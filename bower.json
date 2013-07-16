@@ -1,0 +1,17 @@
+{
+    "name": "pullme",
+    "version": "0.0.1",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "components"
+    ],
+    "dependencies": {
+        "angular",
+        "sass-bootstrap",
+        "angular-bootstrap",
+        "jquery",
+        "angular-firebase",
+        "requirejs"
+    }
+}

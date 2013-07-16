@@ -1,0 +1,23 @@
+@import "compass/css3";
+@import "pullme-icons/*.png";
+
+@include all-pullme-icons-sprites;
+
+.pullme-icons {
+	width: 130px;
+	height: 125px;
+	display: block;
+	margin: auto;
+	@include transition(all, 0.3s);
+}
+.pull-type {
+	color: #999;
+	text-decoration: none;
+	&.selected {
+		background-color: #0088cc;
+		color: #fff;
+	}
+	&:hover,p {
+		text-decoration: none;
+	}
+}

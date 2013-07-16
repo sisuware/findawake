@@ -1,0 +1,121 @@
+<div class="container-fluid text-center view-header">
+	<h2>Give a pull</h2>
+	<h4 class="muted light">List your boat to connect with riders in your area who want a pull.</h4>
+</div>
+<div class="container-fluid well">
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span6">
+				<h4>About Your Boat. <span class="label label-info">Public</span></h4>
+				<p>Let potential riders know what they can expect from your boat. This is also a great time to showoff your boat and the monster wake it makes.</p>
+			</div>
+			<div class="span6">
+				<div class="controls-row">
+					<select class="span3" ng-model="boat.year" required>
+						<option>Select one</option>
+					  <option ng-repeat="year in options.years()">{{year}}</option>
+					</select>
+					<input type="text" class="span4" Placeholder="Make" ng-model="boat.make" required/>
+					<input type="text" class="span5" Placeholder="Model" ng-model="boat.model" required/>
+				</div>
+				<div class="controls-row">
+					<textarea class="input-block-level" Placeholder="Describe your boat, wake, ballast setup, stereo setup, etc..." ng-model="boat.description"></textarea>
+				</div>
+				<div class="controls-row" ng-hide="true">
+					<div class="well well-small inverse clearfix">
+            <div class="span8">
+							<input class="inline-block file-upload" type="file" ng-model="boat.thumbnail" required/>
+						</div>
+						<div class="span4">
+             <small class="muted">Add a 800x600 picture of your boat.</small>
+            </div>
+					</div>
+				</div>
+				<div class="controls-row">
+					<label class="checkbox inline">
+					  <input type="checkbox" id="perfectPass" value="true" ng-model="boat.perfectPass"> Perfect Pass
+					</label>
+					<label class="checkbox inline">
+					  <input type="checkbox" id="tower" value="true" ng-model="boat.tower"> Tower
+					</label>
+					<label class="checkbox inline">
+					  <input type="checkbox" id="ballastSystem" value="true" ng-model="boat.ballastSystem"> Ballast System
+					</label>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span6">
+				<h4>Type Of Pulls. <span class="label label-info">Public</span></h4>
+				<p>Let potential riders know what you can pull behind your boat. Select from wakesurfing, wakeboarding, and wakeskating. </p>
+			</div>
+			<div class="span6">
+			  <div class="span4" ng-repeat="type in pulltypes">
+			    <a href="" class="thumbnail pull-type" ng-class="{true: 'selected'}[type.selected]" ng-click="type.selected = !type.selected">
+			      <span class="pullme-icons pullme-icons-{{type.name}}" ng-class="{true: type.name+'-active'}[type.selected]"></span>
+			      <p class="text-center">{{type.name}}</p>
+			    </a>
+			  </div>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span6">
+				<h4>Your Pull Schedule. <span class="label label-info">Public</span></h4>
+				<p>Let potential riders know approximately how often you go out.</p>
+			</div>
+			<div class="span6">
+				<div class="control-group">
+					<b>Days you go out:</b>
+				  <div class="controls-row">
+						<label class="checkbox inline" ng-repeat="day in schedule.days">
+						  <input type="checkbox" id="scheduleDay{{$index}}" value="{{day.name}}" ng-model="day.selected"> {{day.name}}
+						</label>
+					</div>
+				</div>
+				<div class="control-group">
+					<b>Time of day:</b>
+					<div class="controls-row">
+						<label class="checkbox inline" ng-repeat="period in schedule.periods">
+						  <input type="checkbox" id="schedulePeriod{{$index}}" value="{{period.name}}" ng-model="period.selected"> {{period.name}}
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span6">
+				<h4>General Location. <span class="label label-info">Public</span></h4>
+				<p>Let potential riders know the general location where you go out. This is not the location where riders should meet you or where you keep your boat.</p>
+			</div>
+			<div class="span6">
+				<div class="control-group">
+					<div class="controls-row">
+						<input type="text" class="span5" Placeholder="City" ng-model="location.city" />
+						<input type="text" class="span4" Placeholder="State" ng-model="location.state" />
+						<input type="text" class="span3" Placeholder="Zipcode/Postal Code" ng-model="location.zip_code" />
+					</div>
+				</div>
+				<div class="control-group" ng-show="locations">
+					<b>Please select the verified address:</b>
+					<label class="radio" ng-repeat="l in locations">
+				    <input type="radio" name="verifyLocation" id="l{{$index}}" value="{{l.formatted_address}}" ng-model="location.verified" />
+				    {{l.formatted_address}}
+				  </label>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row-fluid">
+			<div class="span5 text-left"></div>
+			<div class="span4 text-right">
+				<small class="muted">By clicking "Save & Continue", you confirm that<br/>you accept the Terms of Service & Privacy Policy.</small>
+			</div>
+			<div class="span3 text-right">
+				<button type="button" class="btn btn-large btn-primary btn-block" ng-click="submit()">Save & Continue</button>
+			</div>
+		</div>
+	</div>
+</div>

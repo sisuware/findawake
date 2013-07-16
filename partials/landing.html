@@ -1,0 +1,48 @@
+<div class="landing">
+	<div class="container">
+		<h1>Heading one</h1>
+		<h4>Sub heading</h4>
+		<div class="search-container">
+			<div class="padded10 inline-block">
+				<h5 class="inline-block">
+					Find a pull within
+					<div class="dropdown inline-block">
+						<a href="#" id="miles-dropdown" class="miles dropdown-toggle" data-toggle="dropdown"><span ng-bind="selectedDistance.name"></span></a> of
+						<ul class="dropdown-menu">
+							<li ng-repeat="distance in distances"><a ng-click="selectDistance($index)" tabindex="-1" href="#">{{distance.name}}</a></li>
+						</ul>
+					</div>
+				</h5>
+				<input type="text" class="inverse" placeholder="What's your location" ng-model="location"/>
+			</div>
+			<span class="divider-vertical"></span>
+			<div class="padded10 inline-block">
+				<div class="btn-group" data-toggle="buttons-checkbox">
+				  <button type="button" class="btn btn-inverse" ng-model="boarding.wakeboarding" btn-checkbox>Wakeboarding</button>
+				  <button type="button" class="btn btn-inverse" ng-model="boarding.wakeskating" btn-checkbox>Wakeskating</button>
+				  <button type="button" class="btn btn-inverse" ng-model="boarding.wakesurfing" btn-checkbox>Wakesurfing</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row-fluid">
+		<ul class="boats clearfix">
+			<li class="span3" ng-repeat="pull in pulls">
+				<a class="thumbnail" ng-href="#/pulls/{{pull.id}}">
+          <div class="img-container">
+          	<div class="shadow-overlay">
+          		<span>{{pull.boat.year}} {{pull.boat.make}} {{pull.boat.model}}</span>
+          	</div>
+          	<img ng-src="" />
+        	</div>
+          <div class="caption">
+            <h5>Thumbnail label</h5>
+            <small class="muted">{{pull.location.verified}}</small>
+          </div>
+        </a>
+			</li>
+		</ul>
+	</div>
+</div>
