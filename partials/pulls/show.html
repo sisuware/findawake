@@ -21,11 +21,27 @@
 			</div>
 		</div>
 		<div class="span4">
-			<div class="well">
-				<div class="control-group">
-					<button type="button" class="btn btn-block btn-success">Request A Pull</button>
+			<div ng-cloak class="well" ng-hide="pullRequested()">
+				<div class="control-group" ng-show="auth.authenticated">
+					<button type="button" class="btn btn-block btn-success" bs-modal="'partials/pulls/request.html'">Request A Pull</button>
+				</div>
+				<div class="control-group" ng-hide="auth.authenticated">
+					<div ng-controller="SessionCtrl">
+					    <div class="alert alert-info">
+					          <a href="" class="btn btn-large btn-block" bs-modal="'partials/signup.html'">Sign up</a>
+					          <h5 class="text-center light">or</h5>
+					          <a href="" class="btn btn-large btn-block" bs-modal="'partials/login.html'">Login</a>
+					    </div>
+					</div>
+					<button type="button" class="btn btn-block disabled">Request A Pull</button>
 				</div>
 				<p class="muted text-center">Request a pull and be the first to know when you can wakeboard, wakesurf, or wakeskate behind this boat.</p>
+			</div>
+			<div ng-cloak class="well" ng-show="pullRequested()">
+				<div class="control-group">
+					<button type="button" class="btn btn-block disabled">Pull Requested</button>
+				</div>
+				<p class="muted">You will be notified by {{pullRequested().notification}}</p>
 			</div>
 		</div>
 	</div>

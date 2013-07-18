@@ -61,6 +61,8 @@
 .boats {
 	margin: 0px;
 	li {
+		height:169px;
+		margin-bottom: 2.5641%;
 		img {
 			height: 100px;
 			background: #ccc;
@@ -71,6 +73,9 @@
 			&:hover {
 				text-decoration: none;
 			}
+		}
+		&:nth-child(4n+5) {
+			margin-left: 0px;
 		}
 	}
 	h5 {
