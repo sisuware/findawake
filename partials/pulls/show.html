@@ -41,7 +41,13 @@
 				<div class="control-group">
 					<button type="button" class="btn btn-block disabled">Pull Requested</button>
 				</div>
-				<p class="muted">You will be notified by {{pullRequested().notification}}</p>
+				<p class="muted">
+					You'll be notified via
+					<span ng-cloak ng-show="pullRequested().notification.email">Email</span>
+					<span ng-cloak ng-show="pullRequested().notification.email && pullRequested().notification.textMessage">and</span>
+					<span ng-cloak ng-show="pullRequested().notification.textMessage">Text Message</span>
+					when a session has been scheduled.
+				</p>
 			</div>
 		</div>
 	</div>
