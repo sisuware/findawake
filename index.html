@@ -2,7 +2,7 @@
 <html ng-app="pullme">
 <head>
   <meta charset="utf-8">
-  <title>Find A Pull</title>
+  <title>Find A Wake</title>
   <script>document.write('<base href="' + document.location + '" />');</script>
   <link rel="stylesheet" href="css/main.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </a>
-	      <a class="brand" href="#">Find A Pull</a>
+	      <a class="brand" href="#">Find A Wake</a>
 	      <div class="nav-collapse collapse">
 	        <a href="#/pulls/new" class="btn btn-primary pull-right">Give A Pull</a>
 	        <ul ng-cloak class="nav pull-right" ng-hide="auth.authenticated" ng-controller="SessionCtrl">
@@ -47,7 +47,8 @@
 	<script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
 	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
   <script type="text/javascript" src="components/jquery/jquery.js"></script>
-  <script type="text/javascript" src="components/angular/angular.js"></script>
+  <script type="text/javascript" src="components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="components/angular/angular-resource.min.js"></script>
   <script type="text/javascript" src="components/angularFire/angularfire.min.js"></script>
   <script type="text/javascript" src="components/angular-strap/angular-strap.min.js"></script>
   <script type="text/javascript" src="components/sass-bootstrap/js/bootstrap-collapse.js"></script>
@@ -56,9 +57,9 @@
   <script type="text/javascript" src="components/sass-bootstrap/js/bootstrap-modal.js"></script>
   <script type="text/javascript" src="components/sass-bootstrap/js/bootstrap-transition.js"></script>
   <script type="text/javascript" src="components/sass-bootstrap/js/bootstrap-alert.js"></script>
-  
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/services.js"></script>
+  <script type="text/javascript" src="js/directives.js"></script>
   <script type="text/javascript" src="js/controllers.js"></script>
 </body>
 </html>

@@ -139,10 +139,12 @@
     'FIREBASE_URL',
     'angularFireCollection',
     'angularFire',
+    'ImgurManager',
 
-    function($timeout, $location, FIREBASE_URL, angularFireCollection, angularFire) {
+    function($timeout, $location, FIREBASE_URL, angularFireCollection, angularFire, ImgurManager) {
       return function($scope, user) {
         var _client = new Firebase(FIREBASE_URL);
+        var _imgur = new ImgurManager();
         var _methods = {
           getPulls: function(user){
             if(user){
@@ -151,7 +153,7 @@
               $scope.pulls = angularFireCollection(FIREBASE_URL+'pulls');
             }
           },
-          getPull: function(pullId){
+          getPull: function(pullId, callback){
             $scope.loading = true;
             var auth = $scope.auth,
             pullRef = _client.child('/pulls/'+pullId);
@@ -160,37 +162,44 @@
               $timeout(function(){
                 $scope.pull = snapshot.val();
                 $scope.loading = false;
+                if(typeof callback === 'function'){
+                  callback(snapshot.val());
+                }
               });
             });
           },
           addPull: function(){
             $scope.loading = true;
             var auth = $scope.auth,
-            newPull = _client.child("/pulls").push(),
+            newPull = _client.child('/pulls').push();
 
             newPullData = {
               id: newPull.name(),
               boat: $scope.boat,
-              schedule: $scope.schedule,
+              schedule: $scope.schedules,
               pulltypes: $scope.pulltypes,
               location: $scope.location,
-              user_id: auth.user
+              user_id: auth.user,
+              thumbnail: undefined
             };
 
-            newPull.set(JSON.parse(angular.toJson(newPullData)), function(error){
-              if(error){
-                $scope.loading = false;
-                $scope.$broadcast('pulls.add.error', {error: error});
-              } else {
-                $scope.loading = false;
-                _client.child('/users/'+auth.user+'/pulls/'+newPull.name()).set({id:newPull.name()});
-                $scope.$broadcast('pulls.add.success', {pull: newPull.name()});
-
-                $timeout(function(){
-                  $location.path('/pulls/'+newPull.name());
-                }, 250);
-              }
+            _imgur.uploadImage({image: $scope.thumbnail.replace(/^data:image\/(png|jpg|jpeg);base64,/, "")}, function(data){
+              newPullData.thumbnail = data.data.link;
+              _setData();
             });
+
+            var _setData = function(){
+              newPull.set(JSON.parse(angular.toJson(newPullData)), function(error){
+                if(error){
+                  $scope.loading = false;
+                  $scope.$broadcast('pulls.add.error', {error: error});
+                } else {
+                  $scope.loading = false;
+                  _client.child('/users/'+auth.user+'/pulls/'+newPull.name()).set({id:newPull.name()});
+                  $scope.$broadcast('pulls.add.success', {pull: newPull.name()});
+                }
+              });
+            };
           },
           removePull: function(pullId){
             var auth = $scope.auth;
@@ -224,6 +233,37 @@
                 $scope.$broadcast('requests.add.success', {pull: newRequest.name()});
               }
             })
+          }
+        };
+
+        return _methods;
+      }
+    }
+  ]);
+
+  services.factory('ImgurManager', [
+    '$resource',
+    '$http',
+    '$q',
+    'IMGUR_URL',
+
+    function($resource, $http, $q, IMGUR_URL) {
+      return function() {
+
+        $http.defaults.useXDomain = true;
+        $http.defaults.headers.common['Authorization'] = 'Client-ID 64973c9d57c6457';
+
+        var _methods = {
+          getImage: function(){},
+          getAlbum: function(){},
+          uploadImage: function(image, callback){
+            var Image = $resource(IMGUR_URL+'image.json');
+
+            Image.save(image, function(data){
+              callback(data);
+            }, function(data){
+              debugger
+            });
           }
         };
 

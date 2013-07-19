@@ -115,46 +115,57 @@ controllers.controller('PullsNewCtrl', [
   '$scope',
   '$timeout',
   'PullsManager',
+  '$location',
+  'ImgurManager',
 
-  function($scope, $timeout, PullsManager){
+  function($scope, $timeout, PullsManager, $location, ImgurManager){
     var pulls = new PullsManager($scope, $scope.auth);
+    var imgur = new ImgurManager($scope, $scope.auth);
 
     $scope.options = {
       years: function(){
-        var currentYear = new Date().getFullYear(),
+        var currentYear = new Date().getFullYear()+1,
         years = [];
-        startYear = 1980;
+        startYear = 1970;
         while ( startYear <= currentYear ) {
           years.unshift(startYear++);
         }
         return years;
-      }
+      },
+      days: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      hours: function(){
+        var hours = [],
+        startHour = 1,
+        endHour = 12;
+        while(startHour <= endHour) {
+          hours.push(startHour++);
+        }
+        return hours;
+      },
+      periods: ['AM','PM']
     };
 
-    $scope.boat = {
+    /*$scope.boat = {
       year: 'Select one',
       make: undefined,
       model: undefined,
       description: undefined,
       tower: false,
       perfectPass: false,
-      ballastSystem: false
+      ballastSystem: false,
+      pylon: false,
+      thumbnail: undefined
+    };*/
+
+    $scope.schedules = []
+
+    $scope.addSchedule = function(){
+      this.schedules.push(this.schedule);
+      this.schedule = undefined;
     };
 
-    $scope.schedule = {
-      days:[
-        {name:"Sun",selected:false},
-        {name:"Mon",selected:false},
-        {name:"Tue",selected:false},
-        {name:"Wed",selected:false},
-        {name:"Thur",selected:false},
-        {name:"Fri",selected:false},
-        {name:"Sat",selected:false}
-      ],
-      periods:[
-        {name:"AM",selected:false},
-        {name:"PM",selected:false}
-      ]
+    $scope.removeSchedule = function(index){
+      $scope.schedules.splice(index, 1);
     };
 
     $scope.pulltypes = [
@@ -191,10 +202,13 @@ controllers.controller('PullsNewCtrl', [
 
     $scope.submit = function(){
       pulls.addPull();
-      $scope.$on('pulls.add.success', function(event, args){
-
-      })
     };
+
+    $scope.$on('pulls.add.success', function(event, args){
+      $timeout(function(){
+        $location.path('/pulls/'+args.pull);
+      }, 250);
+    });
 
     var verifyLocation = function(location){
       var geocoder = new google.maps.Geocoder();
@@ -274,6 +288,18 @@ controllers.controller('PullsShowCtrl', [
 
     $scope.remove = function(id){
       pulls.removePull(id);
-    }
+    };
+
+    $scope.$watch('pulls',function(value){
+      if(value){
+        for(key in value){
+          pulls.getPull(value[key].id, function(data){
+            $scope.$apply(function(){
+              $scope.pulls[data.id] = data;
+            });
+          });
+        }
+      }
+    });
   }
  ]);

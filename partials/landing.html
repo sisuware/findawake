@@ -35,11 +35,11 @@
           	<div class="shadow-overlay">
           		<span>{{pull.boat.year}} {{pull.boat.make}} {{pull.boat.model}}</span>
           	</div>
-          	<img ng-src="" />
+          	<img ng-src="{{pull.thumbnail}}" />
         	</div>
           <div class="caption">
             <h5>Thumbnail label</h5>
-            <small class="muted">{{pull.location.verified}}</small>
+            <small class="muted"><i class="icon-map-marker"></i> {{pull.location.verified}}</small>
           </div>
         </a>
 			</li>

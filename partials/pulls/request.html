@@ -1,6 +1,6 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h4>Request A Pull</h4>
+  <h4><i class="icon-star-half-full"></i> Request A Pull</h4>
 </div>
 <div class="modal-body" ng-hide="loading">
 	<div class="alerts">
@@ -13,7 +13,7 @@
     <div class="span5">
       <div class="input-prepend input-append row-fluid">
         <span class="add-on">$</span>
-        <input class="span8" type="text" placeholder="0" ng-model="request.expenses">
+        <input class="span5" type="text" placeholder="0" ng-model="request.expenses">
         <span class="add-on">.00</span>
       </div>
     </div>
@@ -52,7 +52,6 @@
         <input type="checkbox" value="true" ng-model="request.notification.textMessage">
         Text Message
       </label>
-      <input type="tel" ng-cloak ng-show="request.notification.textMessage" ng-model="auth.cellphone" placeholder="Cellphone number"/>
     </div>
   </div>
 </div>

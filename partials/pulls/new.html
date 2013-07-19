@@ -12,7 +12,7 @@
 			<div class="span6">
 				<div class="controls-row">
 					<select class="span3" ng-model="boat.year" required>
-						<option>Select one</option>
+						<option value="" selected disabled>Select one</option>
 					  <option ng-repeat="year in options.years()">{{year}}</option>
 					</select>
 					<input type="text" class="span4" Placeholder="Make" ng-model="boat.make" required/>
@@ -21,22 +21,28 @@
 				<div class="controls-row">
 					<textarea class="input-block-level" Placeholder="Describe your boat, wake, ballast setup, stereo setup, etc..." ng-model="boat.description"></textarea>
 				</div>
-				<div class="controls-row" ng-hide="true">
+				<div class="controls-row">
 					<div class="well well-small inverse clearfix">
-            <div class="span8">
-							<input class="inline-block file-upload" type="file" ng-model="boat.thumbnail" required/>
+						<div class="span2">
+							<img ng-cloak ng-show="thumbnail" class="img-polaroid" ng-src="{{thumbnail}}" />
+							<span ng-cloak ng-hide="thumbnail" class="text-center img-polaroid inline-block">
+								<small class="muted">No<br/>Thumbnail</small>
+							</span>
 						</div>
-						<div class="span4">
-             <small class="muted">Add a 800x600 picture of your boat.</small>
-            </div>
+						<div class="span10">
+							<input class="file-upload" type="file" name="thumbnail" file-upload="thumbnail" />
+						</div>
 					</div>
 				</div>
 				<div class="controls-row">
 					<label class="checkbox inline">
-					  <input type="checkbox" id="perfectPass" value="true" ng-model="boat.perfectPass"> Perfect Pass
+					  <input type="checkbox" id="perfectPass" value="true" ng-model="boat.perfectPass"> Cruise Control / Perfect Pass
 					</label>
 					<label class="checkbox inline">
 					  <input type="checkbox" id="tower" value="true" ng-model="boat.tower"> Tower
+					</label>
+					<label class="checkbox inline">
+					  <input type="checkbox" id="tower" value="true" ng-model="boat.pylon"> Extended Pylon
 					</label>
 					<label class="checkbox inline">
 					  <input type="checkbox" id="ballastSystem" value="true" ng-model="boat.ballastSystem"> Ballast System
@@ -62,26 +68,57 @@
 		<hr>
 		<div class="row-fluid">
 			<div class="span6">
-				<h4>Your Pull Schedule. <span class="label label-info">Public</span></h4>
+				<h4>Pull Schedule. <span class="label label-info">Public</span></h4>
 				<p>Let potential riders know approximately how often you go out.</p>
 			</div>
 			<div class="span6">
-				<div class="control-group">
-					<b>Days you go out:</b>
-				  <div class="controls-row">
-						<label class="checkbox inline" ng-repeat="day in schedule.days">
-						  <input type="checkbox" id="scheduleDay{{$index}}" value="{{day.name}}" ng-model="day.selected"> {{day.name}}
-						</label>
-					</div>
-				</div>
-				<div class="control-group">
-					<b>Time of day:</b>
-					<div class="controls-row">
-						<label class="checkbox inline" ng-repeat="period in schedule.periods">
-						  <input type="checkbox" id="schedulePeriod{{$index}}" value="{{period.name}}" ng-model="period.selected"> {{period.name}}
-						</label>
-					</div>
-				</div>
+				<table class="table table-condensed">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>From</th>
+              <th>To</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="s in schedules">
+              <td>{{s.day}}</td>
+              <td>{{s.from.hour}}{{s.from.period}}</td>
+              <td>{{s.to.hour}}{{s.to.period}}</td>
+              <td><button type="submit" class="btn btn-small btn-link" ng-click="removeSchedule($index)"><i class="icon-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td class="span4">
+              	<select class="input-block-level" ng-model="schedule.day">
+							  	<option value="" disabled selected>Day</option>
+							  	<option ng-repeat="day in options.days">{{day}}</option>
+								</select>
+              </td>
+              <td class="span4">
+              	<select class="span6" ng-model="schedule.from.hour">
+              		<option value="" disabled selected>Hour</option>
+							  	<option ng-repeat="hour in options.hours()">{{hour}}</option>
+								</select>
+								<select class="span6" ng-model="schedule.from.period">
+									<option value="" disabled selected>Period</option>
+							  	<option ng-repeat="period in options.periods">{{period}}</option>
+								</select>
+              </td>
+              <td class="span4">
+              	<select class="span6" ng-model="schedule.to.hour">
+              		<option value="" disabled selected>Hour</option>
+							  	<option ng-repeat="hour in options.hours()">{{hour}}</option>
+								</select>
+								<select class="span6" ng-model="schedule.to.period">
+									<option value="" disabled selected>Period</option>
+							  	<option ng-repeat="period in options.periods">{{period}}</option>
+								</select>
+              </td>
+              <td><button type="submit" class="btn btn-small" ng-click="addSchedule()"><i class="icon-plus"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
 			</div>
 		</div>
 		<hr>
