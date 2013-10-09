@@ -6,8 +6,10 @@ var controllers = angular.module('pullme.controllers', ['firebase']);
 controllers.controller('LandingCtrl', [
   '$scope',
   'PullsManager',
+  '$timeout',
+  '$http',
 
-  function($scope, PullsManager){
+  function($scope, PullsManager, $timeout, $http){
     var pulls = new PullsManager($scope, $scope.auth);
     pulls.getPulls();
 
@@ -17,27 +19,56 @@ controllers.controller('LandingCtrl', [
       wakeskating: true
     };
 
-    $scope.location = "Portland, Oregon"
+    $scope.location = {
+      search: null
+    }
 
-    $scope.distances = [
-      new _Distance({radius:5,name:"5 Miles"}),
-      new _Distance({radius:15,name:"15 Miles"}),
-      new _Distance({radius:25,name:"25 Miles"}),
-      new _Distance({radius:50,name:"50 Miles"}),
-      new _Distance({radius:100,name:"100 Miles"})
-    ];
+    $scope.distances = ['5','15','25','50','100','150'];
+    $scope.selectedDistance = '25';
 
-    $scope.selectedDistance = $scope.distances[0];
+    $scope.selectDistance = function(){
+      $scope.selectedDistance = this.distance;
+    };
 
-    $scope.selectDistance = function(index){};
+    $scope.filterPulls = function(pull){
+      var searchTypeFilters = [];
+      var pullTypes = [];
+      for(key in $scope.boarding){
+        if($scope.boarding[key] && $.grep(pull.pulltypes, function(type){return (type.name === key && type.selected)})){
+          return _calculateDistance($scope, pull) <= parseInt($scope.selectedDistance);
+        } else {
+          continue;
+        }
+      }
+    };
+
+    $scope.search = function(){
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode( { 'address': $scope.location.search }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          $timeout(function(){
+            $scope.location.lat = results[0].geometry.location.lat();
+            $scope.location.lng = results[0].geometry.location.lng();
+          });
+        } else {
+          console.log('Geocode was not successful for the following reason: ' + status);
+        }
+      });
+    };
+
+    var _calculateDistance = function($scope, pull){
+      if($scope.location.lat && $scope.location.lng){
+        var from = new google.maps.LatLng($scope.location.lat, $scope.location.lng),
+        to = new google.maps.LatLng(pull.location.lat, pull.location.lng),
+        distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(from, to) * 0.000621371192);
+        pull.location.distance = distance;
+        return distance;
+      } else {
+        return 0;
+      }
+    }
   }
 ]);
-
-var _Distance = function(args){
-  var self = this;
-  self.name = args.name;
-  self.radius = args.radius;
-};
 
 /*
  * Session Controller
@@ -116,11 +147,9 @@ controllers.controller('PullsNewCtrl', [
   '$timeout',
   'PullsManager',
   '$location',
-  'ImgurManager',
 
-  function($scope, $timeout, PullsManager, $location, ImgurManager){
+  function($scope, $timeout, PullsManager, $location){
     var pulls = new PullsManager($scope, $scope.auth);
-    var imgur = new ImgurManager($scope, $scope.auth);
 
     $scope.options = {
       years: function(){
@@ -144,18 +173,6 @@ controllers.controller('PullsNewCtrl', [
       },
       periods: ['AM','PM']
     };
-
-    /*$scope.boat = {
-      year: 'Select one',
-      make: undefined,
-      model: undefined,
-      description: undefined,
-      tower: false,
-      perfectPass: false,
-      ballastSystem: false,
-      pylon: false,
-      thumbnail: undefined
-    };*/
 
     $scope.schedules = []
 
@@ -277,7 +294,7 @@ controllers.controller('PullsShowCtrl', [
 /*
  * User Pulls Controller
  */
- controllers.controller('PullsIndexCtrl', [
+ controllers.controller('UsersPullsCtrl', [
   '$scope',
   '$routeParams',
   'PullsManager',
@@ -301,5 +318,82 @@ controllers.controller('PullsShowCtrl', [
         }
       }
     });
+  }
+ ]);
+
+ /*
+ * User Show Controller
+ */
+ controllers.controller('UsersShowCtrl', [
+  '$scope',
+  '$routeParams',
+  'PullsManager',
+  'ImgurManager',
+  'angularFire',
+  'FIREBASE_URL',
+  '$timeout',
+  'SmsManager',
+
+  function($scope, $routeParams, PullsManager, ImgurManager, angularFire, FIREBASE_URL, $timeout, SmsManager){
+    $scope.user = angularFire(FIREBASE_URL+'users/'+$routeParams.userId, $scope, 'user', {})
+    $scope.options = {
+      gear: ['Wakeboard','Wakesurf','Wakeskate','Helmet','Bindings','Camera','Handle','Rope','Fins','Shoes','Vest']
+    }
+
+    $scope.addGear = function(){
+      if($scope.user.gear === undefined) {
+        $scope.user.gear = [];
+      }
+      $scope.user.gear.push(this.gear);
+      this.gear = undefined;
+    };
+
+    $scope.removeGear = function(index){
+      $scope.user.gear.splice(index,1);
+    };
+
+    $scope.verifyCell = function(){
+      var Message = new SmsManager();
+      if($scope.user.cell.verification){
+        
+
+      } else {
+        Message.validate($scope.user.cell.value, function(data){
+          if(data.valid){
+            $timeout(function(){
+              $scope.user.cell.value = data.national;
+              $scope.user.cell.international = data.international;
+              $scope.user.cell.e164 = data.e164.replace('+','');
+              $scope.user.cell.verification = Math.floor(Math.random() * 9999);
+            });
+            $scope.sendVerificationCode();
+          }
+        });
+      }
+    };
+
+    $scope.sendVerificationCode = function(){
+      if($scope.user.cell.verification){
+        var Message = new SmsManager(),
+        verifyText = "Your Find A Wake verification code is "+$scope.user.cell.verification;
+        Message.send($scope.user.cell.e164, verifyText);
+      }
+    };
+
+
+    $scope.upload = function(){
+      $scope.uploadingAvatar = true;
+      var Imgur = new ImgurManager();
+      Imgur.uploadImage($scope.avatar, function(data){
+        if(data.status === 200){
+          $timeout(function(){
+            $scope.uploadingAvatar = false;
+            $scope.user.avatar = data.data.link
+          });
+        } else {
+          alert('Unable to save your avatar. Please refresh the page and try again.');
+        }
+      });
+    };
   }
  ]);

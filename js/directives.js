@@ -18,20 +18,29 @@
 
   directives.directive('objectLength', function($timeout) {
     return function(scope, element, attrs){
-      var params = attrs.objectLength.split('.');
-      var object = scope;
-      for (var i = 0; i < params.length; i++) {
-        object = object[params[i]];
-      };
-      if(object){
-        var count = 0;
-        for(key in object){
-          count++
+      scope.$watch(attrs.objectLength, function(value){
+        if(value){
+          var count = 0;
+          for(key in value){
+            count++
+          }
+          element.text(count);
+        } else {
+          element.text("0");
         }
-        element.text(count);
-      } else {
-        element.text("0");
-      }
+      });
+    }
+  });
+
+  directives.directive('btnLoading', function() {
+    return function(scope, element, attrs){
+      scope.$watch(attrs.btnLoading, function(value){
+        if(value){
+          element.button('loading');
+        } else {
+          element.button('reset');
+        }
+      });
     }
   });
 })(angular);

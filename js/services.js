@@ -6,13 +6,15 @@
     '$timeout',
     'localStorage',
     'FIREBASE_URL',
+    'angularFire',
 
-    function($rootScope, $timeout, localStorage, FIREBASE_URL) {
+    function($rootScope, $timeout, localStorage, FIREBASE_URL, angularFire) {
       return function() {
         $rootScope.auth = {
           authenticated: false,
           user: null,
           email: null,
+          profile: null,
           provider: localStorage.get('authProvider')
         };
 
@@ -22,7 +24,8 @@
               authenticated: true,
               user: args.user.id,
               email: args.user.email,
-              provider: args.user.provider
+              provider: args.user.provider,
+              profile: angularFire(FIREBASE_URL+'users/'+args.user.id, $rootScope, 'auth.profile', {})
             };
             localStorage.set('authProvider', args.user.provider);
           });
@@ -76,10 +79,10 @@
          var _status = function(error, user) {
             if(error) {
                $log.info('auth.error', error, user);
-               $rootScope.$broadcast('auth.error', {error: error, user: user});
+              $rootScope.$broadcast('auth.error', {error: error, user: user});
             } else if(user ) {
-               $log.info('auth.login', user);
-               $rootScope.$broadcast('auth.login', {user: user});
+              $log.info('auth.login', user);
+              $rootScope.$broadcast('auth.login', {user: user});
             } else {
                $log.info('auth.logout');
                $rootScope.$broadcast('auth.logout', {});
@@ -183,7 +186,7 @@
               thumbnail: undefined
             };
 
-            _imgur.uploadImage({image: $scope.thumbnail.replace(/^data:image\/(png|jpg|jpeg);base64,/, "")}, function(data){
+            _imgur.uploadImage($scope.thumbnail, function(data){
               newPullData.thumbnail = data.data.link;
               _setData();
             });
@@ -259,7 +262,7 @@
           uploadImage: function(image, callback){
             var Image = $resource(IMGUR_URL+'image.json');
 
-            Image.save(image, function(data){
+            Image.save({image: image.replace(/^data:image\/(png|jpg|jpeg);base64,/, "")}, function(data){
               callback(data);
             }, function(data){
               debugger
@@ -267,6 +270,47 @@
           }
         };
 
+        return _methods;
+      }
+    }
+  ]);
+
+  services.factory('SmsManager', [
+    '$resource',
+    '$http',
+    '$q',
+    'NEXMO_URL',
+
+    function($resource, $http, $q, NEXMO_URL) {
+      return function() {
+        $http.defaults.useXDomain = true;
+        var _methods = {
+          send: function(number, text){
+            $http.defaults.headers.common['AC20e47e6c9364376543bdfaf4983de840'] = '396f1e15bc4ae943c49ea2edb447157b';
+            var Message = $resource('https://api.twilio.com/2010-04-01/Accounts/AC20e47e6c9364376543bdfaf4983de840/SMS/Messages.json');
+            
+            Message.save({
+              from: '+19713138565',
+              body: text,
+              to: number
+            }, function(data){
+              debugger
+            }, function(data){
+              debugger
+            });
+          },
+          validate: function(number, callback){
+            $http.defaults.headers.common['X-Mashape-Authorization'] = 'ah1Mr6t5B92S4T1m9SgeqO0F2w3aOpy4';
+            var Parsify = $resource('https://parsify-format.p.mashape.com/api/format/number');
+
+            Parsify.get({
+              number: number,
+              country: 'us'
+            }, function(data){
+              callback(data);
+            });
+          }
+        }
         return _methods;
       }
     }

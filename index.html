@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<div class="navbar navbar-static-top navbar-inverse">
+	<div class="navbar navbar-static-top navbar-wake navbar-inverse">
 	  <div class="navbar-inner">
 	    <div class="container">
 	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -16,34 +16,33 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </a>
-	      <a class="brand" href="#">Find A Wake</a>
+	      <a class="brand logo" href="#">Find A Wake</a>
 	      <div class="nav-collapse collapse">
-	        <a href="#/pulls/new" class="btn btn-primary pull-right">Give A Pull</a>
+	        <a href="#/pulls/new" class="btn pull-right">Give A Pull</a>
 	        <ul ng-cloak class="nav pull-right" ng-hide="auth.authenticated" ng-controller="SessionCtrl">
 					  <li><a href="" bs-modal="'partials/signup.html'" ng-cloak>Sign up</a></li>
 					  <li><a href="" bs-modal="'partials/login.html'" ng-cloak>Login</a></li>
 					</ul>
-					<ul ng-cloak class="nav pull-right" ng-show="auth.authenticated">
+					<ul ng-cloak ng-show="auth.authenticated" class="nav pull-right">
+					  <li><a href="#/users/{{auth.user}}/requests">Pull Requests <span class="badge badge-inverse" object-length="auth.profile.requests"></span></a></li>
 					  <li class="dropdown">
 					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					  		<span ng-bind="auth.email"></span> <b class="caret"></b>
+					  		<span ng-bind="auth.profile.name || auth.email"></span> <b class="caret"></b>
 					  	</a>
 					  	<ul class="dropdown-menu">
-					  		<li><a href="#/users/{{auth.user}}/pulls">Your Pulls</a></li>
-					  		<li><a href=''>Your Requests</a></li>
+					  		<li><a href="#/users/{{auth.user}}/pulls">Your Boats</a></li>
 					  		<li><a href="#/users/{{auth.user}}">Account</a></li>
 					  		<li class="divider"></li>
 					  		<li><a href="" ng-click="logout()">Logout</a></li>
 					  	</ul>
 					  </li>
-					  <li class="divider-vertical"></li>
 					</ul>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 	<div ng-view></div>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
 	<script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
 	<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
   <script type="text/javascript" src="components/jquery/jquery.js"></script>

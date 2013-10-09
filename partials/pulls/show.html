@@ -24,7 +24,9 @@
 					  <li class="active"><a href="#description">Description</a></li>
 					</ul>
 					<div class="tab-content">
-					  <div class="tab-pane active" id="description">{{pull.boat.description}}</div>
+					  <div class="tab-pane active" id="description">
+					  	{{pull.boat.description}}
+					  </div>
 					</div>
 				</div>
 			</div>
@@ -76,7 +78,7 @@
             <td>{{s.to.hour}}{{s.to.period}}</td>
           </tr>
           <tr ng-cloak ng-hide="pull.schedule">
-          	<td colspan="3" class="muted">No schedule has been added yet.</td>
+          	<td colspan="3" class="muted">The pull schedule will be posted soon.</td>
           </tr>
         </tbody>
       </table>

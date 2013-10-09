@@ -1,4 +1,5 @@
 @import "compass/css3";
+@import url(http://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,600);
 @import "../components/sass-bootstrap/lib/bootstrap";
 @import "../components/sass-bootstrap/lib/responsive";
 @import "landing";
@@ -25,11 +26,11 @@
 /* Forms */
 input {
 	&.inverse {
-		background: #1b1b1b;
-		background-color: #1b1b1b;
-		color: #999;
+		background: darken(#2C3E50, 5%);
+		background-color: darken(#2C3E50, 5%);
+		color: #ECF0F1;
 		@include box-shadow (0 1px 1px rgba(255,255,255,.1));
-		border-color: #111;
+		border-color: darken(#2C3E50, 7%);
 	}
 	&[type="file"]{
 		line-height: 12px;
@@ -37,6 +38,19 @@ input {
 }
 
 /* Overrides */
+.brand {
+	font-family: 'Lobster', cursive;
+	&.logo {
+		font-size: 24px;
+		text-shadow: 1px 2px rgba(0,0,0,.75);
+		@include transition(all, 0.3s);
+		color: #eee;
+		&:hover {
+			text-shadow: none;
+			@include transition(all, 0.3s);
+		}
+	}
+}
 .container-fluid {
 	&.well {
 		padding: 20px 0;
@@ -49,12 +63,62 @@ input {
 		background: #fff;
 		border-color: #ccc;
 	}
-	&.well-tabs {
-		
-	}
 }
 .breadcrumb {
 	background-color: transparent;
 	padding-left: 0px;
 	margin-top: 10px;
+}
+.table {
+	&.table-list {
+		tr {
+			&:first-child {
+				td {
+					border-top: none;
+				}
+			}
+		}
+	}
+}
+.nav-lines {
+	margin: 0px;
+	li {
+		display: inline-block;
+		a {
+			padding: 9px 0;
+			margin: 0 10px;
+			&:hover {
+				background: transparent;
+				border-bottom: 2px solid #e5e5e5;
+				margin-bottom: -1px;
+			}
+		}
+		&.active {
+			a {
+				border-bottom: 2px solid #333;
+				color: inherit;
+				margin-bottom: -1px;
+			}
+		}
+		&:first-child{
+			a {
+				margin-left: 0px;
+			}
+		}
+		&:last-child {
+			a {
+				margin-right: 0px;
+			}
+		}
+	}
+}
+.navbar {
+	&.navbar-wake {
+		.navbar-inner {
+			border-top: 3px solid #2f8ecd;
+			@include background(image-url('landing-bg-7.jpg') no-repeat center top, #fff);
+			@include box-shadow(none);
+			border-bottom: none;
+		}
+	}
 }

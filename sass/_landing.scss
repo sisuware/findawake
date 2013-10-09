@@ -1,8 +1,15 @@
+@mixin placeholder {
+  &.placeholder { @content }
+  &:-moz-placeholder { @content }
+  &::-webkit-input-placeholder { @content }
+}
+
 .landing {
-	height: 190px;
-	background: #ddd;
-	padding: 70px 0 0 0;
-	margin: 0 0 50px 0;
+	min-height: 190px;
+	@include background(image-url('landing-bg-7.jpg') no-repeat center -50px, #fff);
+	@include box-shadow(inset 0 -2px 2px rgba(0,0,0,.25));
+	padding: 10px 0 25px 0;
+	margin: 0px;
 	h1, h4 {
 		color: #fff;
 		text-shadow: 0 1px 1px rgba(0,0,0,.5);
@@ -10,6 +17,7 @@
 	h1 {
 		font-weight: 500;
 		font-size: 54px;
+		line-height: 64px;
 	}
 	h4 {
 		font-weight: 400;
@@ -19,16 +27,42 @@
 		height: 100%;
 		position: relative;
 	}
+	.landing-input {
+		background: #fff;
+		border: none;
+		@include box-shadow(none);
+		height: auto;
+		font-size: inherit;
+		color: #2C3E50;
+		@include placeholder {
+			color: #BDC3C7;
+			line-height: 75px;
+			height: auto;
+		}
+	}
+	.location-container {
+		display: block;
+		position: relative;
+		.btn {
+			position: absolute;
+			bottom: 10px;
+			right: 0px;
+			color: #5dade2;
+			@include transition(all, 0.1s);
+			&:hover {
+				color: darken(#5dade2, 10%);
+				@include transition(all, 0.1s);
+			}
+		}
+		.landing-input {
+			margin: 0px;
+		}
+	}
 }
 .search-container {
-	position: absolute;
-	bottom: -25px;
-	left: 0px;
-	right: 0px;
-	@include background(linear-gradient(top, #373737, #333));
-	height: 50px;
-	@include box-shadow(0 -2px 5px rgba(0,0,0,.1));
-	color: #ccc;
+	@include background(linear-gradient(top, #34495E, #2C3E50));
+	min-height: 50px;
+	color: #ECF0F1;
 	h5 {
 		font-weight: 300;
 		font-size: 16px;
@@ -38,15 +72,17 @@
 		font-weight: 300;
 		font-size: 16px;
 	}
+	.input-append{
+		margin: 0px;
+	}
 	.miles {
 		border-bottom: 1px dotted #ccc;
-		color: #ccc;
+		color: #ECF0F1;
 		text-decoration: none;
 		@include transition(color, 0.1s);
 		outline: none;
 		&:hover {
 			text-decoration: none;
-			color: #fff;
 			@include transition(color, 0.1s);
 		}
 	}
@@ -57,6 +93,9 @@
 		background: rgba(0,0,0,.25);
 		border-right: 1px solid rgba(255,255,255,.15);
 	}
+}
+.search-results {
+	padding-top: 20px;
 }
 .boats {
 	margin: 0px;
@@ -94,13 +133,21 @@
 		> span {
 			display: table-cell;
 			vertical-align:bottom;
-			padding: 10px;
+			padding: 10px 10px 5px;
 			font-size: 16px;
 			font-weight: 500;
 			color: #fff;
-			text-shadow: 0 1px 1px rgba(0,0,0,.5);
+			text-shadow: 0 1px 1px rgba(0,0,0,1), 0 0 5px #000;
 			letter-spacing: 1px;
 			word-break: break-word;
 		}
 	}
+}
+.lamp {
+	background: #fff;
+	padding: 10px;
+	margin-bottom: 20px;
+	@include border-radius(4px);
+	border: 1px solid #ddd;
+	@include box-shadow(0 1px 3px rgba(0, 0, 0, 0.055));
 }

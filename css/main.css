@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Lobster|Open+Sans:400,600);
 /*
  * Bootstrap v2.3.2
  *
@@ -235,23 +236,23 @@ textarea {
 /* line 9, ../components/sass-bootstrap/lib/_scaffolding.scss */
 body {
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
-  color: #333333;
+  color: #2c3e50;
   background-color: white;
 }
 
 /* line 22, ../components/sass-bootstrap/lib/_scaffolding.scss */
 a {
-  color: #0088cc;
+  color: #5dade2;
   text-decoration: none;
 }
 
 /* line 27, ../components/sass-bootstrap/lib/_scaffolding.scss */
 a:hover,
 a:focus {
-  color: #005580;
+  color: #258ace;
   text-decoration: underline;
 }
 
@@ -728,13 +729,13 @@ cite {
 
 /* line 31, ../components/sass-bootstrap/lib/_type.scss */
 .muted {
-  color: #999999;
+  color: #95a5a6;
 }
 
 /* line 33, ../components/sass-bootstrap/lib/_type.scss */
 a.muted:hover,
 a.muted:focus {
-  color: gray;
+  color: #798d8f;
 }
 
 /* line 35, ../components/sass-bootstrap/lib/_type.scss */
@@ -809,7 +810,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
   font-weight: normal;
   line-height: 1;
-  color: #999999;
+  color: #95a5a6;
 }
 
 /* line 75, ../components/sass-bootstrap/lib/_type.scss */
@@ -873,7 +874,7 @@ h4 small {
 .page-header {
   padding-bottom: 9px;
   margin: 20px 0 30px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #ecf0f1;
 }
 
 /* line 105, ../components/sass-bootstrap/lib/_type.scss */
@@ -973,7 +974,7 @@ dd {
 hr {
   margin: 20px 0;
   border: 0;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #ecf0f1;
   border-bottom: 1px solid white;
 }
 
@@ -981,7 +982,7 @@ hr {
 abbr[title],
 abbr[data-original-title] {
   cursor: help;
-  border-bottom: 1px dotted #999999;
+  border-bottom: 1px dotted #95a5a6;
 }
 
 /* line 186, ../components/sass-bootstrap/lib/_type.scss */
@@ -994,7 +995,7 @@ abbr.initialism {
 blockquote {
   padding: 0 0 0 15px;
   margin: 0 0 20px;
-  border-left: 5px solid #eeeeee;
+  border-left: 5px solid #ecf0f1;
 }
 /* line 196, ../components/sass-bootstrap/lib/_type.scss */
 blockquote p {
@@ -1007,7 +1008,7 @@ blockquote p {
 blockquote small {
   display: block;
   line-height: 20px;
-  color: #999999;
+  color: #95a5a6;
 }
 /* line 206, ../components/sass-bootstrap/lib/_type.scss */
 blockquote small:before {
@@ -1018,7 +1019,7 @@ blockquote.pull-right {
   float: right;
   padding-right: 15px;
   padding-left: 0;
-  border-right: 5px solid #eeeeee;
+  border-right: 5px solid #ecf0f1;
   border-left: 0;
 }
 /* line 219, ../components/sass-bootstrap/lib/_type.scss */
@@ -1057,7 +1058,7 @@ pre {
   padding: 0 3px 2px;
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
   font-size: 12px;
-  color: #333333;
+  color: #34495e;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -1130,14 +1131,14 @@ legend {
   margin-bottom: 20px;
   font-size: 21px;
   line-height: 40px;
-  color: #333333;
+  color: #34495e;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
 /* line 33, ../components/sass-bootstrap/lib/_forms.scss */
 legend small {
   font-size: 15px;
-  color: #999999;
+  color: #95a5a6;
 }
 
 /* line 44, ../components/sass-bootstrap/lib/_forms.scss */
@@ -1156,7 +1157,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
 /* line 55, ../components/sass-bootstrap/lib/_forms.scss */
@@ -1189,7 +1190,7 @@ input[type="color"],
   margin-bottom: 10px;
   font-size: 14px;
   line-height: 20px;
-  color: #555555;
+  color: #34495e;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -1319,7 +1320,7 @@ input[type="checkbox"]:focus {
 /* line 189, ../components/sass-bootstrap/lib/_forms.scss */
 .uneditable-input,
 .uneditable-textarea {
-  color: #999999;
+  color: #95a5a6;
   background-color: #fcfcfc;
   border-color: #cccccc;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.025);
@@ -1343,17 +1344,17 @@ input[type="checkbox"]:focus {
 /* line 83, ../components/sass-bootstrap/lib/_mixins.scss */
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-  color: #999999;
+  color: #95a5a6;
 }
 /* line 86, ../components/sass-bootstrap/lib/_mixins.scss */
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-  color: #999999;
+  color: #95a5a6;
 }
 /* line 89, ../components/sass-bootstrap/lib/_mixins.scss */
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: #999999;
+  color: #95a5a6;
 }
 
 /* line 225, ../components/sass-bootstrap/lib/_forms.scss */
@@ -1579,7 +1580,7 @@ input[readonly],
 select[readonly],
 textarea[readonly] {
   cursor: not-allowed;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
 }
 
 /* line 340, ../components/sass-bootstrap/lib/_forms.scss */
@@ -1790,7 +1791,7 @@ select:focus:invalid:focus {
 /* line 400, ../components/sass-bootstrap/lib/_forms.scss */
 .help-block,
 .help-inline {
-  color: #595959;
+  color: #476481;
 }
 
 /* line 404, ../components/sass-bootstrap/lib/_forms.scss */
@@ -1868,7 +1869,7 @@ select:focus:invalid:focus {
   line-height: 20px;
   text-align: center;
   text-shadow: 0 1px 0 white;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
   border: 1px solid #ccc;
 }
 /* line 468, ../components/sass-bootstrap/lib/_forms.scss */
@@ -1886,8 +1887,8 @@ select:focus:invalid:focus {
 /* line 472, ../components/sass-bootstrap/lib/_forms.scss */
 .input-append .active,
 .input-prepend .active {
-  background-color: #a9dba9;
-  border-color: #46a546;
+  background-color: #a8ebc4;
+  border-color: #2ecc71;
 }
 
 /* line 480, ../components/sass-bootstrap/lib/_forms.scss */
@@ -4823,7 +4824,7 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
   clear: both;
   font-weight: normal;
   line-height: 20px;
-  color: #333333;
+  color: #34495e;
   white-space: nowrap;
 }
 
@@ -4834,14 +4835,14 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
 .dropdown-submenu:focus > a {
   text-decoration: none;
   color: white;
-  background-color: #0081c2;
-  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-color: #54a8e0;
+  background-image: -moz-linear-gradient(top, #5dade2, #47a2de);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5dade2), to(#47a2de));
+  background-image: -webkit-linear-gradient(top, #5dade2, #47a2de);
+  background-image: -o-linear-gradient(top, #5dade2, #47a2de);
+  background-image: linear-gradient(to bottom, #5dade2, #47a2de);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0088CC', endColorstr='#FF0077B3', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5DADE2', endColorstr='#FF47A2DE', GradientType=0);
 }
 
 /* line 101, ../components/sass-bootstrap/lib/_dropdowns.scss */
@@ -4851,21 +4852,21 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
   color: white;
   text-decoration: none;
   outline: 0;
-  background-color: #0081c2;
-  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-color: #54a8e0;
+  background-image: -moz-linear-gradient(top, #5dade2, #47a2de);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5dade2), to(#47a2de));
+  background-image: -webkit-linear-gradient(top, #5dade2, #47a2de);
+  background-image: -o-linear-gradient(top, #5dade2, #47a2de);
+  background-image: linear-gradient(to bottom, #5dade2, #47a2de);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0088CC', endColorstr='#FF0077B3', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5DADE2', endColorstr='#FF47A2DE', GradientType=0);
 }
 
 /* line 113, ../components/sass-bootstrap/lib/_dropdowns.scss */
 .dropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
 .dropdown-menu > .disabled > a:focus {
-  color: #999999;
+  color: #95a5a6;
 }
 
 /* line 118, ../components/sass-bootstrap/lib/_dropdowns.scss */
@@ -5104,7 +5105,7 @@ button.close {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  color: #333333;
+  color: #34495e;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   background-color: whitesmoke;
   background-image: -moz-linear-gradient(top, white, #e6e6e6);
@@ -5132,7 +5133,7 @@ button.close {
 }
 /* line 513, ../components/sass-bootstrap/lib/_mixins.scss */
 .btn:hover, .btn:focus, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {
-  color: #333333;
+  color: #34495e;
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
 }
@@ -5146,7 +5147,7 @@ button.close {
 }
 /* line 30, ../components/sass-bootstrap/lib/_buttons.scss */
 .btn:hover, .btn:focus {
-  color: #333333;
+  color: #34495e;
   text-decoration: none;
   background-position: 0 -15px;
   -webkit-transition: background-position 0.1s linear;
@@ -5261,58 +5262,58 @@ input[type="button"].btn-block {
 .btn-primary {
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #006ccc;
-  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
-  background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+  background-color: #5d9be2;
+  background-image: -moz-linear-gradient(top, #5dade2, #5d81e2);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5dade2), to(#5d81e2));
+  background-image: -webkit-linear-gradient(top, #5dade2, #5d81e2);
+  background-image: -o-linear-gradient(top, #5dade2, #5d81e2);
+  background-image: linear-gradient(to bottom, #5dade2, #5d81e2);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0088CC', endColorstr='#FF0044CC', GradientType=0);
-  border-color: #0044cc #0044cc #002a80;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5DADE2', endColorstr='#FF5D81E2', GradientType=0);
+  border-color: #5d81e2 #5d81e2 #2552ce;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #0044cc;
+  *background-color: #5d81e2;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 /* line 513, ../components/sass-bootstrap/lib/_mixins.scss */
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
   color: white;
-  background-color: #0044cc;
-  *background-color: #003bb3;
+  background-color: #5d81e2;
+  *background-color: #4770de;
 }
 /* line 521, ../components/sass-bootstrap/lib/_mixins.scss */
 .btn-primary:active, .btn-primary.active {
-  background-color: #003399 \9;
+  background-color: #325fda \9;
 }
 
 /* line 149, ../components/sass-bootstrap/lib/_buttons.scss */
 .btn-warning {
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #f9a732;
-  background-image: -moz-linear-gradient(top, #fbb450, #f89406);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
-  background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
-  background-image: -o-linear-gradient(top, #fbb450, #f89406);
-  background-image: linear-gradient(to bottom, #fbb450, #f89406);
+  background-color: #ea964b;
+  background-image: -moz-linear-gradient(top, #eea667, #e67e22);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eea667), to(#e67e22));
+  background-image: -webkit-linear-gradient(top, #eea667, #e67e22);
+  background-image: -o-linear-gradient(top, #eea667, #e67e22);
+  background-image: linear-gradient(to bottom, #eea667, #e67e22);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFBB450', endColorstr='#FFF89406', GradientType=0);
-  border-color: #f89406 #f89406 #ad6704;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEA667', endColorstr='#FFE67E22', GradientType=0);
+  border-color: #e67e22 #e67e22 #a85913;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #f89406;
+  *background-color: #e67e22;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 /* line 513, ../components/sass-bootstrap/lib/_mixins.scss */
 .btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .btn-warning.disabled, .btn-warning[disabled] {
   color: white;
-  background-color: #f89406;
-  *background-color: #df8505;
+  background-color: #e67e22;
+  *background-color: #d67118;
 }
 /* line 521, ../components/sass-bootstrap/lib/_mixins.scss */
 .btn-warning:active, .btn-warning.active {
-  background-color: #c67605 \9;
+  background-color: #bf6516 \9;
 }
 
 /* line 153, ../components/sass-bootstrap/lib/_buttons.scss */
@@ -5406,29 +5407,29 @@ input[type="button"].btn-block {
 .btn-inverse {
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #363636;
-  background-image: -moz-linear-gradient(top, #444444, #222222);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#444444), to(#222222));
-  background-image: -webkit-linear-gradient(top, #444444, #222222);
-  background-image: -o-linear-gradient(top, #444444, #222222);
-  background-image: linear-gradient(to bottom, #444444, #222222);
+  background-color: #304458;
+  background-image: -moz-linear-gradient(top, #34495e, #2c3e50);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#34495e), to(#2c3e50));
+  background-image: -webkit-linear-gradient(top, #34495e, #2c3e50);
+  background-image: -o-linear-gradient(top, #34495e, #2c3e50);
+  background-image: linear-gradient(to bottom, #34495e, #2c3e50);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF444444', endColorstr='#FF222222', GradientType=0);
-  border-color: #222222 #222222 black;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF34495E', endColorstr='#FF2C3E50', GradientType=0);
+  border-color: #2c3e50 #2c3e50 #11181f;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #222222;
+  *background-color: #2c3e50;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 /* line 513, ../components/sass-bootstrap/lib/_mixins.scss */
 .btn-inverse:hover, .btn-inverse:focus, .btn-inverse:active, .btn-inverse.active, .btn-inverse.disabled, .btn-inverse[disabled] {
   color: white;
-  background-color: #222222;
-  *background-color: #151515;
+  background-color: #2c3e50;
+  *background-color: #233140;
 }
 /* line 521, ../components/sass-bootstrap/lib/_mixins.scss */
 .btn-inverse:active, .btn-inverse.active {
-  background-color: #090909 \9;
+  background-color: #1a242f \9;
 }
 
 /* line 174, ../components/sass-bootstrap/lib/_buttons.scss */
@@ -5477,7 +5478,7 @@ input[type="submit"].btn.btn-mini {
 .btn-link {
   border-color: transparent;
   cursor: pointer;
-  color: #0088cc;
+  color: #5dade2;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   border-radius: 0;
@@ -5486,7 +5487,7 @@ input[type="submit"].btn.btn-mini {
 /* line 219, ../components/sass-bootstrap/lib/_buttons.scss */
 .btn-link:hover,
 .btn-link:focus {
-  color: #005580;
+  color: #258ace;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -5494,7 +5495,7 @@ input[type="submit"].btn.btn-mini {
 /* line 225, ../components/sass-bootstrap/lib/_buttons.scss */
 .btn-link[disabled]:hover,
 .btn-link[disabled]:focus {
-  color: #333333;
+  color: #34495e;
   text-decoration: none;
 }
 
@@ -5672,11 +5673,11 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 140, ../components/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn-primary.dropdown-toggle {
-  background-color: #0044cc;
+  background-color: #5d81e2;
 }
 /* line 143, ../components/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn-warning.dropdown-toggle {
-  background-color: #f89406;
+  background-color: #e67e22;
 }
 /* line 146, ../components/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn-danger.dropdown-toggle {
@@ -5692,7 +5693,7 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 155, ../components/sass-bootstrap/lib/_button-groups.scss */
 .btn-group.open .btn-inverse.dropdown-toggle {
-  background-color: #222222;
+  background-color: #2c3e50;
 }
 
 /* line 162, ../components/sass-bootstrap/lib/_button-groups.scss */
@@ -5889,7 +5890,7 @@ input[type="submit"].btn.btn-mini {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
 }
 
 /* line 27, ../components/sass-bootstrap/lib/_navs.scss */
@@ -5909,7 +5910,7 @@ input[type="submit"].btn.btn-mini {
   font-size: 11px;
   font-weight: bold;
   line-height: 20px;
-  color: #999999;
+  color: #95a5a6;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
 }
@@ -5945,7 +5946,7 @@ input[type="submit"].btn.btn-mini {
 .nav-list > .active > a:focus {
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
-  background-color: #0088cc;
+  background-color: #5dade2;
 }
 
 /* line 79, ../components/sass-bootstrap/lib/_navs.scss */
@@ -6021,14 +6022,14 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 128, ../components/sass-bootstrap/lib/_navs.scss */
 .nav-tabs > li > a:hover, .nav-tabs > li > a:focus {
-  border-color: #eeeeee #eeeeee #dddddd;
+  border-color: #ecf0f1 #ecf0f1 #dddddd;
 }
 
 /* line 135, ../components/sass-bootstrap/lib/_navs.scss */
 .nav-tabs > .active > a,
 .nav-tabs > .active > a:hover,
 .nav-tabs > .active > a:focus {
-  color: #555555;
+  color: #34495e;
   background-color: white;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
@@ -6051,7 +6052,7 @@ input[type="submit"].btn.btn-mini {
 .nav-pills > .active > a:hover,
 .nav-pills > .active > a:focus {
   color: white;
-  background-color: #0088cc;
+  background-color: #5dade2;
 }
 
 /* line 170, ../components/sass-bootstrap/lib/_navs.scss */
@@ -6130,16 +6131,16 @@ input[type="submit"].btn.btn-mini {
 
 /* line 220, ../components/sass-bootstrap/lib/_navs.scss */
 .nav .dropdown-toggle .caret {
-  border-top-color: #0088cc;
-  border-bottom-color: #0088cc;
+  border-top-color: #5dade2;
+  border-bottom-color: #5dade2;
   margin-top: 6px;
 }
 
 /* line 226, ../components/sass-bootstrap/lib/_navs.scss */
 .nav .dropdown-toggle:hover .caret,
 .nav .dropdown-toggle:focus .caret {
-  border-top-color: #005580;
-  border-bottom-color: #005580;
+  border-top-color: #258ace;
+  border-bottom-color: #258ace;
 }
 
 /* move down carets for tabs */
@@ -6156,8 +6157,8 @@ input[type="submit"].btn.btn-mini {
 
 /* line 241, ../components/sass-bootstrap/lib/_navs.scss */
 .nav-tabs .active .dropdown-toggle .caret {
-  border-top-color: #555555;
-  border-bottom-color: #555555;
+  border-top-color: #34495e;
+  border-bottom-color: #34495e;
 }
 
 /* line 249, ../components/sass-bootstrap/lib/_navs.scss */
@@ -6172,8 +6173,8 @@ input[type="submit"].btn.btn-mini {
 .nav > li.dropdown.open.active > a:hover,
 .nav > li.dropdown.open.active > a:focus {
   color: white;
-  background-color: #999999;
-  border-color: #999999;
+  background-color: #95a5a6;
+  border-color: #95a5a6;
 }
 
 /* line 266, ../components/sass-bootstrap/lib/_navs.scss */
@@ -6190,7 +6191,7 @@ input[type="submit"].btn.btn-mini {
 /* line 274, ../components/sass-bootstrap/lib/_navs.scss */
 .tabs-stacked .open > a:hover,
 .tabs-stacked .open > a:focus {
-  border-color: #999999;
+  border-color: #95a5a6;
 }
 
 /* line 288, ../components/sass-bootstrap/lib/_navs.scss */
@@ -6294,7 +6295,7 @@ input[type="submit"].btn.btn-mini {
 /* line 363, ../components/sass-bootstrap/lib/_navs.scss */
 .tabs-left > .nav-tabs > li > a:hover,
 .tabs-left > .nav-tabs > li > a:focus {
-  border-color: #eeeeee #dddddd #eeeeee #eeeeee;
+  border-color: #ecf0f1 #dddddd #ecf0f1 #ecf0f1;
 }
 
 /* line 368, ../components/sass-bootstrap/lib/_navs.scss */
@@ -6323,7 +6324,7 @@ input[type="submit"].btn.btn-mini {
 /* line 384, ../components/sass-bootstrap/lib/_navs.scss */
 .tabs-right > .nav-tabs > li > a:hover,
 .tabs-right > .nav-tabs > li > a:focus {
-  border-color: #eeeeee #eeeeee #eeeeee #dddddd;
+  border-color: #ecf0f1 #ecf0f1 #ecf0f1 #dddddd;
 }
 
 /* line 389, ../components/sass-bootstrap/lib/_navs.scss */
@@ -6336,7 +6337,7 @@ input[type="submit"].btn.btn-mini {
 
 /* line 400, ../components/sass-bootstrap/lib/_navs.scss */
 .nav > .disabled > a {
-  color: #999999;
+  color: #95a5a6;
 }
 
 /* line 405, ../components/sass-bootstrap/lib/_navs.scss */
@@ -6357,7 +6358,7 @@ input[type="submit"].btn.btn-mini {
 
 /* line 21, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inner {
-  min-height: 40px;
+  min-height: 50px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: #f9f9f9;
@@ -6403,7 +6404,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand {
   float: left;
   display: block;
-  padding: 10px 20px 10px;
+  padding: 15px 20px 15px;
   margin-left: -20px;
   font-size: 20px;
   font-weight: 200;
@@ -6418,7 +6419,7 @@ input[type="submit"].btn.btn-mini {
 /* line 67, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-text {
   margin-bottom: 0;
-  line-height: 40px;
+  line-height: 50px;
   color: #777777;
 }
 
@@ -6428,12 +6429,12 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 78, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-link:hover, .navbar-link:focus {
-  color: #333333;
+  color: #34495e;
 }
 
 /* line 85, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar .divider-vertical {
-  height: 40px;
+  height: 50px;
   margin: 0 9px;
   border-left: 1px solid #f2f2f2;
   border-right: 1px solid white;
@@ -6442,7 +6443,7 @@ input[type="submit"].btn.btn-mini {
 /* line 95, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar .btn,
 .navbar .btn-group {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 /* line 102, ../components/sass-bootstrap/lib/_navbar.scss */
@@ -6474,7 +6475,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-form select,
 .navbar-form .radio,
 .navbar-form .checkbox {
-  margin-top: 5px;
+  margin-top: 10px;
 }
 /* line 119, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-form input,
@@ -6505,14 +6506,14 @@ input[type="submit"].btn.btn-mini {
 .navbar-search {
   position: relative;
   float: left;
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 0;
 }
 /* line 145, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-search .search-query {
   margin-bottom: 0;
   padding: 4px 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 13px;
   font-weight: normal;
   line-height: 1;
@@ -6618,7 +6619,7 @@ input[type="submit"].btn.btn-mini {
 /* line 242, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar .nav > li > a {
   float: none;
-  padding: 10px 15px 10px;
+  padding: 15px 15px 15px;
   color: #777777;
   text-decoration: none;
   text-shadow: 0 1px 0 white;
@@ -6633,7 +6634,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
   background-color: transparent;
-  color: #333333;
+  color: #34495e;
   text-decoration: none;
 }
 
@@ -6641,7 +6642,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
 .navbar .nav > .active > a:focus {
-  color: #555555;
+  color: #34495e;
   text-decoration: none;
   background-color: #e6e6e6;
   -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125);
@@ -6748,8 +6749,8 @@ input[type="submit"].btn.btn-mini {
 /* line 343, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar .nav li.dropdown > a:hover .caret,
 .navbar .nav li.dropdown > a:focus .caret {
-  border-top-color: #555555;
-  border-bottom-color: #555555;
+  border-top-color: #34495e;
+  border-bottom-color: #34495e;
 }
 
 /* line 351, ../components/sass-bootstrap/lib/_navbar.scss */
@@ -6757,7 +6758,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav li.dropdown.active > .dropdown-toggle,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle {
   background-color: #e6e6e6;
-  color: #555555;
+  color: #34495e;
 }
 
 /* line 355, ../components/sass-bootstrap/lib/_navbar.scss */
@@ -6770,8 +6771,8 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav li.dropdown.open > .dropdown-toggle .caret,
 .navbar .nav li.dropdown.active > .dropdown-toggle .caret,
 .navbar .nav li.dropdown.open.active > .dropdown-toggle .caret {
-  border-top-color: #555555;
-  border-bottom-color: #555555;
+  border-top-color: #34495e;
+  border-bottom-color: #34495e;
 }
 
 /* line 368, ../components/sass-bootstrap/lib/_navbar.scss */
@@ -6806,20 +6807,20 @@ input[type="submit"].btn.btn-mini {
 
 /* line 394, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .navbar-inner {
-  background-color: #1b1b1b;
-  background-image: -moz-linear-gradient(top, #222222, #111111);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));
-  background-image: -webkit-linear-gradient(top, #222222, #111111);
-  background-image: -o-linear-gradient(top, #222222, #111111);
-  background-image: linear-gradient(to bottom, #222222, #111111);
+  background-color: #2f8ecd;
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3498db), to(#2980b9));
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF222222', endColorstr='#FF111111', GradientType=0);
-  border-color: #252525;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF3498DB', endColorstr='#FF2980B9', GradientType=0);
+  border-color: #2472a4;
 }
 /* line 400, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .brand,
 .navbar-inverse .nav > li > a {
-  color: #999999;
+  color: rgba(255, 255, 255, 0.75);
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 /* line 404, ../components/sass-bootstrap/lib/_navbar.scss */
@@ -6830,11 +6831,11 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 409, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .brand {
-  color: #999999;
+  color: #eeeeee;
 }
 /* line 413, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .navbar-text {
-  color: #999999;
+  color: rgba(255, 255, 255, 0.75);
 }
 /* line 418, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .nav > li > a:focus,
@@ -6847,11 +6848,11 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .nav .active > a:hover,
 .navbar-inverse .nav .active > a:focus {
   color: white;
-  background-color: #111111;
+  background-color: #2980b9;
 }
 /* line 431, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .navbar-link {
-  color: #999999;
+  color: rgba(255, 255, 255, 0.75);
 }
 /* line 434, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .navbar-link:hover, .navbar-inverse .navbar-link:focus {
@@ -6859,14 +6860,14 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 440, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .divider-vertical {
-  border-left-color: #111111;
-  border-right-color: #222222;
+  border-left-color: #2980b9;
+  border-right-color: #3498db;
 }
 /* line 448, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.active > .dropdown-toggle,
 .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
-  background-color: #111111;
+  background-color: #2980b9;
   color: white;
 }
 /* line 453, ../components/sass-bootstrap/lib/_navbar.scss */
@@ -6877,8 +6878,8 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 457, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
-  border-top-color: #999999;
-  border-bottom-color: #999999;
+  border-top-color: rgba(255, 255, 255, 0.75);
+  border-bottom-color: rgba(255, 255, 255, 0.75);
 }
 /* line 463, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle .caret,
@@ -6890,8 +6891,8 @@ input[type="submit"].btn.btn-mini {
 /* line 470, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .navbar-search .search-query {
   color: white;
-  background-color: #515151;
-  border-color: #111111;
+  background-color: #7fbbe3;
+  border-color: #2980b9;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.15);
   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.15);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -6915,7 +6916,7 @@ input[type="submit"].btn.btn-mini {
 /* line 480, ../components/sass-bootstrap/lib/_navbar.scss */
 .navbar-inverse .navbar-search .search-query:focus, .navbar-inverse .navbar-search .search-query.focused {
   padding: 5px 15px;
-  color: #333333;
+  color: #34495e;
   text-shadow: 0 1px 0 white;
   background-color: white;
   border: 0;
@@ -6928,29 +6929,29 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .btn-navbar {
   color: white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #0e0e0e;
-  background-image: -moz-linear-gradient(top, #151515, #040404);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#151515), to(#040404));
-  background-image: -webkit-linear-gradient(top, #151515, #040404);
-  background-image: -o-linear-gradient(top, #151515, #040404);
-  background-image: linear-gradient(to bottom, #151515, #040404);
+  background-color: #2481bf;
+  background-image: -moz-linear-gradient(top, #258cd1, #2472a4);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#258cd1), to(#2472a4));
+  background-image: -webkit-linear-gradient(top, #258cd1, #2472a4);
+  background-image: -o-linear-gradient(top, #258cd1, #2472a4);
+  background-image: linear-gradient(to bottom, #258cd1, #2472a4);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF151515', endColorstr='#FF040404', GradientType=0);
-  border-color: #040404 #040404 black;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF258CD1', endColorstr='#FF2472A4', GradientType=0);
+  border-color: #2472a4 #2472a4 #164666;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  *background-color: #040404;
+  *background-color: #2472a4;
   /* Darken IE7 buttons by default so they stand out more given they won't have borders */
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
 }
 /* line 513, ../components/sass-bootstrap/lib/_mixins.scss */
 .navbar-inverse .btn-navbar:hover, .navbar-inverse .btn-navbar:focus, .navbar-inverse .btn-navbar:active, .navbar-inverse .btn-navbar.active, .navbar-inverse .btn-navbar.disabled, .navbar-inverse .btn-navbar[disabled] {
   color: white;
-  background-color: #040404;
-  *background-color: black;
+  background-color: #2472a4;
+  *background-color: #20638f;
 }
 /* line 521, ../components/sass-bootstrap/lib/_mixins.scss */
 .navbar-inverse .btn-navbar:active, .navbar-inverse .btn-navbar.active {
-  background-color: black \9;
+  background-color: #1b557a \9;
 }
 
 /* line 6, ../components/sass-bootstrap/lib/_breadcrumbs.scss */
@@ -6978,7 +6979,7 @@ input[type="submit"].btn.btn-mini {
 }
 /* line 21, ../components/sass-bootstrap/lib/_breadcrumbs.scss */
 .breadcrumb .active {
-  color: #999999;
+  color: #95a5a6;
 }
 
 /* line 6, ../components/sass-bootstrap/lib/_pagination.scss */
@@ -7030,7 +7031,7 @@ input[type="submit"].btn.btn-mini {
 /* line 41, ../components/sass-bootstrap/lib/_pagination.scss */
 .pagination ul > .active > a,
 .pagination ul > .active > span {
-  color: #999999;
+  color: #95a5a6;
   cursor: default;
 }
 
@@ -7039,7 +7040,7 @@ input[type="submit"].btn.btn-mini {
 .pagination ul > .disabled > a,
 .pagination ul > .disabled > a:hover,
 .pagination ul > .disabled > a:focus {
-  color: #999999;
+  color: #95a5a6;
   background-color: transparent;
   cursor: default;
 }
@@ -7202,7 +7203,7 @@ input[type="submit"].btn.btn-mini {
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
 .pager .disabled > span {
-  color: #999999;
+  color: #95a5a6;
   background-color: #fff;
   cursor: default;
 }
@@ -7626,7 +7627,7 @@ input[type="submit"].btn.btn-mini {
 /* line 38, ../components/sass-bootstrap/lib/_thumbnails.scss */
 a.thumbnail:hover,
 a.thumbnail:focus {
-  border-color: #0088cc;
+  border-color: #5dade2;
   -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
   -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
   box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
@@ -7643,7 +7644,7 @@ a.thumbnail:focus {
 /* line 50, ../components/sass-bootstrap/lib/_thumbnails.scss */
 .thumbnail .caption {
   padding: 9px;
-  color: #555555;
+  color: #34495e;
 }
 
 /* line 11, ../components/sass-bootstrap/lib/_media.scss */
@@ -7703,7 +7704,7 @@ a.thumbnail:focus {
   vertical-align: baseline;
   white-space: nowrap;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #999999;
+  background-color: #95a5a6;
 }
 
 /* line 21, ../components/sass-bootstrap/lib/_labels-badges.scss */
@@ -7747,12 +7748,12 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 
 /* line 57, ../components/sass-bootstrap/lib/_labels-badges.scss */
 .label-warning {
-  background-color: #f89406;
+  background-color: #e67e22;
 }
 
 /* line 58, ../components/sass-bootstrap/lib/_labels-badges.scss */
 .label-warning[href] {
-  background-color: #c67605;
+  background-color: #bf6516;
 }
 
 /* line 60, ../components/sass-bootstrap/lib/_labels-badges.scss */
@@ -7777,12 +7778,12 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 
 /* line 66, ../components/sass-bootstrap/lib/_labels-badges.scss */
 .label-inverse {
-  background-color: #333333;
+  background-color: #34495e;
 }
 
 /* line 67, ../components/sass-bootstrap/lib/_labels-badges.scss */
 .label-inverse[href] {
-  background-color: #1a1a1a;
+  background-color: #222f3d;
 }
 
 /* line 54, ../components/sass-bootstrap/lib/_labels-badges.scss */
@@ -7797,12 +7798,12 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 
 /* line 57, ../components/sass-bootstrap/lib/_labels-badges.scss */
 .badge-warning {
-  background-color: #f89406;
+  background-color: #e67e22;
 }
 
 /* line 58, ../components/sass-bootstrap/lib/_labels-badges.scss */
 .badge-warning[href] {
-  background-color: #c67605;
+  background-color: #bf6516;
 }
 
 /* line 60, ../components/sass-bootstrap/lib/_labels-badges.scss */
@@ -7827,12 +7828,12 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 
 /* line 66, ../components/sass-bootstrap/lib/_labels-badges.scss */
 .badge-inverse {
-  background-color: #333333;
+  background-color: #34495e;
 }
 
 /* line 67, ../components/sass-bootstrap/lib/_labels-badges.scss */
 .badge-inverse[href] {
-  background-color: #1a1a1a;
+  background-color: #222f3d;
 }
 
 /* line 73, ../components/sass-bootstrap/lib/_labels-badges.scss */
@@ -8056,19 +8057,19 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 
 /* line 117, ../components/sass-bootstrap/lib/_progress-bars.scss */
 .progress-warning .bar, .progress .bar-warning {
-  background-color: #f9a732;
-  background-image: -moz-linear-gradient(top, #fbb450, #f89406);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fbb450), to(#f89406));
-  background-image: -webkit-linear-gradient(top, #fbb450, #f89406);
-  background-image: -o-linear-gradient(top, #fbb450, #f89406);
-  background-image: linear-gradient(to bottom, #fbb450, #f89406);
+  background-color: #ea964b;
+  background-image: -moz-linear-gradient(top, #eea667, #e67e22);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#eea667), to(#e67e22));
+  background-image: -webkit-linear-gradient(top, #eea667, #e67e22);
+  background-image: -o-linear-gradient(top, #eea667, #e67e22);
+  background-image: linear-gradient(to bottom, #eea667, #e67e22);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFBB450', endColorstr='#FFF89406', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFEEA667', endColorstr='#FFE67E22', GradientType=0);
 }
 
 /* line 120, ../components/sass-bootstrap/lib/_progress-bars.scss */
 .progress-warning.progress-striped .bar, .progress-striped .bar-warning {
-  background-color: #fbb450;
+  background-color: #eea667;
   background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
@@ -8193,7 +8194,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   line-height: 30px;
   color: white;
   text-align: center;
-  background: #222222;
+  background: #2c3e50;
   border: 3px solid white;
   -webkit-border-radius: 23px;
   -moz-border-radius: 23px;
@@ -8247,7 +8248,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   right: 0;
   bottom: 0;
   padding: 15px;
-  background: #333333;
+  background: #34495e;
   background: rgba(0, 0, 0, 0.75);
 }
 
@@ -8276,7 +8277,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   font-weight: 200;
   line-height: 30px;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #ecf0f1;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -9741,7 +9742,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   /* line 90, ../components/sass-bootstrap/lib/_responsive-navbar.scss */
   .navbar-inverse .nav-collapse .nav > li > a,
   .navbar-inverse .nav-collapse .dropdown-menu a {
-    color: #999999;
+    color: rgba(255, 255, 255, 0.75);
   }
 
   /* line 96, ../components/sass-bootstrap/lib/_responsive-navbar.scss */
@@ -9749,7 +9750,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   .navbar-inverse .nav-collapse .nav > li > a:focus,
   .navbar-inverse .nav-collapse .dropdown-menu a:hover,
   .navbar-inverse .nav-collapse .dropdown-menu a:focus {
-    background-color: #111111;
+    background-color: #2980b9;
   }
 
   /* line 100, ../components/sass-bootstrap/lib/_responsive-navbar.scss */
@@ -9815,8 +9816,8 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   /* line 147, ../components/sass-bootstrap/lib/_responsive-navbar.scss */
   .navbar-inverse .nav-collapse .navbar-form,
   .navbar-inverse .nav-collapse .navbar-search {
-    border-top-color: #111111;
-    border-bottom-color: #111111;
+    border-top-color: #2980b9;
+    border-bottom-color: #2980b9;
   }
 
   /* line 152, ../components/sass-bootstrap/lib/_responsive-navbar.scss */
@@ -9850,66 +9851,124 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
     overflow: visible !important;
   }
 }
-/* line 1, ../sass/_landing.scss */
+/* line 7, ../sass/_landing.scss */
 .landing {
-  height: 190px;
-  background: #ddd;
-  padding: 70px 0 0 0;
-  margin: 0 0 50px 0;
+  min-height: 190px;
+  background: url('/img/landing-bg-7.jpg?1375319154') no-repeat center -50px, white;
+  -webkit-box-shadow: inset 0 -2px 2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: inset 0 -2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 -2px 2px rgba(0, 0, 0, 0.25);
+  padding: 10px 0 25px 0;
+  margin: 0px;
 }
-/* line 6, ../sass/_landing.scss */
+/* line 13, ../sass/_landing.scss */
 .landing h1, .landing h4 {
   color: #fff;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
-/* line 10, ../sass/_landing.scss */
+/* line 17, ../sass/_landing.scss */
 .landing h1 {
   font-weight: 500;
   font-size: 54px;
+  line-height: 64px;
 }
-/* line 14, ../sass/_landing.scss */
+/* line 22, ../sass/_landing.scss */
 .landing h4 {
   font-weight: 400;
   margin-top: 17px;
 }
-/* line 18, ../sass/_landing.scss */
+/* line 26, ../sass/_landing.scss */
 .landing .container {
   height: 100%;
   position: relative;
 }
-
-/* line 23, ../sass/_landing.scss */
-.search-container {
-  position: absolute;
-  bottom: -25px;
-  left: 0px;
-  right: 0px;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #373737), color-stop(100%, #333333));
-  background: -webkit-linear-gradient(top, #373737, #333333);
-  background: -moz-linear-gradient(top, #373737, #333333);
-  background: -o-linear-gradient(top, #373737, #333333);
-  background: linear-gradient(top, #373737, #333333);
-  height: 50px;
-  -webkit-box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  color: #ccc;
+/* line 30, ../sass/_landing.scss */
+.landing .landing-input {
+  background: #fff;
+  border: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  height: auto;
+  font-size: inherit;
+  color: #2C3E50;
 }
-/* line 32, ../sass/_landing.scss */
+/* line 2, ../sass/_landing.scss */
+.landing .landing-input.placeholder {
+  color: #BDC3C7;
+  line-height: 75px;
+  height: auto;
+}
+/* line 3, ../sass/_landing.scss */
+.landing .landing-input:-moz-placeholder {
+  color: #BDC3C7;
+  line-height: 75px;
+  height: auto;
+}
+/* line 4, ../sass/_landing.scss */
+.landing .landing-input::-webkit-input-placeholder {
+  color: #BDC3C7;
+  line-height: 75px;
+  height: auto;
+}
+/* line 43, ../sass/_landing.scss */
+.landing .location-container {
+  display: block;
+  position: relative;
+}
+/* line 46, ../sass/_landing.scss */
+.landing .location-container .btn {
+  position: absolute;
+  bottom: 10px;
+  right: 0px;
+  color: #5dade2;
+  -webkit-transition: all, 0.1s;
+  -moz-transition: all, 0.1s;
+  -o-transition: all, 0.1s;
+  transition: all, 0.1s;
+}
+/* line 52, ../sass/_landing.scss */
+.landing .location-container .btn:hover {
+  color: #3297da;
+  -webkit-transition: all, 0.1s;
+  -moz-transition: all, 0.1s;
+  -o-transition: all, 0.1s;
+  transition: all, 0.1s;
+}
+/* line 57, ../sass/_landing.scss */
+.landing .location-container .landing-input {
+  margin: 0px;
+}
+
+/* line 62, ../sass/_landing.scss */
+.search-container {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #34495e), color-stop(100%, #2c3e50));
+  background: -webkit-linear-gradient(top, #34495e, #2c3e50);
+  background: -moz-linear-gradient(top, #34495e, #2c3e50);
+  background: -o-linear-gradient(top, #34495e, #2c3e50);
+  background: linear-gradient(top, #34495e, #2c3e50);
+  min-height: 50px;
+  color: #ECF0F1;
+}
+/* line 66, ../sass/_landing.scss */
 .search-container h5 {
   font-weight: 300;
   font-size: 16px;
   margin: 5px;
 }
-/* line 37, ../sass/_landing.scss */
+/* line 71, ../sass/_landing.scss */
 .search-container input {
   font-weight: 300;
   font-size: 16px;
 }
-/* line 41, ../sass/_landing.scss */
+/* line 75, ../sass/_landing.scss */
+.search-container .input-append {
+  margin: 0px;
+}
+/* line 78, ../sass/_landing.scss */
 .search-container .miles {
   border-bottom: 1px dotted #ccc;
-  color: #ccc;
+  color: #ECF0F1;
   text-decoration: none;
   -webkit-transition: color, 0.1s;
   -moz-transition: color, 0.1s;
@@ -9917,16 +9976,15 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   transition: color, 0.1s;
   outline: none;
 }
-/* line 47, ../sass/_landing.scss */
+/* line 84, ../sass/_landing.scss */
 .search-container .miles:hover {
   text-decoration: none;
-  color: #fff;
   -webkit-transition: color, 0.1s;
   -moz-transition: color, 0.1s;
   -o-transition: color, 0.1s;
   transition: color, 0.1s;
 }
-/* line 53, ../sass/_landing.scss */
+/* line 89, ../sass/_landing.scss */
 .search-container .divider-vertical {
   display: inline-block;
   width: 1px;
@@ -9935,44 +9993,49 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   border-right: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* line 61, ../sass/_landing.scss */
+/* line 97, ../sass/_landing.scss */
+.search-results {
+  padding-top: 20px;
+}
+
+/* line 100, ../sass/_landing.scss */
 .boats {
   margin: 0px;
 }
-/* line 63, ../sass/_landing.scss */
+/* line 102, ../sass/_landing.scss */
 .boats li {
   height: 169px;
   margin-bottom: 2.5641%;
 }
-/* line 66, ../sass/_landing.scss */
+/* line 105, ../sass/_landing.scss */
 .boats li img {
   height: auto;
   background: #ccc;
 }
-/* line 70, ../sass/_landing.scss */
+/* line 109, ../sass/_landing.scss */
 .boats li a {
   text-decoration: none;
 }
-/* line 72, ../sass/_landing.scss */
+/* line 111, ../sass/_landing.scss */
 .boats li a:hover {
   text-decoration: none;
 }
-/* line 76, ../sass/_landing.scss */
+/* line 115, ../sass/_landing.scss */
 .boats li:nth-child(4n+5) {
   margin-left: 0px;
 }
-/* line 80, ../sass/_landing.scss */
+/* line 119, ../sass/_landing.scss */
 .boats h5 {
   margin: 0px;
 }
 
-/* line 84, ../sass/_landing.scss */
+/* line 123, ../sass/_landing.scss */
 .img-container {
   position: relative;
   height: 100px;
   overflow: hidden;
 }
-/* line 88, ../sass/_landing.scss */
+/* line 127, ../sass/_landing.scss */
 .img-container .shadow-overlay {
   position: absolute;
   width: 100%;
@@ -9982,17 +10045,31 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   -moz-box-shadow: inset 0 -25px 50px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 -25px 50px rgba(0, 0, 0, 0.5);
 }
-/* line 94, ../sass/_landing.scss */
+/* line 133, ../sass/_landing.scss */
 .img-container .shadow-overlay > span {
   display: table-cell;
   vertical-align: bottom;
-  padding: 10px;
+  padding: 10px 10px 5px;
   font-size: 16px;
   font-weight: 500;
   color: #fff;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 1px black, 0 0 5px black;
   letter-spacing: 1px;
   word-break: break-word;
+}
+
+/* line 146, ../sass/_landing.scss */
+.lamp {
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
 }
 
 /* line 1, ../sass/_login.scss */
@@ -10068,7 +10145,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 }
 /* line 16, ../sass/_new.scss */
 .pull-type.selected {
-  background-color: #0088cc;
+  background-color: #3498db;
   color: #fff;
 }
 /* line 20, ../sass/_new.scss */
@@ -10141,47 +10218,81 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   box-shadow: inset 0 -25px 50px rgba(0, 0, 0, 0.25);
 }
 
+/* line 45, ../sass/_show.scss */
+.no-avatar {
+  font-size: 100px;
+  color: #eee;
+}
+
+/* line 49, ../sass/_show.scss */
+.section {
+  margin-top: 20px;
+}
+
 /* Global */
-/* line 10, ../sass/main.scss */
+/* line 11, ../sass/main.scss */
 .inline-block {
   display: inline-block;
   vertical-align: top;
 }
 
-/* line 14, ../sass/main.scss */
+/* line 15, ../sass/main.scss */
 .padded10 {
   padding: 10px;
 }
 
-/* line 17, ../sass/main.scss */
+/* line 18, ../sass/main.scss */
 .view-header {
   padding: 30px 0;
 }
 
 /* Typography */
-/* line 22, ../sass/main.scss */
+/* line 23, ../sass/main.scss */
 .light {
   font-weight: 200;
 }
 
 /* Forms */
-/* line 27, ../sass/main.scss */
+/* line 28, ../sass/main.scss */
 input.inverse {
-  background: #1b1b1b;
-  background-color: #1b1b1b;
-  color: #999;
+  background: #233140;
+  background-color: #233140;
+  color: #ECF0F1;
   -webkit-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
   -moz-box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
   box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
-  border-color: #111;
+  border-color: #1f2c39;
 }
-/* line 34, ../sass/main.scss */
+/* line 35, ../sass/main.scss */
 input[type="file"] {
   line-height: 12px;
 }
 
 /* Overrides */
 /* line 41, ../sass/main.scss */
+.brand {
+  font-family: 'Lobster', cursive;
+}
+/* line 43, ../sass/main.scss */
+.brand.logo {
+  font-size: 24px;
+  text-shadow: 1px 2px rgba(0, 0, 0, 0.75);
+  -webkit-transition: all, 0.3s;
+  -moz-transition: all, 0.3s;
+  -o-transition: all, 0.3s;
+  transition: all, 0.3s;
+  color: #eee;
+}
+/* line 48, ../sass/main.scss */
+.brand.logo:hover {
+  text-shadow: none;
+  -webkit-transition: all, 0.3s;
+  -moz-transition: all, 0.3s;
+  -o-transition: all, 0.3s;
+  transition: all, 0.3s;
+}
+
+/* line 55, ../sass/main.scss */
 .container-fluid.well {
   padding: 20px 0;
   margin: 0px;
@@ -10192,15 +10303,64 @@ input[type="file"] {
   border-radius: 0px;
 }
 
-/* line 48, ../sass/main.scss */
+/* line 62, ../sass/main.scss */
 .well.inverse {
   background: #fff;
   border-color: #ccc;
 }
 
-/* line 56, ../sass/main.scss */
+/* line 67, ../sass/main.scss */
 .breadcrumb {
   background-color: transparent;
   padding-left: 0px;
   margin-top: 10px;
+}
+
+/* line 76, ../sass/main.scss */
+.table.table-list tr:first-child td {
+  border-top: none;
+}
+
+/* line 83, ../sass/main.scss */
+.nav-lines {
+  margin: 0px;
+}
+/* line 85, ../sass/main.scss */
+.nav-lines li {
+  display: inline-block;
+}
+/* line 87, ../sass/main.scss */
+.nav-lines li a {
+  padding: 9px 0;
+  margin: 0 10px;
+}
+/* line 90, ../sass/main.scss */
+.nav-lines li a:hover {
+  background: transparent;
+  border-bottom: 2px solid #e5e5e5;
+  margin-bottom: -1px;
+}
+/* line 97, ../sass/main.scss */
+.nav-lines li.active a {
+  border-bottom: 2px solid #333;
+  color: inherit;
+  margin-bottom: -1px;
+}
+/* line 104, ../sass/main.scss */
+.nav-lines li:first-child a {
+  margin-left: 0px;
+}
+/* line 109, ../sass/main.scss */
+.nav-lines li:last-child a {
+  margin-right: 0px;
+}
+
+/* line 117, ../sass/main.scss */
+.navbar.navbar-wake .navbar-inner {
+  border-top: 3px solid #2f8ecd;
+  background: url('/img/landing-bg-7.jpg?1375319154') no-repeat center top, white;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-bottom: none;
 }
