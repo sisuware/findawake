@@ -9,6 +9,10 @@
  */
 var app = angular.module('findawakeApp');
 
-app.controller('SessionCtrl', function(){
+app.controller('WakeCtrl', function(){
+
+});
+
+app.controller('NewWakeCtrl', function(){
 
 });

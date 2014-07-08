@@ -11,9 +11,9 @@
  */
 var app = angular.module('findawakeApp');
 
-app.controller('IndexCtrl', function($scope, $timeout, PullsManager){
-  var pulls = new PullsManager($scope, $scope.auth);
-  pulls.getPulls();
+app.controller('IndexCtrl', function($scope, $timeout, auth, wakes){
+  $scope.auth = auth;
+  $scope.wakes = wakes;
 
   $scope.boarding = {
     wakeboarding: true,

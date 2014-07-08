@@ -9,6 +9,9 @@
  */
 var app = angular.module('findawakeApp');
 
-app.controller('PullsCtrl', function(){
-
+app.controller('NavCtrl', function(
+  $scope, 
+  SimpleLogin
+){
+  $scope.auth = SimpleLogin.currentUser();
 });

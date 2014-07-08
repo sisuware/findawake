@@ -5,18 +5,12 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
   <body ng-app="findawakeApp">
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavCtrl">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -25,26 +19,28 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Find A Wake</a>
+          <a class="navbar-brand" href="/">Find A Wake</a>
         </div>
         <div class="collapse navbar-collapse" id="bnavbar-collapse-1">
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+              <input type="text" class="form-control input-sm" placeholder="Search">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
           </form>
-          <ul ng-cloak ng-show="auth.authenticated" class="nav navbar-nav navbar-right">
-            <li><a ng-href="#/users/{{auth.user}}/requests">Pull Requests <span class="badge badge-inverse"></span></a></li>
+          <ul ng-cloak ng-show-auth="login" class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
+            <li><a ng-href="/account/requests">Pull Requests <span class="badge badge-inverse"></span></a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="auth.profile.name || auth.email"></span> <b class="caret"></b> <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="auth.user.profile.name || auth.user.email"></span> <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a ng-href="#/users/{{auth.user}}/pulls">Your Boats</a></li>
-                <li><a ng-href="#/users/{{auth.user}}">Account</a></li>
+                <li><a ng-href="/account/boats">Your Boats</a></li>
+                <li><a ng-href="#/users/{{auth.user.id}}">Account</a></li>
                 <li class="divider"></li>
                 <li><a href="" ng-click="logout()">Logout</a></li>
               </ul>
             </li>
+          </ul>
+          <ul ng-cloak ng-show-auth="['logout','error']" class="nav navbar-nav navbar-right">
+            <li><a href="/login">Login</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -64,8 +60,6 @@
     </script>
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
-    <script type="text/javascript" src="https://cdn.firebase.com/v0/firebase.js"></script>
-    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -80,15 +74,28 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+    <script src="bower_components/angularfire/angularfire.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/index.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/global.js"></script>
+    <script src="scripts/controllers/wakes.js"></script>
+    <script src="scripts/services/security.js"></script>
+    <script src="scripts/services/wakes.js"></script>
+    <script src="scripts/modules/firebase.js"></script>
+    <script src="scripts/modules/imgur.js"></script>
+    <script src="scripts/modules/login.js"></script>
+    <script src="scripts/modules/loginTools.js"></script>
     <!-- endbuild -->
 </body>
 </html>
