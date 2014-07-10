@@ -13,5 +13,7 @@ app.controller('NavCtrl', function(
   $scope, 
   SimpleLogin
 ){
-  $scope.auth = SimpleLogin.currentUser();
+  SimpleLogin.currentUser().then(function(user){
+    $scope.user = user;
+  });
 });

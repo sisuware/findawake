@@ -4,25 +4,10 @@
   </h1>
   <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 </div>
-<div class="landing">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span6">
-        <h1 class="form-inline">
-          Fine me a wake near
-          <div class="location-container">
-            <input type="text" class="landing-input input-block-level" placeholder="your location" ng-model="location.search"></input>
-            <button class="btn landing-input" type="button" ng-click="search()"><i class="icon-search"></i></button>
-          </div>
-        </h1>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="search-results">
   <div ng-cloak ng-hide="(pulls | filter:filterPulls).length" class="lamp">
     <h4>We were unable to find any pulls within {{selectedDistance}} miles of <i>{{location.search}}</i>.</h4>
-    <p>Try increasing the distance or <a href="#/pulls/new">give a pull</a>.</p>
+    <p>Try increasing the distance or <a href="/wakes/new">give a pull</a>.</p>
   </div>
 </div>
 <div class="row clearfix">
@@ -35,7 +20,7 @@
         <img ng-src="{{wake.thumbnail}}" />
       </div>
       <div class="caption">
-        <small class="muted"><i class="icon-map-marker"></i> {{wake.location.verified}}</small>
+        <small class="muted"><i class="glyphicon glyphicon-map-marker"></i> {{wake.location.formatted}}</small>
         <span ng-cloak class="label pull-right" ng-show="wake.location.distance">{{wake.location.distance}} miles</span>
       </div>
     </a>

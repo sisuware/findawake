@@ -1,0 +1,86 @@
+<div class="row clearfix">
+  <div class="col-xs-12">
+    <div class="avatar avatar-sm">
+      <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
+      <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i class="fa fa-user"></i></div>
+    </div>
+    <ol class="breadcrumb avatar-breadcrumb">
+      <li><a ng-href="/profile/{{profile.userId}}">{{profile.name}}</a></li>
+      <li class="active">Profile</li>
+    </ol>
+  </div>
+</div>
+<div class="page-header">
+  <h1>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="glyphicon glyphicon-map-marker"></i> {{wake.location.formatted}}</small></h1>
+</div>
+<div class="row clearfix">
+  <div class="col-md-8">
+    <div class="boat-info">
+      <div class="boat-features">
+        <span class="label label-info" ng-show="wake.boat.perfectPass">CRUISE CONTROL / PERFECT PASS</span>
+        <span class="label label-info" ng-show="wake.boat.ballastSystem">BALLAST SYSTEM</span>
+        <span class="label label-info" ng-show="wake.boat.tower">TOWER</span>
+        <span class="label label-info" ng-show="wake.boat.pylong">EXTENDED PYLON</span>
+      </div>
+      <div class="boat-thumbnail">
+        <span class="shadow-overlay"></span>
+        <img class="img-responsive" ng-src="{{wake.thumbnail}}" />
+      </div>
+      <div class="boat-tabs">
+        <ul class="nav nav-tabs" id="myTab">
+          <li class="active"><a href="#description">Description</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="description">
+            {{wake.boat.description}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div ng-cloak class="well" ng-hide="wakeRequested()">
+      <div class="control-group" ng-show="auth.authenticated">
+        <button type="button" class="btn btn-block btn-success btn-large" bs-modal="'partials/wakes/request.html'"><i class="icon-star-empty"></i> Request A wake</button>
+      </div>
+      <div class="control-group" ng-hide="auth.authenticated">
+        <button type="button" class="btn btn-block disabled">Request A wake</button>
+      </div>
+      <p class="muted text-center">Request a wake and be the first to know when you can wakeboard, wakesurf, or wakeskate behind this boat.</p>
+    </div>
+    <div ng-cloak class="well" ng-show="wakeRequested()">
+      <div class="control-group">
+        <button type="button" class="btn btn-block disabled btn-large"><i class="icon-star"></i> wake Requested</button>
+      </div>
+      <p class="muted">
+        You'll be notified via
+        <span ng-cloak ng-show="wakeRequested().notification.email">Email</span>
+        <span ng-cloak ng-show="wakeRequested().notification.email && wakeRequested().notification.textMessage">and</span>
+        <span ng-cloak ng-show="wakeRequested().notification.textMessage">Text Message</span>
+        when a session has been scheduled.
+      </p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h4><i class="glyphicon glyphicon-calendar"></i> Boating Schedule</h4>
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>From</th>
+          <th>To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="s in wake.schedules">
+          <td>{{s.day}}</td>
+          <td>{{s.from.hour}}{{s.from.period}}</td>
+          <td>{{s.to.hour}}{{s.to.period}}</td>
+        </tr>
+        <tr ng-cloak ng-hide="wake.schedules">
+          <td colspan="3" class="muted">The wake schedule will be posted soon.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

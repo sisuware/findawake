@@ -1,4 +1,5 @@
 'use strict';
+/*global _:false */
 
 /**
  * @ngdoc function
@@ -11,35 +12,35 @@
 var app = angular.module('findawakeApp');
 
 app.factory('Wakes', function(
-  syncData
+  syncData,
+  firebaseRef,
+  $timeout
 ){
   var wakesService = {};
 
   wakesService.query = function(){
-    return syncData('pulls');
+    return syncData('wakes');
   };
 
-  wakesService.create = function(){
+  wakesService.get = function(id){
+    return syncData('wakes/' + id);
+  };
 
+  wakesService.create = function(wake, callback){
+    var wakeRef = firebaseRef('wakes').push();
+    wakeRef.set(
+      _.assign(JSON.parse(angular.toJson(wake)), {'id': wakeRef.name()}), function(err){
+        firebaseRef('users/' + wake.userId + '/wakes').push(wakeRef.name());
+        firebaseRef('profiles/' + wake.userId + '/wakes').push(wakeRef.name());
+        if(callback){
+          $timeout(function(){
+            callback(err);
+          });
+        }
+      });
   };
 
   return wakesService;
-});
-
-app.factory('WakeCreator', function(
-  firebaseRef,
-  $timeout
-){
-  return function(id, args, callback) {
-    firebaseRef('wakes/' + id).set(args, function(err) {
-      //err && console.error(err);
-      if( callback ) {
-        $timeout(function() {
-          callback(err);
-        });
-      }
-    });
-  };
 });
 
 /**

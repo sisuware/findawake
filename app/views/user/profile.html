@@ -1,0 +1,28 @@
+<div class="row clearfix">
+  <div class="col-xs-12 text-center">
+    <div class="avatar avatar-md center-block">
+      <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
+      <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i class="fa fa-user"></i></div>
+    </div>
+    <h2>{{profile.name}}</h2>
+    <p class="lead">{{profile.bio}}</p>
+    <h4><i class="fa fa-map-marker"></i> {{profile.location}}</h4>
+    <hr/>
+  </div>
+</div>
+<div class="row clearfix">
+  <div class="col-sm-6 col-md-3" ng-repeat="wake in wakes">
+    <a class="thumbnail" ng-href="/wakes/{{wake.id}}">
+      <div class="wake-thumbnail">
+        <div class="shadow-overlay">
+          <span>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}}</span>
+        </div>
+        <img ng-src="{{wake.thumbnail}}" />
+      </div>
+      <div class="caption">
+        <small class="muted"><i class="glyphicon glyphicon-map-marker"></i> {{wake.location.formatted}}</small>
+        <span ng-cloak class="label pull-right" ng-show="wake.location.distance">{{wake.location.distance}} miles</span>
+      </div>
+    </a>
+  </div>
+</div>

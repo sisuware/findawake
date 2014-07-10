@@ -11,18 +11,26 @@ app.factory('SimpleLogin', function(
   $firebaseSimpleLogin, 
   firebaseRef, 
   ProfileCreator, 
-  $timeout
+  $timeout,
+  $q
 ){
   var auth = null, simpleLoginService = {};
 
   simpleLoginService.init = function() {
-    auth = $firebaseSimpleLogin(firebaseRef());
-    return auth;
+    var dfr = $q.defer();
+    auth = $firebaseSimpleLogin(firebaseRef(), function(error, user){
+      if(error){
+        dfr.reject(error);
+      } else {
+        dfr.resolve(user);
+      }
+    });
+    return dfr.promise;
   };
 
   simpleLoginService.currentUser = function(){
     assertAuth();
-    return auth;
+    return auth.$getCurrentUser();
   };
 
   simpleLoginService.logout = function() {
@@ -86,7 +94,9 @@ app.factory('SimpleLogin', function(
 
   simpleLoginService.createAccount = function(email, pass, callback) {
     assertAuth();
-    auth.$createUser(email, pass).then(function(user) { callback(null, user); }, callback);
+    auth.$createUser(email, pass).then(function(user) { 
+      callback(null, user); 
+    }, callback);
   };
 
   simpleLoginService.createProfile = ProfileCreator;
@@ -116,7 +126,8 @@ app.factory('ProfileCreator', function(
 
     firebaseRef('users/' + id).set({
       email: email, 
-      name: firstPartOfEmail(email)
+      name: firstPartOfEmail(email),
+      userId: id
     }, function(err) {
       //err && console.error(err);
       if( callback ) {

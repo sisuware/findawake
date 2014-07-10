@@ -12,6 +12,7 @@ var app = angular.module('findawakeApp');
 app.controller('LoginCtrl', function(
   $scope,
   SimpleLogin,
+  Users,
   $location
 ){
   $scope.login = function(service) {
@@ -56,14 +57,21 @@ app.controller('LoginCtrl', function(
 
     $scope.err = null;
     if( assertValidLoginAttempt() ) {
-      SimpleLogin.createAccount($scope.email, $scope.pass, function(err, user) {
+      SimpleLogin.createAccount($scope.email, $scope.pass, function(err) {
         if( err ) {
           $scope.err = err? err + '' : null;
         } else {
           // must be logged in before I can write to my profile
-          $scope.login(function() {
-            SimpleLogin.createProfile(user.uid, user.email);
-            $location.path('/account');
+          SimpleLogin.loginPassword($scope.email, $scope.pass, function(err, user) {
+            if(err){ 
+              $scope.err = err;
+            } else {
+              SimpleLogin.createProfile(user.id, user.email, function(){
+                Users.createPublicProfile(user, function(){
+                  $location.path('/profile/' + user.id);
+                });
+              });
+            }
           });
         }
       });

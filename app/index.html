@@ -6,7 +6,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/bower_components/animate.css/animate.css">
     <!-- endbuild -->
   </head>
   <body ng-app="findawakeApp">
@@ -28,12 +29,14 @@
             </div>
           </form>
           <ul ng-cloak ng-show-auth="login" class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
-            <li><a ng-href="/account/requests">Pull Requests <span class="badge badge-inverse"></span></a></li>
+            <li>
+              <a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a>
+            </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="auth.user.profile.name || auth.user.email"></span> <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.email"></span> <b class="caret"></b></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a ng-href="/account/boats">Your Boats</a></li>
-                <li><a ng-href="#/users/{{auth.user.id}}">Account</a></li>
+                <li><a ng-href="/my/boats">My Boats</a></li>
+                <li><a ng-href="/my/account">My Account</a></li>
                 <li class="divider"></li>
                 <li><a href="" ng-click="logout()">Logout</a></li>
               </ul>
@@ -63,39 +66,45 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/json3/lib/json3.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="bower_components/firebase/firebase.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
-    <script src="bower_components/angularfire/angularfire.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/es5-shim/es5-shim.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/json3/lib/json3.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-touch/angular-touch.js"></script>
+    <script src="/bower_components/angular-route/angular-route.js"></script>
+    <script src="/bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="/bower_components/firebase/firebase.js"></script>
+    <script src="/bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="/bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+    <script src="/bower_components/angularfire/angularfire.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/index.js"></script>
-    <script src="scripts/controllers/login.js"></script>
-    <script src="scripts/controllers/global.js"></script>
-    <script src="scripts/controllers/wakes.js"></script>
-    <script src="scripts/services/security.js"></script>
-    <script src="scripts/services/wakes.js"></script>
-    <script src="scripts/modules/firebase.js"></script>
-    <script src="scripts/modules/imgur.js"></script>
-    <script src="scripts/modules/login.js"></script>
-    <script src="scripts/modules/loginTools.js"></script>
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/controllers/index.js"></script>
+    <script src="/scripts/controllers/login.js"></script>
+    <script src="/scripts/controllers/global.js"></script>
+    <script src="/scripts/controllers/wake.js"></script>
+    <script src="/scripts/controllers/user.js"></script>
+    <script src="/scripts/controllers/profile.js"></script>
+    <script src="/scripts/services/security.js"></script>
+    <script src="/scripts/services/wakes.js"></script>
+    <script src="/scripts/services/users.js"></script>
+    <script src="/scripts/services/wakeSettings.js"></script>
+    <script src="/scripts/services/userSettings.js"></script>
+    <script src="/scripts/modules/firebase.js"></script>
+    <script src="/scripts/modules/imgur.js"></script>
+    <script src="/scripts/modules/simpleLogin.js"></script>
+    <script src="/scripts/modules/loginTools.js"></script>
+    <script src="/scripts/directives/fileUpload.js"></script>
     <!-- endbuild -->
 </body>
 </html>

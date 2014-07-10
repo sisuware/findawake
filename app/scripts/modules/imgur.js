@@ -7,14 +7,14 @@ app.run(function($http) {
   $http.defaults.headers.common.Authorization = 'Client-ID 64973c9d57c6457';
 });
 
-app.factory('Imgur', function ($http, ImgurRef) {
+app.factory('Imgur', function ($http, ImgurImageApi) {
   var imgurService = {};
 
   imgurService.upload = function(img){
-    var newUpload = new ImgurRef();
+    var newUpload = new ImgurImageApi();
     newUpload.image = base64EncodeImage(img);
 
-    return newUpload.save();
+    return newUpload.$save();
   };
 
   function base64EncodeImage(image){
@@ -26,7 +26,7 @@ app.factory('Imgur', function ($http, ImgurRef) {
   return imgurService;
 });
 
-app.factory('ImgurRef', function($resource, IMGUR){
+app.factory('ImgurImageApi', function($resource, IMGUR){
   var url = IMGUR + 'image.json';
   return $resource(url);
 });

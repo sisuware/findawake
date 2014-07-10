@@ -18,6 +18,10 @@ module.exports = function (grunt) {
   // Modrewrite puling to redirect all requests to root url
   var modRewrite = require('connect-modrewrite');
 
+  var mountFolder = function (connect, dir) {
+    return connect.static(require('path').resolve(dir));
+  };
+
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -79,13 +83,17 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-              modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png$ /index.html [L]']),
-              connect.static('.tmp'),
+              modRewrite([
+                '!\\.html|\\images|\\.js|\\.css|\\.png|\\.jpg|\\.woff|\\.ttf|\\.svg /index.html [L]'
+              ]),
+              mountFolder(connect, '.tmp'),
+              //connect.static('.tmp'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
               ),
-              connect.static(appConfig.app)
+              mountFolder(connect, appConfig.app)
+              //connect.static(appConfig.app)
             ];
           }
         }
@@ -341,6 +349,12 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      fonts: {
+        expand: true,
+        cwd: 'bower_components/fontawesome/fonts',
+        src: '*',
+        dest: '.tmp/fonts'
       }
     },
 
@@ -348,15 +362,18 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'less:development',
-        'copy:styles'
+        'copy:styles',
+        'copy:fonts'
       ],
       test: [
         'less:development',
-        'copy:styles'
+        'copy:styles',
+        'copy:fonts'
       ],
       dist: [
         'less:development',
         'copy:styles',
+        'copy:fonts',
         'imagemin',
         'svgmin'
       ]
