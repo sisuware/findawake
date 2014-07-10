@@ -13,34 +13,36 @@
 var app = angular.module('findawakeApp');
 
 app.factory('WakeSettings', function($timeout, $q){
-  var wakeSettingsService = {};
+  var wakeSettingsService = {}, validationTimeout;
 
   wakeSettingsService.init = function($scope){
-    $timeout(function(){
+    if(_.isNull($scope.wake)){
       $scope.wake = {};
       $scope.wake.schedules = [];
       $scope.wake.types = listBoardTypes();
+    }
       $scope.years = listYears();
       $scope.days = listDays();
       $scope.hours = listHours();
       $scope.timePeriods = listTimePeriods();
-    });
   };
 
-  wakeSettingsService.geocode = function(location){
-    var dfr = $q.defer(),
-        geocoder = new google.maps.Geocoder();
-    
-    geocoder.geocode({ 
-      'address': JSON.stringify(location)
-    }, function(results, status) {
-      if (status === google.maps.GeocoderStatus.OK) {
-        dfr.resolve(formatGeocodeResults(results));
-      } else {
-        dfr.reject('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-    return dfr.promise;
+  wakeSettingsService.validateLocation = function(location, callback){
+    /*jshint camelcase: false */
+    var l = location;
+    if(_.isEmpty(l) || _.isEmpty(l.city) || _.isEmpty(l.state)) { return false; }
+
+    if(!_.isUndefined(validationTimeout)){
+      $timeout.cancel(validationTimeout);
+      validationTimeout = undefined;
+    }
+    validationTimeout = $timeout(function(){
+      geocode(l).then(function(res){
+        if(callback){
+          callback(res);
+        }
+      });
+    }, 1000);
   };
 
   function formatGeocodeResults(results){
@@ -55,6 +57,22 @@ app.factory('WakeSettings', function($timeout, $q){
       obj.lng = result.geometry.location.lng();
       return obj;
     });
+  }
+
+  function geocode(location){
+    var dfr = $q.defer(),
+        geocoder = new google.maps.Geocoder();
+    
+    geocoder.geocode({ 
+      'address': JSON.stringify(location)
+    }, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        dfr.resolve(formatGeocodeResults(results));
+      } else {
+        dfr.reject('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+    return dfr.promise;
   }
 
   function listYears(){

@@ -1,0 +1,14 @@
+<div class="page-header text-center">
+  <h2>Update your wake.</h2>
+</div>
+<form ng-cloak ng-show="auth.id === wake.userId" name="editWake" class="animated fadeIn">
+  <ng-include src="'/views/wakes/form.html'"></ng-include>
+  <div class="row form-group clearfix">
+    <div class="col-md-9">
+      <a href="/wakes/{{wake.id}}">Cancel</button>
+    </div>
+    <div class="col-md-3 text-right">
+      <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="update()">Update</button>
+    </div>
+  </div>
+</form>

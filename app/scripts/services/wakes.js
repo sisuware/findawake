@@ -14,7 +14,8 @@ var app = angular.module('findawakeApp');
 app.factory('Wakes', function(
   syncData,
   firebaseRef,
-  $timeout
+  $timeout,
+  $q
 ){
   var wakesService = {};
 
@@ -26,19 +27,108 @@ app.factory('Wakes', function(
     return syncData('wakes/' + id);
   };
 
-  wakesService.create = function(wake, callback){
-    var wakeRef = firebaseRef('wakes').push();
-    wakeRef.set(
-      _.assign(JSON.parse(angular.toJson(wake)), {'id': wakeRef.name()}), function(err){
-        firebaseRef('users/' + wake.userId + '/wakes').push(wakeRef.name());
-        firebaseRef('profiles/' + wake.userId + '/wakes').push(wakeRef.name());
-        if(callback){
-          $timeout(function(){
-            callback(err);
-          });
-        }
-      });
+  wakesService.remove = function(wake){
+    return $q.all([
+      removeUserWakeAssociation(wake.userId, wake.id), 
+      removeProfileWakeAssociation(wake.userId, wake.id)
+    ]).then(function(){
+      return wake.$remove();
+    });
   };
+
+  wakesService.create = function(wake){
+    return createWake(wake).then(function(wakeRef){
+      return $q.all([
+        createUserWakeAssociation(wake.userId, wakeRef), 
+        createProfileWakeAssociation(wake.userId, wakeRef)
+      ]);
+    });
+
+    //var wakeRef = firebaseRef('wakes').push();
+    //wakeRef.set(
+    //  _.assign(JSON.parse(angular.toJson(wake)), {'id': wakeRef.name()}), function(err){
+    //    firebaseRef('users/' + wake.userId + '/wakes').push(wakeRef.name());
+    //    firebaseRef('profiles/' + wake.userId + '/wakes').push(wakeRef.name());
+    //    
+    //    if(callback){
+    //      $timeout(function(){
+    //        callback(err);
+    //      });
+    //    }
+    //  });
+  };
+
+  function createWake(wake){
+    var dfr = $q.defer(),
+        wakeRef = firebaseRef('wakes').push(),
+        wakeData = JSON.parse(angular.toJson(wake));
+
+    wakeRef.set(_.assign(wakeData, {'id': wakeRef.name()}), function(err){
+      if(err){
+        dfr.reject(err);
+      } else {
+        dfr.resolve(wakeRef.name());
+      }
+    });
+
+    return dfr.promise;
+  }
+
+  function createUserWakeAssociation(userId, wakeRef){
+    var dfr = $q.defer();
+
+    firebaseRef('users/' + userId + '/wakes').push(wakeRef, function(err){
+      if(err){
+        dfr.reject(err);
+      } else {
+        dfr.resolve();
+      }
+    });
+
+    return dfr.promise;
+  }
+
+  function removeUserWakeAssociation(userId, wakeRef){
+    var dfr = $q.defer();
+
+    firebaseRef('users/' + userId + '/wakes/' + wakeRef).remove(function(err){
+      if(err){
+        dfr.reject(err);
+      } else {
+        dfr.resolve();
+      }
+    });
+
+    return dfr.promise;
+  }
+
+  function createProfileWakeAssociation(userId, wakeRef){
+    var dfr = $q.defer();
+
+    firebaseRef('profiles/' + userId + '/wakes').push(wakeRef, function(err){
+      if(err){
+        dfr.reject(err);
+      } else {
+        dfr.resolve();
+      }
+    });
+
+    return dfr.promise;
+  }
+
+  function removeProfileWakeAssociation(userId, wakeRef){
+    var dfr = $q.defer();
+
+    firebaseRef('profiles/' + userId + '/wakes/' + wakeRef).remove(function(err){
+      if(err){
+        dfr.reject(err);
+      } else {
+        dfr.resolve();
+      }
+    });
+
+    return dfr.promise;
+  }
 
   return wakesService;
 });

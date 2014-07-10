@@ -14,6 +14,7 @@ var app = angular.module('findawakeApp', [
   'ngRoute',
   'ngSanitize',
   'firebase',
+  'ui.bootstrap',
   'angularfire.firebase',
   'angularfire.login',
   'simpleLoginTools',
@@ -40,6 +41,7 @@ app.config(function($routeProvider, $locationProvider) {
     .when('/wakes/new', {
       templateUrl: '/views/wakes/new.html', 
       controller: 'NewWakeCtrl',
+      authRequired: false,
       resolve: {
         auth: function(SimpleLogin){
           return SimpleLogin.currentUser();
@@ -49,6 +51,20 @@ app.config(function($routeProvider, $locationProvider) {
     .when('/wakes/:id', {
       templateUrl: '/views/wakes/show.html', 
       controller: 'WakeCtrl',
+      authRequired: false,
+      resolve: {
+        auth: function(SimpleLogin){
+          return SimpleLogin.currentUser();
+        },
+        wake: function(Wakes, $route){
+          return Wakes.get($route.current.params.id);
+        }
+      }
+    })
+    .when('/wakes/:id/edit', {
+      templateUrl: '/views/wakes/edit.html', 
+      controller: 'EditWakeCtrl',
+      authRequired: true,
       resolve: {
         auth: function(SimpleLogin){
           return SimpleLogin.currentUser();
