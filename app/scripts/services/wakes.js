@@ -42,15 +42,15 @@ app.factory('Wakes', function(
 
   wakesService.request = function(request){
     return createRef('requests/' + request.wakeId, request).then(function(requestRef){
-      createAssociation('users', 'requests', request.userId, requestRef);
+      createAssociation('users', 'requests/' + request.wakeId, request.userId, requestRef, 'set');
     });
   };
 
   wakesService.create = function(wake){
     return createRef('wakes', wake).then(function(wakeRef){
       return $q.all([
-        createAssociation('users', 'wakes', wake.userId, wakeRef),
-        createAssociation('profiles', 'wakes', wake.userId, wakeRef)
+        createAssociation('users', 'wakes', wake.userId, wakeRef, 'push'),
+        createAssociation('profiles', 'wakes', wake.userId, wakeRef, 'push')
       ]);
     });
   };
@@ -71,10 +71,10 @@ app.factory('Wakes', function(
     return dfr.promise;
   }
 
-  function createAssociation(root, target, id, ref){
+  function createAssociation(root, target, id, ref, method){
     var dfr = $q.defer();
 
-    firebaseRef(root + '/' + id + '/' + target).push(ref, function(err){
+    firebaseRef(root + '/' + id + '/' + target)[method](ref, function(err){
       if(err){
         dfr.reject(err);
       } else {

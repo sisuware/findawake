@@ -71,3 +71,10 @@ app.controller('UserCtrl', function(
     }, 500);
   }
 });
+
+app.controller('UserWelcomeCtrl', function(
+  $scope,
+  profile
+){
+  $scope.profile = profile;
+});

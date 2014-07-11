@@ -53,8 +53,12 @@ app.config(function($routeProvider, $locationProvider) {
       controller: 'WakeCtrl',
       authRequired: false,
       resolve: {
-        auth: function(SimpleLogin){
-          return SimpleLogin.currentUser();
+        auth: function(SimpleLogin, Users){
+          return SimpleLogin.currentUser().then(function(user){
+            if(user){
+              return Users.get(user.id);
+            }
+          });
         },
         wake: function(Wakes, $route){
           return Wakes.get($route.current.params.id);
@@ -81,7 +85,9 @@ app.config(function($routeProvider, $locationProvider) {
       resolve: {
         profile: function(SimpleLogin, Users){
           return SimpleLogin.currentUser().then(function(user){
-            return Users.get(user.id);
+            if(user){
+              return Users.get(user.id);
+            }
           });
         }
       }
@@ -103,6 +109,20 @@ app.config(function($routeProvider, $locationProvider) {
       templateUrl: '/views/login.html', 
       controller: 'LoginCtrl',
       authRequired: false
+    })
+    .when('/welcome', {
+      templateUrl: '/views/user/welcome.html', 
+      controller: 'UserWelcomeCtrl', 
+      authRequired: true,
+      resolve: {
+        profile: function(SimpleLogin, Users){
+          return SimpleLogin.currentUser().then(function(user){
+            if(user){
+              return Users.get(user.id);
+            }
+          });
+        }
+      }
     })
     .otherwise({
       redirectTo: '/'

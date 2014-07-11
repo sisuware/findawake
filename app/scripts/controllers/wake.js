@@ -1,4 +1,5 @@
 'use strict';
+/*global _:false */
 
 /**
  * @ngdoc function
@@ -17,9 +18,10 @@ app.controller('WakeCtrl', function(
   $location,
   Users
 ){
-  $scope.wake = wake;
   $scope.auth = auth;
-  $scope.profile = Users.getProfile(wake.userId);
+  $scope.wake = wake.$on('value', function(dataSnapshot){
+    $scope.profile = Users.getProfile(dataSnapshot.snapshot.value.userId);
+  });
 
   $scope.requestRide = function(){
     var modalInstance = $modal.open({
@@ -39,6 +41,16 @@ app.controller('WakeCtrl', function(
     modalInstance.result.then(function(){
 
     });
+  };
+
+  $scope.rideRequested = function(){
+    if(_.isUndefined(auth) || _.isEmpty(auth)){ return false; }
+    if(_.isObject(auth.requests)){
+      return !_.isUndefined(auth.requests[wake.id]);
+    }
+    if(_.isArray(auth.requests)){
+      return _.indexOf(auth.requests, wake.id) === -1;
+    }
   };
 
   $scope.removeWake = function(wake){

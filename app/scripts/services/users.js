@@ -14,16 +14,20 @@ var app = angular.module('findawakeApp');
 app.factory('Users', function(
   syncData,
   firebaseRef,
-  $timeout
+  $q
 ){
-  var usersService = {};
+  var usersService = {}, profiles = {};
 
   usersService.get = function(id){
     return syncData('users/' + id);
   };
 
   usersService.getProfile = function(id){
-    return syncData('profiles/' + id);
+    if(!id){ return false; }
+    if(!profiles[id]){
+      profiles[id] = syncData('profiles/' + id);
+    }
+    return profiles[id];
   };
 
   usersService.updatePublicProfile = function(user){
@@ -34,19 +38,25 @@ app.factory('Users', function(
     );
   };
 
-  usersService.createPublicProfile = function(user, callback){
-    var profile = firebaseRef('profiles/' + user.id);
-    
-    profile.set(
-      _.assign(JSON.parse(angular.toJson(_.pick(user, 'name')))), function(err){
-        if(callback){
-          $timeout(function(){
-            callback(err);
-          });
-        }
-      }
-    );
+  usersService.createPublicProfile = function(user){
+    return createRef('profiles/' + user.userId, user);
   };
+
+  function createRef(target, data){
+    var dfr = $q.defer(),
+        ref = firebaseRef(target),
+        refData = JSON.parse(angular.toJson(_.pick(data, 'name')));
+
+    ref.set(refData, function(err){
+      if(err){
+        dfr.reject(err);
+      } else {
+        dfr.resolve(ref.name());
+      }
+    });
+
+    return dfr.promise;
+  }
 
   return usersService;
 });

@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Find A Wake (Beta)</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- build:css(.tmp) styles/main.css -->
@@ -11,7 +11,7 @@
     <!-- endbuild -->
   </head>
   <body ng-app="findawakeApp">
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" ng-controller="NavCtrl">
+    <nav class="navbar navbar-default navbar-static-top animated fadeInDown" role="navigation" ng-controller="NavCtrl">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -20,7 +20,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Find A Wake</a>
+          <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a>
         </div>
         <div class="collapse navbar-collapse" id="bnavbar-collapse-1">
           <form class="navbar-form navbar-left" role="search">
@@ -41,7 +41,7 @@
                 <li><a href="" ng-click="logout()">Logout</a></li>
               </ul>
             </li>
-            <li ng-cloak ng-show-auth="['logout','error']"><a href="/login">Login</a></li>
+            <li ng-cloak ng-show-auth="['logout','error']"><a href="/login">Login/Register</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

@@ -6878,6 +6878,10 @@ legend {
 legend > .nav > li > a {
   font-size: 18px;
 }
+.jumbotron.welcome-jumbotron {
+  background: linear-gradient(#02a5de, #029acf 6%, #028fc0);
+  color: #fff;
+}
 .wake-thumbnail {
   height: 100px;
   overflow: hidden;

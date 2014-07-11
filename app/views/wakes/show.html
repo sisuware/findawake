@@ -3,16 +3,24 @@
     <div class="col-xs-9">
       <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small>  
       </h2>
-      <small>By <a ng-href="/profile/{{profile.$id}}">{{profile.name}}</a></small>
+      <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{profile.$id}}">{{profile.name}}</a></small>
     </div>
-    <div class="col-xs-3 text-right">
-      <button ng-cloak ng-show="wake.userId === auth.id" ng-click="removeWake(wake)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
-      <a ng-cloak ng-show="wake.userId === auth.id" ng-href="/wakes/{{wake.id}}/edit" class="btn btn-danger btn-sm"><i class="fa fa-gear"></i> Edit</a>
+    <div ng-cloak ng-show-auth="login" class="col-xs-3 text-right">
+      <button ng-cloak ng-show="wake.userId === auth.userId" ng-click="removeWake(wake)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
+      <a ng-cloak ng-show="wake.userId === auth.userId" ng-href="/wakes/{{wake.id}}/edit" class="btn btn-danger btn-sm"><i class="fa fa-gear"></i> Edit</a>
     </div>
   </div>
   <hr/>
   <div class="row clearfix">
     <div class="col-md-8">
+      <div class="row">
+         <div class="col-sm-4" ng-repeat="type in wake.types">
+          <div class="thumbnail board-thumbnail" ng-class="{true: 'active'}[type.selected]">
+            <span class="boarding-icons boarding-icons-{{type.name}}" ng-class="{true: type.name+'-active'}[type.selected]"></span>
+            <p class="text-center">{{type.name}}</p>
+          </div>
+        </div>
+      </div>
       <div class="boat-info panel panel-default">
         <div class="boat-features">
           <span class="label label-info" ng-show="wake.boat.perfectPass">CRUISE CONTROL / PERFECT PASS</span>
@@ -37,22 +45,22 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div class="well">
-        <div class="form-group" ng-auth-show="login">
+      <div ng-hide="profile" class="well text-center animated fadeIn"><i class="fa fa-spin fa-spinner"></i></div>
+      <div ng-cloak class="well animated fadeIn" ng-hide="rideRequested()">
+        <div class="form-group" ng-show-auth="login">
           <button type="button" class="btn btn-block btn-primary btn-lg" ng-click="requestRide()"><i class="fa fa-star-o"></i> Request A Ride!</button>
+        </div>
+        <div class="form-group" ng-show-auth="['logout','error']">
+          <button type="button" class="btn btn-block btn-primary btn-lg" ng-click=""><i class="fa fa-star-o"></i> Request A Ride!</button>
         </div>
         <p class="muted text-center">Request a ride to be notified when you can wakeboard, wakesurf, or wakeskate behind this wake making machine!</p>
       </div>
-      <div ng-cloak class="well" ng-show="wakeRequested()">
-        <div class="control-group">
-          <button type="button" class="btn btn-block disabled btn-large"><i class="icon-star"></i> wake Requested</button>
+      <div ng-cloak class="well animated fadeIn" ng-show="rideRequested()">
+        <div class="form-group">
+          <button type="button" class="btn btn-block btn-success disabled btn-lg"><i class="fa fa-star"></i> Ride Requested</button>
         </div>
-        <p class="muted">
-          You'll be notified via
-          <span ng-cloak ng-show="wakeRequested().notification.email">Email</span>
-          <span ng-cloak ng-show="wakeRequested().notification.email && wakeRequested().notification.textMessage">and</span>
-          <span ng-cloak ng-show="wakeRequested().notification.textMessage">Text Message</span>
-          when a session has been scheduled.
+        <p class="muted text-center">
+          You'll be notified via when a session has been scheduled.
         </p>
       </div>
     </div>

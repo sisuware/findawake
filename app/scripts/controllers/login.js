@@ -16,22 +16,20 @@ app.controller('LoginCtrl', function(
   $location
 ){
   $scope.login = function(service) {
+    $scope.loading = true;
     SimpleLogin.login(service, function(err) {
+      $scope.loading = false;
       $scope.err = err? err + '' : null;
     });
   };
 
   $scope.loginPassword = function(cb) {
+    $scope.loading = true;
     $scope.err = null;
-    if( !$scope.email ) {
-      $scope.err = 'Please enter an email address';
-    }
-    else if( !$scope.pass ) {
-      $scope.err = 'Please enter a password';
-    }
-    else {
+    if( assertValidLoginAttempt() ) {
       SimpleLogin.loginPassword($scope.email, $scope.pass, function(err, user) {
-        $scope.err = err? err + '' : null;
+        $scope.loading = false;
+        $scope.err = parseErrorMessages(err);
         if( !err && cb ) {
           cb(user);
         }
@@ -42,33 +40,24 @@ app.controller('LoginCtrl', function(
   $scope.logout = SimpleLogin.logout;
 
   $scope.createAccount = function() {
-    function assertValidLoginAttempt() {
-      if( !$scope.email ) {
-        $scope.err = 'Please enter an email address';
-      }
-      else if( !$scope.pass ) {
-        $scope.err = 'Please enter a password';
-      }
-      else if( $scope.pass !== $scope.confirm ) {
-        $scope.err = 'Passwords do not match';
-      }
-      return !$scope.err;
-    }
-
+    $scope.loading = true;
     $scope.err = null;
-    if( assertValidLoginAttempt() ) {
+    if( assertValidCreateAccountAttempt() ) {
       SimpleLogin.createAccount($scope.email, $scope.pass, function(err) {
+        $scope.loading = false;
         if( err ) {
-          $scope.err = err? err + '' : null;
+          $scope.err = parseErrorMessages(err);
         } else {
+          $scope.creatingProfile = true;
           // must be logged in before I can write to my profile
           SimpleLogin.loginPassword($scope.email, $scope.pass, function(err, user) {
             if(err){ 
+              $scope.creatingProfile = false;
               $scope.err = err;
             } else {
-              SimpleLogin.createProfile(user.id, user.email, function(){
-                Users.createPublicProfile(user, function(){
-                  $location.path('/profile/' + user.id);
+              SimpleLogin.createProfile(user.id, user.email).then(function(user) {
+                Users.createPublicProfile(user).then(function(){
+                  $location.path('/welcome');
                 });
               });
             }
@@ -77,4 +66,32 @@ app.controller('LoginCtrl', function(
       });
     }
   };
+
+  function parseErrorMessages(err){
+    if(err){
+      return err.message.replace(/FirebaseSimpleLogin:\s/g,'');
+    } else {
+      return null;
+    }
+  }
+
+  function assertValidLoginAttempt(){
+    if( !$scope.email ) {
+      $scope.err = 'Please enter an email address';
+    } else if( !$scope.pass ) {
+      $scope.err = 'Please enter a password';
+    }
+    return !$scope.err;
+  }
+
+  function assertValidCreateAccountAttempt() {
+    if( !$scope.email ) {
+      $scope.err = 'Please enter an email address';
+    } else if( !$scope.pass ) {
+      $scope.err = 'Please enter a password';
+    } else if( $scope.pass !== $scope.confirm ) {
+      $scope.err = 'Passwords do not match';
+    }
+    return !$scope.err;
+  }
 });

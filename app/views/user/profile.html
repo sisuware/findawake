@@ -6,8 +6,8 @@
         <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i class="fa fa-user"></i></div>
       </div>
       <ol class="breadcrumb avatar-breadcrumb">
-        <li><h4>{{profile.name}}</h4></li>
-        <li><i class="fa fa-map-marker"></i> {{profile.location}}</li>
+        <li ng-cloak ng-show="profile.name"><h4>{{profile.name}}</h4></li>
+        <li ng-cloak ng-show="profile.location"><i class="fa fa-map-marker"></i> {{profile.location}}</li>
       </ol>
     </div>
     <div class="col-xs-3 text-right">
@@ -37,10 +37,12 @@
     <div class="col-md-4">
       <div class="form-group">
         <h4>Bio</h4>
-        <p class="lead">{{profile.bio}}</p>
+        <p ng-cloak ng-show="profile.bio" class="lead">{{profile.bio}}</p>
+        <p ng-cloak ng-hide="profile.bio" class="text-muted">No bio exists yet for {{profile.name}}</p>
       </div>
       <div class="form-group">
         <h4>Gear</h4>
+        <p ng-cloak ng-hide="profile.gear" class="text-muted">No gear exists yet for {{profile.name}}</p>
         <table class="table table-condensed table-hover table-list">
         <tbody>
           <tr ng-repeat="gear in profile.gear">

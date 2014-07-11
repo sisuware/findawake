@@ -110,31 +110,37 @@ app.factory('SimpleLogin', function(
 
 app.factory('ProfileCreator', function(
   firebaseRef, 
-  $timeout
+  $q
 ) {
-  return function(id, email, callback) {
-    function firstPartOfEmail(email) {
+  function firstPartOfEmail(email) {
       return ucfirst(email.substr(0, email.indexOf('@'))||'');
-    }
+  }
 
-    function ucfirst (str) {
-      // credits: http://kevin.vanzonneveld.net
-      str += '';
-      var f = str.charAt(0).toUpperCase();
-      return f + str.substr(1);
-    }
+  function ucfirst (str) {
+    // credits: http://kevin.vanzonneveld.net
+    str += '';
+    var f = str.charAt(0).toUpperCase();
+    return f + str.substr(1);
+  }
 
-    firebaseRef('users/' + id).set({
+  return function(id, email) {
+    var dfr = $q.defer(),
+        ref = firebaseRef('users/' + id);
+
+    var refData = {
       email: email, 
       name: firstPartOfEmail(email),
       userId: id
-    }, function(err) {
-      //err && console.error(err);
-      if( callback ) {
-        $timeout(function() {
-          callback(err);
-        });
+    };
+
+    ref.set(refData, function(err){
+      if(err){
+        dfr.reject(err);
+      } else {
+        dfr.resolve(refData);
       }
     });
+
+    return dfr.promise;
   };
 });

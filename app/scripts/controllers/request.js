@@ -21,7 +21,7 @@ app.controller('RequestCtrl', function(
   $scope.wake = wake;
 
   $scope.submit = function(){
-    $scope.request.userId = auth.id;
+    $scope.request.userId = auth.userId;
     $scope.request.wakeId = wake.id;
     Wakes.request($scope.request);
   };
