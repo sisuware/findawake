@@ -15,12 +15,6 @@ app.controller('IndexCtrl', function($scope, $timeout, auth, wakes){
   $scope.auth = auth;
   $scope.wakes = wakes;
 
-  $scope.boarding = {
-    wakeboarding: true,
-    wakesurfing: true,
-    wakeskating: true
-  };
-
   $scope.distances = ['5','15','25','50','100','150'];
   $scope.selectedDistance = '25';
 

@@ -1,109 +1,111 @@
-<div class="row clearfix form-group animated fadeIn ">
-  <div class="col-xs-12">
-    <div class="avatar avatar-sm">
-      <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
-      <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i class="fa fa-user"></i></div>
+<div class="container animated fadeIn">
+  <div class="row clearfix form-group">
+    <div class="col-xs-12">
+      <div class="avatar avatar-sm">
+        <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
+        <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i class="fa fa-user"></i></div>
+      </div>
+      <ol class="breadcrumb avatar-breadcrumb">
+        <li><a ng-href="/profile/{{profile.userId}}">{{profile.name}}</a></li>
+        <li class="active">Profile</li>
+      </ol>
     </div>
-    <ol class="breadcrumb avatar-breadcrumb">
-      <li><a ng-href="/profile/{{profile.userId}}">{{profile.name}}</a></li>
-      <li class="active">Profile</li>
-    </ol>
   </div>
-</div>
-<legend class="animated fadeIn ">
-  <ul class="nav nav-lines">
-    <li class="active">
-      <a href="/my/account">Profile</a>
-    </li>
-  </ul>
-</legend>
-<div class="row clearfix animated fadeIn">
-  <div class="col-md-8">
-    <div class="form-horizontal">
-      <div class="form-group">
-        <label class="control-label col-sm-2">Name</label>
-        <div class="col-sm-10">
-          <input type="text" placeholder="Name" class="form-control" ng-model="profile.name" />
-          <small class="muted">We're big on names around here, so people know who's who.</small>
+  <legend>
+    <ul class="nav nav-lines">
+      <li class="active">
+        <a href="/my/account">Profile</a>
+      </li>
+    </ul>
+  </legend>
+  <div class="row clearfix">
+    <div class="col-md-8">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-sm-2">Name</label>
+          <div class="col-sm-10">
+            <input type="text" placeholder="Name" class="form-control" ng-model="profile.name" />
+            <small class="muted">We're big on names around here, so people know who's who.</small>
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2">Location</label>
-        <div class="col-sm-10">
-          <input type="text" placeholder="Location" class="form-control" ng-model="profile.location" />
+        <div class="form-group">
+          <label class="control-label col-sm-2">Location</label>
+          <div class="col-sm-10">
+            <input type="text" placeholder="Location" class="form-control" ng-model="profile.location" />
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2">Email</label>
-        <div class="col-sm-10">
-          <input type="text" placeholder="Email" class="form-control" ng-model="profile.email" />
+        <div class="form-group">
+          <label class="control-label col-sm-2">Email</label>
+          <div class="col-sm-10">
+            <input type="text" placeholder="Email" class="form-control" ng-model="profile.email" />
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2">Cell</label>
-        <div class="col-sm-10">
-          <div class="input-group">
-            <span class="input-group-addon">1</span>
-            <input type="tel" class="form-control" placeholder="(555) 555-5555" ng-model="profile.cell.value" />
+        <div class="form-group">
+          <label class="control-label col-sm-2">Cell</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon">1</span>
+              <input type="tel" class="form-control" placeholder="(555) 555-5555" ng-model="profile.cell.value" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Bio</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" ng-model="profile.bio"></textarea>
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2">Bio</label>
-        <div class="col-sm-10">
-          <textarea class="form-control" ng-model="profile.bio"></textarea>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <legend><h4>Your Avatar</h4></legend>
-    <div class="row">
-      <div class="form-group clearfix">
-        <div class="col-sm-4">
-          <div class="text-center">
-            <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
-            <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i ng-hide="uploadingAvatar" class="fa fa-user"></i><i ng-cloak ng-show="uploadingAvatar" class="fa fa-spinner fa-spin"></i></div>
+    <div class="col-md-4">
+      <legend><h4>Your Avatar</h4></legend>
+      <div class="row">
+        <div class="form-group clearfix">
+          <div class="col-sm-4">
+            <div class="text-center">
+              <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
+              <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i ng-hide="uploadingAvatar" class="fa fa-user"></i><i ng-cloak ng-show="uploadingAvatar" class="fa fa-spinner fa-spin"></i></div>
+            </div>
+          </div>
+          <div ng-cloak ng-hide="profile.avatar" class="col-sm-8" ng-form="avatarForm">
+            <input type="file" class="form-control" file-upload="avatar" required name="avatar"/>
+            <button ng-cloak ng-show="existingAvatar" type="button" class="btn btn-sm btn-default" ng-click="cancelChangeAvatar()">Cancel</button>
+            <button type="button" class="btn btn-sm btn-primary" ng-disabled="!avatar || uploadingAvatar" ng-click="uploadAvatar()" ng-bind="uploadingAvatar ? 'Saving...':'Save Avatar'"></button>
+          </div>
+          <div ng-cloak ng-show="profile.avatar" class="col-sm-8">
+            <button type="button" class="btn btn-sm btn-primary" ng-click="changeAvatar()">Change Avatar</button>
+            <button type="button" class="btn btn-sm btn-default" ng-click="profile.avatar=null"><i class="fa fa-trash-o"></i> Delete</button>
           </div>
         </div>
-        <div ng-cloak ng-hide="profile.avatar" class="col-sm-8" ng-form="avatarForm">
-          <input type="file" class="form-control" file-upload="avatar" required name="avatar"/>
-          <button ng-cloak ng-show="existingAvatar" type="button" class="btn btn-sm btn-default" ng-click="cancelChangeAvatar()">Cancel</button>
-          <button type="button" class="btn btn-sm btn-primary" ng-disabled="!avatar || uploadingAvatar" ng-click="uploadAvatar()" ng-bind="uploadingAvatar ? 'Saving...':'Save Avatar'"></button>
-        </div>
-        <div ng-cloak ng-show="profile.avatar" class="col-sm-8">
-          <button type="button" class="btn btn-sm btn-primary" ng-click="changeAvatar()">Change Avatar</button>
-          <button type="button" class="btn btn-sm btn-default" ng-click="profile.avatar=null"><i class="fa fa-trash-o"></i> Delete</button>
-        </div>
       </div>
+      <h4>Your Gear</h4>
+      <table class="table table-condensed table-hover table-list">
+        <tbody>
+          <tr ng-repeat="gear in profile.gear">
+            <td><b>{{gear.type}}</b></td>
+            <td>{{gear.desc}}</td>
+            <td class="text-right">
+              <button ng-click="removeGear($index)" type="button" class="btn btn-sm btn-link"><i class="fa fa-trash-o"></i></button>
+            </td>
+          </tr>
+          <tr ng-form="gearForm">
+            <td>
+              <select class="form-control input-sm" name="type" ng-model="gear.type" ng-options="type as type for type in gearTypes" required></select>
+            </td>
+            <td>
+              <input class="form-control input-sm" name="desc" ng-model="gear.desc" type="text" placeholder="E.g. Ronix One 2013" required/>
+            </td>
+            <td class="text-right">
+              <button class="btn btn-default btn-sm" ng-click="addGear(gear)" ng-disabled="gearForm.$invalid"><i class="fa fa-plus"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <h4>Your Gear</h4>
-    <table class="table table-condensed table-hover table-list">
-      <tbody>
-        <tr ng-repeat="gear in profile.gear">
-          <td><b>{{gear.type}}</b></td>
-          <td>{{gear.desc}}</td>
-          <td class="text-right">
-            <button ng-click="removeGear($index)" type="button" class="btn btn-sm btn-link"><i class="fa fa-trash-o"></i></button>
-          </td>
-        </tr>
-        <tr ng-form="gearForm">
-          <td>
-            <select class="form-control input-sm" name="type" ng-model="gear.type" ng-options="type as type for type in gearTypes" required></select>
-          </td>
-          <td>
-            <input class="form-control input-sm" name="desc" ng-model="gear.desc" type="text" placeholder="E.g. Ronix One 2013" required/>
-          </td>
-          <td class="text-right">
-            <button class="btn btn-default btn-sm" ng-click="addGear(gear)" ng-disabled="gearForm.$invalid"><i class="fa fa-plus"></i></button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="col-sm-12 text-right form-group">
-    <hr/>
-    <button ng-cloak ng-show="profileSaved" class="btn btn-success" ng-click="updateProfile()">Success!</button>
-    <button ng-cloak ng-hide="profileSaved" class="btn btn-primary" ng-click="updateProfile()" ng-bind="savingProfile ? 'Saving...' : 'Update Profile'" ng-disabled="savingProfile"></button>
+    <div class="col-sm-12 text-right form-group">
+      <hr/>
+      <button ng-cloak ng-show="profileSaved" class="btn btn-success" ng-click="updateProfile()">Success!</button>
+      <button ng-cloak ng-hide="profileSaved" class="btn btn-primary" ng-click="updateProfile()" ng-bind="savingProfile ? 'Saving...' : 'Update Profile'" ng-disabled="savingProfile"></button>
+    </div>
   </div>
 </div>

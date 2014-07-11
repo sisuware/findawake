@@ -1,36 +1,37 @@
-<!-- wait for auth to resolve (avoid flashing login page before redirect -->
-<div ng-cloak class="row">
-  <div class="col-md-6 col-md-offset-3 animated bounceInDown">
-    <div class="panel panel-primary animated" ng-form="loginForm" ng-class="{'shake':err ? true:false}">
-      <div class="panel-heading">Login</div>
-      <div ng-cloak ng-show="loading" class="panel-body animated fadeIn">
-        <h3 class="text-center text-muted"><i class="fa fa-spin fa-spinner"></i></h3>
-      </div>
-      <div ng-cloak ng-show="creatingProfile" class="panel-body text-center animated fadeIn">
-        <h3>Welcome aboard!</h3>
-        <p class="lead">Please wait while we finish creating your new account. This will only take a couple seconds.</p>
-        <h3 class="text-center text-muted"><i class="fa fa-spin fa-spinner"></i></h3>
-      </div>
-      <div ng-hide="loading || creatingProfile" class="panel-body">
-        <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
-        <div class="form-group">
-          <label>Email</label>
-          <input class="form-control" type="text" ng-model="email" name="email" required/>
+<div class="container" ng-cloak>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 animated bounceInDown">
+      <div class="panel panel-primary animated" ng-form="loginForm" ng-class="{'shake':err ? true:false}">
+        <div class="panel-heading">Login</div>
+        <div ng-cloak ng-show="loading" class="panel-body animated fadeIn">
+          <h3 class="text-center text-muted"><i class="fa fa-spin fa-spinner"></i></h3>
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input class="form-control" type="password" ng-model="pass" name="pass" required/>
+        <div ng-cloak ng-show="creatingProfile" class="panel-body text-center animated fadeIn">
+          <h3>Welcome aboard!</h3>
+          <p class="lead">Please wait while we finish creating your new account. This will only take a couple seconds.</p>
+          <h3 class="text-center text-muted"><i class="fa fa-spin fa-spinner"></i></h3>
         </div>
-        <div class="form-group" ng-show="createMode">
-          <label>Confirm Password</label>
-          <input class="form-control" type="password" ng-model="confirm" />
+        <div ng-hide="loading || creatingProfile" class="panel-body">
+          <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+          <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" type="text" ng-model="email" name="email" required/>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" type="password" ng-model="pass" name="pass" required/>
+          </div>
+          <div class="form-group" ng-show="createMode">
+            <label>Confirm Password</label>
+            <input class="form-control" type="password" ng-model="confirm" />
+          </div>
         </div>
-      </div>
-      <div ng-hide="loading" class="panel-footer">
-        <button class="btn btn-primary pull-right" ng-click="loginPassword()" ng-hide="createMode" ng-disabled="loginForm.$invalid">Login</button>
-        <button class="btn btn-default" ng-click="createMode = true" ng-hide="createMode">Register</button>
-        <button class="btn btn-primary pull-right" ng-show="createMode" ng-click="createAccount()" ng-disabled="loginForm.$invalid || pass !== confirm">Create Account</button>
-        <button class="btn btn-default" ng-show="createMode" ng-click="createMode = false">Login</button>
+        <div ng-hide="loading" class="panel-footer">
+          <button class="btn btn-primary pull-right" ng-click="loginPassword()" ng-hide="createMode" ng-disabled="loginForm.$invalid">Login</button>
+          <button class="btn btn-default" ng-click="createMode = true" ng-hide="createMode">Register</button>
+          <button class="btn btn-primary pull-right" ng-show="createMode" ng-click="createAccount()" ng-disabled="loginForm.$invalid || pass !== confirm">Create Account</button>
+          <button class="btn btn-default" ng-show="createMode" ng-click="createMode = false">Login</button>
+        </div>
       </div>
     </div>
   </div>

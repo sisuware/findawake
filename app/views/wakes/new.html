@@ -1,15 +1,17 @@
-<div class="page-header text-center">
-  <h2>Your wake belongs here!</h2>
-  <h4 class="text-muted">List your boat to connect with riders who need a wake to ride.</h4>
-</div>
-<form name="newWake" class="animated fadeIn">
-  <ng-include src="'/views/wakes/form.html'"></ng-include>
-  <div class="row form-group clearfix">
-    <div class="col-md-9 text-right">
-      <small class="muted">By clicking "Save & Continue", you confirm that<br/>you accept the Terms of Service & Privacy Policy.</small>
-    </div>
-    <div class="col-md-3 text-right">
-      <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="submit()" ng-disabled="newWake.$invalid">Save & Continue</button>
-    </div>
+<div class="container">
+  <div class="page-header text-center">
+    <h2>Your wake belongs here!</h2>
+    <h4 class="text-muted">List your boat to connect with riders who need a wake to ride.</h4>
   </div>
-</form>
+  <form name="newWake" class="animated fadeIn">
+    <ng-include src="'/views/wakes/form.html'"></ng-include>
+    <div class="row form-group clearfix">
+      <div class="col-md-9 text-right">
+        <small class="muted">By clicking "Save & Continue", you confirm that<br/>you accept the Terms of Service & Privacy Policy.</small>
+      </div>
+      <div class="col-md-3 text-right">
+        <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="submit()" ng-disabled="newWake.$invalid">Save & Continue</button>
+      </div>
+    </div>
+  </form>
+</div>
