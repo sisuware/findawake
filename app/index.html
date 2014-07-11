@@ -28,22 +28,20 @@
               <input type="text" class="form-control input-sm" placeholder="Search">
             </div>
           </form>
-          <ul ng-cloak ng-show-auth="login" class="nav navbar-nav navbar-right" ng-controller="LoginCtrl">
+          <ul class="nav navbar-nav navbar-right animated fadeIn">
             <li>
               <a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a>
             </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.email"></span> <b class="caret"></b></a>
+            <li class="dropdown" ng-cloak ng-show-auth="login" ng-controller="LoginCtrl">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.email"></span> <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a ng-href="/my/boats">My Boats</a></li>
+                <li><a ng-href="/profile/{{user.id}}">My Profile</a></li>
                 <li><a ng-href="/my/account">My Account</a></li>
                 <li class="divider"></li>
                 <li><a href="" ng-click="logout()">Logout</a></li>
               </ul>
             </li>
-          </ul>
-          <ul ng-cloak ng-show-auth="['logout','error']" class="nav navbar-nav navbar-right">
-            <li><a href="/login">Login</a></li>
+            <li ng-cloak ng-show-auth="['logout','error']"><a href="/login">Login</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -95,6 +93,7 @@
     <script src="/scripts/controllers/wake.js"></script>
     <script src="/scripts/controllers/user.js"></script>
     <script src="/scripts/controllers/profile.js"></script>
+    <script src="/scripts/controllers/request.js"></script>
     <script src="/scripts/services/security.js"></script>
     <script src="/scripts/services/wakes.js"></script>
     <script src="/scripts/services/users.js"></script>

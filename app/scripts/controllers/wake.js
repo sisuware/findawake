@@ -14,10 +14,32 @@ app.controller('WakeCtrl', function(
   wake, 
   auth, 
   $modal,
-  $location
+  $location,
+  Users
 ){
   $scope.wake = wake;
   $scope.auth = auth;
+  $scope.profile = Users.getProfile(wake.userId);
+
+  $scope.requestRide = function(){
+    var modalInstance = $modal.open({
+      templateUrl: '/views/wakes/requestModal.html',
+      controller: 'RequestCtrl',
+      size: 'lg',
+      resolve: {
+        auth: function(){
+          return $scope.auth;
+        },
+        wake: function(){
+          return $scope.wake;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(){
+
+    });
+  };
 
   $scope.removeWake = function(wake){
     var modalInstance = $modal.open({
@@ -92,6 +114,7 @@ app.controller('EditWakeCtrl', function(
 app.controller('NewWakeCtrl', function(
   $scope,
   $timeout,
+  $location,
   WakeSettings,
   Wakes,
   Imgur,
@@ -124,7 +147,9 @@ app.controller('NewWakeCtrl', function(
         $scope.wake.thumbnail = res.data.link;
       }
     }).finally(function(){
-      Wakes.create($scope.wake);
+      Wakes.create($scope.wake).then(function(){
+        $location.path('/');
+      });
     });
     
   };

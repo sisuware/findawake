@@ -19,8 +19,11 @@ app.controller('ProfileCtrl', function(
   $scope.auth = auth;
   $scope.wakes = [];
 
-  angular.forEach($scope.profile.wakes, function(wake){
-    console.log(wake);
-    $scope.wakes.push(Wakes.get(wake));
+  $scope.$watch('profile', function(value){
+    if(!value){ return false; }
+
+    angular.forEach($scope.profile.wakes, function(wake){
+      $scope.wakes.push(Wakes.get(wake));
+    });
   });
 });

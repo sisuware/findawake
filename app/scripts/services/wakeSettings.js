@@ -16,11 +16,12 @@ app.factory('WakeSettings', function($timeout, $q){
   var wakeSettingsService = {}, validationTimeout;
 
   wakeSettingsService.init = function($scope){
-    if(_.isNull($scope.wake)){
+    if(_.isNull($scope.wake) || _.isUndefined($scope.wake)){
       $scope.wake = {};
       $scope.wake.schedules = [];
       $scope.wake.types = listBoardTypes();
     }
+      $scope.location = {};
       $scope.years = listYears();
       $scope.days = listDays();
       $scope.hours = listHours();
