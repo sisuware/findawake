@@ -18,7 +18,9 @@ var app = angular.module('findawakeApp', [
   'angularfire.firebase',
   'angularfire.login',
   'simpleLoginTools',
-  'imgur'
+  'imgur',
+  'geolocation',
+  'google.geocoder'
 ]);
 
 

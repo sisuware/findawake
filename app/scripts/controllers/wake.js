@@ -78,9 +78,11 @@ app.controller('EditWakeCtrl', function(
   WakeSettings, 
   $window,
   Imgur,
+  Wakes,
   wake, 
   auth
 ){
+  var origWake = angular.copy(wake);
   $scope.auth = auth;
   $scope.wake = wake;
 
@@ -108,6 +110,11 @@ app.controller('EditWakeCtrl', function(
 
   $scope.update = function(){
     $scope.saving = true;
+
+    if(origWake.location !== $scope.wake.location) {
+      Wakes.updateLocation($scope.wake);
+    }
+
     if(!$scope.wake.thumbnail){
       Imgur.upload($scope.thumbnail).then(function(res){
         if(res.data){

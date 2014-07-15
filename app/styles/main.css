@@ -7016,3 +7016,24 @@ legend > .nav > li > a {
   width: 80px;
   display: inline-block;
 }
+.form-text input,
+.form-text select {
+  height: 40px;
+  overflow: hidden;
+  line-height: 40px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px dotted;
+  font-weight: 500;
+  border-radius: 0px;
+}
+.form-text label {
+  font-weight: 300;
+}
+.form-text .submit.btn.btn-lg {
+  font-size: 28px;
+  color: #999;
+  border: 1px dotted;
+  background-color: transparent;
+  border-radius: 0;
+}

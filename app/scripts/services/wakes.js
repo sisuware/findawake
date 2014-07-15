@@ -1,5 +1,6 @@
 'use strict';
 /*global _:false */
+/*global google:false */
 
 /**
  * @ngdoc function
@@ -47,12 +48,26 @@ app.factory('Wakes', function(
   };
 
   wakesService.create = function(wake){
+    /*jshint camelcase: false */
     return createRef('wakes', wake).then(function(wakeRef){
       return $q.all([
         createAssociation('users', 'wakes', wake.userId, wakeRef, 'push'),
-        createAssociation('profiles', 'wakes', wake.userId, wakeRef, 'push')
+        createAssociation('profiles', 'wakes', wake.userId, wakeRef, 'push'),
+        createAssociation('locations', wake.location.administrative_area_level_2, wake.location.administrative_area_level_1, wakeRef, 'push')
       ]);
     });
+  };
+
+  wakesService.updateLocation = function(wake){
+    /*jshint camelcase: false */
+    return createAssociation('locations', wake.location.administrative_area_level_2, wake.location.administrative_area_level_1, wake.id, 'push');
+  };
+
+  wakesService.getDistance = function(current, target){
+    var fromLatLng = new google.maps.LatLng(current.lat, current.lng),
+        toLatlng = new google.maps.Latlng(target.lat, target.lng);
+
+    return Math.round(google.maps.geometry.spherical.computeDistanceBetween(fromLatLng, toLatlng) * 0.000621371192);
   };
 
   function createRef(target, data){

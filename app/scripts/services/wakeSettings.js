@@ -1,5 +1,4 @@
 'use strict';
-/*global google:false */
 /*global _:false */
 
 /**
@@ -12,7 +11,7 @@
 
 var app = angular.module('findawakeApp');
 
-app.factory('WakeSettings', function($timeout, $q){
+app.factory('WakeSettings', function($timeout, $q, Geocoder){
   var wakeSettingsService = {}, validationTimeout;
 
   wakeSettingsService.init = function($scope){
@@ -38,9 +37,9 @@ app.factory('WakeSettings', function($timeout, $q){
       validationTimeout = undefined;
     }
     validationTimeout = $timeout(function(){
-      geocode(l).then(function(res){
+      Geocoder.geocode('address', location).then(function(res){
         if(callback){
-          callback(res);
+          callback(formatGeocodeResults(res));
         }
       });
     }, 1000);
@@ -58,22 +57,6 @@ app.factory('WakeSettings', function($timeout, $q){
       obj.lng = result.geometry.location.lng();
       return obj;
     });
-  }
-
-  function geocode(location){
-    var dfr = $q.defer(),
-        geocoder = new google.maps.Geocoder();
-    
-    geocoder.geocode({ 
-      'address': JSON.stringify(location)
-    }, function(results, status) {
-      if (status === google.maps.GeocoderStatus.OK) {
-        dfr.resolve(formatGeocodeResults(results));
-      } else {
-        dfr.reject('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-    return dfr.promise;
   }
 
   function listYears(){

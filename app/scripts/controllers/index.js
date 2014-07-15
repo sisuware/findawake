@@ -1,6 +1,5 @@
 'use strict';
-/*global google:false */
-
+/*global _:false */
 
 /**
  * @ngdoc function
@@ -11,53 +10,51 @@
  */
 var app = angular.module('findawakeApp');
 
-app.controller('IndexCtrl', function($scope, $timeout, auth, wakes){
+app.controller('IndexCtrl', function(
+  $scope, 
+  $timeout, 
+  auth, 
+  wakes, 
+  geolocation,
+  Geocoder,
+  Wakes
+){
   $scope.auth = auth;
   $scope.wakes = wakes;
 
+  /*
   $scope.distances = ['5','15','25','50','100','150'];
-  $scope.selectedDistance = '25';
+  $scope.selectedDistance = '50';
 
-  $scope.selectDistance = function(){
-    $scope.selectedDistance = this.distance;
+  geolocation.getLocation().then(function(data){
+    $scope.currentLocation = data.coords;
+    formattedCurrentLocation(data);
+  });
+
+  $scope.selectDistance = function(distance){
+    $scope.selectedDistance = distance;
   };
 
-  $scope.filterPulls = function(pull){
-    //for(var key in $scope.boarding){
-    //  if($scope.boarding[key] && $.grep(pull.pulltypes, function(type){return (type.name === key && type.selected);})){
-    //    return _calculateDistance($scope, pull) <= parseInt($scope.selectedDistance);
-    //  } else {
-    //    continue;
-    //  }
-    //}
-    return pull;
+  $scope.isDistanceSelected = function(distance){
+    return distance === $scope.selectedDistance;
   };
 
-  $scope.search = function(){
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode( { 'address': $scope.location.search }, function(results, status) {
-      if (status === google.maps.GeocoderStatus.OK) {
-        $timeout(function(){
-          $scope.location.lat = results[0].geometry.location.lat();
-          $scope.location.lng = results[0].geometry.location.lng();
-        });
-      } else {
-        console.log('Geocode was not successful for the following reason: ' + status);
-      }
+  $scope.filterWakes = function(wake){
+    var currentLocation = $scope.currentLocation,
+        wakeLocation = _.pick(wake.location, 'lat','lng');
+    return Wakes.getDistance(currentLocation, wakeLocation) <= parseInt($scope.selectedDistance);
+  };
+
+  function formattedCurrentLocation(data){
+    $scope.loadingLocation = true;
+    Geocoder.latlng(data.coords).then(function(results){
+      $scope.formattedCurrentLocation = _.first(results).formatted_address;
+    }).finally(function(){
+      $scope.loadingLocation = false;
     });
-  };
+  }
+  */
 
-  //function calculateDistance($scope, pull){
-  //  if($scope.location.lat && $scope.location.lng){
-  //    var from = new google.maps.LatLng($scope.location.lat, $scope.location.lng),
-  //    to = new google.maps.LatLng(pull.location.lat, pull.location.lng),
-  //    distance = Math.round(google.maps.geometry.spherical.computeDistanceBetween(from, to) * 0.000621371192);
-  //    pull.location.distance = distance;
-  //    return distance;
-  //  } else {
-  //    return 0;
-  //  }
-  //};
 });
 
 
