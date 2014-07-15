@@ -1,0 +1,354 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+@import "bootstrap.less";
+@import "pattern.less"; 
+
+// Simplex 3.2.0
+// Bootswatch
+// -----------------------------------------------------
+
+.btn-shadow(@color) {
+  #gradient > .vertical-three-colors(lighten(@color, 3%), @color, 6%, darken(@color, 3%));
+  filter: none;
+  border: 1px solid darken(@color, 10%);
+}
+
+// Navbar =====================================================================
+
+.navbar {
+
+  &-inverse {
+
+    .badge {
+      background-color: #fff;
+      color: @brand-primary;
+    }
+  }
+}
+
+// Buttons ====================================================================
+
+.btn {
+  font-family: @headings-font-family;
+}
+
+.btn-default,
+.btn-default:hover {
+  .btn-shadow(@btn-default-bg);
+}
+
+.btn-primary,
+.btn-primary:hover {
+  .btn-shadow(@btn-primary-bg);
+}
+
+.btn-success,
+.btn-success:hover {
+  .btn-shadow(@btn-success-bg);
+}
+
+.btn-info,
+.btn-info:hover {
+  .btn-shadow(@btn-info-bg);
+}
+
+.btn-warning,
+.btn-warning:hover {
+  .btn-shadow(@btn-warning-bg);
+}
+
+.btn-danger,
+.btn-danger:hover {
+  .btn-shadow(@btn-danger-bg);
+}
+
+// Typography =================================================================
+
+body {
+  font-weight: 200;
+}
+
+// Tables =====================================================================
+
+th {
+  color: @headings-color;
+}
+
+// Forms ======================================================================
+
+legend {
+  color: @headings-color;
+}
+
+.has-warning {
+  .help-block,
+  .control-label {
+    color: @brand-danger;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border-color: @brand-danger;
+  }
+}
+
+.has-error {
+  .help-block,
+  .control-label {
+    color: @brand-primary;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border-color: @brand-primary;
+  }
+}
+
+.has-success {
+  .help-block,
+  .control-label {
+    color: @brand-success;
+  }
+
+  .form-control,
+  .form-control:focus {
+    border-color: @brand-success;
+  }
+}
+
+// Navs =======================================================================
+
+.pager {
+  a {
+    color: @headings-color;
+  }
+
+  a:hover,
+  .active > a, {
+    border-color: @brand-primary;
+    color: #fff;
+  }
+
+  .disabled > a {
+    border-color: @pager-border;
+  }
+}
+
+.nav-lines {
+  margin: 0px;
+  li {
+    display: inline-block;
+    a {
+      padding: 9px 0;
+      margin: 0 10px;
+      &:hover {
+        background: transparent;
+        border-bottom: 2px solid @link-hover-color;
+        margin-bottom: -1px;
+      }
+    }
+    &.active {
+      a {
+        border-bottom: 2px solid #333;
+        color: inherit;
+        margin-bottom: -1px;
+      }
+    }
+    &:first-child{
+      a {
+        margin-left: 0px;
+      }
+    }
+    &:last-child {
+      a {
+        margin-right: 0px;
+      }
+    }
+  }
+}
+
+.breadcrumb {
+  &.avatar-breadcrumb {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 0 0 10px;
+    padding: 0px;
+    > li {
+      font-size: 18px;
+      > h4 {
+        margin: 0px;
+      }
+    }
+  }
+}
+
+legend {
+  > .nav {
+    > li {
+      > a {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.jumbotron {
+  &.welcome-jumbotron {
+    background: linear-gradient(#02a5de, #029acf 6%, #028fc0);
+    color: #fff;
+  }
+}
+
+// Indicators =================================================================
+
+// Progress bars ==============================================================
+
+// Wake Thumbnails ============================================================
+
+.wake-thumbnail {
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  .shadow-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    display: table;
+    box-shadow: inset 0 -25px 50px rgba(0,0,0,.5);
+    > span {
+      display: table-cell;
+      vertical-align:bottom;
+      padding: 10px 10px 5px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.5), 0 0 5px #000;
+      word-break: break-word;
+    }
+  }
+  > img {
+    width: 100%;  
+  }
+}
+
+// Boarding Thumbnails =========================================================
+
+.boarding-icons-sprite, .boarding-icons-wakeboarding, .boarding-icons-wakeskating, .boarding-icons-wakesurfing {
+  background: url('/images/boarding-icons.png') no-repeat;
+}
+.boarding-icons-wakeboarding {
+  background-position: 0 -244px;
+}
+.boarding-icons-wakeboarding:active, .boarding-icons-wakeboarding.wakeboarding_active, .boarding-icons-wakeboarding.wakeboarding-active {
+  background-position: 0 0;
+}
+.boarding-icons-wakeskating {
+  background-position: 0 -488px;
+}
+.boarding-icons-wakeskating:active, .boarding-icons-wakeskating.wakeskating_active, .boarding-icons-wakeskating.wakeskating-active {
+  background-position: 0 -122px;
+}
+.boarding-icons-wakesurfing {
+  background-position: 0 -610px;
+}
+.boarding-icons-wakesurfing:active, .boarding-icons-wakesurfing.wakesurfing_active, .boarding-icons-wakesurfing.wakesurfing-active {
+  background-position: 0 -366px;
+}
+.boarding-icons {
+  width: 130px;
+  height: 125px;
+  display: block;
+  margin: auto;
+  -webkit-transition: all, 0.3s;
+  -moz-transition: all, 0.3s;
+  -o-transition: all, 0.3s;
+  transition: all, 0.3s;
+}
+.board-thumbnail {
+  color: #999;
+  text-decoration: none;
+  &.active {
+    background-color: @brand-primary;
+    color: #fff;
+  }
+  &:hover,p {
+    text-decoration: none;
+  }
+}
+
+// Boat Info =========================================================
+
+.boat-info {
+  position: relative;
+  .boat-thumbnail {
+    position: absolute;
+    overflow: hidden;
+    height: 250px;
+    top: 0px;
+    border-radius:3px 3px 0 0;
+    width: 100%;
+  }
+  .boat-features {
+    position: absolute;
+    top: 0px;
+    padding: 10px;
+    z-index: 100;
+  }
+  .boat-tabs {
+    position: relative;
+    z-index: 100;
+    margin-top: 210px;
+    .nav {
+      margin: 0px;
+      padding-left: 10px;
+    }
+    .tab-content {
+      background: #fff;
+      padding: 10px;
+      border-radius:0 0 5px 5px;
+    }
+  }
+  .shadow-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow:inset 0 -25px 50px rgba(0,0,0,.25);
+  }
+}
+
+.avatar {
+  &.avatar-sm {
+    width: 48px;
+    display: inline-block;
+  }
+  &.avatar-md {
+    width: 80px;
+    display: inline-block;
+  }
+}
+
+.form-text {
+  input, select {
+    height: 40px;
+    overflow: hidden;
+    line-height: 40px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px dotted;
+    font-weight: 500;
+    border-radius: 0px;
+  }
+  label {
+    font-weight: 300;
+  }
+  .submit.btn.btn-lg {
+    font-size: 28px;
+    color: #999;
+    border: 1px dotted;
+    background-color: transparent;
+    border-radius: 0;
+  }
+}
+ 
