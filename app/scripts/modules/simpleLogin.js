@@ -99,6 +99,34 @@ app.factory('SimpleLogin', function(
     }, callback);
   };
 
+  simpleLoginService.parseErrorMessages = function(err){
+    if(err){
+      return err.message.replace(/FirebaseSimpleLogin:\s/g,'');
+    } else {
+      return null;
+    }
+  };
+
+  simpleLoginService.assertValidLoginAttempt = function(email, pass){
+    if( !email ) {
+      return 'Please enter an email address';
+    } else if( !pass ) {
+      return 'Please enter a password';
+    }
+    return false;
+  };
+
+  simpleLoginService.assertValidCreateAccountAttempt = function(email, pass, confirm) {
+    if( !email ) {
+      return 'Please enter an email address';
+    } else if( !pass ) {
+      return 'Please enter a password';
+    } else if( pass !== confirm ) {
+      return 'Passwords do not match';
+    }
+    return false;
+  };
+
   simpleLoginService.createProfile = ProfileCreator;
 
   function assertAuth() {

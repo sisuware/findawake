@@ -1,6 +1,4 @@
 'use strict';
-/*global _:false */
-
 /**
  * @ngdoc function
  * @name findawakeApp.controller:MainCtrl
@@ -14,10 +12,10 @@ app.controller('IndexCtrl', function(
   $scope, 
   $timeout, 
   auth, 
-  wakes, 
-  geolocation,
-  Geocoder,
-  Wakes
+  wakes
+  //geolocation,
+  //Geocoder,
+  //Wakes
 ){
   $scope.auth = auth;
   $scope.wakes = wakes;

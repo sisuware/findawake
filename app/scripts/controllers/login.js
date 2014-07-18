@@ -26,10 +26,14 @@ app.controller('LoginCtrl', function(
   $scope.loginPassword = function(cb) {
     $scope.loading = true;
     $scope.err = null;
-    if( assertValidLoginAttempt() ) {
+    var invalidLogin = SimpleLogin.assertValidLoginAttempt($scope.email, $scope.pass);
+    if(invalidLogin) {
+      $scope.loading = false;
+      $scope.err = invalidLogin;
+    } else {
       SimpleLogin.loginPassword($scope.email, $scope.pass, function(err, user) {
         $scope.loading = false;
-        $scope.err = parseErrorMessages(err);
+        $scope.err = SimpleLogin.parseErrorMessages(err);
         if( !err && cb ) {
           cb(user);
         }
@@ -42,11 +46,15 @@ app.controller('LoginCtrl', function(
   $scope.createAccount = function() {
     $scope.loading = true;
     $scope.err = null;
-    if( assertValidCreateAccountAttempt() ) {
+    var invalidLogin = SimpleLogin.assertValidCreateAccountAttempt($scope.email, $scope.pass, $scope.confirm);
+    if(invalidLogin) {
+      $scope.err = invalidLogin;
+    } else {
       SimpleLogin.createAccount($scope.email, $scope.pass, function(err) {
         $scope.loading = false;
         if( err ) {
-          $scope.err = parseErrorMessages(err);
+          $scope.loading = false;
+          $scope.err = SimpleLogin.parseErrorMessages(err);
         } else {
           $scope.creatingProfile = true;
           // must be logged in before I can write to my profile
@@ -66,32 +74,74 @@ app.controller('LoginCtrl', function(
       });
     }
   };
+});
 
-  function parseErrorMessages(err){
-    if(err){
-      return err.message.replace(/FirebaseSimpleLogin:\s/g,'');
+app.controller('LoginModalCtrl', function(
+  $scope,
+  SimpleLogin,
+  Users,
+  $location,
+  $modalInstance
+){
+  $scope.login = function(service) {
+    $scope.loading = true;
+    SimpleLogin.login(service, function(err) {
+      $scope.loading = false;
+      $scope.err = err? err + '' : null;
+      $modalInstance.dismiss(err);
+    });
+  };
+
+  $scope.loginPassword = function(cb) {
+    $scope.loading = true;
+    $scope.err = null;
+    var invalidLogin = SimpleLogin.assertValidLoginAttempt($scope.email, $scope.pass);
+    if(invalidLogin) {
+      $scope.loading = false;
+      $scope.err = invalidLogin;
     } else {
-      return null;
+      SimpleLogin.loginPassword($scope.email, $scope.pass, function(err, user) {
+        $scope.loading = false;
+        $scope.err = SimpleLogin.parseErrorMessages(err);
+        if( !err && cb ) {
+          cb(user);
+        }
+        if(!err){
+          $modalInstance.resolve(user);
+        }
+      });
     }
-  }
+  };
 
-  function assertValidLoginAttempt(){
-    if( !$scope.email ) {
-      $scope.err = 'Please enter an email address';
-    } else if( !$scope.pass ) {
-      $scope.err = 'Please enter a password';
+  $scope.createAccount = function() {
+    $scope.loading = true;
+    $scope.err = null;
+    var invalidLogin = SimpleLogin.assertValidCreateAccountAttempt($scope.email, $scope.pass, $scope.confirm);
+    if(invalidLogin) {
+      $scope.loading = false;
+      $scope.err = invalidLogin;
+    } else {
+      SimpleLogin.createAccount($scope.email, $scope.pass, function(err) {
+        $scope.loading = false;
+        if( err ) {
+          $scope.err = SimpleLogin.parseErrorMessages(err);
+        } else {
+          $scope.creatingProfile = true;
+          // must be logged in before I can write to my profile
+          SimpleLogin.loginPassword($scope.email, $scope.pass, function(err, user) {
+            if(err){ 
+              $scope.creatingProfile = false;
+              $scope.err = err;
+            } else {
+              SimpleLogin.createProfile(user.id, user.email).then(function(user) {
+                Users.createPublicProfile(user).then(function(){
+                 $modalInstance.resolve();
+                });
+              });
+            }
+          });
+        }
+      });
     }
-    return !$scope.err;
-  }
-
-  function assertValidCreateAccountAttempt() {
-    if( !$scope.email ) {
-      $scope.err = 'Please enter an email address';
-    } else if( !$scope.pass ) {
-      $scope.err = 'Please enter a password';
-    } else if( $scope.pass !== $scope.confirm ) {
-      $scope.err = 'Passwords do not match';
-    }
-    return !$scope.err;
-  }
+  };
 });

@@ -24,23 +24,11 @@ app.controller('WakeCtrl', function(
   });
 
   $scope.requestRide = function(){
-    var modalInstance = $modal.open({
-      templateUrl: '/views/wakes/requestModal.html',
-      controller: 'RequestCtrl',
-      size: 'lg',
-      resolve: {
-        auth: function(){
-          return $scope.auth;
-        },
-        wake: function(){
-          return $scope.wake;
-        }
-      }
-    });
-
-    modalInstance.result.then(function(){
-
-    });
+    if(_.isUndefined($scope.auth)){
+      authModal();
+    } else {
+      requestRideModal();
+    }
   };
 
   $scope.rideRequested = function(){
@@ -71,6 +59,39 @@ app.controller('WakeCtrl', function(
       }
     });
   };
+
+  function authModal(){
+    var modalInstance = $modal.open({
+      templateUrl: '/views/loginModal.html',
+      controller: 'LoginModalCtrl',
+      size: 'md'
+    });
+
+    modalInstance.result.then(function(){
+
+    });
+  }
+
+  function requestRideModal(){
+    var modalInstance = $modal.open({
+      templateUrl: '/views/wakes/requestModal.html',
+      controller: 'RequestCtrl',
+      size: 'lg',
+      resolve: {
+        auth: function(){
+          return $scope.auth;
+        },
+        wake: function(){
+          return $scope.wake;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(){
+
+    });
+  }
+
 });
 
 app.controller('EditWakeCtrl', function(

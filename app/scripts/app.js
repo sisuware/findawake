@@ -38,6 +38,14 @@ app.config(function($routeProvider, $locationProvider) {
         wakes: function(Wakes){
           return Wakes.query();
         }
+      },
+      redirectTo: function(){
+        var str = location.hash.substring(1);
+        if(str){
+          return str.replace('!','');
+        } else {
+          return '/';
+        }
       }
     })
     .when('/wakes/new', {
