@@ -67,8 +67,11 @@ app.controller('WakeCtrl', function(
       size: 'md'
     });
 
-    modalInstance.result.then(function(){
-
+    modalInstance.result.then(function(user){
+      if(user){
+        $scope.auth = Users.get(user.id);
+        requestRideModal();
+      }
     });
   }
 

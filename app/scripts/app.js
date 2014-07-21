@@ -115,6 +115,10 @@ app.config(function($routeProvider, $locationProvider) {
         }
       }
     })
+    .when('/legal', {
+      templateUrl: '/views/legal/index.html', 
+      authRequired: false
+    })
     .when('/login', {
       templateUrl: '/views/login.html', 
       controller: 'LoginCtrl',

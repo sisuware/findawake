@@ -6744,6 +6744,9 @@ button.close {
 .pattern-pixelweave {
   background: url('/images/pixel_weave.png') repeat;
 }
+.image-ocean {
+  background: url('/images/ocean.jpg') no-repeat center;
+}
 .navbar-inverse .badge {
   background-color: #fff;
   color: #d9230f;
@@ -6891,7 +6894,7 @@ legend > .nav > li > a {
   font-size: 18px;
 }
 .jumbotron.welcome-jumbotron {
-  background: linear-gradient(#02a5de, #029acf 6%, #028fc0);
+  background: transparent;
   color: #fff;
 }
 .wake-thumbnail {
@@ -7036,4 +7039,12 @@ legend > .nav > li > a {
   border: 1px dotted;
   background-color: transparent;
   border-radius: 0;
+}
+.login-container {
+  margin-top: -20px;
+  padding: 20px 0;
+}
+.login-container h3 {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }

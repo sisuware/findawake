@@ -13,7 +13,8 @@ app.controller('LoginCtrl', function(
   $scope,
   SimpleLogin,
   Users,
-  $location
+  $location,
+  $window
 ){
   $scope.login = function(service) {
     $scope.loading = true;
@@ -41,7 +42,10 @@ app.controller('LoginCtrl', function(
     }
   };
 
-  $scope.logout = SimpleLogin.logout;
+  $scope.logout = function(){
+    SimpleLogin.logout();
+    $window.location.reload();
+  };
 
   $scope.createAccount = function() {
     $scope.loading = true;
@@ -83,13 +87,8 @@ app.controller('LoginModalCtrl', function(
   $location,
   $modalInstance
 ){
-  $scope.login = function(service) {
-    $scope.loading = true;
-    SimpleLogin.login(service, function(err) {
-      $scope.loading = false;
-      $scope.err = err? err + '' : null;
-      $modalInstance.dismiss(err);
-    });
+  $scope.cancel = function(){
+    $modalInstance.dismiss();
   };
 
   $scope.loginPassword = function(cb) {
@@ -107,7 +106,7 @@ app.controller('LoginModalCtrl', function(
           cb(user);
         }
         if(!err){
-          $modalInstance.resolve(user);
+          $modalInstance.close(user);
         }
       });
     }
