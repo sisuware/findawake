@@ -24,7 +24,7 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
+    app: 'app',
     dist: 'dist'
   };
 
@@ -180,6 +180,8 @@ module.exports = function (grunt) {
 
     // Automatically inject Bower components into the app
     wiredep: {
+      directory: '../.bowerrc',
+      bowerJson: '../bower.json',
       options: {
         cwd: '<%= yeoman.app %>'
       },
@@ -395,7 +397,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
+      //'wiredep',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',

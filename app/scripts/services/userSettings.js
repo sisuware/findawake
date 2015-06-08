@@ -1,45 +1,42 @@
-'use strict';
-/*global _:false */
+(function(){
+  'use strict';
 
-/**
- * @ngdoc function
- * @name findawakeApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the findawakeApp
- */
+  angular
+    .module('findAWake')
+    .factory('UserSettings', UserSettings);
 
-var app = angular.module('findawakeApp');
+  UserSettings.$inject = [];
 
-app.factory('UserSettings', function(){
-  var usersSettingsService = {};
+  function UserSettings() {
+    var service = {
+      init: init
+    };
 
-  usersSettingsService.init = function($scope){
-    assertProfile($scope.profile);
+    return service;
 
-    if(_.isUndefined($scope.profile.gear)) {
-      $scope.profile.gear = [];
+    function init($scope) {
+      assertProfile($scope.profile);
+
+      if(_.isUndefined($scope.profile.gear)) {
+        $scope.profile.gear = [];
+      }
+
+      $scope.gearTypes = listGearTypes();
     }
 
-    $scope.gearTypes = listGearTypes();
-  };
+    function listGearTypes(){
+      return  ['Wakeboard','Wakesurf','Wakeskate','Helmet','Bindings','Camera','Handle','Rope','Fins','Shoes','Vest'];
+    }
 
-  function listGearTypes(){
-    return  ['Wakeboard','Wakesurf','Wakeskate','Helmet','Bindings','Camera','Handle','Rope','Fins','Shoes','Vest'];
-  }
-
-  function assertProfile(profile){
-    if(_.isUndefined(profile) || _.isNull(profile)) { throw new Error('Profile must be loaded before calling UserSettings'); }
-    
-    // these are required and never should be empty, but in case the profile was deleted this will re-create it.
-    if(_.isUndefined(profile.email) && _.isUndefined(profile.id) && _.isUndefined(profile.name)) {
-      //SimpleLogin.currentUser().then(function(user){
-      //  SimpleLogin.createProfile(user.id, user.email);
-      //});
+    function assertProfile(profile){
+      if(_.isUndefined(profile) || _.isNull(profile)) { throw new Error('Profile must be loaded before calling UserSettings'); }
+      
+      // these are required and never should be empty, but in case the profile was deleted this will re-create it.
+      //if(_.isUndefined(profile.email) && _.isUndefined(profile.id) && _.isUndefined(profile.name)) {
+        //SimpleLogin.currentUser().then(function(user){
+        //  SimpleLogin.createProfile(user.id, user.email);
+        //});
+      //}
     }
   }
-
-
-
-  return usersSettingsService;
-});
+})();

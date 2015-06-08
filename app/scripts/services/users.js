@@ -1,62 +1,72 @@
-'use strict';
-/*global _:false */
+(function(){
+  'use strict';
 
-/**
- * @ngdoc function
- * @name findawakeApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the findawakeApp
- */
+  angular
+    .module('findAWake')
+    .factory('Users', Users);
 
-var app = angular.module('findawakeApp');
+  Users.$inject = ['syncData', 'firebaseRef', '$q'];
 
-app.factory('Users', function(
-  syncData,
-  firebaseRef,
-  $q
-){
-  var usersService = {}, profiles = {};
+  function Users(syncData, firebaseRef, $q) {
+    var profiles = {};
 
-  usersService.get = function(id){
-    return syncData('users/' + id);
-  };
+    var service = {
+      get:get,
+      getProfile:getProfile,
+      updatePublicProfile:updatePublicProfile,
+      createPublicProfile:createPublicProfile
+    };
 
-  usersService.getProfile = function(id){
-    if(!id){ return false; }
-    if(!profiles[id]){
-      profiles[id] = syncData('profiles/' + id);
-    }
-    return profiles[id];
-  };
-
-  usersService.updatePublicProfile = function(user){
-    var profile = firebaseRef('profiles/' + user.userId);
+    return service; 
     
-    profile.update(
-      _.assign(JSON.parse(angular.toJson(_.pick(user, 'avatar','bio','gear','location','name','boats'))))
-    );
-  };
+    function get(id){
+      return syncData('users/' + id);
+    }
 
-  usersService.createPublicProfile = function(user){
-    return createRef('profiles/' + user.userId, user);
-  };
-
-  function createRef(target, data){
-    var dfr = $q.defer(),
-        ref = firebaseRef(target),
-        refData = JSON.parse(angular.toJson(_.pick(data, 'name')));
-
-    ref.set(refData, function(err){
-      if(err){
-        dfr.reject(err);
-      } else {
-        dfr.resolve(ref.name());
+    function getProfile(id){
+      if(!id){ return false; }
+      if(!profiles[id]){
+        profiles[id] = syncData('profiles/' + id);
       }
-    });
+      return profiles[id];
+    }
 
-    return dfr.promise;
+    function updatePublicProfile(user){
+      var profile = firebaseRef('profiles/' + user.userId);
+      
+      profile.update(
+        _.assign(
+          JSON.parse(
+            angular.toJson(
+              _.pick(user, 'avatar','bio','gear','location','name','boats')
+            )
+          )
+        )
+      );
+    }
+
+    function createPublicProfile(user){
+      return createRef('profiles/' + user.userId, user);
+    }
+
+    function createRef(target, data){
+      var dfr = $q.defer();
+      var ref = firebaseRef(target);
+      var refData = JSON.parse(
+        angular.toJson(
+          _.pick(data, 'name')
+        )
+      );
+
+      ref.set(refData, function(err){
+        if(err){
+          dfr.reject(err);
+        } else {
+          dfr.resolve(ref.name());
+        }
+      });
+
+      return dfr.promise;
+    }
   }
-
-  return usersService;
-});
+})();
