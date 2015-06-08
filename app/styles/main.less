@@ -2,205 +2,207 @@
   display: none !important;
 }
 
+@import "scheme.less";
 @import "bootstrap.less";
+@import "1pxdeep.less";
 @import "pattern.less"; 
 
 // Simplex 3.2.0
 // Bootswatch
 // -----------------------------------------------------
 
-.btn-shadow(@color) {
-  #gradient > .vertical-three-colors(lighten(@color, 3%), @color, 6%, darken(@color, 3%));
-  filter: none;
-  border: 1px solid darken(@color, 10%);
-}
+// .btn-shadow(@color) {
+//   #gradient > .vertical-three-colors(lighten(@color, 3%), @color, 6%, darken(@color, 3%));
+//   filter: none;
+//   border: 1px solid darken(@color, 10%);
+// }
 
 // Navbar =====================================================================
 
-.navbar {
+// .navbar {
 
-  &-inverse {
+//   &-inverse {
 
-    .badge {
-      background-color: #fff;
-      color: @brand-primary;
-    }
-  }
-}
+//     .badge {
+//       background-color: #fff;
+//       color: @brand-primary;
+//     }
+//   }
+// }
 
 // Buttons ====================================================================
 
-.btn {
-  font-family: @headings-font-family;
-}
+// .btn {
+//   font-family: @headings-font-family;
+// }
 
-.btn-default,
-.btn-default:hover {
-  .btn-shadow(@btn-default-bg);
-}
+// .btn-default,
+// .btn-default:hover {
+//   .btn-shadow(@btn-default-bg);
+// }
 
-.btn-primary,
-.btn-primary:hover {
-  .btn-shadow(@btn-primary-bg);
-}
+// .btn-primary,
+// .btn-primary:hover {
+//   .btn-shadow(@btn-primary-bg);
+// }
 
-.btn-success,
-.btn-success:hover {
-  .btn-shadow(@btn-success-bg);
-}
+// .btn-success,
+// .btn-success:hover {
+//   .btn-shadow(@btn-success-bg);
+// }
 
-.btn-info,
-.btn-info:hover {
-  .btn-shadow(@btn-info-bg);
-}
+// .btn-info,
+// .btn-info:hover {
+//   .btn-shadow(@btn-info-bg);
+// }
 
-.btn-warning,
-.btn-warning:hover {
-  .btn-shadow(@btn-warning-bg);
-}
+// .btn-warning,
+// .btn-warning:hover {
+//   .btn-shadow(@btn-warning-bg);
+// }
 
-.btn-danger,
-.btn-danger:hover {
-  .btn-shadow(@btn-danger-bg);
-}
+// .btn-danger,
+// .btn-danger:hover {
+//   .btn-shadow(@btn-danger-bg);
+// }
 
 // Typography =================================================================
 
-body {
-  font-weight: 200;
-}
+// body {
+//   font-weight: 200;
+// }
 
 // Tables =====================================================================
 
-th {
-  color: @headings-color;
-}
+// th {
+//   color: @headings-color;
+// }
 
 // Forms ======================================================================
 
-legend {
-  color: @headings-color;
-}
+// legend {
+//   color: @headings-color;
+// }
 
-.has-warning {
-  .help-block,
-  .control-label {
-    color: @brand-danger;
-  }
+// .has-warning {
+//   .help-block,
+//   .control-label {
+//     color: @brand-danger;
+//   }
 
-  .form-control,
-  .form-control:focus {
-    border-color: @brand-danger;
-  }
-}
+//   .form-control,
+//   .form-control:focus {
+//     border-color: @brand-danger;
+//   }
+// }
 
-.has-error {
-  .help-block,
-  .control-label {
-    color: @brand-primary;
-  }
+// .has-error {
+//   .help-block,
+//   .control-label {
+//     color: @brand-primary;
+//   }
 
-  .form-control,
-  .form-control:focus {
-    border-color: @brand-primary;
-  }
-}
+//   .form-control,
+//   .form-control:focus {
+//     border-color: @brand-primary;
+//   }
+// }
 
-.has-success {
-  .help-block,
-  .control-label {
-    color: @brand-success;
-  }
+// .has-success {
+//   .help-block,
+//   .control-label {
+//     color: @brand-success;
+//   }
 
-  .form-control,
-  .form-control:focus {
-    border-color: @brand-success;
-  }
-}
+//   .form-control,
+//   .form-control:focus {
+//     border-color: @brand-success;
+//   }
+// }
 
 // Navs =======================================================================
 
-.pager {
-  a {
-    color: @headings-color;
-  }
+// .pager {
+//   a {
+//     color: @headings-color;
+//   }
 
-  a:hover,
-  .active > a, {
-    border-color: @brand-primary;
-    color: #fff;
-  }
+//   a:hover,
+//   .active > a, {
+//     border-color: @brand-primary;
+//     color: #fff;
+//   }
 
-  .disabled > a {
-    border-color: @pager-border;
-  }
-}
+//   .disabled > a {
+//     border-color: @pager-border;
+//   }
+// }
 
-.nav-lines {
-  margin: 0px;
-  li {
-    display: inline-block;
-    a {
-      padding: 9px 0;
-      margin: 0 10px;
-      &:hover {
-        background: transparent;
-        border-bottom: 2px solid @link-hover-color;
-        margin-bottom: -1px;
-      }
-    }
-    &.active {
-      a {
-        border-bottom: 2px solid #333;
-        color: inherit;
-        margin-bottom: -1px;
-      }
-    }
-    &:first-child{
-      a {
-        margin-left: 0px;
-      }
-    }
-    &:last-child {
-      a {
-        margin-right: 0px;
-      }
-    }
-  }
-}
+// .nav-lines {
+//   margin: 0px;
+//   li {
+//     display: inline-block;
+//     a {
+//       padding: 9px 0;
+//       margin: 0 10px;
+//       &:hover {
+//         background: transparent;
+//         border-bottom: 2px solid @link-hover-color;
+//         margin-bottom: -1px;
+//       }
+//     }
+//     &.active {
+//       a {
+//         border-bottom: 2px solid #333;
+//         color: inherit;
+//         margin-bottom: -1px;
+//       }
+//     }
+//     &:first-child{
+//       a {
+//         margin-left: 0px;
+//       }
+//     }
+//     &:last-child {
+//       a {
+//         margin-right: 0px;
+//       }
+//     }
+//   }
+// }
 
-.breadcrumb {
-  &.avatar-breadcrumb {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 0 0 10px;
-    padding: 0px;
-    > li {
-      font-size: 18px;
-      > h4 {
-        margin: 0px;
-      }
-    }
-  }
-}
+// .breadcrumb {
+//   &.avatar-breadcrumb {
+//     display: inline-block;
+//     vertical-align: top;
+//     margin: 0 0 0 10px;
+//     padding: 0px;
+//     > li {
+//       font-size: 18px;
+//       > h4 {
+//         margin: 0px;
+//       }
+//     }
+//   }
+// }
 
-legend {
-  > .nav {
-    > li {
-      > a {
-        font-size: 18px;
-      }
-    }
-  }
-}
+// legend {
+//   > .nav {
+//     > li {
+//       > a {
+//         font-size: 18px;
+//       }
+//     }
+//   }
+// }
 
-.jumbotron {
-  &.welcome-jumbotron {
-    background: transparent;
-    //background: linear-gradient(#02a5de, #029acf 6%, #028fc0);
-    color: #fff;
-  }
-}
+// .jumbotron {
+//   &.welcome-jumbotron {
+//     background: transparent;
+//     //background: linear-gradient(#02a5de, #029acf 6%, #028fc0);
+//     color: #fff;
+//   }
+// }
 
 // Indicators =================================================================
 
