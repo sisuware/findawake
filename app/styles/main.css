@@ -10133,6 +10133,9 @@ a.list-group-item.color4 > .list-group-item-heading {
 .image-ocean {
   background: url('/images/ocean.jpg') no-repeat center;
 }
+.navbar .navbar-brand {
+  color: #fff;
+}
 .wake-thumbnail {
   height: 100px;
   overflow: hidden;
