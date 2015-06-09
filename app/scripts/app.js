@@ -136,6 +136,11 @@
         controller: 'LoginCtrl',
         authRequired: false
       })
+      .when('/register', {
+        templateUrl: '/views/register.html', 
+        controller: 'RegisterController',
+        authRequired: false
+      })
       .when('/welcome', {
         templateUrl: '/views/user/welcome.html', 
         controller: 'UserWelcomeCtrl', 

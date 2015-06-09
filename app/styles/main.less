@@ -8,9 +8,24 @@
 @import "pattern.less"; 
 
 .navbar {
+  margin-bottom: 0px;
   .navbar-brand {
     color: #fff;
   }
+}
+
+.navbar-default {
+  .navbar-nav {
+    li {
+      a {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.welcome-jumbotron {
+  height: 400px;
 }
 
 // Simplex 3.2.0
@@ -144,63 +159,63 @@
 //   }
 // }
 
-// .nav-lines {
-//   margin: 0px;
-//   li {
-//     display: inline-block;
-//     a {
-//       padding: 9px 0;
-//       margin: 0 10px;
-//       &:hover {
-//         background: transparent;
-//         border-bottom: 2px solid @link-hover-color;
-//         margin-bottom: -1px;
-//       }
-//     }
-//     &.active {
-//       a {
-//         border-bottom: 2px solid #333;
-//         color: inherit;
-//         margin-bottom: -1px;
-//       }
-//     }
-//     &:first-child{
-//       a {
-//         margin-left: 0px;
-//       }
-//     }
-//     &:last-child {
-//       a {
-//         margin-right: 0px;
-//       }
-//     }
-//   }
-// }
+.nav-lines {
+  margin: 0px;
+  li {
+    display: inline-block;
+    a {
+      padding: 9px 0;
+      margin: 0 10px;
+      &:hover {
+        background: transparent;
+        border-bottom: 2px solid @link-hover-color;
+        margin-bottom: -1px;
+      }
+    }
+    &.active {
+      a {
+        border-bottom: 2px solid #333;
+        color: inherit;
+        margin-bottom: -1px;
+      }
+    }
+    &:first-child{
+      a {
+        margin-left: 0px;
+      }
+    }
+    &:last-child {
+      a {
+        margin-right: 0px;
+      }
+    }
+  }
+}
 
-// .breadcrumb {
-//   &.avatar-breadcrumb {
-//     display: inline-block;
-//     vertical-align: top;
-//     margin: 0 0 0 10px;
-//     padding: 0px;
-//     > li {
-//       font-size: 18px;
-//       > h4 {
-//         margin: 0px;
-//       }
-//     }
-//   }
-// }
+.breadcrumb {
+  &.avatar-breadcrumb {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 0 0 10px;
+    padding: 0px;
+    > li {
+      font-size: 18px;
+      > h4 {
+        margin: 0px;
+      }
+    }
+  }
+}
 
-// legend {
-//   > .nav {
-//     > li {
-//       > a {
-//         font-size: 18px;
-//       }
-//     }
-//   }
-// }
+legend {
+  > .nav {
+    > li {
+      > a {
+        font-size: 18px;
+      }
+    }
+  }
+}
 
 // .jumbotron {
 //   &.welcome-jumbotron {

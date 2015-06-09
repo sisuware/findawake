@@ -26,5 +26,9 @@
     "angular-mocks": "1.2.16",
     "angular-scenario": "1.2.16"
   },
-  "appPath": "app"
+  "appPath": "app",
+  "resolutions": {
+    "angular": "^1.2.21",
+    "bootstrap": "^3.2.0"
+  }
 }
