@@ -132,14 +132,22 @@
         authRequired: false
       })
       .when('/login', {
-        templateUrl: '/views/login.html', 
+        templateUrl: '/views/auth/login.html', 
         controller: 'LoginCtrl',
         authRequired: false
       })
-      .when('/register', {
-        templateUrl: '/views/register.html', 
-        controller: 'RegisterController',
+      .when('/signup', {
+        templateUrl: '/views/auth/signup.html', 
+        controller: 'SignupController',
         authRequired: false
+      })
+      .when('/signup/success', {
+        templateUrl: '/views/auth/signup.success.html',
+        controller: 'SignupSuccessController',
+        authRequired: true,
+        resolve: {
+          auth: authResolve
+        }
       })
       .when('/welcome', {
         templateUrl: '/views/user/welcome.html', 

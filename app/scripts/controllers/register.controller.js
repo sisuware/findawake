@@ -3,11 +3,11 @@
 
 	angular
 		.module('findAWake')
-		.controller('RegisterController', RegisterController);
+		.controller('SignupController', SignupController);
 
-	RegisterController.$inject = ['$scope', 'SimpleLogin', 'Users', '$location', '$window'];
+	SignupController.$inject = ['$scope', 'SimpleLogin', '$location'];
 
-	function RegisterController($scope, SimpleLogin, Users, $location, $window) {
+	function SignupController($scope, SimpleLogin, $location) {
 		$scope.submit = submit;
 
 		function submit() {
@@ -33,26 +33,7 @@
 				return false;
 			}
 
-			_createProfile();
-
-		}
-
-		function _createProfile() {
-			$scope.creatingProfile = true;
-			
-			SimpleLogin.loginPassword($scope.email, $scope.pass, function(error, user) {
-				if (error) {
-					$scope.creatingProfile = false;
-					$scope.error = error;
-					return false;
-				}
-
-				SimpleLogin.createProfile(user.id, user.email).then(function(user) {
-          Users.createPublicProfile(user).then(function(){
-            $location.path('/welcome');
-          });
-        });
-			});
+			$location.path('/signup/success');	
 		}
 
 		function _resetPasswords(){
