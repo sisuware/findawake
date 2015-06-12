@@ -10130,6 +10130,11 @@ a.list-group-item.color4 > .list-group-item-heading {
 .welcome-jumbotron {
   height: 400px;
 }
+.sectional.color3 h1,
+.sectional.color3 h2,
+.sectional.color3 p {
+  color: #195137;
+}
 .nav-lines {
   margin: 0px;
 }
