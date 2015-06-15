@@ -46,7 +46,27 @@
     }
 
     function createPublicProfile(user){
-      return createRef('profiles/' + user.userId, user);
+      // ensure user does not have a profile.
+      return _checkExistingProfile(user.userId).then(function(data){
+        console.debug('profile already exists');
+      }, function(){
+        return createRef('profiles/' + user.userId, user);  
+      });
+    }
+
+    function _checkExistingProfile(id) {
+      var dfr = $q.defer();
+      var profiles = firebaseRef('profiles');
+      
+      profiles.child(id).once('value', function(snapshot){
+        if (snapshot.val() !== null) {
+          dfr.resolve(snapshot);
+        } else {
+          dfr.reject();
+        }
+      });
+
+      return dfr.promise;
     }
 
     function createRef(target, data){
