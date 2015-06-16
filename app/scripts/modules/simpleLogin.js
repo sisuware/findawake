@@ -1,174 +1,196 @@
-'use strict';
+(function(){
+  'use strict';
 
-var app = angular.module('angularfire.login', ['firebase', 'angularfire.firebase']);
+  angular
+    .module('angularfire.login', ['firebase', 'angularfire.firebase'])
+    .run(angularfireRun)
+    .factory('SimpleLogin', SimpleLogin)
+    .factory('ProfileCreator', ProfileCreator);
 
-app.run(function(SimpleLogin) {
-  SimpleLogin.init();
-});
+  SimpleLogin.$inject = ['$rootScope', 'firebaseRef', 'ProfileCreator', '$timeout', '$q', '$firebaseAuth'];
+  ProfileCreator.$inject = ['firebaseRef', '$q'];
 
-app.factory('SimpleLogin', function(
-  $rootScope, 
-  $firebaseSimpleLogin, 
-  firebaseRef, 
-  ProfileCreator, 
-  $timeout,
-  $q
-){
-  var auth = null, simpleLoginService = {};
-
-  simpleLoginService.init = function() {
-    var dfr = $q.defer();
-    auth = $firebaseSimpleLogin(firebaseRef(), function(error, user){
-      if(error){
-        dfr.reject(error);
-      } else {
-        dfr.resolve(user);
-      }
-    });
-    return dfr.promise;
-  };
-
-  simpleLoginService.currentUser = function(){
-    assertAuth();
-    return auth.$getCurrentUser();
-  };
-
-  simpleLoginService.logout = function() {
-    assertAuth();
-    auth.$logout();
-  };
-  
-  /**
-   * @param {string} provider
-   * @param {Function} [callback]
-   * @returns {*}
-   */
-  simpleLoginService.login = function(provider, callback) {
-    assertAuth();
-    auth.$login(provider, {rememberMe: true}).then(function(user) {
-      if( callback ) {
-        //todo-bug https://github.com/firebase/angularFire/issues/199
-        $timeout(function() {
-          callback(null, user);
-        });
-      }
-    }, callback);
-  };
-
-  /**
-   * @param {string} email
-   * @param {string} pass
-   * @param {Function} [callback]
-   * @returns {*}
-   */
-  simpleLoginService.loginPassword = function(email, pass, callback) {
-    assertAuth();
-    auth.$login('password', {
-      email: email,
-      password: pass,
-      rememberMe: true
-    }).then(function(user) {
-      if( callback ) {
-        //todo-bug https://github.com/firebase/angularFire/issues/199
-        $timeout(function() {
-          callback(null, user);
-        });
-      }
-    }, callback);
-  };
-
-  simpleLoginService.changePassword = function(opts) {
-    assertAuth();
-    var cb = opts.callback || function() {};
-    if( !opts.oldpass || !opts.newpass ) {
-      $timeout(function(){ cb('Please enter a password'); });
-    }
-    else if( opts.newpass !== opts.confirm ) {
-      $timeout(function() { cb('Passwords do not match'); });
-    }
-    else {
-      auth.$changePassword(opts.email, opts.oldpass, opts.newpass)
-        .then(function() { cb(null); }, cb);
-    }
-  };
-
-  simpleLoginService.createAccount = function(email, pass, callback) {
-    assertAuth();
-    auth.$createUser(email, pass).then(function(user) { 
-      callback(null, user); 
-    }, callback);
-  };
-
-  simpleLoginService.parseErrorMessages = function(err){
-    if(err){
-      return err.message.replace(/FirebaseSimpleLogin:\s/g,'');
-    } else {
-      return null;
-    }
-  };
-
-  simpleLoginService.assertValidLoginAttempt = function(email, pass){
-    if( !email ) {
-      return 'Please enter an email address';
-    } else if( !pass ) {
-      return 'Please enter a password';
-    }
-    return false;
-  };
-
-  simpleLoginService.assertValidCreateAccountAttempt = function(email, pass, confirm) {
-    if( !email ) {
-      return 'Please enter an email address';
-    } else if( !pass ) {
-      return 'Please enter a password';
-    } else if( pass !== confirm ) {
-      return 'Passwords do not match';
-    }
-    return false;
-  };
-
-  simpleLoginService.createProfile = ProfileCreator;
-
-  function assertAuth() {
-    if( auth === null ) { throw new Error('Must call loginService.init() before using its methods'); }
+  function angularfireRun(SimpleLogin){
+    SimpleLogin.init();
   }
 
-  return simpleLoginService;
-});
+  function SimpleLogin($rootScope, firebaseRef, ProfileCreator, $timeout, $q, $firebaseAuth){
+    var _auth = null;
 
-app.factory('ProfileCreator', function(
-  firebaseRef, 
-  $q
-) {
-  function firstPartOfEmail(email) {
-      return ucfirst(email.substr(0, email.indexOf('@'))||'');
-  }
-
-  function ucfirst (str) {
-    // credits: http://kevin.vanzonneveld.net
-    str += '';
-    var f = str.charAt(0).toUpperCase();
-    return f + str.substr(1);
-  }
-
-  return function(id, email) {
-    var dfr = $q.defer(),
-        ref = firebaseRef('users/' + id);
-
-    var refData = {
-      email: email, 
-      name: firstPartOfEmail(email),
-      userId: id
+    var service = {
+      init: init,
+      currentUser: currentUser,
+      logout: logout,
+      login: login,
+      loginPassword: loginPassword,
+      changePassword: changePassword,
+      createAccount: createAccount,
+      createProfile: ProfileCreator,
+      parseErrorMessages: parseErrorMessages,
+      assertValidLoginAttempt: assertValidLoginAttempt,
+      assertValidCreateAccountAttempt: assertValidCreateAccountAttempt
     };
 
-    ref.set(refData, function(err){
-      if(err){
-        dfr.reject(err);
-      } else {
-        dfr.resolve(refData);
-      }
-    });
+    return service;
 
-    return dfr.promise;
-  };
-});
+    function init() {
+      var dfr = $q.defer();
+      _auth = $firebaseAuth(firebaseRef(), function(error, user){
+        if(error){
+          dfr.reject(error);
+        } else {
+          dfr.resolve(user);
+        }
+      });
+      return dfr.promise;
+    }
+
+    function currentUser(){
+      _ensureAuth();
+      return _auth.$waitForAuth();
+    }
+
+    function logout() {
+      _ensureAuth();
+      return _auth.$unauth();
+    }
+    
+    /**
+     * @param {string} provider
+     * @param {Function} [callback]
+     * @returns {*}
+     */
+    function login(provider, credentials, callback) {
+      _ensureAuth();
+      return _auth.$authWithOAuthToken(provider, credentials, {rememberMe: true}).then(function(user) {
+        if( callback ) {
+          //todo-bug https://github.com/firebase/angularFire/issues/199
+          $timeout(function() {
+            callback(null, user);
+          });
+        }
+      }, callback);
+    }
+
+    /**
+     * @param {string} email
+     * @param {string} pass
+     * @param {Function} [callback]
+     * @returns {*}
+     */
+    function loginPassword(email, pass, callback) {
+      _ensureAuth();
+      return _auth.$authWithPassword({
+        email: email,
+        password: pass,
+        rememberMe: true
+      }).then(function(user) {
+        if( callback ) {
+          //todo-bug https://github.com/firebase/angularFire/issues/199
+          $timeout(function() {
+            callback(null, user);
+          });
+        }
+      }, callback);
+    }
+
+    function changePassword(user) {
+      _ensureAuth();
+      var dfr = $q.defer();
+
+      if( !user.oldpass || !user.newpass ) {
+        dfr.reject('Please enter a password');
+      } else if( user.newpass !== user.confirm ) {
+        dfr.reject('Passwords do not match');
+      } else {
+        _auth.$changePassword({
+          'email': user.email, 
+          'oldPassword': user.oldpass, 
+          'newPassword': user.newpass
+        }).then(dfr.resolve, dfr.reject);
+      }
+
+      return dfr.promise;
+    }
+
+    function createAccount(email, password, callback) {
+      _ensureAuth();
+      var dfr = $q.defer();
+
+      _auth.$createUser({
+        'email': email, 
+        'password': password
+      }).then(dfr.resolve, dfr.reject);
+
+      return dfr.promise;
+    }
+
+    function parseErrorMessages(err){
+      if(err){
+        return err.message.replace(/FirebaseSimpleLogin:\s/g,'');
+      } else {
+        return null;
+      }
+    }
+
+    function assertValidLoginAttempt(email, pass){
+      if( !email ) {
+        return 'Please enter an email address';
+      } else if( !pass ) {
+        return 'Please enter a password';
+      }
+      return false;
+    }
+
+    function assertValidCreateAccountAttempt(email, pass, confirm) {
+      if( !email ) {
+        return 'Please enter an email address';
+      } else if( !pass ) {
+        return 'Please enter a password';
+      } else if( pass !== confirm ) {
+        return 'Passwords do not match';
+      }
+      return false;
+    }
+
+    function _ensureAuth() {
+      if( _auth === null ) { 
+        throw new Error('Must call loginService.init() before using its methods'); 
+      }
+    }
+  }
+
+  function ProfileCreator(firebaseRef, $q) {
+    function _firstPartOfEmail(email) {
+        return _ucfirst(email.substr(0, email.indexOf('@'))||'');
+    }
+
+    function _ucfirst (str) {
+      // credits: http://kevin.vanzonneveld.net
+      str += '';
+      var f = str.charAt(0).toUpperCase();
+      return f + str.substr(1);
+    }
+
+    return function(id, email) {
+      var dfr = $q.defer(),
+          ref = firebaseRef('users/' + id);
+
+      var refData = {
+        email: email, 
+        name: _firstPartOfEmail(email),
+        userId: id
+      };
+
+      ref.set(refData, function(err){
+        if(err){
+          dfr.reject(err);
+        } else {
+          dfr.resolve(refData);
+        }
+      });
+
+      return dfr.promise;
+    };
+  }
+})();

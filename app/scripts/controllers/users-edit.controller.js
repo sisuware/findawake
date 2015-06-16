@@ -9,7 +9,7 @@
  */
 var app = angular.module('findAWake');
 
-app.controller('UserCtrl', function(
+app.controller('UsersEditController', function(
   $scope, 
   $timeout,
   UserSettings, 

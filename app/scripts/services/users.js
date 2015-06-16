@@ -20,6 +20,7 @@
     return service; 
     
     function get(id){
+      if (!id) { return false; }
       return syncData('users/' + id);
     }
 

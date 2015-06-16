@@ -12,37 +12,7 @@
     <base href="/">
   </head>
   <body ng-app="findAWake">
-    <nav class="navbar navbar-default navbar-static-top animated fadeInDown" role="navigation" ng-controller="NavCtrl">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a>
-        </div>
-        <div class="collapse navbar-collapse" id="bnavbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right animated fadeIn">
-            <li>
-              <a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a>
-            </li>
-            <li class="dropdown" ng-cloak ng-show-auth="login" ng-controller="LoginCtrl">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.email"></span> <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a ng-href="/profile/{{user.id}}">My Profile</a></li>
-                <li><a ng-href="/my/account">My Account</a></li>
-                <li class="divider"></li>
-                <li><a href="" ng-click="logout()">Logout</a></li>
-              </ul>
-            </li>
-            <li ng-cloak ng-show-auth="['logout','error']"><a href="/login">Login</a></li>
-            <li ng-cloak ng-show-auth="['logout','error']"><a href="/signup">Signup</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <nav class="navbar navbar-default navbar-static-top animated fadeInDown" role="navigation" navigation></nav>
     <div ng-view=""></div>
      <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -69,12 +39,11 @@
     <script src="../bower_components/angular-touch/angular-touch.js"></script>
     <script src="../bower_components/angular-route/angular-route.js"></script>
     <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="../bower_components/firebase/firebase.js"></script>
+    <script src="../bower_components/firebase/firebase-debug.js"></script>
     <script src="../bower_components/angular-strap/dist/angular-strap.min.js"></script>
     <script src="../bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="../bower_components/firebase-simple-login/firebase-simple-login.js"></script>
-    <script src="../bower_components/angularfire/angularfire.js"></script>
+    <script src="../bower_components/angularfire/dist/angularfire.js"></script>
     <script src="../bower_components/angularjs-geolocation/src/geolocation.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
@@ -85,12 +54,15 @@
     <script src="/scripts/controllers/login.js"></script>
     <script src="/scripts/controllers/signup.controller.js"></script>
     <script src="/scripts/controllers/signup-success.controller.js"></script>
-    <script src="/scripts/controllers/global.js"></script>
-    <script src="/scripts/controllers/wake.js"></script>
-    <script src="/scripts/controllers/user.js"></script>
+    <script src="/scripts/controllers/wakes-index.controller.js"></script>
+    <script src="/scripts/controllers/wakes-new.controller.js"></script>
+    <script src="/scripts/controllers/wakes-show.controller.js"></script>
+    <script src="/scripts/controllers/wakes-delete.controller.js"></script>
+    <script src="/scripts/controllers/users-edit.controller.js"></script>
     <script src="/scripts/controllers/profile.js"></script>
     <script src="/scripts/controllers/request.js"></script>
     <script src="/scripts/directives/profile-gear.directive.js"></script>
+    <script src="/scripts/directives/navigation.directive.js"></script>
     <script src="/scripts/services/security.js"></script>
     <script src="/scripts/services/wakes.js"></script>
     <script src="/scripts/services/users.js"></script>

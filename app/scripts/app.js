@@ -19,7 +19,7 @@
       'ui.bootstrap',
       'angularfire.firebase',
       'angularfire.login',
-      'simpleLoginTools',
+      //'simpleLoginTools',
       'imgur',
       'geolocation',
       'google.geocoder'
@@ -53,7 +53,7 @@
     function authUserResolve(SimpleLogin, Users){
       return SimpleLogin.currentUser().then(function(user){
         if(user){
-          return Users.get(user.id);
+          return Users.get(user.uid);
         }
       });
     }
@@ -86,7 +86,7 @@
       })
       .when('/wakes/new', {
         templateUrl: '/views/wakes/new.html', 
-        controller: 'NewWakeCtrl',
+        controller: 'WakesNewController',
         authRequired: false,
         resolve: {
           auth: authResolve
@@ -94,25 +94,24 @@
       })
       .when('/wakes/:id', {
         templateUrl: '/views/wakes/show.html', 
-        controller: 'WakeCtrl',
+        controller: 'WakesShowController',
         authRequired: false,
         resolve: {
-          auth: authUserResolve,
           wake: wakeResolve
         }
       })
       .when('/wakes/:id/edit', {
         templateUrl: '/views/wakes/edit.html', 
-        controller: 'EditWakeCtrl',
+        controller: 'WakesEditController',
         authRequired: true,
         resolve: {
           auth: authResolve,
           wake: wakeResolve
         }
       })
-      .when('/my/account', {
-        templateUrl: '/views/user/show.html', 
-        controller: 'UserCtrl', 
+      .when('/profile/:id/edit', {
+        templateUrl: '/views/user/edit.html', 
+        controller: 'UsersEditController', 
         authRequired: true,
         resolve: {
           profile: authUserResolve
@@ -133,7 +132,7 @@
       })
       .when('/login', {
         templateUrl: '/views/auth/login.html', 
-        controller: 'LoginCtrl',
+        controller: 'LoginController',
         authRequired: false
       })
       .when('/signup', {

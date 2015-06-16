@@ -24,15 +24,15 @@
     return service;
 
     function query() {
-      return syncData('wakes');
+      return syncData('wakes').$loaded();
     }
 
     function get(id) {
-      return syncData('wakes/' + id);
+      return syncData('wakes/' + id).$loaded();
     }
 
     function requests(id) {
-      return syncData('requests/' + id);
+      return syncData('requests/' + id).$loaded();
     }
 
     function remove(wake) {
