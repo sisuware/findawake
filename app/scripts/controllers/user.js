@@ -18,16 +18,9 @@ app.controller('UserCtrl', function(
   profile
 ){
   $scope.profile = profile;
-  UserSettings.init($scope);
+  //UserSettings.init($scope);
 
-  $scope.addGear = function(gear){
-    $scope.profile.gear.push(angular.copy(gear));
-    $scope.gear = null;
-  };
 
-  $scope.removeGear = function(index){
-    $scope.profile.gear.splice(index,1);
-  };
 
   $scope.changeAvatar = function(){
     $scope.existingAvatar = angular.copy($scope.profile.avatar);

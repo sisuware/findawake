@@ -11,10 +11,10 @@
     var profiles = {};
 
     var service = {
-      get:get,
-      getProfile:getProfile,
-      updatePublicProfile:updatePublicProfile,
-      createPublicProfile:createPublicProfile
+      get: get,
+      getProfile: getProfile,
+      updatePublicProfile: updatePublicProfile,
+      createPublicProfile: createPublicProfile
     };
 
     return service; 
@@ -32,17 +32,24 @@
     }
 
     function updatePublicProfile(user){
+      var dfr = $q.defer();
       var profile = firebaseRef('profiles/' + user.userId);
-      
-      profile.update(
-        _.assign(
-          JSON.parse(
-            angular.toJson(
-              _.pick(user, 'avatar','bio','gear','location','name','boats')
-            )
-          )
+      var datum = JSON.parse(
+        angular.toJson(
+          _.pick(user, 'avatar','bio','gear','location','name','boats')
         )
       );
+
+      profile.update(datum, function(error) {
+        if (error) {
+          console.debug('unable to update profile: ', error);
+          dfr.reject(error);
+        } else {
+          dfr.resolve();
+        }
+      });
+
+      return dfr.promise;
     }
 
     function createPublicProfile(user){
@@ -50,8 +57,29 @@
       return _checkExistingProfile(user.userId).then(function(data){
         console.debug('profile already exists');
       }, function(){
-        return createRef('profiles/' + user.userId, user);  
+        return _createRef('profiles/' + user.userId, user);  
       });
+    }
+
+    function _createRef(target, data){
+      var dfr = $q.defer();
+      var ref = firebaseRef(target);
+      var datum = JSON.parse(
+        angular.toJson(
+          _.pick(data, 'name')
+        )
+      );
+
+      ref.set(datum, function(error){
+        if(error){
+          console.debug('unable to create reference: ', error);
+          dfr.reject(error);
+        } else {
+          dfr.resolve(ref.name());
+        }
+      });
+
+      return dfr.promise;
     }
 
     function _checkExistingProfile(id) {
@@ -63,26 +91,6 @@
           dfr.resolve(snapshot);
         } else {
           dfr.reject();
-        }
-      });
-
-      return dfr.promise;
-    }
-
-    function createRef(target, data){
-      var dfr = $q.defer();
-      var ref = firebaseRef(target);
-      var refData = JSON.parse(
-        angular.toJson(
-          _.pick(data, 'name')
-        )
-      );
-
-      ref.set(refData, function(err){
-        if(err){
-          dfr.reject(err);
-        } else {
-          dfr.resolve(ref.name());
         }
       });
 

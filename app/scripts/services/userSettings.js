@@ -8,8 +8,10 @@
   UserSettings.$inject = [];
 
   function UserSettings() {
+    var _gearKeys = ['Wakeboard','Wakesurf','Wakeskate','Helmet','Bindings','Camera','Handle','Rope','Fins','Shoes','Vest'];
+
     var service = {
-      init: init
+      gear: listGearTypes
     };
 
     return service;
@@ -25,7 +27,7 @@
     }
 
     function listGearTypes(){
-      return  ['Wakeboard','Wakesurf','Wakeskate','Helmet','Bindings','Camera','Handle','Rope','Fins','Shoes','Vest'];
+      return _gearKeys;
     }
 
     function assertProfile(profile){
