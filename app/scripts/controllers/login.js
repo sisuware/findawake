@@ -24,6 +24,8 @@
       console.debug('you are now logged in.');
       if ($scope.redirect) {
         $location.path($scope.redirect).search('');
+      } else {
+        $lcoation.path('/');
       }
     }
 

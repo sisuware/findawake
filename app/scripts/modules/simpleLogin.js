@@ -20,6 +20,7 @@
     var service = {
       init: init,
       currentUser: currentUser,
+      onAuth: onAuth,
       logout: logout,
       login: login,
       loginPassword: loginPassword,
@@ -45,9 +46,14 @@
       return dfr.promise;
     }
 
-    function currentUser(){
+    function currentUser() {
       _ensureAuth();
       return _auth.$waitForAuth();
+    }
+
+    function onAuth(callback) {
+      _ensureAuth();
+      return _auth.$onAuth(callback);
     }
 
     function logout() {

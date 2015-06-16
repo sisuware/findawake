@@ -24,6 +24,12 @@
       $rootScope.$on('$routeChangeStart', function (event, current, prev) {
         _checkCurrentRoute(current, event);
       });
+
+      // SimpleLogin.onAuth(function(auth){
+        // if (!auth) {
+          // _checkCurrentRoute($route);
+        // }
+      // });
     }
 
     function _checkCurrentRoute(current, event) {
@@ -39,7 +45,10 @@
 
     function _handleAuthRequired(current, event) {
       console.debug('this route requires you to be authenticated.');
-      event.preventDefault();
+      
+      if (event) {
+        event.preventDefault();
+      }
 
       $location.path(loginRedirectPath).search('redirect', current.$$route.originalPath);
     }

@@ -23,8 +23,8 @@
         _html += '      <li>';
         _html += '        <a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a>';
         _html += '      </li>';
-        _html += '      <li class="dropdown" ng-cloak ng-show="user.auth">';
-        _html += '        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.email"></span> <span class="caret"></span></a>';
+        _html += '      <li class="dropdown" ng-cloak ng-show="user">';
+        _html += '        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.password.email"></span> <span class="caret"></span></a>';
         _html += '        <ul class="dropdown-menu" role="menu">';
         _html += '          <li><a ng-href="/profile/{{user.uid}}">My Profile</a></li>';
         _html += '          <li><a ng-href="/profile/{{user.uid}}/edit">My Account</a></li>';
@@ -32,8 +32,8 @@
         _html += '          <li><a href="" ng-click="logout()">Logout</a></li>';
         _html += '        </ul>';
         _html += '      </li>';
-        _html += '      <li ng-cloak ng-hide="user.auth"><a href="/login">Login</a></li>';
-        _html += '      <li ng-cloak ng-hide="user.auth"><a href="/signup">Signup</a></li>';
+        _html += '      <li ng-cloak ng-hide="user"><a href="/login">Login</a></li>';
+        _html += '      <li ng-cloak ng-hide="user"><a href="/signup">Signup</a></li>';
         _html += '    </ul>';
         _html += '  </div>';
         _html += '</div>';
@@ -48,8 +48,25 @@
     return directive;
     
     function navigationController($scope, $element, $attrs) {
-      $scope.user = SimpleLogin.currentUser();
+      _checkCurrentUser();
+      
       $scope.logout = SimpleLogin.logout;
+
+      SimpleLogin.onAuth(function(auth){
+        console.log(auth, $scope.user);
+
+        if (auth) {
+          _checkCurrentUser();
+        } else {
+          $scope.user = false;
+        }
+      });
+
+      function _checkCurrentUser() {
+        SimpleLogin.currentUser().then(function(user){
+          $scope.user = user;
+        });
+      }
 
     }
   }

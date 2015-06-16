@@ -118,7 +118,7 @@
         }
       })
       .when('/profile/:id', {
-        templateUrl: '/views/user/profile.html',
+        templateUrl: '/views/user/show.html',
         controller: 'ProfileCtrl',
         authRequired: false,
         resolve: {
