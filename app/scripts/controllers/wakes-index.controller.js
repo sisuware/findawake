@@ -5,86 +5,42 @@
     .module('findAWake')
     .controller('WakesIndexController', WakesIndexController);
 
-  WakesIndexController.$inject = ['$scope','wake','auth','$modal','$location','Users'];
+  WakesIndexController.$inject = ['$scope','wakes'];
 
-  function WakesIndexController($scope, wake, auth, $modal,$location, Users) {
-    $scope.auth = auth;
-    $scope.wake = wake;
-    
-    // $scope.wake = wake.$on('value', function(dataSnapshot){
-    //   $scope.profile = Users.getProfile(dataSnapshot.snapshot.value.userId);
-    // });
+  function WakesIndexController($scope, wakes) {
+    $scope.wakes = wakes;
 
-    $scope.requestRide = function(){
-      if(_.isUndefined($scope.auth)){
-        authModal();
-      } else {
-        requestRideModal();
-      }
+    /*
+    $scope.distances = ['5','15','25','50','100','150'];
+    $scope.selectedDistance = '50';
+
+    geolocation.getLocation().then(function(data){
+      $scope.currentLocation = data.coords;
+      formattedCurrentLocation(data);
+    });
+
+    $scope.selectDistance = function(distance){
+      $scope.selectedDistance = distance;
     };
 
-    $scope.rideRequested = function(){
-      if(_.isUndefined(auth) || _.isEmpty(auth)){ return false; }
-      if(_.isObject(auth.requests)){
-        return !_.isUndefined(auth.requests[wake.id]);
-      }
-      if(_.isArray(auth.requests)){
-        return _.indexOf(auth.requests, wake.id) === -1;
-      }
+    $scope.isDistanceSelected = function(distance){
+      return distance === $scope.selectedDistance;
     };
 
-    $scope.removeWake = function(wake){
-      var modalInstance = $modal.open({
-        templateUrl: '/views/wakes/removeModal.html',
-        controller: 'DeleteWakeCtrl',
-        size: 'sm',
-        resolve: {
-          wake: function () {
-            return wake;
-          }
-        }
-      });
-
-      modalInstance.result.then(function(res){
-        if(!res){
-          $location.path('/wakes');
-        }
-      });
+    $scope.filterWakes = function(wake){
+      var currentLocation = $scope.currentLocation,
+          wakeLocation = _.pick(wake.location, 'lat','lng');
+      return Wakes.getDistance(currentLocation, wakeLocation) <= parseInt($scope.selectedDistance);
     };
 
-    function authModal(){
-      var modalInstance = $modal.open({
-        templateUrl: '/views/loginModal.html',
-        controller: 'LoginModalCtrl',
-        size: 'md'
-      });
-
-      modalInstance.result.then(function(user){
-        if(user){
-          $scope.auth = Users.get(user.id);
-          requestRideModal();
-        }
+    function formattedCurrentLocation(data){
+      $scope.loadingLocation = true;
+      Geocoder.latlng(data.coords).then(function(results){
+        $scope.formattedCurrentLocation = _.first(results).formatted_address;
+      }).finally(function(){
+        $scope.loadingLocation = false;
       });
     }
-
-    function requestRideModal(){
-      var modalInstance = $modal.open({
-        templateUrl: '/views/wakes/requestModal.html',
-        controller: 'RequestCtrl',
-        size: 'lg',
-        resolve: {
-          auth: function(){
-            return $scope.auth;
-          },
-          wake: function(){
-            return $scope.wake;
-          }
-        }
-      });
-
-      modalInstance.result.then(function(){
-
-      });
-    }
+    */
   }
 })();

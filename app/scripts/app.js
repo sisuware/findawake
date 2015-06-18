@@ -65,24 +65,23 @@
     function profileResolve(Users, $route){
       return Users.getProfile($route.current.params.id);
     }
-    
+
     $routeProvider
-      .when('/', {
-        templateUrl: '/views/index.html', 
-        controller: 'IndexCtrl',
+      .when('/wakes', {
+        templateUrl: '/views/wakes/index.html', 
+        controller: 'WakesIndexController',
         authRequired: false,
         resolve: {
-          auth: authResolve,
           wakes: wakesResolve
-        },
-        redirectTo: function(){
-          var str = location.hash.substring(1);
-          if(str){
-            return str.replace('!','');
-          } else {
-            return '/';
-          }
         }
+        // redirectTo: function(){
+        //   var str = location.hash.substring(1);
+        //   if(str){
+        //     return str.replace('!','');
+        //   } else {
+        //     return '/';
+        //   }
+        // }
       })
       .when('/wakes/new', {
         templateUrl: '/views/wakes/new.html', 
@@ -96,6 +95,14 @@
         templateUrl: '/views/wakes/show.html', 
         controller: 'WakesShowController',
         authRequired: false,
+        resolve: {
+          wake: wakeResolve
+        }
+      })
+      .when('/wakes/:id/ride', {
+        templateUrl: '/views/wakes/ride.html', 
+        controller: 'WakesRideController',
+        authRequired: true,
         resolve: {
           wake: wakeResolve
         }
@@ -157,7 +164,7 @@
         }
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/wakes'
       });
   }
 

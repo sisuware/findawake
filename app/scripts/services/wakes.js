@@ -10,15 +10,18 @@
   Wakes.$inject = ['syncData', 'firebaseRef', '$timeout', '$q'];
 
   function Wakes(syncData, firebaseRef, $timeout, $q) {
+    var _currentUser;
+
     var service = {
       query: query,
       get: get,
       requests: requests,
-      remove: remove,
-      request: request,
-      create: create,
+      remove: removeWake,
+      create: createWake,
       updateLocation: updateLocation,
-      getDistance: getDistance
+      getDistance: getDistance,
+      requested: requested,
+      requestRide: requestRide
     };
 
     return service;
@@ -35,7 +38,36 @@
       return syncData('requests/' + id).$loaded();
     }
 
-    function remove(wake) {
+    function requested() {
+      // if(_.isUndefined(auth) || _.isEmpty(auth)){ return false; }
+      // if(_.isObject(auth.requests)){
+      //   return !_.isUndefined(auth.requests[wake.id]);
+      // }
+      // if(_.isArray(auth.requests)){
+      //   return _.indexOf(auth.requests, wake.id) === -1;
+      // }
+      _currentUser.then(function(auth){
+
+      });
+    }
+
+    function requestRide(wake) {  
+      return _currentUser.then(function(auth){
+        
+        var datum = angular.copy(wake);
+        datum.userId = auth.uid;
+
+        return _createRef('requests/' + wake.id, datum).then(function(requestRef){
+          return _createAssociation('users', 'requests/' + wake.id, auth.uid, requestRef, 'set');
+        }, _handleError);
+      }, _handleError);
+    }
+
+    function removeRideRequest() {
+
+    }
+
+    function removeWake(wake) {
       return $q.all([
         _removeAssociation('users', 'wakes', wake.userId, wake.id),
         _removeAssociation('profiles', 'wakes', wake.userId, wake.id)
@@ -44,13 +76,7 @@
       });
     }
 
-    function request(request) {
-      return _createRef('requests/' + request.wakeId, request).then(function(requestRef){
-        _createAssociation('users', 'requests/' + request.wakeId, request.userId, requestRef, 'set');
-      });
-    }
-
-    function create(wake) {
+    function createWake(wake) {
       /*jshint camelcase: false */
       return _createRef('wakes', wake).then(function(wakeRef){
         return $q.all([
@@ -115,6 +141,17 @@
       });
 
       return dfr.promise;
+    }
+
+    function _auth() {
+      if (!_currentUser) {
+        _currentUser = SimpleLogin.currentUser();
+      }
+      return _currentUser;
+    }
+
+    function _handleError(error) {
+      console.debug(error);
     }
   }
 })();

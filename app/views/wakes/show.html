@@ -1,58 +1,18 @@
-<div class="container animated fadeIn">
-  <div class="row clearfix">
-    <div class="col-xs-9">
-      <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small>  
-      </h2>
-      <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{profile.$id}}">{{profile.name}}</a></small>
+<div class="sectional color1a clearfix">
+  <div class="container animated fadeInDown">
+    <div class="col-sm-9">
+      <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
+      <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{wake.userId}}">{{profile.name}}</a></small>
     </div>
-    <div ng-cloak ng-show-auth="login" class="col-xs-3 text-right">
+    <div class="col-sm-3">
+      <h2><a class="btn btn-block btn-primary btn-lg" ng-href="/wakes/{{wake.id}}/ride">Request A Ride</a></h2>
+      <!-- <p class="muted text-center">Request a ride to be notified when you can wakeboard, wakesurf, or wakeskate behind this wake making machine!</p> -->
+    </div>
+    <!-- <div ng-cloak ng-show-auth="login" class="col-xs-3 text-right">
       <button ng-cloak ng-show="wake.userId === auth.userId" ng-click="removeWake(wake)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
       <a ng-cloak ng-show="wake.userId === auth.userId" ng-href="/wakes/{{wake.id}}/edit" class="btn btn-danger btn-sm"><i class="fa fa-gear"></i> Edit</a>
-    </div>
-  </div>
-  <hr/>
-  <div class="row clearfix">
-    <div class="col-md-8">
-      <div class="row">
-         <div class="col-sm-4" ng-repeat="type in wake.types">
-          <div class="thumbnail board-thumbnail" ng-class="{true: 'active'}[type.selected]">
-            <span class="boarding-icons boarding-icons-{{type.name}}" ng-class="{true: type.name+'-active'}[type.selected]"></span>
-            <p class="text-center">{{type.name}}</p>
-          </div>
-        </div>
-      </div>
-      <div class="boat-info panel panel-default">
-        <div class="boat-features">
-          <span class="label label-info" ng-show="wake.boat.perfectPass">CRUISE CONTROL / PERFECT PASS</span>
-          <span class="label label-info" ng-show="wake.boat.ballastSystem">BALLAST SYSTEM</span>
-          <span class="label label-info" ng-show="wake.boat.tower">TOWER</span>
-          <span class="label label-info" ng-show="wake.boat.pylong">EXTENDED PYLON</span>
-        </div>
-        <div class="boat-thumbnail pattern-pixelweave">
-          <span class="shadow-overlay"></span>
-          <img class="img-responsive" ng-src="{{wake.thumbnail}}" />
-        </div>
-        <div class="boat-tabs">
-          <ul class="nav nav-tabs" id="myTab">
-            <li class="active"><a href="#description">Description</a></li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane active" id="description">
-              {{wake.boat.description}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div ng-hide="profile" class="well text-center animated fadeIn"><i class="fa fa-spin fa-spinner"></i></div>
-      <div ng-cloak class="well animated fadeIn" ng-hide="rideRequested()">
-        <div class="form-group">
-          <button type="button" class="btn btn-block btn-primary btn-lg" ng-click="requestRide()"><i class="fa fa-star-o"></i> Request A Ride!</button>
-        </div>
-        <p class="muted text-center">Request a ride to be notified when you can wakeboard, wakesurf, or wakeskate behind this wake making machine!</p>
-      </div>
-      <div ng-cloak class="well animated fadeIn" ng-show="rideRequested()">
+    </div> -->
+    <!-- <div ng-cloak class="well animated fadeIn">
         <div class="form-group">
           <button type="button" class="btn btn-block btn-success disabled btn-lg"><i class="fa fa-star"></i> Ride Requested</button>
         </div>
@@ -60,9 +20,25 @@
           You'll be notified via when a session has been scheduled.
         </p>
       </div>
+    </div> -->
+  </div>
+</div>
+<div ng-cloak ng-show="wake.thumbnail" class="row clearfix wake-show-thumbnail has-thumbnail animated fadeInLeft" style="background-image: url({{wake.thumbnail}})"></div>
+<div class="sectional color1b">
+  <div class="container animated fadeInRight">
+    <div class="col-md-8">
+      <p class="lead">{{wake.boat.description}}</p>
     </div>
     <div class="col-md-4">
-      <h4><i class="fa fa-calendar"></i> Boating Schedule</h4>
+      <h4><i class="fa fa-smile-o"></i> Goodies</h4>
+      <ul class="list-unstyled">
+        <li ng-cloak ng-show="wake.boat.perfectPass"><i class="fa fa-check"></i> Cruise Control / Perfect Pass</li>
+        <li ng-cloak ng-show="wake.boat.ballastSystem"><i class="fa fa-check"></i> Ballast System</li>
+        <li ng-cloak ng-show="wake.boat.tower"><i class="fa fa-check"></i> Tower</li>
+        <li ng-cloak ng-show="wake.boat.pylon"><i class="fa fa-check"></i> Extended Pylon</li>
+      </ul>
+      <hr/>
+      <h4><i class="fa fa-calendar"></i> Schedule</h4>
       <table class="table table-condensed table-striped">
         <thead>
           <tr>
@@ -82,6 +58,18 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+<div class="sectional color1c">
+  <div class="container">
+    <div class="row-fluid clearfix">
+       <div ng-cloak ng-show="type.selected" class="col-sm-4" ng-repeat="type in wake.types" ng-mouseover="type.$mouseover = true" ng-mouseleave="type.$mouseover = false">
+        <a class="color1 thumbnail board-thumbnail" ng-class="{true: 'active'}[type.$mouseover]" ng-href="/wakes/{{wake.id}}/ride">
+          <span class="boarding-icons boarding-icons-{{type.name}}" ng-class="{true: type.name+'-active'}[type.$mouseover]"></span>
+          <h4 class="text-center">Lets Go <span class="text-capitalize">{{type.name}}</span></h4>
+        </a>
+      </div>
     </div>
   </div>
 </div>

@@ -20,9 +20,8 @@
         _html += '  </div>';
         _html += '  <div class="collapse navbar-collapse" id="navbar-collapse">';
         _html += '    <ul class="nav navbar-nav navbar-right animated fadeIn">';
-        _html += '      <li>';
-        _html += '        <a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a>';
-        _html += '      </li>';
+        _html += '      <li><a href="/wakes" class="">Wakes</a></li>';
+        _html += '      <li><a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a></li>';
         _html += '      <li class="dropdown" ng-cloak ng-show="user">';
         _html += '        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.password.email"></span> <span class="caret"></span></a>';
         _html += '        <ul class="dropdown-menu" role="menu">';
