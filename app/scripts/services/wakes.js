@@ -7,9 +7,9 @@
     .module('findAWake')
     .factory('Wakes', Wakes);
 
-  Wakes.$inject = ['syncData', 'firebaseRef', '$timeout', '$q'];
+  Wakes.$inject = ['syncData', 'firebaseRef', '$timeout', '$q', 'SimpleLogin'];
 
-  function Wakes(syncData, firebaseRef, $timeout, $q) {
+  function Wakes(syncData, firebaseRef, $timeout, $q, SimpleLogin) {
     var _currentUser;
 
     var service = {

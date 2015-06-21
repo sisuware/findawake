@@ -50,7 +50,7 @@
         event.preventDefault();
       }
 
-      $location.path(loginRedirectPath).search('redirect', current.$$route.originalPath);
+      $location.path(loginRedirectPath).search('redirect', window.location.pathname);
     }
   }
 

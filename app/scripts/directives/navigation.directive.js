@@ -16,12 +16,12 @@
         _html += '      <span class="icon-bar"></span>';
         _html += '      <span class="icon-bar"></span>';
         _html += '    </button>';
-        _html += '    <!-- <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a> -->';
+        _html += '    <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a>';
         _html += '  </div>';
         _html += '  <div class="collapse navbar-collapse" id="navbar-collapse">';
         _html += '    <ul class="nav navbar-nav navbar-right animated fadeIn">';
-        _html += '      <li><a href="/wakes" class="">Wakes</a></li>';
-        _html += '      <li><a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a></li>';
+        _html += '      <li ks-active-link active-class="active" active-path="/wakes"><a href="/wakes"><i class="fa fa-search"></i> Wakes</a></li>';
+        _html += '      <li ks-active-link active-class="active" active-view="/new"><a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a></li>';
         _html += '      <li class="dropdown" ng-cloak ng-show="user">';
         _html += '        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.password.email"></span> <span class="caret"></span></a>';
         _html += '        <ul class="dropdown-menu" role="menu">';
@@ -31,8 +31,8 @@
         _html += '          <li><a href="" ng-click="logout()">Logout</a></li>';
         _html += '        </ul>';
         _html += '      </li>';
-        _html += '      <li ng-cloak ng-hide="user"><a href="/login">Login</a></li>';
-        _html += '      <li ng-cloak ng-hide="user"><a href="/signup">Signup</a></li>';
+        _html += '      <li ng-cloak ng-hide="user" ks-active-link active-class="active" active-path="/login"><a href="/login">Login</a></li>';
+        _html += '      <li ng-cloak ng-hide="user" ks-active-link active-class="active" active-path="/signup"><a href="/signup">Signup</a></li>';
         _html += '    </ul>';
         _html += '  </div>';
         _html += '</div>';

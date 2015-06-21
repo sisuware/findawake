@@ -25,7 +25,7 @@
       if ($scope.redirect) {
         $location.path($scope.redirect).search('');
       } else {
-        $lcoation.path('/');
+        $location.path('/');
       }
     }
 

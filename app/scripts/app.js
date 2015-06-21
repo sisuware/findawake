@@ -22,10 +22,11 @@
       //'simpleLoginTools',
       'imgur',
       'geolocation',
-      'google.geocoder'
+      'google.geocoder',
+      'ks.activeLink'
     ])
     .config(findAWakeConfig)
-    .constant('angularFireVersion', '0.7.1')
+    .constant('angularFireVersion', '1.1.1')
     .constant('loginRedirectPath', '/login')
     .constant('loginProviders', '')
     .constant('FBURL', 'https://findawake.firebaseio.com')

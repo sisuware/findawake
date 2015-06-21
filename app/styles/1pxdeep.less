@@ -11,7 +11,7 @@
 /////////////////////////////////////////////////
 
 //// Bootstrap variable overrides
-
+@white:                             #f7f7f7;
 @font-size-base:                    16px;
 
 @border-radius-base:                6px;
@@ -46,11 +46,16 @@
 @brand-warning:                     hsl(hue(#f0ad4e),((saturation(#f0ad4e) + @sat + 16)/2),((luma(#f0ad4e) + @luma - 10)/2));
 @brand-danger:                      hsl(hue(#d9534f),((saturation(#d9534f) + @sat)/2),((luma(#d9534f) + @luma + 10)/2));
 
-@navbar-link-color:                 white;
-@navbar-link-hover-color:           white;
-@navbar-link-hover-bg:              transparent;
-@navbar-link-active-color:          white;
-@navbar-link-active-bg:             @1pxdeep-bg;
+//@navbar-link-color:                 white;
+@navbar-default-link-color:         @white;
+//@navbar-link-hover-color:           white;
+@navbar-default-link-hover-color:   @white;
+//@navbar-link-hover-bg:              transparent;
+@navbar-default-link-active-color:  @color1b;
+//@navbar-link-active-color:          white;
+@navbar-default-link-active-bg:     @1pxdeep-bg;
+//@navbar-link-active-bg:             @1pxdeep-bg;
+@navbar-default-link-hover-bg:      @color1b;
 @navbar-link-disabled-color:        #ccc;
 @navbar-link-disabled-bg:           transparent;
 
@@ -63,8 +68,8 @@
 //// Theme variables
 
 @1pxdeep-default-button-color:      @color1b;
-@1pxdeep-bg:                        @color1;
-@body-bg:                           @1pxdeep-bg;
+@1pxdeep-bg:                        @white;
+@body-bg:                           @white;
 
 
 //// Mix-ins
