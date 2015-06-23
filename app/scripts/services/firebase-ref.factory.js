@@ -2,12 +2,10 @@
   'use strict';
 
   angular
-    .module('angularfire.firebase', ['firebase'])
-    .factory('firebaseRef', firebaseRef)
-    .factory('syncData', syncData);
+    .module('findAWake')
+    .factory('firebaseRef', firebaseRef);
 
   firebaseRef.$inject = ['Firebase', 'FBURL'];
-  syncData.$inject = ['$firebaseObject', 'firebaseRef'];
 
   function firebaseRef (Firebase, FBURL) {
     return function () {
@@ -22,15 +20,5 @@
       }
       return args.join('/');
     }
-  }
-
-  function syncData($firebaseObject, firebaseRef) {
-    return function (path, limit) {
-      var ref = firebaseRef(path);
-      if( limit ) {
-        ref = ref.limit(limit);
-      }
-      return $firebaseObject(ref);
-    };
   }
 })();

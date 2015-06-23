@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angularfire.login', ['firebase', 'angularfire.firebase'])
+    .module('findAWake')
     .run(angularfireRun)
     .factory('SimpleLogin', SimpleLogin)
     .factory('ProfileCreator', ProfileCreator);
