@@ -24,7 +24,7 @@
   </div>
 </div>
 <div ng-cloak ng-show="wake.thumbnail" class="row clearfix wake-show-thumbnail has-thumbnail animated fadeInLeft" style="background-image: url({{wake.thumbnail}})"></div>
-<div class="sectional color1b">
+<div class="sectional">
   <div class="container animated fadeInRight">
     <div class="col-md-8">
       <p class="lead">{{wake.boat.description}}</p>
@@ -61,11 +61,12 @@
     </div>
   </div>
 </div>
-<div class="sectional color1c">
+<div class="sectional highlight">
+  <p class="lead text-center form-group">Just select how you want to ride <a ng-href="/profile/{{wake.userId}}">{{profile.name}}'s</a> wake</p>
   <div class="container">
     <div class="row-fluid clearfix">
        <div ng-cloak ng-show="type.selected" class="col-sm-4" ng-repeat="type in wake.types" ng-mouseover="type.$mouseover = true" ng-mouseleave="type.$mouseover = false">
-        <a class="color1 thumbnail board-thumbnail" ng-class="{true: 'active'}[type.$mouseover]" ng-href="/wakes/{{wake.id}}/ride">
+        <a class="color1 thumbnail board-thumbnail" ng-class="{true: 'active'}[type.$mouseover]" ng-href="/wakes/{{wake.id}}/ride#{{type.name}}">
           <span class="boarding-icons boarding-icons-{{type.name}}" ng-class="{true: type.name+'-active'}[type.$mouseover]"></span>
           <h4 class="text-center">Lets Go <span class="text-capitalize">{{type.name}}</span></h4>
         </a>
