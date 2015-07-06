@@ -102,7 +102,8 @@
         controller: 'WakesRideController',
         authRequired: true,
         resolve: {
-          wake: wakeResolve
+          wake: wakeResolve,
+          auth: authResolve
         }
       })
       .when('/wakes/:id/edit', {
