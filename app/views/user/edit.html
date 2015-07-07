@@ -1,5 +1,12 @@
+<div class="sectional color1a clearfix sectional-sm">
+  <div class="container animated fadeInDown">
+    <div class="col-sm-9">
+      <h2><avatar></avatar> {{profile.name}}</h2>
+    </div>
+  </div>
+</div>
 <div class="container animated fadeIn">
-  <div class="row clearfix form-group">
+  <!-- <div class="row clearfix form-group">
     <div class="col-xs-12">
       <div class="avatar avatar-sm">
         <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
@@ -10,12 +17,12 @@
         <li class="active">Profile</li>
       </ol>
     </div>
-  </div>
+  </div> -->
   <legend>
     <ul class="nav nav-lines">
-      <li class="active">
-        <a href="/my/account">Profile</a>
-      </li>
+      <li class="active"><a href="/my/account">Profile</a></li>
+      <li class="active"><a href="/my/account">Wakes</a></li>
+      <li class="active"><a href="/my/account">Requests</a></li>
     </ul>
   </legend>
   <div class="row clearfix">
@@ -58,26 +65,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <legend><h4>Your Avatar</h4></legend>
-      <div class="row">
-        <div class="form-group clearfix">
-          <div class="col-sm-4">
-            <div class="text-center">
-              <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
-              <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i ng-hide="uploadingAvatar" class="fa fa-user"></i><i ng-cloak ng-show="uploadingAvatar" class="fa fa-spinner fa-spin"></i></div>
-            </div>
-          </div>
-          <div ng-cloak ng-hide="profile.avatar" class="col-sm-8" ng-form="avatarForm">
-            <input type="file" class="form-control" file-upload="avatar" required name="avatar"/>
-            <button ng-cloak ng-show="existingAvatar" type="button" class="btn btn-sm btn-default" ng-click="cancelChangeAvatar()">Cancel</button>
-            <button type="button" class="btn btn-sm btn-primary" ng-disabled="!avatar || uploadingAvatar" ng-click="uploadAvatar()" ng-bind="uploadingAvatar ? 'Saving...':'Save Avatar'"></button>
-          </div>
-          <div ng-cloak ng-show="profile.avatar" class="col-sm-8">
-            <button type="button" class="btn btn-sm btn-primary" ng-click="changeAvatar()">Change Avatar</button>
-            <button type="button" class="btn btn-sm btn-default" ng-click="profile.avatar=null"><i class="fa fa-trash-o"></i> Delete</button>
-          </div>
-        </div>
-      </div>
+      <div profile-avatar profile="profile"></div>
       <div profile-gear profile="profile"></div>
     </div>
     <div class="col-sm-12 text-right form-group">

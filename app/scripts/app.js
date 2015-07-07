@@ -26,8 +26,7 @@
     .constant('angularFireVersion', '1.1.1')
     .constant('loginRedirectPath', '/login')
     .constant('loginProviders', '')
-    .constant('FBURL', 'https://findawake.firebaseio.com')
-    .constant('IMGUR', 'https://api.imgur.com/3/');
+    .constant('FBURL', 'https://findawake.firebaseio.com');
 
   findAWakeConfig.$inject = ['$routeProvider', '$locationProvider'];
 

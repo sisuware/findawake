@@ -34,7 +34,8 @@
 
     function updatePublicProfile(user){
       var dfr = $q.defer();
-      var profile = firebaseRef('profiles/' + user.userId);
+      var id = user.uid || user.$id;
+      var profile = firebaseRef('profiles/' + id);
       var datum = JSON.parse(
         angular.toJson(
           _.pick(user, 'avatar','bio','gear','location','name','boats')
@@ -55,10 +56,11 @@
 
     function createPublicProfile(user){
       // ensure user does not have a profile.
-      return _checkExistingProfile(user.userId).then(function(data){
+      var id = user.uid || user.$id;
+      return _checkExistingProfile(id).then(function(data){
         console.debug('profile already exists');
       }, function(){
-        return _createRef('profiles/' + user.userId, user);  
+        return _createRef('profiles/' + id, user);  
       });
     }
 

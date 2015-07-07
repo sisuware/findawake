@@ -36,7 +36,7 @@
 
 @input-height-base:                 (@line-height-computed + (@padding-base-vertical * 2) + 4);
 
-@btn-default-bg:                    @color1;
+@btn-default-bg:                    @white;
 @btn-default-border:                @btn-default-bg;
 @btn-font-weight:                   normal;
 
@@ -70,6 +70,9 @@
 @1pxdeep-default-button-color:      @color1b;
 @1pxdeep-bg:                        @white;
 @body-bg:                           @white;
+
+@sectional-padding-top:             90px;
+@sectional-padding-bottom:          90px;
 
 
 //// Mix-ins
@@ -1477,8 +1480,12 @@ hr {
 // sectionals
 .sectional {
     position:relative;
-    padding-top:90px;
-    padding-bottom:90px;
+    padding-top: @sectional-padding-top;
+    padding-bottom: @sectional-padding-bottom;
+    &.sectional-sm {
+        padding-top: unit(unit(@sectional-padding-top)/2,px) ;
+        padding-bottom: unit(unit(@sectional-padding-bottom)/2,px);
+    }
 
     .sectional-title {
         position:absolute;

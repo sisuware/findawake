@@ -22,27 +22,6 @@ app.controller('UsersEditController', function(
 
 
 
-  $scope.changeAvatar = function(){
-    $scope.existingAvatar = angular.copy($scope.profile.avatar);
-    $scope.profile.avatar = false;
-  };
-
-  $scope.cancelChangeAvatar = function(){
-    $scope.profile.avatar = $scope.existingAvatar;
-    $scope.existingAvatar = false;
-  }; 
-
-  $scope.uploadAvatar = function(){
-    $scope.uploadingAvatar = true;
-    Imgur.upload($scope.avatar).then(function(res){
-      $scope.profile.avatar = res.data.link;
-    }, function(res){
-      $scope.errors = res;
-    }).finally(function(){
-      $scope.uploadingAvatar = false;
-    });
-  };
-
   $scope.updateProfile = function(){
     $scope.savingProfile = true;
     $scope.profileSaved = false;

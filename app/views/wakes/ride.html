@@ -20,9 +20,9 @@
       <div class="col-sm-6">
         <div class="row">
           <div ng-cloak ng-show="type.selected" class="col-sm-4" ng-repeat="type in wake.types">
-            <a href="" class="thumbnail board-thumbnail" ng-class="{true: 'active'}[request.type[type.name].selected]" ng-click="request.type[type.name].selected = !request.type[type.name].selected">
+            <a href="" class="thumbnail board-thumbnail" ng-class="{true: 'active color3'}[request.type[type.name].selected]" ng-click="request.type[type.name].selected = !request.type[type.name].selected">
               <span class="boarding-icons boarding-icons-{{type.name}}" ng-class="{true: type.name+'-active'}[request.type[type.name].selected]"></span>
-              <p class="text-center">{{type.name}}</p>
+              <h6 class="text-center"><i class="fa" ng-class="request.type[type.name].selected ? 'fa-check-square-o':'fa-square-o'"></i> {{type.name}}</h6>
             </a>
           </div>
         </div>
