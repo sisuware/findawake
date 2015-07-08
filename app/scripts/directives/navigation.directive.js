@@ -19,9 +19,12 @@
         _html += '    <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a>';
         _html += '  </div>';
         _html += '  <div class="collapse navbar-collapse" id="navbar-collapse">';
-        _html += '    <ul class="nav navbar-nav navbar-right animated fadeIn">';
-        _html += '      <li ks-active-link active-class="active" active-path="/wakes"><a href="/wakes"><i class="fa fa-search"></i> Wakes</a></li>';
-        _html += '      <li ks-active-link active-class="active" active-view="/new"><a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a></li>';
+        _html += '    <ul class="nav navbar-nav animated fadeIn">';
+        _html += '      <li ng-repeat="route in routes" ks-active-link active-class="active" active-path="{{route.href}}">';
+        _html += '        <a href="{{route.href}}"><i class="fa {{route.icon}}"></i> {{route.label}}</a></li>';
+        _html += '      </li>';
+        _html += '    </ul>';
+        _html += '    <ul class="nav navbar-nav navbar-right animated fadeIn">';      
         _html += '      <li class="dropdown" ng-cloak ng-show="user">';
         _html += '        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.password.email"></span> <span class="caret"></span></a>';
         _html += '        <ul class="dropdown-menu" role="menu">';
@@ -49,6 +52,10 @@
     function navigationController($scope, $element, $attrs) {
       _checkCurrentUser();
       
+      $scope.routes = [
+        {href:'/wakes/find', label:'Find A Wake', icon: 'fa-search'},
+        {href:'/wakes/share', label:'Share A Wake', icon: 'fa-plus'},
+      ];
       $scope.logout = SimpleLogin.logout;
 
       SimpleLogin.onAuth(function(auth){

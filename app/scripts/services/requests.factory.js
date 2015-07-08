@@ -24,9 +24,9 @@
 
     function createRequest(request) {  
       // first create a top level request reference of the wake id.
-      return FirebaseModels.createRef('requests/' + data.wakeId, request).then(function(requestRef){
+      return FirebaseModels.createRef('requests/' + request.wakeId, request).then(function(requestRef){
         // second update the user with his new request reference
-        return FirebaseModels.createUserAssociation('users', 'requests/' + data.wakeId, requestRef, 'set');
+        return FirebaseModels.createUserAssociation('users', 'requests/' + request.wakeId, requestRef, 'set');
       });
     }
 

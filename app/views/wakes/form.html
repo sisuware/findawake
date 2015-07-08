@@ -18,25 +18,7 @@
     <div class="form-group">
       <textarea class="form-control" Placeholder="Describe your badass boat setup; wake size, overloaded ballasts, loud stereo, etc..." ng-model="wake.boat.description"></textarea>
     </div>
-    <div class="form-group">
-      <div class="well well-sm clearfix">
-        <div class="row">
-          <div ng-show="wake.thumbnail" class="col-sm-3">
-            <img ng-cloak class="img-thumbnail img-responsive" ng-src="{{wake.thumbnail}}" />
-          </div>
-          <div ng-hide="wake.thumbnail" class="col-sm-3">
-            <img ng-cloak ng-show="thumbnail" class="img-thumbnail img-responsive" ng-src="{{thumbnail}}" />
-            <span ng-cloak ng-hide="thumbnail" class="text-center img-thumbnail">
-              <small class="muted">No<br/>Thumbnail</small>
-            </span>
-          </div>
-          <div class="col-sm-9">
-            <input ng-hide="wake.thumbnail" class="form-control" name="boat.thumbnail" type="file" name="thumbnail" file-upload="thumbnail" />
-            <button ng-cloak ng-show="wake.thumbnail" type="button" class="btn btn-sm btn-primary" ng-click="wake.thumbnail=false">Change Picture</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <wake-thumbnail wake="wake"></wake-thumbnail>
     <div class="form-group">
       <div class="checkbox">
         <label>

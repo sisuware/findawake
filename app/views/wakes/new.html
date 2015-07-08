@@ -1,17 +1,21 @@
-<div class="container">
-  <div class="page-header text-center">
-    <h2>Your wake belongs here!</h2>
-    <p class="lead">List your boat to connect with riders who need a wake to ride.</p>
+<div class="sectional color1a">
+  <div class="container text-center animated fadeInDown">
+    <h1>Share A Wake</h1>
+    <h2>List your boat to connect with riders who need a wake to ride.</h2>
   </div>
-  <form name="newWake" class="animated fadeIn">
-    <ng-include src="'/views/wakes/form.html'"></ng-include>
-    <div class="row form-group clearfix">
-      <div class="col-md-9 text-right">
-        <small class="muted">By clicking "Save & Continue", you confirm that<br/>you accept the Terms of Service & Privacy Policy.</small>
+</div>
+<div class="sectional">
+  <div class="container">
+    <form name="newWake" class="animated fadeIn">
+      <ng-include src="'/views/wakes/form.html'"></ng-include>
+      <div class="row form-group clearfix">
+        <div class="col-md-9 text-right">
+          <small class="muted">By clicking "Save & Continue", you confirm that<br/>you accept the Terms of Service & Privacy Policy.</small>
+        </div>
+        <div class="col-md-3 text-right">
+          <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="submit()" ng-disabled="newWake.$invalid">Save & Continue</button>
+        </div>
       </div>
-      <div class="col-md-3 text-right">
-        <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="submit()" ng-disabled="newWake.$invalid">Save & Continue</button>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

@@ -64,26 +64,18 @@
     }
 
     $routeProvider
-      .when('/wakes', {
+      .when('/wakes/find', {
         templateUrl: '/views/wakes/index.html', 
         controller: 'WakesIndexController',
         authRequired: false,
         resolve: {
           wakes: wakesResolve
         }
-        // redirectTo: function(){
-        //   var str = location.hash.substring(1);
-        //   if(str){
-        //     return str.replace('!','');
-        //   } else {
-        //     return '/';
-        //   }
-        // }
       })
-      .when('/wakes/new', {
+      .when('/wakes/share', {
         templateUrl: '/views/wakes/new.html', 
         controller: 'WakesNewController',
-        authRequired: false,
+        authRequired: true,
         resolve: {
           auth: authResolve
         }
@@ -162,7 +154,7 @@
         }
       })
       .otherwise({
-        redirectTo: '/wakes'
+        redirectTo: '/wakes/find'
       });
   }
 

@@ -6,7 +6,7 @@
     .directive('avatar', avatar);
 
   function avatar() {
-    var _html = '<img ng-cloak ng-show="profile.avatar" class="animated fadeIn" ng-class="avatarStyle()" ng-src="{{avatarUrl(profile.avatar)}}" />';
+    var _html = '<img ng-cloak ng-show="avatarId" class="animated fadeIn" ng-class="avatarStyle()" ng-src="{{avatarUrl()}}" />';
 
     var directive = {
       template: _html,
@@ -22,14 +22,20 @@
       $scope.avatarUrl = avatarUrl;
       $scope.avatarStyle = avatarStyle;
 
+      $attrs.$observe('avatar', function(value){
+        console.log(value);
+        if(!value) { return false; }
+        $scope.avatarId = value;
+      });
+
       function avatarStyle() {
         return 'img-' + style;
       }
 
-      function avatarUrl(id) {
-        if(!id) { return false; }
+      function avatarUrl() {
+        if(!$scope.avatarId) { return false; }
 
-        return 'http://i.imgur.com/' + id + size + '.jpg';
+        return 'http://i.imgur.com/' + $scope.avatarId + size + '.jpg';
       }
     }
   }
