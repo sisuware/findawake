@@ -69,6 +69,7 @@
 
 @1pxdeep-default-button-color:      @color1b;
 @1pxdeep-bg:                        @white;
+@highlight:                         lighten(@1pxdeep-bg,6%);
 @body-bg:                           @white;
 
 @sectional-padding-top:             90px;
@@ -872,9 +873,13 @@ h1, h2, h3, h4, h5, h6,
 
     .thumbnail-color(@color) {
         background-color:@color;
-
+        
+        &.active {
+            border-color:darken(@color,4%); 
+        }
         .caption {
             .contrast(@color);
+            text-decoration: none;
         }
     }
 
@@ -884,6 +889,7 @@ h1, h2, h3, h4, h5, h6,
     &.color2 {.thumbnail-color(@color2b);}
     &.color3 {.thumbnail-color(@color3b);}
     &.color4 {.thumbnail-color(@color4b);}
+    &.highlight {.thumbnail-color(@highlight);}
 }
 
 //form
@@ -1134,6 +1140,7 @@ table {
     &.color2 { .table-color(@color2b);}
     &.color3 { .table-color(@color3b);}
     &.color4 { .table-color(@color4b);}
+    &.highlight { .table-color(@highlight);}
 }
 
 //hr
@@ -1505,7 +1512,7 @@ hr {
     .sectional-color(@1pxdeep-bg);
 
     &.monochrome {.sectional-color(greyscale(@color1));}
-    &.highlight {.sectional-color(lighten(@1pxdeep-bg,6%));}
+    &.highlight {.sectional-color(@highlight);}
 
     &.color1 {.sectional-color(@color1);}
     &.color1a {.sectional-color(@color1a);}

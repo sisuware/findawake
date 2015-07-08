@@ -17,8 +17,7 @@
       get: get,
       remove: removeWake,
       create: createWake,
-      updateLocation: updateLocation,
-      getDistance: getDistance
+      updateLocation: updateLocation
     };
 
     return service;
@@ -54,13 +53,6 @@
     function updateLocation(wake) {
       /*jshint camelcase: false */
       //return FirebaseModels.createUserAssociation('locations', wake.location.administrative_area_level_2, wake.location.administrative_area_level_1, wake.id, 'push');
-    }
-
-    function getDistance(current, target) {
-      var fromLatLng = new google.maps.LatLng(current.lat, current.lng);
-      var toLatlng = new google.maps.Latlng(target.lat, target.lng);
-
-      return Math.round(google.maps.geometry.spherical.computeDistanceBetween(fromLatLng, toLatlng) * 0.000621371192);
     }
 
     function _handleError(error) {

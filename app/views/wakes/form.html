@@ -49,57 +49,15 @@
     <h4>Type of Wakes. <span class="label label-info">Public</span></h4>
     <p>What type of wakes can your boat create? Select from wakesurfing, wakeboarding, and wakeskating. </p>
   </div>
-  <div class="col-md-6">
-    <div class="row">
-      <div class="col-sm-4" ng-repeat="type in wake.types">
-        <a href="" class="thumbnail board-thumbnail" ng-class="{true: 'active'}[type.selected]" ng-click="type.selected = !type.selected">
-          <span class="boarding-icons boarding-icons-{{type.name}}" ng-class="{true: type.name+'-active'}[type.selected]"></span>
-          <p class="text-center">{{type.name}}</p>
-        </a>
-      </div>
-    </div>
-  </div>
+  <div class="col-md-6" wake-types wake="wake"></div>
 </div>
 <hr>
 <div class="row form-group clearfix">
   <div class="col-md-6">
     <h4>Boating Schedule. <span class="label label-info">Public</span></h4>
-    <p>Approximately how often would do you go boating?</p>
+    <p>What days would you be willing to share your wake?</p>
   </div>
-  <div class="col-md-6 table-responsive">
-    <table class="table table-condensed">
-      <thead>
-        <tr>
-          <th>Day</th>
-          <th>From</th>
-          <th>To</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="schedule in wake.schedules">
-          <td>{{schedule.day}}</td>
-          <td>{{schedule.from.hour}}{{schedule.from.period}}</td>
-          <td>{{schedule.to.hour}}{{schedule.to.period}}</td>
-          <td><button class="btn btn-sm btn-default" ng-click="removeSchedule($index)"><i class="fa fa-lg fa-times-circle"></i></button></td>
-        </tr>
-        <tr class="info" ng-form="scheduleForm" ng-init="schedule = {}">
-          <td class="col-sm-4">
-            <select class="form-control input-sm" ng-model="schedule.day" name="day" ng-options="day as day for day in days" required></select>
-          </td>
-          <td class="col-sm-4 form-inline">
-            <select class="form-control input-sm" ng-model="schedule.from.hour" name="fromHour" ng-options="hour as hour for hour in hours" required></select>
-            <select class="form-control input-sm" ng-model="schedule.from.period" name="fromPeriod" ng-options="period as period for period in timePeriods" required></select>
-          </td>
-          <td class="col-sm-4 form-inline">
-            <select class="form-control input-sm" ng-model="schedule.to.hour" name="toHour" ng-options="hour as hour for hour in hours" required></select>
-            <select class="form-control input-sm" ng-model="schedule.to.period" name="toPeriod" ng-options="period as period for period in timePeriods" required></select>
-          </td>
-          <td><button type="submit" class="btn btn-info btn-sm" ng-click="addSchedule(schedule)" ng-disabled="scheduleForm.$invalid"><i class="fa fa-lg fa-plus"></i></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <div class="col-md-6 table-responsive" wake-schedule wake="wake"></div>
 </div>
 <hr>
 <div class="row form-group clearfix">
@@ -108,47 +66,6 @@
     <p>What's the general location of your boating activities?</p>
     <p class="text-muted">NOTE: This is not the exact location of your house or boat, but the lake or river where you primarily go boating.</p>
   </div>
-  <div class="col-md-6">
-    <div class="form-group" ng-cloak ng-show="wake.location">
-      <div class="well well-sm">
-        <div class="row clearfix">
-          <div class="col-xs-6">
-            <h5><i class="fa fa-map-marker"></i> {{wake.location.formatted}} <span class="label label-info">Verified</span></h5>
-          </div>
-          <div class="col-xs-6 text-right">
-            <button class="btn btn-sm btn-default" ng-click="wake.location = null"><i class="fa fa-lg  fa-times-circle"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="form-group" ng-hide="wake.location">
-      <div class="row">
-        <div class="col-xs-4">
-          <input type="text" class="form-control" Placeholder="City" ng-model="location.city" ng-change="validateLocation()"/>
-        </div>
-        <div class="col-xs-2">
-          <input type="text" class="form-control" Placeholder="State" ng-model="location.state" ng-change="validateLocation()"/>
-        </div>
-        <div class="col-xs-3">
-          <input type="text" class="form-control" Placeholder="Zipcode" ng-model="location.zipcode" ng-change="validateLocation()"/>
-        </div>
-        <div class="col-xs-3">
-          <input type="text" class="form-control" Placeholder="Country" ng-model="location.country" ng-change="validateLocation()"/>
-        </div>
-      </div>
-    </div>
-    <div ng-cloak class="text-center" ng-show="validating">
-      <small class="muted">Verifying the location...</small>
-    </div>
-    <div class="form-group" ng-show="validatedLocations">
-      <b>Please select a verified location:</b>
-      <div class="radio" ng-repeat="l in validatedLocations">
-        <label>
-          <input type="radio" name="validatedLocations" id="validatedLocations" ng-value="l" ng-model="wake.location">
-          {{l.formatted}}
-        </label>
-      </div>
-    </div>
-  </div>
+  <div class="col-md-6" wake-location wake="wake"></div>
 </div>
 <hr>
