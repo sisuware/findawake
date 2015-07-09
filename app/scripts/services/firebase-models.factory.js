@@ -13,7 +13,9 @@
     var service = {
       createRef: createRef,
       createUserAssociation: createUserAssociation,
-      removeUserAssociation: removeUserAssociation
+      removeUserAssociation: removeUserAssociation,
+      createLocationAssociation: createLocationAssociation,
+      removeLocationAssociation: removeLocationAssociation
     };
 
     return service;
@@ -35,11 +37,44 @@
     }
 
     function createUserAssociation(root, target, ref, method){
-      _auth();
       var dfr = $q.defer();
 
-      firebaseRef(root + '/' + _currentUser.uid + '/' + target)[method](ref, function(err){
-        if(err){
+      _auth().then(function(user){
+        firebaseRef(root + '/' + user.uid + '/' + target)[method](ref, function(err){
+          if(err){
+            dfr.reject(err);
+          } else {
+            dfr.resolve();
+          }
+        });
+      }, function(err){
+        dfr.reject(err);
+      });
+
+      return dfr.promise; 
+    }
+
+    function createLocationAssociation(state, city, ref) {
+      var dfr = $q.defer();
+      var path = ['locations', state, city].join('/');
+      
+      firebaseRef(path).push(ref, function(err){
+        if (err) {
+          dfr.reject(err);
+        } else {
+          dfr.resolve();
+        }
+      });
+
+      return dfr.promise;
+    }
+
+    function removeLocationAssociation(state, city, ref) {
+      var dfr = $q.defer();
+      var path = ['locations', state, city, ref].join('/');
+      
+      firebaseRef(path).remove(function(err){
+        if (err) {
           dfr.reject(err);
         } else {
           dfr.resolve();
@@ -50,15 +85,18 @@
     }
 
     function removeUserAssociation(root, target, ref){
-      _auth();
       var dfr = $q.defer();
-
-      firebaseRef(root + '/' + _currentUser.uid + '/' + target + '/' + ref).remove(function(err){
-        if(err){
-          dfr.reject(err);
-        } else {
-          dfr.resolve();
-        }
+      
+      _auth().then(function(user) {
+        firebaseRef(root + '/' + user.uid + '/' + target + '/' + ref).remove(function(err){
+          if(err){
+            dfr.reject(err);
+          } else {
+            dfr.resolve();
+          }
+        });
+      }, function(err) {
+        dfr.reject(err);
       });
 
       return dfr.promise;

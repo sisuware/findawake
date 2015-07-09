@@ -56,7 +56,7 @@
         // {name:'wakeskating', selected:false}
       // ];
 
-      var types = ['wakeboarding','wakesurfing','wakeskating']
+      var types = ['wakeboarding','wakesurfing','wakeskating'];
       return types;
     }
   }

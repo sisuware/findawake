@@ -1,4 +1,4 @@
-/*global google:false */
+/*jshint camelcase: false */
 
 (function(){
   'use strict';
@@ -10,14 +10,12 @@
   Wakes.$inject = ['syncData', 'FirebaseModels','$q'];
 
   function Wakes(syncData, FirebaseModels, $q) {
-    
-
     var service = {
       query: query,
       get: get,
       remove: removeWake,
       create: createWake,
-      updateLocation: updateLocation
+      update: updateWake
     };
 
     return service;
@@ -30,29 +28,36 @@
       return syncData('wakes/' + id).$loaded();
     }
 
+    function updateWake(wake) {
+
+    }
+
     function removeWake(wake) {
       return $q.all([
         FirebaseModels.removeUserAssociation('users', 'wakes', wake.id),
-        FirebaseModels.removeUserAssociation('profiles', 'wakes', wake.id)
+        FirebaseModels.removeUserAssociation('profiles', 'wakes', wake.id),
+        FirebaseModels.removeLocationAssociation(_state(wake), _city(wake), wake.id)
       ]).then(function(){
         return wake.$remove();
       });
     }
 
     function createWake(wake) {
-      /*jshint camelcase: false */
       return FirebaseModels.createRef('wakes', wake).then(function(wakeRef){
         return $q.all([
           FirebaseModels.createUserAssociation('users', 'wakes', wakeRef, 'push'),
           FirebaseModels.createUserAssociation('profiles', 'wakes', wakeRef, 'push'),
-          //FirebaseModels.createUserAssociation('locations', wake.location.administrative_area_level_2, wake.location.administrative_area_level_1, wakeRef, 'push')
+          FirebaseModels.createLocationAssociation(_state(wake), _city(wake), wakeRef)
         ]);
       });
     }
 
-    function updateLocation(wake) {
-      /*jshint camelcase: false */
-      //return FirebaseModels.createUserAssociation('locations', wake.location.administrative_area_level_2, wake.location.administrative_area_level_1, wake.id, 'push');
+    function _city(wake) {
+      return wake.location.locality || wake.location.administrative_area_level_2;
+    }
+
+    function _state(wake) {
+      return wake.location.administrative_area_level_1;
     }
 
     function _handleError(error) {

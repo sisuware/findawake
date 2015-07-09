@@ -10,18 +10,18 @@
 	function wakeThumbnail(Imgur) {
     var _html = '<div class="row form-group">';
         _html += '  <div ng-cloak ng-show="errors" class="alert alert-danger"><strong>{{errors}}</strong></div>';
-        _html += '  <div class="col-sm-3">';
+        _html += '  <div class="col-xs-3">';
         _html += '    <span avatar="{{wake.thumbnail}}" size="t" style="rounded"></span>';
         _html += '    <div ng-cloak ng-hide="wake.thumbnail" class="img-thumbnail text-center">';
         _html += '      <small ng-hide="uploadingThumbnail">No<br/>Thumbnail</small>';
         _html += '      <i ng-cloak ng-show="uploadingThumbnail" class="fa fa-spinner fa-spin"></i>';
         _html += '    </div>';
         _html += '  </div>';
-        _html += '  <div ng-cloak ng-show="wake.thumbnail && !existingThumbnail" class="col-sm-9 text-right">';
+        _html += '  <div ng-cloak ng-show="wake.thumbnail && !existingThumbnail" class="col-xs-9 text-right">';
         _html += '    <button type="button" class="btn btn-sm btn-danger" ng-click="deleteThumbnail()"><i class="fa fa-trash-o"></i></button>';
         _html += '    <button type="button" class="btn btn-sm btn-info" ng-click="changeThumbnail()">Change</button>';
         _html += '  </div>';
-        _html += '  <div ng-cloak ng-hide="wake.thumbnail && !existingThumbnail" class="col-sm-9" ng-form="thumbnailForm">';
+        _html += '  <div ng-cloak ng-hide="wake.thumbnail && !existingThumbnail" class="col-xs-9" ng-form="thumbnailForm">';
         _html += '    <div class="form-group input-group">';
         _html += '      <input type="file" class="form-control input-sm" file-upload="thumbnail" required name="thumbnail"/>';
         _html += '      <span class="input-group-btn">';
