@@ -3,11 +3,11 @@
 
   angular
     .module('findAWake')
-    .directive('wakeSchedule', wakeSchedule);
+    .directive('wakeScheduleForm', wakeScheduleForm);
 
-  wakeSchedule.$inject = ['WakeSettings'];
+  wakeScheduleForm.$inject = ['WakeSettings'];
 
-  function wakeSchedule(WakeSettings) {
+  function wakeScheduleForm(WakeSettings) {
     var _html  = '<table class="table table-condensed table-striped highlight">';
         _html += '  <thead>';
         _html += '    <tr>';

@@ -14,7 +14,7 @@
         _html += '<div class="row form-group">';
         _html += '  <div ng-cloak ng-show="errors" class="alert alert-danger"><strong>{{errors}}</strong></div>';
         _html += '  <div class="col-sm-4">';
-        _html += '    <span avatar="{{profile.avatar}}" size="m" style="rounded"></avatar>';
+        _html += '    <img avatar="{{profile.avatar}}" size="m" style="rounded" />';
         _html += '    <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail">';
         _html += '      <i ng-hide="uploadingAvatar" class="fa fa-user"></i>';
         _html += '      <i ng-cloak ng-show="uploadingAvatar" class="fa fa-spinner fa-spin"></i>';

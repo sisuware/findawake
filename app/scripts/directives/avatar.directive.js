@@ -6,36 +6,41 @@
     .directive('avatar', avatar);
 
   function avatar() {
-    var _html = '<img ng-cloak ng-show="avatarId" class="animated fadeIn" ng-class="avatarStyle()" ng-src="{{avatarUrl()}}" />';
-
     var directive = {
-      template: _html,
-      link: avatarController
+      link: avatarController,
+      restrict: 'AE'
     };
 
     return directive;
 
+    /**
+      * Size:
+      * s Small Square  90x90
+      * b Big Square  160x160
+      * t Small Thumbnail 160x160 (Keeps image proportions)
+      * m Medium Thumbnail  320x320 (Keeps image proportions)
+      * l Large Thumbnail 640x640 (Keeps image proportions)
+      * h Huge Thumbnail  1024x1024 (Keeps image proportions)
+      */
     function avatarController($scope, $element, $attrs) {
       var size = $attrs.size || 's';
       var style = $attrs.style || 'circle';
 
-      $scope.avatarUrl = avatarUrl;
-      $scope.avatarStyle = avatarStyle;
-
       $attrs.$observe('avatar', function(value){
-        console.log(value);
         if(!value) { return false; }
-        $scope.avatarId = value;
+        $attrs.$set('src', _imgurUrl(value));
       });
 
-      function avatarStyle() {
+      if (style && style !== 'false') {
+        $attrs.$addClass(_thumbnailStyle())
+      }
+
+      function _thumbnailStyle() {
         return 'img-' + style;
       }
 
-      function avatarUrl() {
-        if(!$scope.avatarId) { return false; }
-
-        return 'http://i.imgur.com/' + $scope.avatarId + size + '.jpg';
+      function _imgurUrl(value) {
+        return 'http://i.imgur.com/' + value + size + '.jpg';
       }
     }
   }

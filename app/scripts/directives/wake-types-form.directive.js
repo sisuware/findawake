@@ -3,11 +3,11 @@
 
   angular
     .module('findAWake')
-    .directive('wakeTypes', wakeTypes);
+    .directive('wakeTypesForm', wakeTypesForm);
 
-  wakeTypes.$inject = ['WakeSettings'];
+  wakeTypesForm.$inject = ['WakeSettings'];
 
-  function wakeTypes(WakeSettings) {
+  function wakeTypesForm(WakeSettings) {
     var _html  = '<div class="row">';
         _html += '  <div class="col-sm-4" ng-repeat="type in wakeTypes">';
         _html += '    <a href="" class="thumbnail board-thumbnail" ng-class="wake.types[type] ? \'active color3\':\'highlight\'" ng-click="wake.types[type] = !wake.types[type]">';

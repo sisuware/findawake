@@ -3,11 +3,11 @@
 
   angular
     .module('findAWake')
-    .directive('wakeLocation', wakeLocation);
+    .directive('wakeLocationForm', wakeLocationForm);
 
-  wakeLocation.$inject = ['LocationGeocode'];
+  wakeLocationForm.$inject = ['LocationGeocode'];
 
-  function wakeLocation(LocationGeocode) {
+  function wakeLocationForm(LocationGeocode) {
     /* jshint maxstatements:43 */
     var _html  = '<div class="form-group" ng-cloak ng-show="wake.location">';
         _html += '  <div class="row clearfix">';

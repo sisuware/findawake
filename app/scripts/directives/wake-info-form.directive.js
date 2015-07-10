@@ -3,11 +3,11 @@
 
   angular
     .module('findAWake')
-    .directive('wakeInfo', wakeInfo);
+    .directive('wakeInfoForm', wakeInfoForm);
 
-  wakeInfo.$inject = ['WakeSettings'];
+  wakeInfoForm.$inject = ['WakeSettings'];
 
-  function wakeInfo(WakeSettings) {
+  function wakeInfoForm(WakeSettings) {
     var _html  = '<div class="row">';
         _html += '  <div class="col-sm-3 form-group" ng-class="inputFeedback(wake.boat.year)">';
         _html += '    <select class="form-control" ng-model="wake.boat.year" name="boat.year" ng-options="year as year for year in years" required>';

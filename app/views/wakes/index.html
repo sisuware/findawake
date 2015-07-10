@@ -14,19 +14,6 @@
     </h2>      
   </form>
   <div class="row clearfix animated fadeInDown">
-    <div class="col-sm-6 col-md-3 animated fadeIn" ng-repeat="wake in wakes">
-      <a class="thumbnail" ng-href="/wakes/{{wake.id}}">
-        <div class="wake-thumbnail pattern-pixelweave">
-          <div class="shadow-overlay">
-            <span>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}}</span>
-          </div>
-          <img ng-src="{{wake.thumbnail}}" />
-        </div>
-        <div class="caption">
-          <small class="muted"><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small>
-          <span ng-cloak class="label pull-right" ng-show="wake.location.distance">{{wake.location.distance}} miles</span>
-        </div>
-      </a>
-    </div>
+    <div class="col-sm-6 col-md-3 animated fadeIn" ng-repeat="wake in wakes" wake-thumbnail></div>
   </div>  
 </div>
