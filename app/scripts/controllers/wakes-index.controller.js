@@ -9,10 +9,7 @@
 
   function WakesIndexController($scope, wakes, LocationGeocode) {
     $scope.wakes = wakes;
-    LocationGeocode.states().then(function(data){
-      console.log(data);
-    });
-
+    
     /*
     $scope.distances = ['5','15','25','50','100','150'];
     $scope.selectedDistance = '50';
