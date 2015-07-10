@@ -9,7 +9,7 @@
 
   function Requests(syncData, FirebaseModels, $q) {
     function query(id) {
-      return syncData('requests/' + id).$loaded();
+      return syncData.object('requests/' + id).$loaded();
     }
 
     function get(id) {

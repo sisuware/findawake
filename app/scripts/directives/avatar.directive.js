@@ -32,7 +32,7 @@
       });
 
       if (style && style !== 'false') {
-        $attrs.$addClass(_thumbnailStyle())
+        $attrs.$addClass(_thumbnailStyle());
       }
 
       function _thumbnailStyle() {

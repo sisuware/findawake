@@ -5,14 +5,23 @@
     .module('findAWake')
     .factory('LocationGeocode', locationGeocode);
 
-  locationGeocode.$inject = ['$q', 'Geocoder', '$timeout'];
+  locationGeocode.$inject = ['$q', 'Geocoder', '$timeout','syncData'];
 
-  function locationGeocode($q, Geocoder, $timeout) {
+  function locationGeocode($q, Geocoder, $timeout, syncData) {
     var service = {
-      validate: validate
+      validate: validate,
+      states: states
     };
 
     return service;
+
+    function states() {
+      return syncData.array('locations').$loaded();
+    }
+
+    function cities(state) {
+
+    }
 
     function validate(address) {
       var dfr = $q.defer();

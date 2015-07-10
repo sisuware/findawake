@@ -6,7 +6,7 @@
     .directive('wakeThumbnail', wakeThumbnail);
 
   function wakeThumbnail() {
-    var _html  = '<a class="thumbnail" ng-href="/wakes/{{wake.id}}">';
+    var _html  = '<a class="thumbnail highlight" ng-href="/wakes/{{wake.id}}">';
         _html += '  <div class="wake-thumbnail pattern-pixelweave">';
         _html += '    <div class="shadow-overlay">';
         _html += '      <span>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}}</span>';

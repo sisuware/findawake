@@ -21,11 +21,11 @@
     return service;
 
     function query() {
-      return syncData('wakes').$loaded();
+      return syncData.array('wakes').$loaded();
     }
 
     function get(id) {
-      return syncData('wakes/' + id).$loaded();
+      return syncData.object('wakes/' + id).$loaded();
     }
 
     function updateWake(wake) {
