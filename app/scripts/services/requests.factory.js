@@ -22,7 +22,7 @@
       return syncData.array('requests/' + id).$loaded();
     }
 
-    function get(id) {
+    function get(request) {
       // if(_.isUndefined(auth) || _.isEmpty(auth)){ return false; }
       // if(_.isObject(auth.requests)){
       //   return !_.isUndefined(auth.requests[wake.id]);
@@ -30,6 +30,7 @@
       // if(_.isArray(auth.requests)){
       //   return _.indexOf(auth.requests, wake.id) === -1;
       // }
+      return syncData.object('requests/' + request.wakeId + '/' + request.id).$loaded();
     }
 
     function createRequest(request) {  
@@ -40,16 +41,17 @@
       });
     }
 
-    function removeRequest() {
-
-    }
-
-    function acceptRequest() {
-
-    }
-
-    function declineRequest() {
+    function acceptRequest(request) {
+      return get(request).then(function(ref){
+        ref.accepted = true;
+        ref.declined = false;
+        return ref.$save();  
+      });
       
+    }
+
+    function declineRequest(request) {
+      return FirebaseModels.createRef('requests/' + request.wakeId + '/declined', request.id);
     }
 
     function _handleError(error) {
