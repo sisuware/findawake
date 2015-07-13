@@ -11,10 +11,10 @@
 		var _html  = '<div class="panel">';
 				_html += '	<div class="panel-heading color1a">';
 				_html += ' 		<div class="row clearfix">';
-				_html += '			<div class="col-sm-8">';
+				_html += '			<div class="col-md-8">';
 				_html += '				<h3 class="panel-title">{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h3>';
 				_html += '			</div>';
-				_html += '			<div class="col-sm-4 text-right">';
+				_html += '			<div class="col-md-4 text-right">';
 				_html += '				<a ng-cloak ng-show="authorized()" ng-href="/wakes/{{wake.id}}/delete" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Delete</a>';
 				_html += '				<a ng-cloak ng-show="authorized()" ng-href="/wakes/{{wake.id}}/edit" class="btn btn-xs btn-info"><i class="fa fa-pencil"></i> Edit</a>';
 				_html += '			</div>';

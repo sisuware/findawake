@@ -42,16 +42,27 @@
     }
 
     function acceptRequest(request) {
-      return get(request).then(function(ref){
-        ref.accepted = true;
-        ref.declined = false;
-        return ref.$save();  
+      return FirebaseModels.createRef('accepted_requests/' + request.wakeId, request.id).then(function(acceptedRef){
+        get(request).then(function(userRequestRef){
+          userRequestRef.accepted = acceptedRef;
+          userRequestRef.declined = false;
+          return userRequestRef.$save();
+        });  
       });
-      
     }
 
     function declineRequest(request) {
-      return FirebaseModels.createRef('requests/' + request.wakeId + '/declined', request.id);
+      return FirebaseModels.createRef('declined_requests/' + request.wakeId, request.id).then(function(declinedRef){
+        get(request).then(function(userRequestRef){
+          userRequestRef.declined = declinedRef;
+          userRequestRef.accepted = false;
+          return userRequestRef.$save();
+        });  
+      });
+    }
+
+    function _resetAcceptedDeclined() {
+      
     }
 
     function _handleError(error) {
