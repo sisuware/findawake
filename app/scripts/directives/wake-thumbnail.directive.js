@@ -5,7 +5,9 @@
     .module('findAWake')
     .directive('wakeThumbnail', wakeThumbnail);
 
-  function wakeThumbnail() {
+  wakeThumbnail.$inject = ['Wakes'];
+
+  function wakeThumbnail(Wakes) {
     var _html  = '<a class="thumbnail highlight" ng-href="/wakes/{{wake.id}}">';
         _html += '  <div class="wake-thumbnail pattern-pixelweave">';
         _html += '    <div class="shadow-overlay">';
@@ -20,9 +22,22 @@
         _html += '</a>';
     
     var directive = {
-      template: _html
+      template: _html,
+      controller: wakeThumbnailController
     };
 
+    wakeThumbnailController.$inject = ['$scope', '$element', '$attrs'];
+
     return directive;
+
+    function wakeThumbnailController($scope, $element, $attrs) {
+      $attrs.$observe('wakeId', function(value){
+        if (!value) { return false; }
+        
+        Wakes.get(value).then(function(data){
+          $scope.wake = data;
+        });
+      });
+    }
   }
 })();

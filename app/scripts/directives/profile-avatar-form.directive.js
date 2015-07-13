@@ -3,11 +3,11 @@
 
   angular
     .module('findAWake')
-    .directive('profileAvatar', profileAvatar);
+    .directive('profileAvatarForm', profileAvatarForm);
 
-  profileAvatar.$inject = ['Imgur', 'Users'];
+  profileAvatarForm.$inject = ['Imgur', 'Users'];
   
-  function profileAvatar(Imgur, Users) {
+  function profileAvatarForm(Imgur, Users) {
     var _html =  '<div class="row">';
         _html += '  <div class="col-sm-12"><h4>Avatar</h4></div>';
         _html += '</div>';
@@ -21,8 +21,8 @@
         _html += '    </div>';
         _html += '  </div>';
         _html += '  <div ng-cloak ng-show="profile.avatar && !existingAvatar" class="col-sm-8 text-right">';
-        _html += '    <button type="button" class="btn btn-sm btn-danger" ng-click="deleteAvatar()"><i class="fa fa-trash-o"></i></button>';
-        _html += '    <button type="button" class="btn btn-sm btn-info" ng-click="changeAvatar()">Change</button>';
+        _html += '    <button type="button" class="btn btn-xs btn-danger" ng-click="deleteAvatar()"><i class="fa fa-trash-o"></i></button>';
+        _html += '    <button type="button" class="btn btn-xs btn-info" ng-click="changeAvatar()">Change</button>';
         _html += '  </div>';
         _html += '  <div ng-cloak ng-hide="profile.avatar && !existingAvatar" class="col-sm-8" ng-form="avatarForm">';
         _html += '    <div class="form-group input-group">';
@@ -31,7 +31,7 @@
         _html += '        <button class="btn btn-sm btn-success" ng-disabled="!avatar || uploadingAvatar" ng-click="uploadAvatar()" ng-bind="uploadingAvatar ? \'Uploading...\':\'Upload\'"></button>';
         _html += '      </span>';
         _html += '    </div>';
-        _html += '    <button ng-cloak ng-show="existingAvatar" type="button" class="btn btn-sm btn-warning" disabled="uploadingAvatar" ng-click="cancelChangeAvatar()">Cancel</button>';
+        _html += '    <button ng-cloak ng-show="existingAvatar" type="button" class="btn btn-xs btn-warning" ng-disabled="{{uploadingAvatar}}" ng-click="cancelChangeAvatar()">Cancel</button>';
         _html += '  </div>';
         _html += '</div>';
 

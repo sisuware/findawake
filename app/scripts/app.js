@@ -35,6 +35,7 @@
     wakesResolve.$inject = ['Wakes'];
     authUserResolve.$inject = ['SimpleLogin', 'Users'];
     wakeResolve.$inject = ['Wakes', '$route'];
+    wakeRequestsResolve.$inject = ['Requests', '$route'];
     profileResolve.$inject = ['Users', '$route'];
 
     $locationProvider.html5Mode(true);
@@ -57,6 +58,10 @@
 
     function wakeResolve(Wakes, $route){
       return Wakes.get($route.current.params.id);
+    }
+
+    function wakeRequestsResolve(Requests, $route) {
+      return Requests.query($route.current.params.id);
     }
 
     function profileResolve(Users, $route){
@@ -106,7 +111,33 @@
           wake: wakeResolve
         }
       })
-      .when('/profile/:id/edit', {
+      .when('/wakes/:id/requests', {
+        templateUrl: '/views/wakes/requests.html',
+        controller: 'WakesRequestsController',
+        authRequired: true,
+        resolve: {
+          auth: authResolve,
+          wake: wakeResolve,
+          requests: wakeRequestsResolve
+        }
+      })
+      .when('/account/:id/wakes', {
+        templateUrl: '/views/user/wakes.html',
+        controller: 'UsersWakesController',
+        authRequired: true,
+        resolve: {
+          profile: authUserResolve
+        }
+      })
+      .when('/account/:id/requests', {
+        templateUrl: '/views/user/requests.html',
+        controller: 'UsersRequestsController',
+        authRequired: true,
+        resolve: {
+          profile: authUserResolve
+        }
+      })
+      .when('/account/:id/edit', {
         templateUrl: '/views/user/edit.html', 
         controller: 'UsersEditController', 
         authRequired: true,

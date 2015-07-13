@@ -1,7 +1,7 @@
 <div class="sectional color1a clearfix sectional-sm">
-  <div class="container animated fadeInDown">
-    <div class="col-sm-9">
-      <h2><img avatar="{{profile.avatar}}" /> {{profile.name}}</h2>
+  <div class="container animated fadeIn">
+    <div class="col-sm-12">
+      <h2><img avatar="{{profile.avatar}}" /> {{profile.name}} <small ng-show="profile.location"><i class="fa fa-map-marker"></i> {{profile.location}}</small></h2>
     </div>
   </div>
 </div>
@@ -18,14 +18,13 @@
       </ol>
     </div>
   </div> -->
-  <legend>
-    <ul class="nav nav-lines">
-      <li class="active"><a href="/my/account">Profile</a></li>
-      <li class="active"><a href="/my/account">Wakes</a></li>
-      <li class="active"><a href="/my/account">Requests</a></li>
-    </ul>
-  </legend>
+
+  
+  
   <div class="row clearfix">
+    <div class="col-sm-12">
+      <h3 class="page-header">Account</h3>
+    </div>
     <div class="col-md-8">
       <div class="form-horizontal">
         <div class="form-group">
@@ -65,8 +64,8 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div profile-avatar profile="profile"></div>
-      <div profile-gear profile="profile"></div>
+      <div profile-avatar-form profile="profile"></div>
+      <div profile-gear-form profile="profile"></div>
     </div>
     <div class="col-sm-12 text-right form-group">
       <hr/>

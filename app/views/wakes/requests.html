@@ -1,0 +1,19 @@
+<div class="sectional sectional-sm color1a clearfix">
+  <div class="container animated fadeIn">
+    <div class="col-sm-23">
+      <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
+    </div>
+  </div>
+</div>
+<div class="sectional">
+  <div class="sectional-title">ride requests</div>
+  <div ng-cloak ng-hide="requests.length" class="container animated fadeIn">
+    <h3 class="text-center">No riders have requested to ride your wake</h3>
+    <p class="lead text-center">Try improving the details about your boat,<br/>such as the description and schedule</p>
+  </div>
+  <div ng-cloak ng-show="requests.length" class="container">
+    <div class="row clearfix">
+      <div ng-repeat="request in requests" class="col-sm-6 col-md-3" request-panel request="request"></div>
+    </div>
+  </div>
+</div>

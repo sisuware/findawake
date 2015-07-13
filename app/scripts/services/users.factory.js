@@ -21,13 +21,13 @@
     
     function get(id){
       if (!id) { return false; }
-      return syncData.object('users/' + id);
+      return syncData.object('users/' + id).$loaded();
     }
 
     function getProfile(id){
       if(!id){ return false; }
       if(!profiles[id]){
-        profiles[id] = syncData.object('profiles/' + id);
+        profiles[id] = syncData.object('profiles/' + id).$loaded();
       }
       return profiles[id];
     }

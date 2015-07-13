@@ -5,53 +5,25 @@
     .module('findAWake')
     .controller('WakesEditController', WakesEditController);
 
-  WakesEditController.$inject = ['$scope', 'WakeSettings', '$window', 'Imgur', 'Wakes', 'wake', 'auth'];
+  WakesEditController.$inject = ['$scope', 'wake', 'auth', '$location'];
 
-  function WakesEditController($scope, WakeSettings, $window, Imgur, Wakes, wake, auth) {
-    var origWake = angular.copy(wake);
+  function WakesEditController($scope, wake, auth, $location) {
     $scope.auth = auth;
     $scope.wake = wake;
 
-    WakeSettings.init($scope);
+    $scope.update = update;
 
-    if(wake.userId !== auth.id){
-      $window.history.back();
-    }
-
-    $scope.addSchedule = function(schedule){
-      $scope.wake.schedules.push(angular.copy(schedule));
-    };
-
-    $scope.removeSchedule = function(index){
-      $scope.wake.schedules.splice(index, 1);
-    };
-
-    $scope.validateLocation = function(){
-      $scope.validating = true;
-      WakeSettings.validateLocation($scope.location, function(res){
-        $scope.validating = false;
-        $scope.validatedLocations = res;
-      });
-    };
-
-    $scope.update = function(){
+    function update() {
+      $scope.errors = false;
       $scope.saving = true;
-
-      if(origWake.location !== $scope.wake.location) {
-        Wakes.updateLocation($scope.wake);
-      }
-
-      if(!$scope.wake.thumbnail){
-        Imgur.upload($scope.thumbnail).then(function(res){
-          if(res.data){
-            $scope.wake.thumbnail = res.data.link;
-          }
-        }).finally(function(){
-          $scope.wake.$save();
-        });
-      } else {
-        $scope.wake.$save();
-      }    
-    };
+      
+      $scope.wake.$save().then(function(res){
+        //$location.path('/wakes/' + res.id);
+      }, function(res){
+        $scope.errors = res;
+      }).finally(function(){
+        $scope.saving = false;
+      });
+    }
   }
 })();

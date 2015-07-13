@@ -28,7 +28,7 @@
         _html += '        <button class="btn btn-sm btn-success" ng-disabled="!thumbnail || uploadingThumbnail" ng-click="uploadThumbnail()" ng-bind="uploadingThumbnail ? \'Uploading...\':\'Upload\'"></button>';
         _html += '      </span>';
         _html += '    </div>';
-        _html += '    <button ng-cloak ng-show="existingThumbnail" type="button" class="btn btn-sm btn-warning" disabled="uploadingThumbnail" ng-click="cancelChangeThumbnail()">Cancel</button>';
+        _html += '    <button ng-cloak ng-show="existingThumbnail" type="button" class="btn btn-sm btn-warning" ng-disabled="uploadingThumbnail" ng-click="cancelChangeThumbnail()">Cancel</button>';
         _html += '  </div>';
         _html += '</div>';
 

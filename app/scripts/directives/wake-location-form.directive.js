@@ -15,7 +15,7 @@
         _html += '      <h5><i class="fa fa-map-marker"></i> {{wake.location.formatted}} <span class="label label-success">Verified</span></h5>';
         _html += '    </div>';
         _html += '    <div class="col-xs-6 text-right">';
-        _html += '      <button class="btn btn-sm btn-danger" ng-click="removeLocation()"><i class="fa fa-trash-o"></i></button>';
+        _html += '      <button class="btn btn-xs btn-danger" ng-click="removeLocation()"><i class="fa fa-trash-o"></i></button>';
         _html += '    </div>';
         _html += '  </div>';
         _html += '</div>';

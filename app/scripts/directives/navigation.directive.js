@@ -25,11 +25,12 @@
         _html += '      </li>';
         _html += '    </ul>';
         _html += '    <ul class="nav navbar-nav navbar-right animated fadeIn">';      
+        _html += '      <li ng-cloak ng-show="user" ks-active-link active-class="active" active-path="/account/{{user.uid}}/wakes"><a ng-href="/account/{{user.uid}}/wakes">My Wakes</a></li>';
         _html += '      <li class="dropdown" ng-cloak ng-show="user">';
         _html += '        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.password.email"></span> <span class="caret"></span></a>';
         _html += '        <ul class="dropdown-menu" role="menu">';
-        _html += '          <li><a ng-href="/profile/{{user.uid}}">My Profile</a></li>';
-        _html += '          <li><a ng-href="/profile/{{user.uid}}/edit">My Account</a></li>';
+        _html += '          <li><a ng-href="/profile/{{user.uid}}">Public Profile</a></li>';
+        _html += '          <li><a ng-href="/account/{{user.uid}}/edit">My Account</a></li>';
         _html += '          <li class="divider"></li>';
         _html += '          <li><a href="" ng-click="logout()">Logout</a></li>';
         _html += '        </ul>';

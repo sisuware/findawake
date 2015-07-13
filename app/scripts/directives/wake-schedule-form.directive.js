@@ -18,11 +18,11 @@
         _html += '    </tr>';
         _html += '  </thead>';
         _html += '  <tbody>';
-        _html += '    <tr ng-repeat="schedule in wake.schedules">';
-        _html += '      <td>{{schedule.day}}</td>';
-        _html += '      <td>{{schedule.from.hour}}{{schedule.from.period}}</td>';
-        _html += '      <td>{{schedule.to.hour}}{{schedule.to.period}}</td>';
-        _html += '      <td><button class="btn btn-sm btn-danger" ng-click="removeSchedule($index)"><i class="fa fa-trash-o"></i></button></td>';
+        _html += '    <tr ng-repeat="s in wake.schedules">';
+        _html += '      <td>{{s.day}}</td>';
+        _html += '      <td>{{s.from.hour}}{{s.from.period}}</td>';
+        _html += '      <td>{{s.to.hour}}{{s.to.period}}</td>';
+        _html += '      <td><button class="btn btn-xs btn-danger" ng-click="removeSchedule($index)"><i class="fa fa-trash-o"></i></button></td>';
         _html += '    </tr>';
         _html += '    <tr class="info">';
         _html += '      <td class="col-sm-4">';
@@ -36,7 +36,7 @@
         _html += '        <select class="form-control input-sm" ng-model="schedule.to.hour" ng-options="hour as hour for hour in hours"></select>';
         _html += '        <select class="form-control input-sm" ng-model="schedule.to.period" ng-options="period as period for period in timePeriods"></select>';
         _html += '      </td>';
-        _html += '      <td><button type="submit" class="btn btn-success btn-sm" ng-click="addSchedule(schedule)" ng-disabled="isInvalid(schedule)"><i class="fa fa-plus"></i></td>';
+        _html += '      <td><button type="submit" class="btn btn-success btn-xs" ng-click="addSchedule(schedule)" ng-disabled="isInvalid(schedule)"><i class="fa fa-plus"></i></td>';
         _html += '    </tr>';
         _html += '  </tbody>';
         _html += '</table>';
@@ -54,7 +54,7 @@
     return directive;
 
     function wakeScheduleController($scope, $element, $attrs) {
-      $scope.wake.schedules = [];
+      $scope.wake.schedules = $scope.wake.schedules || [];
       $scope.removeSchedule = removeSchedule;
       $scope.addSchedule = addSchedule;
       $scope.isInvalid = isInvalid;

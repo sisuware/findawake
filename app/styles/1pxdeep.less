@@ -70,6 +70,7 @@
 @1pxdeep-default-button-color:      @color1b;
 @1pxdeep-bg:                        @white;
 @highlight:                         lighten(@1pxdeep-bg,6%);
+@monochrome:                        greyscale(@color1);
 @body-bg:                           @white;
 
 @sectional-padding-top:             90px;
@@ -1046,6 +1047,7 @@ code, pre {
     &.color2 { .nav-tabs-color(@color2a);}
     &.color3 { .nav-tabs-color(@color3a);}
     &.color4 { .nav-tabs-color(@color4a);}
+    &.highlight { .nav-tabs-color(@highlight);}
 
 
 }
@@ -1325,6 +1327,8 @@ hr {
     &.color4a { .panel-color(@color4a);}
     &.color4b { .panel-color(@color4b);}
     &.color4c { .panel-color(@color4c);}
+    &.highlight { .panel-color(@highlight);}
+    &.monochrome { .panel-color(@monochrome);}
 }
 
 .panel-heading, .panel-footer {
@@ -1365,6 +1369,8 @@ hr {
     &.color4a { .panel-heading-color(@color4a);}
     &.color4b { .panel-heading-color(@color4b);}
     &.color4c { .panel-heading-color(@color4c);}
+    &.highlight { .panel-heading-color(@highlight);}
+    &.monochrome { .panel-heading-color(@monochrome);}
 }
 
 //carousel
@@ -1493,6 +1499,9 @@ hr {
         padding-top: unit(unit(@sectional-padding-top)/2,px) ;
         padding-bottom: unit(unit(@sectional-padding-bottom)/2,px);
     }
+    &.sectional-nav {
+        padding-bottom: 0px;
+    }
 
     .sectional-title {
         position:absolute;
@@ -1511,7 +1520,7 @@ hr {
 
     .sectional-color(@1pxdeep-bg);
 
-    &.monochrome {.sectional-color(greyscale(@color1));}
+    &.monochrome {.sectional-color(@monochrome);}
     &.highlight {.sectional-color(@highlight);}
 
     &.color1 {.sectional-color(@color1);}

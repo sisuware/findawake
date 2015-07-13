@@ -5,9 +5,9 @@
     .module('findAWake')
     .controller('WakesRideController', WakesRideController);
 
-  WakesRideController.$inject = ['$scope', 'wake', 'Wakes', '$location', 'auth'];
+  WakesRideController.$inject = ['$scope', 'wake', 'Requests', '$location', 'auth'];
 
-  function WakesRideController($scope, wake, Wakes, $location, auth) {
+  function WakesRideController($scope, wake, Requests, $location, auth) {
     $scope.auth = auth;
     $scope.wake = wake;
     $scope.request = {};
@@ -18,7 +18,7 @@
       // Wakes.request($scope.request);
       $scope.loading = true;
 
-      Wakes.requestRide($scope.request).then(function(data){
+      Requests.create($scope.request).then(function(data){
         console.log('request success');
       }, function(ref){
         $scope.error = ref;
@@ -31,10 +31,11 @@
       var hash = $location.hash();
 
       if (hash) {
-        $scope.request.type = {};
-        $scope.request.type[hash] = {selected: true};
+        $scope.request.types = {};
+        $scope.request.types[hash] = true;
       }
 
+      $scope.request.expenses = 20;
       $scope.request.wakeId = wake.id;  
       $scope.request.userId = auth.uid;
     }

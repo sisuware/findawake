@@ -8,8 +8,18 @@
   Requests.$inject = ['syncData', 'FirebaseModels','$q'];
 
   function Requests(syncData, FirebaseModels, $q) {
+    var service = {
+      get: get,
+      query: query,
+      create: createRequest,
+      accept: acceptRequest,
+      decline: declineRequest
+    };
+
+    return service; 
+
     function query(id) {
-      return syncData.object('requests/' + id).$loaded();
+      return syncData.array('requests/' + id).$loaded();
     }
 
     function get(id) {
@@ -32,6 +42,14 @@
 
     function removeRequest() {
 
+    }
+
+    function acceptRequest() {
+
+    }
+
+    function declineRequest() {
+      
     }
 
     function _handleError(error) {

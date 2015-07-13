@@ -3,11 +3,11 @@
 
   angular
     .module('findAWake')
-    .directive('profileGear', profileGear);
+    .directive('profileGearForm', profileGearForm);
 
-  profileGear.$inject = ['Users'];
+  profileGearForm.$inject = ['Users'];
 
-  function profileGear(Users) {
+  function profileGearForm(Users) {
     var _gearTypes = ['Wakeboard','Wakesurf','Wakeskate','Helmet','Bindings','Camera','Handle','Rope','Fins','Shoes','Vest'];
 
     var _html  = '<div class="row">';
@@ -21,13 +21,13 @@
         _html += '    </button>';
         _html += '  </div>';
         _html += '</div>';
-        _html += '<table class="table table-condensed table-hover table-list">';
+        _html += '<table class="table table-condensed table-hover table-list highlight">';
         _html += '  <tbody>';
         _html += '    <tr ng-repeat="gear in profile.gear">';
         _html += '      <td><b>{{gear.type}}</b></td>';
         _html += '      <td>{{gear.desc}}</td>';
         _html += '      <td class="text-right">';
-        _html += '        <button ng-click="removeGear($index)" type="button" ng-disabled="saving" class="btn btn-sm btn-default"><i class="fa fa-trash-o"></i></button>';
+        _html += '        <button ng-click="removeGear($index)" type="button" ng-disabled="saving" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>';
         _html += '      </td>';
         _html += '    </tr>';
         _html += '    <tr ng-hide="saving" ng-form="gearForm">';
@@ -38,7 +38,7 @@
         _html += '        <input class="form-control input-sm" name="desc" ng-model="newGear.desc" type="text" placeholder="E.g. Ronix One 2013" required/>';
         _html += '      </td>';
         _html += '      <td class="text-right">';
-        _html += '        <button class="btn btn-primary btn-sm" ng-click="addGear(newGear)" ng-disabled="gearForm.$invalid || saving"><i class="fa fa-plus"></i></button>';
+        _html += '        <button class="btn btn-info btn-xs" ng-click="addGear(newGear)" ng-disabled="gearForm.$invalid || saving"><i class="fa fa-plus"></i></button>';
         _html += '      </td>';
         _html += '    </tr>';
         _html += '  </tbody>';

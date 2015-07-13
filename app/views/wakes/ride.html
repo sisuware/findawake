@@ -19,10 +19,10 @@
       </div>
       <div class="col-sm-6">
         <div class="row">
-          <div ng-cloak ng-show="type.selected" class="col-sm-4" ng-repeat="type in wake.types">
-            <a href="" class="thumbnail board-thumbnail" ng-class="{true: 'active color3'}[request.type[type.name].selected]" ng-click="request.type[type.name].selected = !request.type[type.name].selected">
-              <span class="boarding-icons boarding-icons-{{type.name}}" ng-class="{true: type.name+'-active'}[request.type[type.name].selected]"></span>
-              <h6 class="text-center"><i class="fa" ng-class="request.type[type.name].selected ? 'fa-check-square-o':'fa-square-o'"></i> {{type.name}}</h6>
+          <div ng-cloak ng-show="value" class="col-sm-4" ng-repeat="(key, value) in wake.types">
+            <a href="" class="thumbnail board-thumbnail" ng-class="{true: 'active color3'}[request.types[key]]" ng-click="request.types[key] = !request.types[key]">
+              <span class="boarding-icons boarding-icons-{{key}}" ng-class="{true: key+'-active'}[request.types[key]]"></span>
+              <div class="caption text-center text-capitalize"><i class="fa" ng-class="request.types[key] ? 'fa-check-square-o':'fa-square-o'"></i> {{key}}</div>
             </a>
           </div>
         </div>
