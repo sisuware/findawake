@@ -9,94 +9,91 @@
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/bower_components/animate.css/animate.css">
     <!-- endbuild -->
+    <base href="/">
   </head>
-  <body ng-app="findawakeApp">
-    <nav class="navbar navbar-default navbar-static-top animated fadeInDown" role="navigation" ng-controller="NavCtrl">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a>
-        </div>
-        <div class="collapse navbar-collapse" id="bnavbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right animated fadeIn">
-            <li>
-              <a href="/wakes/new" class=""><i class="fa fa-plus"></i> Wake</a>
-            </li>
-            <li class="dropdown" ng-cloak ng-show-auth="login" ng-controller="LoginCtrl">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.email"></span> <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a ng-href="/profile/{{user.id}}">My Profile</a></li>
-                <li><a ng-href="/my/account">My Account</a></li>
-                <li class="divider"></li>
-                <li><a href="" ng-click="logout()">Logout</a></li>
-              </ul>
-            </li>
-            <li ng-cloak ng-show-auth="['logout','error']"><a href="/login">Login/Register</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <body ng-app="findAWake">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" navigation></nav>
     <div ng-view=""></div>
-     <script>
+    <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
+       ga('create', 'UA-45958647-2');
        ga('send', 'pageview');
     </script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/es5-shim/es5-shim.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/json3/lib/json3.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-    <script src="bower_components/firebase/firebase.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
-    <script src="bower_components/angularfire/angularfire.js"></script>
-    <script src="bower_components/angularjs-geolocation/src/geolocation.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/es5-shim/es5-shim.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/json3/lib/json3.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="../bower_components/firebase/firebase-debug.js"></script>
+    <script src="../bower_components/angular-strap/dist/angular-strap.min.js"></script>
+    <script src="../bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="../bower_components/angularjs-geolocation/src/geolocation.js"></script>
+    <script src="../bower_components/ks-active-link/index.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- build:js({.tmp,app}) scripts/application.js -->
     <script src="/scripts/app.js"></script>
-    <script src="/scripts/controllers/index.js"></script>
+    
     <script src="/scripts/controllers/login.js"></script>
-    <script src="/scripts/controllers/global.js"></script>
-    <script src="/scripts/controllers/wake.js"></script>
-    <script src="/scripts/controllers/user.js"></script>
+    <script src="/scripts/controllers/signup.controller.js"></script>
+    <script src="/scripts/controllers/signup-success.controller.js"></script>
+    <script src="/scripts/controllers/wakes-index.controller.js"></script>
+    <script src="/scripts/controllers/wakes-ride.controller.js"></script>
+    <script src="/scripts/controllers/wakes-new.controller.js"></script>
+    <script src="/scripts/controllers/wakes-show.controller.js"></script>
+    <script src="/scripts/controllers/wakes-delete.controller.js"></script>
+    <script src="/scripts/controllers/wakes-requests.controller.js"></script>
+    <script src="/scripts/controllers/wakes-edit.controller.js"></script>
+    <script src="/scripts/controllers/users-edit.controller.js"></script>
+    <script src="/scripts/controllers/users-wakes.controller.js"></script>
+    <script src="/scripts/controllers/users-requests.controller.js"></script>
     <script src="/scripts/controllers/profile.js"></script>
     <script src="/scripts/controllers/request.js"></script>
-    <script src="/scripts/services/security.js"></script>
-    <script src="/scripts/services/wakes.js"></script>
-    <script src="/scripts/services/users.js"></script>
-    <script src="/scripts/services/wakeSettings.js"></script>
-    <script src="/scripts/services/userSettings.js"></script>
-    <script src="/scripts/modules/firebase.js"></script>
+    <script src="/scripts/directives/profile-gear-form.directive.js"></script>
+    <script src="/scripts/directives/profile-avatar-form.directive.js"></script>
+    <script src="/scripts/directives/navigation.directive.js"></script>
+    <script src="/scripts/directives/file-upload.directive.js"></script>
+    <script src="/scripts/directives/avatar.directive.js"></script>
+    <script src="/scripts/directives/wake-thumbnail-form.directive.js"></script>
+    <script src="/scripts/directives/wake-schedule-form.directive.js"></script>
+    <script src="/scripts/directives/wake-location-form.directive.js"></script>
+    <script src="/scripts/directives/wake-types-form.directive.js"></script>
+    <script src="/scripts/directives/wake-info-form.directive.js"></script>
+    <script src="/scripts/directives/wake-thumbnail.directive.js"></script>
+    <script src="/scripts/directives/wake-panel.directive.js"></script>
+    <script src="/scripts/directives/request-panel.directive.js"></script>
+    <script src="/scripts/services/route-security-manager.factory.js"></script>
+    <script src="/scripts/services/wakes.factory.js"></script>
+    <script src="/scripts/services/users.factory.js"></script>
+    <script src="/scripts/services/wake-settings.factory.js"></script>
+    <script src="/scripts/services/user-settings.factory.js"></script>
+    <script src="/scripts/services/firebase-ref.factory.js"></script>
+    <script src="/scripts/services/sync-data.factory.js"></script>
+    <script src="/scripts/services/simple-login.factory.js"></script>
+    <script src="/scripts/services/firebase-models.factory.js"></script>
+    <script src="/scripts/services/requests.factory.js"></script>
+    <script src="/scripts/services/location-geocode.factory.js"></script>
     <script src="/scripts/modules/imgur.js"></script>
-    <script src="/scripts/modules/simpleLogin.js"></script>
     <script src="/scripts/modules/loginTools.js"></script>
     <script src="/scripts/modules/google.js"></script>
-    <script src="/scripts/directives/fileUpload.js"></script>
     <!-- endbuild -->
 </body>
 </html>

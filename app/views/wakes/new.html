@@ -1,17 +1,78 @@
-<div class="container">
-  <div class="page-header text-center">
-    <h2>Your wake belongs here!</h2>
-    <h4 class="text-muted">List your boat to connect with riders who need a wake to ride.</h4>
+<div class="sectional color1a">
+  <div class="container text-center animated fadeInDown">
+    <h1>Share A Wake</h1>
+    <h2>List your boat to connect with riders who need a wake to ride.</h2>
   </div>
-  <form name="newWake" class="animated fadeIn">
-    <ng-include src="'/views/wakes/form.html'"></ng-include>
-    <div class="row form-group clearfix">
-      <div class="col-md-9 text-right">
-        <small class="muted">By clicking "Save & Continue", you confirm that<br/>you accept the Terms of Service & Privacy Policy.</small>
+</div>
+<div class="sectional">
+  <div class="container animated fadeIn">
+    <form name="newWake">
+      <div class="row form-group clearfix animated fadeInLeft">
+        <div class="col-md-6 form-group">
+          <h4>Describe your Boat. <span class="label label-info">Public</span></h4>
+          <p>Let potential riders know what they can expect from your boat. This is also the perfect place to brag about your boat and the monster <b>wake</b> it makes.</p>
+        </div>
+        <div class="col-md-6">
+          <wake-info-form wake="wake"></wake-info>
+          <wake-thumbnail-form wake="wake"></wake-thumbnail>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="true" ng-model="wake.boat.perfectPass"> Cruise Control / Perfect Pass
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="true" ng-model="wake.boat.tower"> Tower
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="true" ng-model="wake.boat.pylon"> Extended Pylon
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="true" ng-model="wake.boat.ballastSystem"> Ballast System
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-3 text-right">
-        <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="submit()" ng-disabled="newWake.$invalid">Save & Continue</button>
+      <hr/>
+      <div class="row form-group clearfix animated fadeInRight">
+        <div class="col-md-6 form-group">
+          <h4>Type of Wakes. <span class="label label-info">Public</span></h4>
+          <p>What type of wakes can your boat create? Select from wakesurfing, wakeboarding, and wakeskating. </p>
+        </div>
+        <div class="col-md-6" wake-types-form wake="wake"></div>
       </div>
-    </div>
-  </form>
+      <hr>
+      <div class="row form-group clearfix animated fadeInLeft">
+        <div class="col-md-6 form-group">
+          <h4>Boating Schedule. <span class="label label-info">Public</span></h4>
+          <p>What days would you be willing to share your wake?</p>
+        </div>
+        <div class="col-md-6 table-responsive" wake-schedule-form wake="wake"></div>
+      </div>
+      <hr>
+      <div class="row form-group clearfix animated fadeInRight">
+        <div class="col-md-6 form-group">
+          <h4>Boating Location. <span class="label label-info">Public</span></h4>
+          <p>What's the general location of your boating activities?</p>
+          <p class="text-muted">NOTE: This is not the exact location of your house or boat, but the lake or river where you primarily go boating.</p>
+        </div>
+        <div class="col-md-6" wake-location-form wake="wake"></div>
+      </div>
+      <hr>
+      <div class="row form-group clearfix animated fadeInLeft">
+        <div class="col-md-9">
+          <small>By clicking "Save & Continue" you confirm that you accept the <a href="/legal" target="_blank">Terms of Service</a> and <a href="/legal" target="_blank">Privacy Policy</a>.</small>
+        </div>
+        <div class="col-md-3 text-right">
+          <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="submit()" ng-disabled="newWake.$invalid">Save & Continue</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
