@@ -36,13 +36,18 @@
 
     function init() {
       var dfr = $q.defer();
-      _auth = $firebaseAuth(firebaseRef(), function(error, user){
-        if(error){
-          dfr.reject(error);
-        } else {
-          dfr.resolve(user);
-        }
-      });
+      
+      if (_auth) { 
+        dfr.resolve(_auth);
+      } else {
+        _auth = $firebaseAuth(firebaseRef(), function(error, user){
+          if(error){
+            dfr.reject(error);
+          } else {
+            dfr.resolve(user);
+          }
+        });
+      }
       return dfr.promise;
     }
 

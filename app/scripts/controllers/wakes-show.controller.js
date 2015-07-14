@@ -9,7 +9,10 @@
 
   function WakesShowController($scope, wake, Users) {
     $scope.wake = wake;
-    $scope.profile = Users.getProfile(wake.userId);
+    
+    Users.getProfile(wake.userId).then(function(data){
+        $scope.profile = data;
+    });
 
     // $scope.wake = wake.$on('value', function(dataSnapshot){
     //   $scope.profile = Users.getProfile(dataSnapshot.snapshot.value.userId);
