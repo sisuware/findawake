@@ -93,54 +93,69 @@
           wake: wakeResolve
         }
       })
+      .when('/wakes/:id/edit', {
+        templateUrl: '/views/wakes/edit.html', 
+        controller: 'WakesEditController',
+        authRequired: true,
+        authorizationRequired: 'wake.userId',
+        resolve: {
+          auth: authResolve,
+          wake: wakeResolve
+        }
+      })
       .when('/wakes/:id/ride', {
         templateUrl: '/views/wakes/ride.html', 
         controller: 'WakesRideController',
+        authRequired: true,
+        authorizationRequired: 'wake.userId',
+        resolve: {
+          auth: authResolve,
+          wake: wakeResolve
+        }
+      })
+      .when('/wakes/:id/request/ride', {
+        templateUrl: '/views/wakes/request.html', 
+        controller: 'WakesRequestController',
         authRequired: true,
         resolve: {
           wake: wakeResolve,
           auth: authResolve
         }
       })
-      .when('/wakes/:id/edit', {
-        templateUrl: '/views/wakes/edit.html', 
-        controller: 'WakesEditController',
-        authRequired: true,
-        resolve: {
-          auth: authResolve,
-          wake: wakeResolve
-        }
-      })
       .when('/wakes/:id/requests', {
         templateUrl: '/views/wakes/requests.html',
         controller: 'WakesRequestsController',
         authRequired: true,
+        authorizationRequired: 'wake.userId',
         resolve: {
           auth: authResolve,
           wake: wakeResolve,
           requests: wakeRequestsResolve
         }
       })
-      .when('/account/:id/wakes', {
+      .when('/account/wakes', {
         templateUrl: '/views/user/wakes.html',
         controller: 'UsersWakesController',
         authRequired: true,
+        authorizationRequired: 'profile.$id',
         resolve: {
           profile: authUserResolve
         }
       })
-      .when('/account/:id/requests', {
+      .when('/account/requests', {
         templateUrl: '/views/user/requests.html',
         controller: 'UsersRequestsController',
         authRequired: true,
+        authorizationRequired: 'profile.$id',
         resolve: {
           profile: authUserResolve
         }
       })
-      .when('/account/:id/edit', {
+      .when('/account/edit', {
         templateUrl: '/views/user/edit.html', 
         controller: 'UsersEditController', 
         authRequired: true,
+        authorizationRequired: 'profile.$id',
         resolve: {
           profile: authUserResolve
         }

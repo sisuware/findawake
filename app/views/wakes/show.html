@@ -5,7 +5,7 @@
       <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{wake.userId}}">{{profile.name}}</a></small>
     </div>
     <div class="col-sm-3">
-      <h2><a class="btn btn-block btn-info btn-lg" ng-href="/wakes/{{wake.id}}/ride">Request A Ride</a></h2>
+      <h2><a class="btn btn-block btn-info btn-lg" ng-href="/wakes/{{wake.id}}/request/ride">Request A Ride</a></h2>
       <!-- <p class="muted text-center">Request a ride to be notified when you can wakeboard, wakesurf, or wakeskate behind this wake making machine!</p> -->
     </div>
     <!-- <div ng-cloak ng-show-auth="login" class="col-xs-3 text-right">
@@ -66,7 +66,7 @@
   <div class="container">
     <div class="row-fluid clearfix">
        <div ng-cloak ng-show="value" class="col-sm-4" ng-repeat="(key, value) in wake.types" ng-mouseover="type.$mouseover = true" ng-mouseleave="type.$mouseover = false">
-        <a class="color1 thumbnail board-thumbnail" ng-class="{true: 'active'}[type.$mouseover]" ng-href="/wakes/{{wake.id}}/ride#{{key}}">
+        <a class="color1 thumbnail board-thumbnail" ng-class="{true: 'active'}[type.$mouseover]" ng-href="/wakes/{{wake.id}}/request/ride#{{key}}">
           <span class="boarding-icons boarding-icons-{{key}}" ng-class="{true: key+'-active'}[type.$mouseover]"></span>
           <div class="caption text-center text-capitalize">Lets Go <span class="text-capitalize">{{key}}</span></div>
         </a>
