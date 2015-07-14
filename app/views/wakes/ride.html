@@ -13,13 +13,29 @@
 </div>
 <div class="sectional">
   <div class="container">
-    <div class="row clearfix">
+    <div class="row clearfix form-group">
       <div class="col-md-6 form-group">
-        <h4>Meetup Location. <span class="label label-info">Public</span></h4>
-        <p>What's the exact meetup location for your boating activities?</p>
+        <h4>Meetup Location <span class="label label-info">Private</span></h4>
+        <p>What's the exact meetup location where riders should meet you?</p>
       </div>
       <div class="col-md-6" meetup-location-form meetup="meetup"></div>
     </div>
+    <hr/>
+    <div class="row clearfix form-group">
+      <div class="col-md-6 form-group">
+        <h4>Date & Time <span class="label label-info">Private</span></h4>
+        <p>What time should the riders meet you?</p>
+      </div>
+      <div class="col-md-6" meetup-datetime-form meetup="meetup"></div>
+    </div>
+    <hr/>
+    <div class="row form-group clearfix">
+        <div class="col-md-9">
+        </div>
+        <div class="col-md-3 text-right">
+          <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="submit()">Let's Ride</button>
+        </div>
+      </div>
   </div>
 </div>
 <!-- <div class="sectional sectional-sm color1b clearfix">

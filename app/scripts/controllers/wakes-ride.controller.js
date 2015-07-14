@@ -12,6 +12,13 @@
     $scope.auth = auth;
 
     $scope.meetup = {}
+
+    $scope.submit = submit;
+
+    function submit() {
+      
+    }
+    
     // information needed
     // a date and time
     // a specific location

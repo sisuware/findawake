@@ -10,7 +10,7 @@
   function meetupLocationForm(LocationGeocode) {
     /* jshint maxstatements:43 */
     var _html  = '<div class="form-group" ng-cloak ng-show="meetup.location">';
-        _html += '  <div class="alert alert-success">';
+        _html += '  <div class="alert alert-info">';
         _html += '    <div class="row clearfix">';
         _html += '      <div class="col-xs-11">';
         _html += '        <i class="fa fa-map-marker"></i> {{meetup.location.formatted}} <span class="label label-success">Verified</span>';
