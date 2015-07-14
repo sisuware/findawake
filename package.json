@@ -1,7 +1,10 @@
 {
   "name": "findawake",
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "firebase": "^2.2.7",
+    "firebase-queue": "^1.2.1"
+  },
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-autoprefixer": "^0.7.3",
