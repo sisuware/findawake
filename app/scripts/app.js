@@ -103,6 +103,15 @@
           wake: wakeResolve
         }
       })
+      .when('/wakes/:id/request/ride', {
+        templateUrl: '/views/wakes/request.html', 
+        controller: 'WakesRequestController',
+        authRequired: true,
+        resolve: {
+          wake: wakeResolve,
+          auth: authResolve
+        }
+      })
       .when('/wakes/:id/ride', {
         templateUrl: '/views/wakes/ride.html', 
         controller: 'WakesRideController',
@@ -111,15 +120,6 @@
         resolve: {
           auth: authResolve,
           wake: wakeResolve
-        }
-      })
-      .when('/wakes/:id/request/ride', {
-        templateUrl: '/views/wakes/request.html', 
-        controller: 'WakesRequestController',
-        authRequired: true,
-        resolve: {
-          wake: wakeResolve,
-          auth: authResolve
         }
       })
       .when('/wakes/:id/requests', {

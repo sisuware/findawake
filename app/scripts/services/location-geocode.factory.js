@@ -23,13 +23,15 @@
 
     }
 
-    function validate(address) {
+    function validate(address, ignoreValidation) {
       var dfr = $q.defer();
 
-      if (!address || address && !address.city || address && !address.state) {
-        dfr.reject('City and State are required.');
+      if (!ignoreValidation) {
+        if (!address || address && !address.city || address && !address.state) {
+          dfr.reject('City and State are required.');
+        }
       }
-
+      
       Geocoder.geocode('address', address).then(function(res){
         dfr.resolve(_formatGeocoderResults(res));
       }, function(res){

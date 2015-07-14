@@ -10,5 +10,12 @@
   function WakesRideController($scope, auth, wake) {
     $scope.wake = wake;
     $scope.auth = auth;
+
+    $scope.meetup = {}
+    // information needed
+    // a date and time
+    // a specific location
+    // 
+
   }
 })();

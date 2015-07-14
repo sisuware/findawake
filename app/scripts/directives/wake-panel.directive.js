@@ -68,7 +68,6 @@
 			});
 
 			Requests.query($scope.wakeId).then(function(data){
-				console.log(data);
 				$scope.requests = data;
 			});
 

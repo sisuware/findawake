@@ -60,7 +60,7 @@
       var ref = current.locals;
 
       keys.forEach(function(key) {
-        ref = ref[key]
+        ref = ref[key];
       });
 
       if (ref) {

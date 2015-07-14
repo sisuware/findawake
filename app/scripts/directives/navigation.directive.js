@@ -16,7 +16,7 @@
         _html += '      <span class="icon-bar"></span>';
         _html += '      <span class="icon-bar"></span>';
         _html += '    </button>';
-        _html += '    <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a>';
+        // _html += '    <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a>';
         _html += '  </div>';
         _html += '  <div class="collapse navbar-collapse" id="navbar-collapse">';
         _html += '    <ul class="nav navbar-nav animated fadeIn">';
