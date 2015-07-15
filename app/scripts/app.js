@@ -37,7 +37,7 @@
     wakeResolve.$inject = ['Wakes', '$route'];
     wakeRequestsResolve.$inject = ['Requests', '$route'];
     profileResolve.$inject = ['Users', '$route'];
-
+    meetupResolve.$inject = ['Meetups', '$route']
     $locationProvider.html5Mode(true);
     
     function authResolve(SimpleLogin){
@@ -66,6 +66,10 @@
 
     function profileResolve(Users, $route){
       return Users.getProfile($route.current.params.id);
+    }
+
+    function meetupResolve(Meetups, $route) {
+      return Meetups.get($route.current.params.id);
     }
 
     $routeProvider
@@ -131,6 +135,15 @@
           auth: authResolve,
           wake: wakeResolve,
           requests: wakeRequestsResolve
+        }
+      })
+      .when('/wakes/:id/meetups ', {
+        templateUrl: '/views/meetups/show.html',
+        controller: 'WakesMeetupsIndexController',
+        authRequired: true,
+        authorizationRequired: 'meetup.userId',
+        resolve: {
+          meetup: meetupResolve
         }
       })
       .when('/account/wakes', {

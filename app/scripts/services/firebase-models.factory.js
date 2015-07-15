@@ -44,7 +44,7 @@
           if(err){
             dfr.reject(err);
           } else {
-            dfr.resolve();
+            dfr.resolve(ref);
           }
         });
       }, function(err){
