@@ -30,6 +30,7 @@
   "appPath": "app",
   "resolutions": {
     "angular": "^1.2.21",
-    "bootstrap": "^3.2.0"
+    "bootstrap": "^3.2.0",
+    "firebase": "2.2.x"
   }
 }

@@ -36,10 +36,10 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ['bower.json'],
-        tasks: ['wiredep']
-      },
+      // bower: {
+        // files: ['bower.json'],
+        // tasks: ['wiredep']
+      // },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
@@ -89,7 +89,7 @@ module.exports = function (grunt) {
               mountFolder(connect, '.tmp'),
               //connect.static('.tmp'),
               connect().use(
-                '/bower_components',
+                '/app/bower_components',
                 connect.static('./bower_components')
               ),
               mountFolder(connect, appConfig.app)
@@ -106,7 +106,7 @@ module.exports = function (grunt) {
               connect.static('.tmp'),
               connect.static('test'),
               connect().use(
-                '/bower_components',
+                '/app/bower_components',
                 connect.static('./bower_components')
               ),
               connect.static(appConfig.app)
@@ -180,8 +180,8 @@ module.exports = function (grunt) {
 
     // Automatically inject Bower components into the app
     wiredep: {
-      directory: '../.bowerrc',
-      bowerJson: '../bower.json',
+      directory: '.bowerrc',
+      bowerJson: 'bower.json',
       options: {
         cwd: '<%= yeoman.app %>'
       },
@@ -244,29 +244,28 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
-    imagemin: {
+    uglify: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
+        files: {
+          '<%= yeoman.dist %>/scripts/application.js': ['<%= yeoman.dist %>/scripts/application.js'],
+          '<%= yeoman.dist %>/scripts/vendor.js': ['<%= yeoman.dist %>/scripts/vendor.js']
+        }
       }
     },
+    concat: {
+      dist: {}
+    },
+
+    // imagemin: {
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '<%= yeoman.app %>/images',
+    //       src: '{,*/}*.{png,jpg,jpeg,gif}',
+    //       dest: '<%= yeoman.dist %>/images'
+    //     }]
+    //   }
+    // },
 
     svgmin: {
       dist: {
@@ -311,13 +310,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -336,12 +328,12 @@ module.exports = function (grunt) {
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
+          cwd: '<%= yeoman.app %>/images',
           dest: '<%= yeoman.dist %>/images',
-          src: ['generated/*']
+          src: ['*']
         }, {
           expand: true,
-          cwd: 'bower_components/fontawesome/fonts',
+          cwd: 'app/bower_components/fontawesome/fonts',
           src: '*',
           dest: '<%= yeoman.dist %>/fonts'
         }]
@@ -354,7 +346,7 @@ module.exports = function (grunt) {
       },
       fonts: {
         expand: true,
-        cwd: 'bower_components/fontawesome/fonts',
+        cwd: 'app/bower_components/fontawesome/fonts',
         src: '*',
         dest: '.tmp/fonts'
       }
@@ -375,7 +367,7 @@ module.exports = function (grunt) {
       dist: [
         'less:development',
         'copy:styles',
-        'imagemin',
+        //'imagemin',
         'svgmin'
       ]
     },
@@ -420,7 +412,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'wiredep',
+    //'wiredep',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -428,9 +420,24 @@ module.exports = function (grunt) {
     'ngmin',
     'less',
     'copy:dist',
-    'cdnify',
     'cssmin',
-    //'uglify',
+    'uglify',
+    'filerev',
+    'usemin',
+    'htmlmin'
+  ]);
+
+  grunt.registerTask('staging', [
+    'clean:dist',
+    //'wiredep',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'ngmin',
+    'less',
+    'copy:dist',
+    'cssmin',
     'filerev',
     'usemin',
     'htmlmin'
