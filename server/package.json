@@ -1,0 +1,15 @@
+{
+  "name": "findawake-server",
+  "version": "1.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "firebase": "^2.2.7",
+    "firebase-queue": "^1.2.1",
+    "firebase-token-generator": "^2.0.0",
+    "q": "^1.4.1",
+    "request": "^2.58.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}
