@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "dependencies": {
     "firebase": "^2.2.7",
-    "firebase-queue": "^1.2.1"
+    "firebase-queue": "^1.2.1",
+    "firebase-token-generator": "^2.0.0",
+    "q": "^1.4.1",
+    "request": "^2.58.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
