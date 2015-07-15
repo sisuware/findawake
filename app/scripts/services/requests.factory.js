@@ -23,7 +23,7 @@
     }
 
     function get(request) {
-      if (!id) { return false; }
+      if (!request) { return false; }
       return syncData.object('requests/' + request.wakeId + '/' + request.id).$loaded();
     }
 

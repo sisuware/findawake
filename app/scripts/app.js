@@ -37,7 +37,7 @@
     wakeResolve.$inject = ['Wakes', '$route'];
     wakeRequestsResolve.$inject = ['Requests', '$route'];
     profileResolve.$inject = ['Users', '$route'];
-    meetupsResolve.$inject = ['Meetups', '$route']
+    meetupsResolve.$inject = ['Meetups', '$route'];
     $locationProvider.html5Mode(true);
     
     function authResolve(SimpleLogin){

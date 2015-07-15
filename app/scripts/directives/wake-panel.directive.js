@@ -36,7 +36,8 @@
 				_html += '			</div>';
 				_html += '		</div>';
 				_html += '	</div>';
-				_html += '	<div class="animated fadeIn panel-body highlight wake-show-thumbnail {{wake.thumbnail ? \'has-thumbnail\':\'no-thumbnail\'}}" style="background-image: url(\'{{\'http://i.imgur.com/\' + (wake.thumbnail ||\'7Kpwp8m\')  + \'h.jpg\'}}\')">';
+				_html += '	<div class="animated fadeIn panel-body highlight wake-show-thumbnail {{wake.thumbnail ? \'has-thumbnail\':\'no-thumbnail\'}}"'; 
+				_html += '	style="background-image: url(\'{{\'http://i.imgur.com/\' + (wake.thumbnail ||\'7Kpwp8m\')  + \'h.jpg\'}}\')">';
 				_html += '	</div>';
 				// _html += '	<div class="panel-footer">';
 				// _html += '		<div class="row">';
