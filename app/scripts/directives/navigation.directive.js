@@ -63,8 +63,6 @@
       $scope.logout = SimpleLogin.logout;
 
       SimpleLogin.onAuth(function(auth){
-        console.log(auth, $scope.user);
-
         if (auth) {
           _checkCurrentUser();
         } else {

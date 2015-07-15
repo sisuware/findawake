@@ -23,13 +23,7 @@
     }
 
     function get(request) {
-      // if(_.isUndefined(auth) || _.isEmpty(auth)){ return false; }
-      // if(_.isObject(auth.requests)){
-      //   return !_.isUndefined(auth.requests[wake.id]);
-      // }
-      // if(_.isArray(auth.requests)){
-      //   return _.indexOf(auth.requests, wake.id) === -1;
-      // }
+      if (!id) { return false; }
       return syncData.object('requests/' + request.wakeId + '/' + request.id).$loaded();
     }
 

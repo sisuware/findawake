@@ -12,6 +12,7 @@
 
     var service = {
       createRef: createRef,
+      createTask: createTask,
       createUserAssociation: createUserAssociation,
       removeUserAssociation: removeUserAssociation,
       createLocationAssociation: createLocationAssociation,
@@ -21,11 +22,26 @@
     return service;
 
     function createRef(target, data){
-      var dfr = $q.defer(),
-          ref = firebaseRef(target).push(),
-          refData = JSON.parse(angular.toJson(data));
+      var dfr = $q.defer();
+      var ref = firebaseRef(target).push();
+      var refData = JSON.parse(angular.toJson(data));
 
-      ref.set(_.assign(refData, {'id': ref.key()}), function(err){
+      ref.set(_.assign(refData, {'id': ref.key(), 'created': Date.now()}), function(err){
+        if(err){
+          dfr.reject(err);
+        } else {
+          dfr.resolve(ref.key());
+        }
+      });
+
+      return dfr.promise;
+    }
+
+    function createTask(task, id) {
+      var dfr = $q.defer();
+      var ref = firebaseRef('/queue/tasks').push();
+
+      ref.set({'task':task, 'id':id}, function(err){
         if(err){
           dfr.reject(err);
         } else {

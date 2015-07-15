@@ -26,9 +26,16 @@
     }
 
     function create(meetup) { 
-      return FirebaseModels.createRef('meetups/' + meetup.wakeId, meetup).then(function(requestRef){
-        return FirebaseModels.createUserAssociation('users', 'meetups/' + meetup.wakeId, requestRef, 'set');
+      return FirebaseModels.createRef('meetups/' + meetup.wakeId, meetup).then(function(meetupRef){
+        return $q.all([
+          FirebaseModels.createUserAssociation('users', 'meetups/' + meetup.wakeId, meetupRef, 'set'),
+          FirebaseModels.createTask('meetup', meetupRef)
+        ]);
       });
+    }
+
+    function remove(meetup) {
+
     }
   }
 })();

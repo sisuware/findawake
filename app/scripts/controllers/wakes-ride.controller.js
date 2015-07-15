@@ -17,7 +17,7 @@
       $scope.processing = true;
 
       Meetups.create($scope.meetup).then(function(ref){
-        $location.path('/meetups/' + ref.id);
+        $location.path('/wake/' + wake.id + '/meetups');
       }, function(errors){
         $scope.errors = errors;
       }).finally(function(){
@@ -32,11 +32,5 @@
     }
 
     _defaultValues();
-    
-    // information needed
-    // a date and time
-    // a specific location
-    // 
-
   }
 })();
