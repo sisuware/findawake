@@ -12,6 +12,7 @@
     $scope.auth = auth;
 
     $scope.meetup = {}
+    $scope.meetup.riders = 10;
 
     $scope.submit = submit;
 
