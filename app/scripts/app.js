@@ -38,6 +38,8 @@
     wakeRequestsResolve.$inject = ['Requests', '$route'];
     profileResolve.$inject = ['Users', '$route'];
     meetupsResolve.$inject = ['Meetups', '$route'];
+    wakesLocationResolve.$inject = ['Locations','$route'];
+
     $locationProvider.html5Mode(true);
     
     function authResolve(SimpleLogin){
@@ -45,7 +47,7 @@
     }
 
     function wakesResolve(Wakes) {
-      return Wakes.query();
+      return Wakes.query(8);
     }
 
     function authUserResolve(SimpleLogin, Users){
@@ -72,8 +74,21 @@
       return Meetups.query();
     }
 
+    function wakesLocationResolve(Locations, $route) {
+      var id = [$route.current.params.state, $route.current.params.city].join('/');
+      return Locations.get(id);
+    }
+
+    function resolveRedirect(params, path, search) {
+      if (path.match(/^(\/!)/)) {
+        return path.replace(/^(\/!)/,'');
+      } else {
+        return '/wakes/discover';
+      }
+    }
+
     $routeProvider
-      .when('/wakes/find', {
+      .when('/wakes/discover', {
         templateUrl: '/views/wakes/index.html', 
         controller: 'WakesIndexController',
         authRequired: false,
@@ -87,6 +102,14 @@
         authRequired: true,
         resolve: {
           auth: authResolve
+        }
+      })
+      .when('/wakes/in/:state/:city', {
+        templateUrl: '/views/wakes/location_index.html', 
+        controller: 'WakesLocationIndexController',
+        authRequired: false,
+        resolve: {
+          wakes: wakesLocationResolve
         }
       })
       .when('/wakes/:id', {
@@ -214,7 +237,7 @@
         }
       })
       .otherwise({
-        redirectTo: '/wakes/find'
+        redirectTo: resolveRedirect
       });
   }
 

@@ -5,9 +5,9 @@
     .module('findAWake')
     .directive('wakeLocationForm', wakeLocationForm);
 
-  wakeLocationForm.$inject = ['LocationGeocode'];
+  wakeLocationForm.$inject = ['Locations'];
 
-  function wakeLocationForm(LocationGeocode) {
+  function wakeLocationForm(Locations) {
     /* jshint maxstatements:43 */
     var _html  = '<div class="form-group" ng-cloak ng-show="wake.location">';
         _html += '  <div class="row clearfix">';
@@ -77,7 +77,7 @@
         $scope.validating = true;
         $scope.errors = false;
         
-        LocationGeocode.validate($scope.location).then(function(res){
+        Locations.validate($scope.location).then(function(res){
           $scope.validatedLocations = res;
         }, function(res){
           $scope.errors = res;

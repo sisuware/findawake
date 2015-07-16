@@ -3,24 +3,25 @@
 
   angular
     .module('findAWake')
-    .factory('LocationGeocode', locationGeocode);
+    .factory('Locations', Locations);
 
-  locationGeocode.$inject = ['$q', 'Geocoder', '$timeout','syncData'];
+  Locations.$inject = ['$q', 'Geocoder', '$timeout','syncData'];
 
-  function locationGeocode($q, Geocoder, $timeout, syncData) {
+  function Locations($q, Geocoder, $timeout, syncData) {
     var service = {
       validate: validate,
-      states: states
+      query: query,
+      get: get
     };
 
     return service;
 
-    function states() {
+    function query() {
       return syncData.array('locations').$loaded();
     }
 
-    function cities(state) {
-
+    function get(id) {
+      return syncData.array('locations/' + id).$loaded();
     }
 
     function validate(address, ignoreValidation) {

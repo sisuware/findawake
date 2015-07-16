@@ -20,8 +20,8 @@
 
     return service;
 
-    function query() {
-      return syncData.array('wakes').$loaded();
+    function query(limit) {
+      return syncData.array('wakes', limit).$loaded();
     }
 
     function get(id) {

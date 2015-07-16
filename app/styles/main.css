@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Merriweather:400,300,700|Open+Sans:400,300,600,700);
+@import url(http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,300,600,700);
 [ng\:cloak],
 [ng-cloak],
 [data-ng-cloak],
@@ -10536,6 +10536,9 @@ a.list-group-item.color4 > .list-group-item-heading {
 .well h5:first-child,
 .well h6:first-child {
   margin-top: 0;
+}
+.text-serif {
+  font-family: 'Pacifico', cursive;
 }
 .pattern-crossword {
   background: url('/images/crossword.png') repeat;

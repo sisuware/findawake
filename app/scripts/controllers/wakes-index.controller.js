@@ -5,10 +5,11 @@
     .module('findAWake')
     .controller('WakesIndexController', WakesIndexController);
 
-  WakesIndexController.$inject = ['$scope','wakes','LocationGeocode'];
+  WakesIndexController.$inject = ['$scope','wakes'];
 
-  function WakesIndexController($scope, wakes, LocationGeocode) {
+  function WakesIndexController($scope, wakes) {
     $scope.wakes = wakes;
+
     
     /*
     $scope.distances = ['5','15','25','50','100','150'];

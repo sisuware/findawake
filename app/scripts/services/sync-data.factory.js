@@ -17,13 +17,17 @@
 
     function array(path, limit) {
       var ref = firebaseRef(path);
-
+      if( limit ) {
+        ref = ref.limitToLast(limit);
+      }
       return $firebaseArray(ref);
     }
 
     function object(path, limit) {
       var ref = firebaseRef(path);
-
+      if( limit ) {
+        ref = ref.limitToLast(limit);
+      }
       return $firebaseObject(ref);
     }
 

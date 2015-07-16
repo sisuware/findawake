@@ -7,7 +7,7 @@
 </div>
 <div ng-cloak ng-show="profile.name" class="sectional highlight">
   <div class="sectional-title">profile</div>
-  <div class="container animated fadeInRight">
+  <div class="container animated fadeIn">
     <div class="col-md-8">
       <p ng-cloak ng-show="profile.bio" class="lead">{{profile.bio}}</p>
       <p ng-cloak ng-hide="profile.bio" class="lead text-muted">{{profile.name}} does not have a bio yet.</p>
@@ -27,7 +27,7 @@
 </div>
 <div ng-cloak ng-show="profile.wakes" class="sectional">
   <div class="sectional-title">wakes</div>
-  <div ng-cloak ng-show="profile && profile.wakes" class="container animated fadeInLeft">
+  <div ng-cloak ng-show="profile && profile.wakes" class="container animated fadeIn">
     <div class="col-sm-6 col-md-3 animated fadeIn" ng-repeat="wakeId in profile.wakes" wake-thumbnail wake-id="{{wakeId}}"></div>
   </div>
 </div>

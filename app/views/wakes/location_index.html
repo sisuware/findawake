@@ -1,0 +1,17 @@
+<div class="sectional sectional-sm color1a">
+  <div class="container animated fadeIn">
+    <h1 class="text-serif text-center"><i class="fa fa-map-marker"></i> {{city}}, {{state}}</h1>
+  </div>
+</div>
+<div class="sectional">
+  <div class="sectional-title">browse wakes in {{city}}</div>
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-sm-6 col-md-3 animated fadeIn" ng-repeat="wake in wakes" wake-thumbnail wake-id="{{wake.$value}}"></div>
+    </div>  
+  </div>
+</div>
+<div class="sectional highlight">
+  <div class="sectional-title">or browse by location</div>
+  <div class="container" locations></div>
+</div>

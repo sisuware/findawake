@@ -5,9 +5,9 @@
     .module('findAWake')
     .directive('meetupLocationForm', meetupLocationForm);
 
-  meetupLocationForm.$inject = ['LocationGeocode'];
+  meetupLocationForm.$inject = ['Locations'];
 
-  function meetupLocationForm(LocationGeocode) {
+  function meetupLocationForm(Locations) {
     /* jshint maxstatements:43 */
     var _html  = '<div class="form-group" ng-cloak ng-show="meetup.location">';
         _html += '  <div class="alert alert-info">';
@@ -70,7 +70,7 @@
         $scope.validating = true;
         $scope.errors = false;
         
-        LocationGeocode.validate($scope.location, true).then(function(res){
+        Locations.validate($scope.location, true).then(function(res){
           $scope.validatedLocations = res;
         }, function(res){
           $scope.errors = res;
