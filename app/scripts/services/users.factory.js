@@ -54,7 +54,7 @@
       return dfr.promise;
     }
 
-    function createPublicProfile(user){
+    function createPublicProfile(user) {
       // ensure user does not have a profile.
       var id = user.uid || user.$id;
       return _checkExistingProfile(id).then(function(data){

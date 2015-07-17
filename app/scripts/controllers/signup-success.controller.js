@@ -11,6 +11,7 @@
     $scope.loading = true;
     $scope.profile = profile;
 
+
     // SimpleLogin.createProfile($scope.user.uid, $scope.user.email).then(function(user) {
     //   Users.createPublicProfile(user).then(function(res){
     //     $location.path('/welcome');

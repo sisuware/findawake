@@ -79,6 +79,10 @@
       return Locations.get(id);
     }
 
+    function hashResolve(Hashes, $route) {
+      return Hashes.get($route.current.params.hash);
+    }
+
     function resolveRedirect(params, path, search) {
       if (path.match(/^(\/!)/)) {
         return path.replace(/^(\/!)/,'');
@@ -207,8 +211,15 @@
         }
       })
       .when('/account/verify/email/:hash', {
-
-      })
+        templateUrl: '/views/user/verify/email.html',
+        controller: 'UsersVerifyEmailController',
+        authRequired: true,
+        authorizationRequired: 'hash.$value',
+        resolve: {
+          hash: hashResolve,
+          profile: authUserResolve
+        }
+      })  
       .when('/profile/:id', {
         templateUrl: '/views/user/show.html',
         controller: 'ProfileController',
