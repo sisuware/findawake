@@ -18,7 +18,7 @@
       'firebase',
       'ui.bootstrap',
       'imgur',
-      'geolocation',
+      // 'geolocation',
       'google.geocoder',
       'ks.activeLink'
     ])
@@ -206,9 +206,12 @@
           profile: authUserResolve
         }
       })
+      .when('/account/verify/email/:hash', {
+
+      })
       .when('/profile/:id', {
         templateUrl: '/views/user/show.html',
-        controller: 'ProfileCtrl',
+        controller: 'ProfileController',
         authRequired: false,
         resolve: {
           profile: profileResolve,
@@ -234,7 +237,7 @@
         controller: 'SignupSuccessController',
         authRequired: true,
         resolve: {
-          auth: authResolve
+          profile: authUserResolve
         }
       })
       .when('/welcome', {

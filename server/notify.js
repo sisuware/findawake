@@ -2,21 +2,29 @@
   'use strict';
   var Request = require('request');
   var Q = require('q');
-  var emailHook = 'https://zapier.com/hooks/catch/bl3xal/';
-  var smsHook = 'https://zapier.com/hooks/catch/bl8czf/';
+  var config = require('./config');
 
   module.exports = function Notify() {
     var service = {
-      email: email,
+      welcomeEmail: welcomeEmail,
+      meetupEmail: meetupEmail,
       sms: sms
     };
 
     return service;
 
-    function email(data) {
+    function welcomeEmail(data) {
+      return _email(config.zapier.email.welcome, data);
+    }
+
+    function meetupEmail(data) {
+      return _email(config.zapier.email.meetup, data);
+    }
+
+    function _email(url, data) {
       var dfr = Q.defer();
 
-      Request.post({url: emailHook, body: data, json: true}, function(error, httpResponse, body){
+      Request.post({url: url, body: data, json: true}, function(error, httpResponse, body){
         if (error) {
           dfr.reject(error);
         } else {
@@ -30,7 +38,7 @@
     function sms(data) {
       var dfr = Q.defer();
 
-      Request.post({url: smsHook, body: data, json: true}, function(error, httpResponse, body){
+      Request.post({url: config.zapier.sms, body: data, json: true}, function(error, httpResponse, body){
         if (error) {
           dfr.reject(error);
         } else {
