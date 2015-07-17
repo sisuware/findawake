@@ -4,17 +4,15 @@
   angular
     .module('findAWake')
     .run(angularfireRun)
-    .factory('SimpleLogin', SimpleLogin)
-    .factory('ProfileCreator', ProfileCreator);
+    .factory('SimpleLogin', SimpleLogin);
 
-  SimpleLogin.$inject = ['$rootScope', 'firebaseRef', 'ProfileCreator', '$timeout', '$q', '$firebaseAuth'];
-  ProfileCreator.$inject = ['firebaseRef', '$q'];
+  SimpleLogin.$inject = ['$rootScope', 'firebaseRef', '$timeout', '$q', '$firebaseAuth'];
 
   function angularfireRun(SimpleLogin){
     SimpleLogin.init();
   }
 
-  function SimpleLogin($rootScope, firebaseRef, ProfileCreator, $timeout, $q, $firebaseAuth){
+  function SimpleLogin($rootScope, firebaseRef, $timeout, $q, $firebaseAuth){
     var _auth = null;
 
     var service = {
@@ -25,8 +23,7 @@
       login: login,
       loginPassword: loginPassword,
       changePassword: changePassword,
-      createAccount: createAccount,
-      createProfile: ProfileCreator,
+      createUser: createUser,
       parseErrorMessages: parseErrorMessages,
       assertValidLoginAttempt: assertValidLoginAttempt,
       assertValidCreateAccountAttempt: assertValidCreateAccountAttempt
@@ -95,14 +92,7 @@
         email: email,
         password: pass,
         rememberMe: true
-      }).then(function(user) {
-        if( callback ) {
-          //todo-bug https://github.com/firebase/angularFire/issues/199
-          $timeout(function() {
-            callback(null, user);
-          });
-        }
-      }, callback);
+      });
     }
 
     function changePassword(user) {
@@ -124,14 +114,64 @@
       return dfr.promise;
     }
 
-    function createAccount(email, password, callback) {
+    function createUser(email, password) {
       _ensureAuth();
       var dfr = $q.defer();
 
       _auth.$createUser({
         'email': email, 
         'password': password
-      }).then(dfr.resolve, dfr.reject);
+      }).then(function successCreateAccount(user) {
+        loginPassword(email, password).then(function(user){
+          createAccount(user).then(dfr.resolve, dfr.reject);
+        }, function(error){
+          dfr.reject(error);
+        });
+
+      }, function failedCreateAccount(error){
+        dfr.reject(parseErrorMessages(error));
+      });
+
+      return dfr.promise;
+    }
+
+    function createAccount(user) {
+      var dfr = $q.defer();
+      var users = firebaseRef('users/' + user.uid);
+
+      var datum = {
+        userId: user.uid,
+        emailVerified: false,
+        created: Date.now()
+      };
+
+      if (user.password) {
+        datum.email = user.password.email;
+        datum.name = _extractNameFromEmail(user.password.email);
+      }
+
+      users.set(datum, function(err){
+        if(err){
+          dfr.reject(err);
+        } else {
+          createTask({'task':'newAccount','userId':user.uid}).then(dfr.resolve,dfr.reject);
+        }
+      });
+
+      return dfr.promise;
+    }
+
+    function createTask(task) {
+      var dfr = $q.defer();
+      var ref = firebaseRef('/queue/tasks').push();
+
+      ref.set(task, function(err){
+        if(err){
+          dfr.reject(err);
+        } else {
+          dfr.resolve(ref.key());
+        }
+      });
 
       return dfr.promise;
     }
@@ -169,11 +209,9 @@
         throw new Error('Must call loginService.init() before using its methods'); 
       }
     }
-  }
-
-  function ProfileCreator(firebaseRef, $q) {
-    function _firstPartOfEmail(email) {
-        return _ucfirst(email.substr(0, email.indexOf('@'))||'');
+    
+    function _extractNameFromEmail(email) {
+      return _ucfirst(email.substr(0, email.indexOf('@'))||'');
     }
 
     function _ucfirst (str) {
@@ -182,26 +220,5 @@
       var f = str.charAt(0).toUpperCase();
       return f + str.substr(1);
     }
-
-    return function(id, email) {
-      var dfr = $q.defer(),
-          ref = firebaseRef('users/' + id);
-
-      var refData = {
-        email: email, 
-        name: _firstPartOfEmail(email),
-        userId: id
-      };
-
-      ref.set(refData, function(err){
-        if(err){
-          dfr.reject(err);
-        } else {
-          dfr.resolve(refData);
-        }
-      });
-
-      return dfr.promise;
-    };
   }
 })();

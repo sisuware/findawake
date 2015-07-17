@@ -1,0 +1,23 @@
+<div class="sectional sectional-sm color1a clearfix">
+  <div class="container animated fadeIn">
+    <div class="col-sm-9">
+      <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
+      <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{wake.userId}}">{{profile.name}}</a></small>
+    </div>
+  </div>
+</div>
+<div class="sectional">
+  <div class="sectional-title">delete your wake</div>
+  <div class="container animated fadeIn">
+    <h3 class="text-center">Are you sure you want to delete <em>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}}</em>?</h3>
+    <hr/>
+    <div class="row form-group clearfix">
+      <div class="col-md-9">
+        <a href="/wakes/{{wake.id}}">Cancel</button>
+      </div>
+      <div class="col-md-3 text-right">
+        <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="delete()">Yes, Delete It</button>
+      </div>
+    </div>
+  </div>
+</div>

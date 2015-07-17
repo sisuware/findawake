@@ -18,7 +18,7 @@
       'firebase',
       'ui.bootstrap',
       'imgur',
-      'geolocation',
+      // 'geolocation',
       'google.geocoder',
       'ks.activeLink'
     ])
@@ -79,6 +79,10 @@
       return Locations.get(id);
     }
 
+    function hashResolve(Hashes, $route) {
+      return Hashes.get($route.current.params.hash);
+    }
+
     function resolveRedirect(params, path, search) {
       if (path.match(/^(\/!)/)) {
         return path.replace(/^(\/!)/,'');
@@ -130,6 +134,15 @@
           wake: wakeResolve
         }
       })
+      .when('/wakes/:id/delete', {
+        templateUrl: '/views/wakes/delete.html', 
+        controller: 'WakesDeleteController',
+        authRequired: true,
+        authorizationRequired: 'wake.userId',
+        resolve: {
+          wake: wakeResolve
+        }
+      })
       .when('/wakes/:id/request/ride', {
         templateUrl: '/views/wakes/request.html', 
         controller: 'WakesRequestController',
@@ -139,7 +152,7 @@
           auth: authResolve
         }
       })
-      .when('/wakes/:id/ride', {
+      .when('/wakes/:id/meetup', {
         templateUrl: '/views/wakes/ride.html', 
         controller: 'WakesRideController',
         authRequired: true,
@@ -197,9 +210,19 @@
           profile: authUserResolve
         }
       })
+      .when('/account/verify/email/:hash', {
+        templateUrl: '/views/user/verify/email.html',
+        controller: 'UsersVerifyEmailController',
+        authRequired: true,
+        authorizationRequired: 'hash.$value',
+        resolve: {
+          hash: hashResolve,
+          profile: authUserResolve
+        }
+      })  
       .when('/profile/:id', {
         templateUrl: '/views/user/show.html',
-        controller: 'ProfileCtrl',
+        controller: 'ProfileController',
         authRequired: false,
         resolve: {
           profile: profileResolve,
@@ -225,7 +248,7 @@
         controller: 'SignupSuccessController',
         authRequired: true,
         resolve: {
-          auth: authResolve
+          profile: authUserResolve
         }
       })
       .when('/welcome', {

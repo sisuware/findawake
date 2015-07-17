@@ -5,20 +5,21 @@
     .module('findAWake')
     .controller('SignupSuccessController', SignupSuccessController);
 
-  SignupSuccessController.$inject = ['$scope', 'auth', 'SimpleLogin', 'Users', '$location'];
+  SignupSuccessController.$inject = ['$scope', 'profile', '$location'];
 
-  function SignupSuccessController($scope, auth, SimpleLogin, Users, $location) {
+  function SignupSuccessController($scope, profile, $location) {
     $scope.loading = true;
-    $scope.user = auth;
+    $scope.profile = profile;
 
-    SimpleLogin.createProfile($scope.user.id, $scope.user.email).then(function(user) {
-      Users.createPublicProfile(user).then(function(res){
-        $location.path('/welcome');
-      }, function(res){
-        console.debug('error creating public profile: ', res);
-      }).finally(function(){
-        $scope.loading = false;
-      });
-    });
+
+    // SimpleLogin.createProfile($scope.user.uid, $scope.user.email).then(function(user) {
+    //   Users.createPublicProfile(user).then(function(res){
+    //     $location.path('/welcome');
+    //   }, function(res){
+    //     console.debug('error creating public profile: ', res);
+    //   }).finally(function(){
+    //     $scope.loading = false;
+    //   });
+    // });
   }
 })();

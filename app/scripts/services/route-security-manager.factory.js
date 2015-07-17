@@ -49,7 +49,7 @@
             if (data !== auth.uid) {
               _handleAuthorizationRequired(event);
             }
-          });
+          }, _handleAuthorizationRequired);
         }
       }, _handleAuthorizationRequired.bind(null, event));
     }

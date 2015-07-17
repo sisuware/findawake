@@ -3,11 +3,11 @@
   var Q = require('q');
   var Notify = require('./notify')();
   var Moment = require('moment');
-  var Bitly = require('bitly');
-  var bitly = new Bitly('simook', 'R_cd58051cae174632bb3cadfcaa284f12');
-  
-  module.exports = function Meetups(firebaesRef) {
-    var firebaesRef = firebaesRef;
+  var Log = require('./log');
+  var config = require('./config');
+
+  module.exports = function Meetups(firebaseRef) {
+    var firebaseRef = firebaseRef;
 
     var service = {
       process: process
@@ -19,7 +19,7 @@
      * Process new meetups from the queue
      */
     function process(task) {
-      _log('processing task', task)
+      Log.info('processing task as a Meetup', task)
       var dfr = Q.defer();
 
       _collectAssociatedTaskData(task)
@@ -30,7 +30,7 @@
     }
 
     function _collectAssociatedTaskData(data) {
-      _log('collecting associated data', data)
+      Log.info('collecting associated data', data)
       return Q.all([
         _acceptedRidersData(data.wakeId),
         _meetupData(data.wakeId, data.meetupId),
@@ -39,7 +39,7 @@
     }
 
     function _processTaskDataResults(results) {
-      _log('process task data results', results);
+      Log.info('process task data results', results);
       var promises = [];
       var riders = results[0];
       var meetup = results[1];
@@ -54,9 +54,9 @@
     }
 
     function _notifyRider(rider, info) {
-      _log('notify rider', rider)
+      Log.info('notify rider', rider)
       var dfr = Q.defer();
-      var usersRef = firebaesRef.child('users');
+      var usersRef = firebaseRef.child('users');
       var promises = [];
 
       if (!rider.notification || !rider.userId) {
@@ -72,14 +72,14 @@
             info.name = user.name;
             info.email = user.email;
 
-            _log('emailing rider', info);
-            promises.push(Notify.email(info));
+            Log.info('emailing rider', info);
+            promises.push(Notify.meetupEmail(info));
           }
 
           if (rider.notification.text) {
             info.number = user.cell.value;
 
-            _log('texting rider', info);
+            Log.info('texting rider', info);
             promises.push(Notify.sms(info));
           }
 
@@ -93,8 +93,8 @@
 
     function _meetupInfo(meetup, wake) {
       var datum = {
-        'date': Moment(meetup.date).format('dddd, MMMM Do'),
-        'time': Moment(meetup.time).format('h:mm a'),
+        'date': Moment(meetup.date).format(config.moment.dateFormat),
+        'time': Moment(meetup.time).format(config.moment.timeFormat),
         'location': meetup.location.undefined,
         'address': meetup.location.formatted,
         'wake': _parseWakeInfo(wake),
@@ -107,7 +107,7 @@
 
     function _acceptedRidersData(wakeId) {
       var dfr = Q.defer();
-      var acceptedRequestsRef = firebaesRef.child('accepted_requests');
+      var acceptedRequestsRef = firebaseRef.child('accepted_requests');
       var promises = [];
 
       acceptedRequestsRef
@@ -128,7 +128,7 @@
 
     function _riderRequestData(wakeId, requestId) {
       var dfr = Q.defer();
-      var requestsRef = firebaesRef.child('requests');
+      var requestsRef = firebaseRef.child('requests');
 
       requestsRef
         .child(wakeId)
@@ -144,7 +144,7 @@
 
     function _meetupData(wakeId, meetupId) {
       var dfr = Q.defer();
-      var meetupsRef = firebaesRef.child('meetups');
+      var meetupsRef = firebaseRef.child('meetups');
 
       meetupsRef
         .child(wakeId)
@@ -160,7 +160,7 @@
 
     function _wakeData(wakeId) {
       var dfr = Q.defer();
-      var wakesRef = firebaesRef.child('wakes');
+      var wakesRef = firebaseRef.child('wakes');
 
       wakesRef
         .child(wakeId)
@@ -178,18 +178,11 @@
     }
 
     function _generateWakeHref(wake) {
-      return 'http://findawake.com/wakes/' + wake.id;
+      return config.uri + 'wakes/' + wake.id;
     }
 
     function _generateDirectionsHref(meetup) {
       return 'http://maps.google.com/maps?daddr=' + meetup.location.lat + ',' + meetup.location.lng
-    }
-
-    function _log(message, data) {
-      console.log('\x1b[42m', 'Meetups.' + Date.now() + ': ' + message, '\x1b[0m');
-      if (data) {
-        console.log('\x1b[0m',JSON.stringify(data),'\n');
-      }
     }
   }
 })();

@@ -27,9 +27,7 @@
 
     <!-- build:js({.tmp,app}) scripts/vendor.js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/bower_components/es5-shim/es5-shim.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
-    <script src="/bower_components/json3/lib/json3.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower_components/angular-resource/angular-resource.js"></script>
     <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
@@ -39,18 +37,14 @@
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="/bower_components/firebase/firebase-debug.js"></script>
-    <script src="/bower_components/angular-strap/dist/angular-strap.min.js"></script>
-    <script src="/bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="/bower_components/angularfire/dist/angularfire.js"></script>
-    <script src="/bower_components/angularjs-geolocation/src/geolocation.js"></script>
     <script src="/bower_components/ks-active-link/index.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/application.js -->
     <script src="/scripts/app.js"></script>
-    
-    <script src="/scripts/controllers/login.js"></script>
+    <script src="/scripts/controllers/login.controller.js"></script>
     <script src="/scripts/controllers/signup.controller.js"></script>
     <script src="/scripts/controllers/signup-success.controller.js"></script>
     <script src="/scripts/controllers/wakes-index.controller.js"></script>
@@ -66,7 +60,8 @@
     <script src="/scripts/controllers/users-edit.controller.js"></script>
     <script src="/scripts/controllers/users-wakes.controller.js"></script>
     <script src="/scripts/controllers/users-requests.controller.js"></script>
-    <script src="/scripts/controllers/profile.js"></script>
+    <script src="/scripts/controllers/users-verify-email.controller.js"></script>
+    <script src="/scripts/controllers/profile.controller.js"></script>
     <script src="/scripts/controllers/request.js"></script>
     <script src="/scripts/directives/profile-gear-form.directive.js"></script>
     <script src="/scripts/directives/profile-avatar-form.directive.js"></script>
@@ -97,6 +92,7 @@
     <script src="/scripts/services/requests.factory.js"></script>
     <script src="/scripts/services/locations.factory.js"></script>
     <script src="/scripts/services/meetups.factory.js"></script>
+    <script src="/scripts/services/hashes.factory.js"></script>
     <script src="/scripts/modules/imgur.js"></script>
     <script src="/scripts/modules/loginTools.js"></script>
     <script src="/scripts/modules/google.js"></script>

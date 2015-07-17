@@ -57,9 +57,10 @@
       _checkCurrentUser();
       
       $scope.routes = [
-        {href:'/wakes/find', label:'Find A Wake', icon: 'fa-search'},
+        {href:'/wakes/discover', label:'Find A Wake', icon: 'fa-search'},
         {href:'/wakes/share', label:'Share A Wake', icon: 'fa-plus'},
       ];
+      
       $scope.logout = SimpleLogin.logout;
 
       SimpleLogin.onAuth(function(auth){

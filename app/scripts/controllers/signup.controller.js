@@ -14,30 +14,26 @@
 			$scope.loading = true;
 	    $scope.error = false;
 
-	    var invalid = SimpleLogin.assertValidCreateAccountAttempt($scope.email, $scope.pass, $scope.confirm);
+	    var invalid = SimpleLogin.assertValidCreateAccountAttempt($scope.email, $scope.password, $scope.confirm);
 	    
 	    if (invalid) {
+	    	$scope.loading = false;
 	      $scope.error = invalid;
 	      _resetPasswords();
 	      return false;
 	    }
 
-	    SimpleLogin.createAccount($scope.email, $scope.pass, _handleCreateAccount);
-		}
-
-		function _handleCreateAccount(error) {
-			$scope.loading = false;
-			
-			if (error) {
+	    SimpleLogin.createUser($scope.email, $scope.password).then(function(){
+	    	console.debug('yay! another user.');
+	    	$location.path('/signup/success');		
+	    }, function(error){
+	    	$scope.loading = false;
 				$scope.error = SimpleLogin.parseErrorMessages(error);
-				return false;
-			}
-
-			$location.path('/signup/success');	
+	    });
 		}
 
 		function _resetPasswords(){
-			$scope.pass = null;
+			$scope.password = null;
 			$scope.confirm = null;
 		}
 	}
