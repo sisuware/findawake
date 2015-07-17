@@ -124,5 +124,16 @@
       }
       return _currentUser;
     }
+
+    function _extractNameFromEmail(email) {
+      return _ucfirst(email.substr(0, email.indexOf('@'))||'');
+    }
+
+    function _ucfirst (str) {
+      // credits: http://kevin.vanzonneveld.net
+      str += '';
+      var f = str.charAt(0).toUpperCase();
+      return f + str.substr(1);
+    }
   }
 })();

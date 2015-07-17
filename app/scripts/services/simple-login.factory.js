@@ -122,8 +122,8 @@
         'email': email, 
         'password': password
       }).then(function successCreateAccount(user) {
-        loginPassword(email, password).then(function(user){
-          createAccount(user).then(dfr.resolve, dfr.reject);
+        loginPassword(email, password).then(function(auth){
+          createAccount(auth).then(dfr.resolve, dfr.reject);
         }, function(error){
           dfr.reject(error);
         });
@@ -176,11 +176,11 @@
       return dfr.promise;
     }
 
-    function parseErrorMessages(err){
-      if(err){
-        return err.message.replace(/FirebaseSimpleLogin:\s/g,'');
+    function parseErrorMessages(error){
+      if(error && error.message){
+        return error.message.replace(/FirebaseSimpleLogin:\s/g,'');
       } else {
-        return null;
+        return error;
       }
     }
 
