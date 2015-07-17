@@ -37,11 +37,11 @@
       return dfr.promise;
     }
 
-    function createTask(task, id) {
+    function createTask(task, data) {
       var dfr = $q.defer();
       var ref = firebaseRef('/queue/tasks').push();
 
-      ref.set({'task':task, 'id':id}, function(err){
+      ref.set(data, function(err){
         if(err){
           dfr.reject(err);
         } else {

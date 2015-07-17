@@ -29,7 +29,7 @@
       return FirebaseModels.createRef('meetups/' + meetup.wakeId, meetup).then(function(meetupRef){
         return $q.all([
           FirebaseModels.createUserAssociation('users', 'meetups/' + meetup.wakeId, meetupRef, 'set'),
-          FirebaseModels.createTask('meetup', meetupRef)
+          FirebaseModels.createTask({'task':'meetup','meetupId':meetupRef,'wakeId':meetup.wakeId})
         ]);
       });
     }

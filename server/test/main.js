@@ -1,9 +1,7 @@
 var FirebaseTokenGenerator = require('firebase-token-generator');
-var Queue = require('firebase-queue');
 var Firebase = require('firebase');
 
 var ref = new Firebase('https://findawake.firebaseio.com');
-var Meetups = require('./meetups')(ref);
 
 // move to env variable
 var tokenGenerator = new FirebaseTokenGenerator('YYM6RxwtABV1jlzgIw3wXThPxSKEIM5ufkdrFLZB');
@@ -12,22 +10,23 @@ var token = tokenGenerator.createToken({}, {'admin': true});
 ref.authWithCustomToken(token, function(error, authData){
   if (error) {
     console.log("Authentication Failed!", error);
-    return false;
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
   }
-
-  var queue = new Queue(ref.child('queue'), processQueue);
 });
 
+var Meetups = require('../meetups')(ref);
 
-
-
-function processQueue(data, progress, resolve, reject) {
-  // Read and process task data
-  console.log('recieved task');
-  
-  if (data && data.task === 'meetup') {
-    Meetups
-      .process(data)
-      .then(resolve, reject);
-  }
+var task = {
+  meetupId: '-JuHX2c--XKn8JFrRBVJ',
+  wakeId: '-Ju2pVidXn6wEmzEmDgV',
+  task: 'meetup'
 }
+
+Meetups.process(task).then(function(results){
+  console.log('Testing complete')
+  console.log(results);
+}, function(errors){
+  console.log('Testing failed')
+  console.log(errors);
+});
