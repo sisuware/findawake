@@ -130,6 +130,15 @@
           wake: wakeResolve
         }
       })
+      .when('/wakes/:id/delete', {
+        templateUrl: '/views/wakes/delete.html', 
+        controller: 'WakesDeleteController',
+        authRequired: true,
+        authorizationRequired: 'wake.userId',
+        resolve: {
+          wake: wakeResolve
+        }
+      })
       .when('/wakes/:id/request/ride', {
         templateUrl: '/views/wakes/request.html', 
         controller: 'WakesRequestController',
@@ -139,7 +148,7 @@
           auth: authResolve
         }
       })
-      .when('/wakes/:id/ride', {
+      .when('/wakes/:id/meetup', {
         templateUrl: '/views/wakes/ride.html', 
         controller: 'WakesRideController',
         authRequired: true,

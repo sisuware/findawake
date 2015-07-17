@@ -1,11 +1,11 @@
 <div class="sectional color1a clearfix sectional-sm">
-  <div class="container animated fadeInDown">
-    <div class="col-sm-9">
+  <div class="container animated fadeIn">
+    <div class="col-sm-8">
       <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
       <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{wake.userId}}">{{profile.name}}</a></small>
     </div>
-    <div class="col-sm-3">
-      <h2><a class="btn btn-block btn-info btn-lg" ng-href="/wakes/{{wake.id}}/request/ride">Request A Ride</a></h2>
+    <div class="col-sm-4">
+      <h2><a class="btn btn-block btn-default highlight btn-lg" ng-href="/wakes/{{wake.id}}/request/ride">Request A Ride</a></h2>
       <!-- <p class="muted text-center">Request a ride to be notified when you can wakeboard, wakesurf, or wakeskate behind this wake making machine!</p> -->
     </div>
     <!-- <div ng-cloak ng-show-auth="login" class="col-xs-3 text-right">
@@ -23,9 +23,9 @@
     </div> -->
   </div>
 </div>
-<div ng-cloak ng-show="wake.thumbnail" class="row clearfix wake-show-thumbnail {{wake.thumbnail ? 'has-thumbnail':'no-thumbnail'}} animated fadeInLeft" style="background-image: url('http://i.imgur.com/{{wake.thumbnail}}h.jpg')"></div>
+<div ng-cloak ng-show="wake.thumbnail" class="row clearfix wake-show-thumbnail {{wake.thumbnail ? 'has-thumbnail':'no-thumbnail'}} animated fadeIn" style="background-image: url('http://i.imgur.com/{{wake.thumbnail}}h.jpg')"></div>
 <div class="sectional">
-  <div class="container animated fadeInRight">
+  <div class="container animated fadeIn">
     <div class="col-md-8">
       <p class="lead">{{wake.boat.description}}</p>
     </div>

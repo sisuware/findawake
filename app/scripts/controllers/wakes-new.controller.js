@@ -26,7 +26,9 @@
     }
 
     function _defaultValues() {
-      $scope.wake.userId = auth.uid;
+      if (auth) {
+        $scope.wake.userId = auth.uid;
+      } 
     } 
 
     _defaultValues();

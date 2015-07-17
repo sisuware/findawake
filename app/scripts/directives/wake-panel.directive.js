@@ -17,6 +17,7 @@
 				_html += '			<div class="col-md-4 text-right">';
 				_html += '				<a ng-cloak ng-show="authorized()" ng-href="/wakes/{{wake.id}}/delete" class="btn btn-xs btn-default color1a"><i class="fa fa-trash-o"></i> Delete</a>';
 				_html += '				<a ng-cloak ng-show="authorized()" ng-href="/wakes/{{wake.id}}/edit" class="btn btn-xs btn-default color1a"><i class="fa fa-pencil"></i> Edit</a>';
+				_html += '				<a ng-cloak ng-show="authorized()" ng-href="/wakes/{{wake.id}}" class="btn btn-xs btn-default color1a"><i class="fa fa-eye"></i> View</a>';
 				_html += '			</div>';
 				_html += '		</div>';
 				_html += '	</div>';
@@ -32,7 +33,7 @@
 				_html += '				<h5><small class="text-uppercase">declined riders</small><br/>{{requests.length}}</h5>';
 				_html += '			</div>';
 				_html += '			<div class="col-md-6 text-right">';
-				_html += '				<a ng-href="/wakes/{{wake.id}}/ride" class="btn btn-default btn-md color3a">Let\'s Ride!</a>';
+				_html += '				<a ng-href="/wakes/{{wake.id}}/meetup" class="btn btn-default btn-md highlight">Create Meetup</a>';
 				_html += '			</div>';
 				_html += '		</div>';
 				_html += '	</div>';

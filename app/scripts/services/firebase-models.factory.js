@@ -37,7 +37,7 @@
       return dfr.promise;
     }
 
-    function createTask(task, data) {
+    function createTask(data) {
       var dfr = $q.defer();
       var ref = firebaseRef('/queue/tasks').push();
 
