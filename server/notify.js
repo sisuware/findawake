@@ -2,7 +2,8 @@
   'use strict';
   var Request = require('request');
   var Q = require('q');
-  var emailHook = 'https://zapier.com/hooks/catch/bl3xal';
+  var emailHook = 'https://zapier.com/hooks/catch/bl3xal/';
+  var smsHook = 'https://zapier.com/hooks/catch/bl8yfa/';
 
   module.exports = function Notify() {
     var service = {
