@@ -1,8 +1,11 @@
 (function(){
   'use strict';
   var Q = require('q');
-  var Notify = require('./notify');
-
+  var Notify = require('./notify')();
+  var Moment = require('moment');
+  var Bitly = require('bitly');
+  var bitly = new Bitly('simook', 'R_cd58051cae174632bb3cadfcaa284f12');
+  
   module.exports = function Meetups(firebaesRef) {
     var firebaesRef = firebaesRef;
 
@@ -16,6 +19,7 @@
      * Process new meetups from the queue
      */
     function process(task) {
+      _log('processing task', task)
       var dfr = Q.defer();
 
       _collectAssociatedTaskData(task)
@@ -26,6 +30,7 @@
     }
 
     function _collectAssociatedTaskData(data) {
+      _log('collecting associated data', data)
       return Q.all([
         _acceptedRidersData(data.wakeId),
         _meetupData(data.wakeId, data.meetupId),
@@ -34,11 +39,12 @@
     }
 
     function _processTaskDataResults(results) {
+      _log('process task data results', results);
       var promises = [];
       var riders = results[0];
       var meetup = results[1];
       var wake = results[2];
-      var info = _wakeMeetupInfo(meetup, wake);
+      var info = _meetupInfo(meetup, wake);
 
       riders.forEach(function(rider) {
         promises.push(_notifyRider(rider, info));
@@ -48,6 +54,7 @@
     }
 
     function _notifyRider(rider, info) {
+      _log('notify rider', rider)
       var dfr = Q.defer();
       var usersRef = firebaesRef.child('users');
       var promises = [];
@@ -56,25 +63,27 @@
         dfr.reject();
       }
 
-      debugger;
-
       usersRef
         .child(rider.userId)
         .on('value', function success(user) {
-          info.name = user.name;
+          var user = user.val();
           
           if (rider.notification.email) {
+            info.name = user.name;
             info.email = user.email;
+
+            _log('emailing rider', info);
             promises.push(Notify.email(info));
           }
 
           if (rider.notification.text) {
-            // todo: need to have a verified flag
-            info.cell = user.cell.value
+            info.number = user.cell.value;
+
+            _log('texting rider', info);
             promises.push(Notify.sms(info));
           }
 
-          dfr.resolve(Q.all(promises));
+          Q.all(promises).then(dfr.resolve, dfr.reject);
         }, function failure(error) {
           dfr.reject(error);
         });
@@ -82,14 +91,15 @@
       return dfr.promise;
     }
 
-    function _wakeMeetupInfo(meetup, wake) {
+    function _meetupInfo(meetup, wake) {
       var datum = {
-        'date': meetup.date,
-        'time': meetup.time,
+        'date': Moment(meetup.date).format('dddd, MMMM Do'),
+        'time': Moment(meetup.time).format('h:mm a'),
         'location': meetup.location.undefined,
         'address': meetup.location.formatted,
         'wake': _parseWakeInfo(wake),
-        'wakeHref': _generateWakeHref(wake)
+        'wakeHref': _generateWakeHref(wake),
+        'directions': _generateDirectionsHref(meetup)
       };
 
       return datum;
@@ -168,11 +178,18 @@
     }
 
     function _generateWakeHref(wake) {
-      return 'http://findawake/wakes/' + wake.id;
+      return 'http://findawake.com/wakes/' + wake.id;
     }
 
-    function _log(message) {
+    function _generateDirectionsHref(meetup) {
+      return 'http://maps.google.com/maps?daddr=' + meetup.location.lat + ',' + meetup.location.lng
+    }
 
+    function _log(message, data) {
+      console.log('\x1b[42m', 'Meetups.' + Date.now() + ': ' + message, '\x1b[0m');
+      if (data) {
+        console.log('\x1b[0m',JSON.stringify(data),'\n');
+      }
     }
   }
 })();
