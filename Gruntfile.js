@@ -391,7 +391,7 @@ module.exports = function (grunt) {
       'clean:server',
       //'wiredep',
       'concurrent:server',
-      'autoprefixer',
+      //'autoprefixer',
       'connect:livereload',
       'watch'
     ]);
@@ -405,7 +405,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'concurrent:test',
-    'autoprefixer',
+    //'autoprefixer',
     'connect:test',
     'karma'
   ]);
@@ -415,9 +415,9 @@ module.exports = function (grunt) {
     //'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    //'autoprefixer',
     'concat',
-    'ngmin',
+    //'ngmin',
     'less',
     'copy:dist',
     'cssmin',
@@ -432,15 +432,15 @@ module.exports = function (grunt) {
     //'wiredep',
     'useminPrepare',
     'concurrent:dist',
-    'autoprefixer',
+    //'autoprefixer',
     'concat',
-    'ngmin',
+    //'ngmin',
     'less',
     'copy:dist',
     'cssmin',
     'filerev',
     'usemin',
-    'htmlmin'
+    //'htmlmin'
   ]);
 
   grunt.registerTask('default', [
