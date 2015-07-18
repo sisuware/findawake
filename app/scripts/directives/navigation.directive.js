@@ -29,11 +29,11 @@
         _html += '      <li class="dropdown" ng-cloak ng-show="user">';
         _html += '        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.password.email"></span> <span class="caret"></span></a>';
         _html += '        <ul class="dropdown-menu" role="menu">';
-        _html += '          <li><a ng-href="/profile/{{user.uid}}">Public Profile</a></li>';
-        _html += '          <li class="divider"></li>';
         _html += '          <li><a ng-href="/account/edit">My Account</a></li>';
         _html += '          <li><a ng-href="/account/wakes">My Wakes</a></li>';
         _html += '          <li><a ng-href="/account/requests">My Ride Requests</a></li>';
+        _html += '          <li class="divider"></li>';
+        _html += '          <li><a ng-href="/profile/{{user.uid}}">Public Profile</a></li>';
         _html += '          <li class="divider"></li>';
         _html += '          <li><a href="" ng-click="logout()">Logout</a></li>';
         _html += '        </ul>';

@@ -1,13 +1,6 @@
 (function(){
   'use strict';
 
-  /**
-   * @ngdoc function
-   * @name findawakeApp.controller:MainCtrl
-   * @description
-   * # MainCtrl
-   * Controller of the findawakeApp
-   */
   angular
     .module('findAWake')
     .controller('UsersEditController', UsersEditController);
@@ -19,17 +12,17 @@
     $scope.updateProfile = updateProfile;
 
     function updateProfile(){
+      $scope.errors = false;
       $scope.savingProfile = true;
       $scope.profileSaved = false;
-      
-      $scope.profile.$save().then(function(){
-        Users.updatePublicProfile($scope.profile);
+
+      Users.updateProfile($scope.profile).then(function(){
+        $scope.profileSaved = true;
+      }, function(errors){
+        $scope.errors = errors;
       }).finally(function(){
-        $timeout(function(){
-          $scope.savingProfile = false;
-          $scope.profileSaved = true;
-          resetUpdateState();
-        },150);
+        $scope.savingProfile = false;
+        resetUpdateState();
       });
     }
 
@@ -39,11 +32,4 @@
       }, 500);
     }
   }
-
-  // app.controller('UserWelcomeCtrl', function(
-  //   $scope,
-  //   profile
-  // ){
-  //   $scope.profile = profile;
-  // });
 })();

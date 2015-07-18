@@ -83,9 +83,7 @@
       }
 
       function updateProfile(){
-        $scope.profile.$save().then(function(){
-          Users.updatePublicProfile($scope.profile);  
-        });
+        Users.updateProfile($scope.profile);  
       }
     }
   }

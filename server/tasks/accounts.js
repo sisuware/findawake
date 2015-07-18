@@ -1,11 +1,12 @@
 (function(){
   'use strict';
   var Q = require('q');
-  var Notify = require('./notify')();
-  var Moment = require('moment');
-  var Log = require('./log');
-  var config = require('./config');
   var crypto = require('crypto');
+  var Moment = require('moment');
+
+  var Notify = require('../notify')();
+  var Log = require('../log');
+  var config = require('../config');
 
   module.exports = function Accounts(firebaseRef) {
     var firebaseRef = firebaseRef;
