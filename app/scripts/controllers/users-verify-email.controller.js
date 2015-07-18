@@ -14,7 +14,7 @@
     $scope.profile.emailVerified = hash.$id;
     
     $scope.profile.$save().then(function(){
-      $location.path('/account/edit');
+      $location.path('/signup/success');
     }, function(errors){
       $scope.errors = errors;
     });

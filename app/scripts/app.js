@@ -23,7 +23,6 @@
       'ks.activeLink'
     ])
     .config(findAWakeConfig)
-    .constant('angularFireVersion', '1.1.1')
     .constant('loginRedirectPath', '/login')
     .constant('loginProviders', '')
     .constant('FBURL', 'https://findawake.firebaseio.com');
@@ -225,8 +224,7 @@
         controller: 'ProfileController',
         authRequired: false,
         resolve: {
-          profile: profileResolve,
-          auth: authResolve
+          profile: profileResolve
         }
       })
       .when('/legal', {

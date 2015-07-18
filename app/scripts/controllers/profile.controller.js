@@ -1,29 +1,14 @@
-'use strict';
+(function(){
+  'use strict';
 
-/**
- * @ngdoc function
- * @name findawakeApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the findawakeApp
- */
-var app = angular.module('findAWake');
+  angular
+    .module('findAWake')
+    .controller('ProfileController', ProfileController);
 
-app.controller('ProfileCtrl', function(
-  $scope, 
-  Wakes,
-  profile,
-  auth
-){
-  $scope.profile = profile;
-  $scope.auth = auth;
-  $scope.wakes = [];
+  ProfileController.$inject = ['$scope','profile'];
 
-  $scope.$watch('profile', function(value){
-    if(!value){ return false; }
-
-    angular.forEach($scope.profile.wakes, function(wake){
-      $scope.wakes.push(Wakes.get(wake));
-    });
-  });
-});
+  function ProfileController($scope, profile){
+    $scope.profile = profile;
+  }
+  
+})();

@@ -5,9 +5,9 @@
 		.module('findAWake')
 		.controller('UsersRequestsController', UsersRequestsController);
 
-	UsersRequestsController.$inject = [];
+	UsersRequestsController.$inject = ['$scope','profile'];
 
-	function UsersRequestsController() {
-		
+	function UsersRequestsController($scope, profile) {
+		$scope.profile = profile;
 	}
 })();

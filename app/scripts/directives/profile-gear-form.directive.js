@@ -66,14 +66,10 @@
 
       function updateGear() {
         $scope.saving = true;
-        $scope.profile.$save().then(function(){
-          Users.updatePublicProfile($scope.profile);
-        }, function(res){
-          console.debug('unable to update gear: ', res);
-        }).finally(function(){
+        Users.updateProfile($scope.profile).finally(function(){
           $scope.saving = false;
           $scope.dirty = false;
-        });
+        });  
       }
 
       function addGear(gear){

@@ -154,7 +154,7 @@
         if(err){
           dfr.reject(err);
         } else {
-          createTask({'task':'newAccount','userId':user.uid}).then(dfr.resolve,dfr.reject);
+          createTask({'task':'account','userId':user.uid}).then(dfr.resolve,dfr.reject);
         }
       });
 

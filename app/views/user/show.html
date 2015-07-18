@@ -1,4 +1,7 @@
-<div class="sectional color1a clearfix sectional-sm">
+<div ng-cloak ng-hide="profile.name" class="sectional highlight text-center">
+  <h3 class="text-center">This user does not have a public profile yet</h3>
+</div>
+<div ng-cloak ng-show="profile.name" class="sectional color1a clearfix sectional-sm">
   <div class="container animated fadeIn">
     <div class="col-sm-12">
       <h2><img avatar="{{profile.avatar}}" /> {{profile.name}} <small ng-show="profile.location"><i class="fa fa-map-marker"></i> {{profile.location}}</small></h2>
@@ -12,9 +15,9 @@
       <p ng-cloak ng-show="profile.bio" class="lead">{{profile.bio}}</p>
       <p ng-cloak ng-hide="profile.bio" class="lead text-muted">{{profile.name}} does not have a bio yet.</p>
     </div>
-    <div class="col-md-4">
+    <div ng-cloak ng-show="profile.gear" class="col-md-4">
       <h4>Gear</h4>
-      <table class="table table-condensed table-striped">
+      <table class="table table-condensed table-striped highlight">
         <tbody>
           <tr ng-repeat="gear in profile.gear">
             <td><b>{{gear.type}}</b></td>
@@ -31,54 +34,3 @@
     <div class="col-sm-6 col-md-3 animated fadeIn" ng-repeat="wakeId in profile.wakes" wake-thumbnail wake-id="{{wakeId}}"></div>
   </div>
 </div>
-
-<!-- <div class="container animated fadeIn">
-  <div class="row clearfix form-group">
-    <div class="col-xs-9">
-      <div class="avatar avatar-sm">
-        <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
-        <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i class="fa fa-user"></i></div>
-      </div>
-      <ol class="breadcrumb avatar-breadcrumb">
-        <li ng-cloak ng-show="profile.name"><h4>{{profile.name}}</h4></li>
-        <li ng-cloak ng-show="profile.location"><i class="fa fa-map-marker"></i> {{profile.location}}</li>
-      </ol>
-    </div>
-    <div class="col-xs-3 text-right">
-      <a ng-cloak ng-show="profile.$id === auth.id" ng-href="/my/account" class="btn btn-danger btn-sm"><i class="fa fa-gear"></i> Edit</a>
-      </div>
-  </div>
-  <div class="row clearfix">
-    <div class="col-md-8">
-      <h4><ng-pluralize count="wakes.length" when="{'0':'No Wakes','one':'1 Wake','other':'{} Wakes'}"></ng-pluralize></h4>
-      <div class="row clearfix">
-        <div class="col-md-12" ng-repeat="wake in wakes">
-          <a class="thumbnail" ng-href="/wakes/{{wake.id}}">
-            <div class="wake-thumbnail pattern-pixelweave">
-              <div class="shadow-overlay">
-                <span>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}}</span>
-              </div>
-              <img ng-src="{{wake.thumbnail}}" />
-            </div>
-            <div class="caption">
-              <small class="muted"><i class="glyphicon glyphicon-map-marker"></i> {{wake.location.formatted}}</small>
-              <span ng-cloak class="label pull-right" ng-show="wake.location.distance">{{wake.location.distance}} miles</span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <h4>Bio</h4>
-        <p ng-cloak ng-show="profile.bio" class="lead">{{profile.bio}}</p>
-        <p ng-cloak ng-hide="profile.bio" class="text-muted">No bio exists yet for {{profile.name}}</p>
-      </div>
-      <div class="form-group"> 
-        <h4>Gear</h4>
-        <p ng-cloak ng-hide="profile.gear" class="text-muted">No gear exists yet for {{profile.name}}</p>
-        
-      </div>
-    </div>
-  </div>
-</div> -->

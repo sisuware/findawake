@@ -1,10 +1,11 @@
 (function(){
   'use strict';
   var Q = require('q');
-  var Notify = require('./notify')();
   var Moment = require('moment');
-  var Log = require('./log');
-  var config = require('./config');
+
+  var Notify = require('../notify')();
+  var Log = require('../log');
+  var config = require('../config');
 
   module.exports = function Meetups(firebaseRef) {
     var firebaseRef = firebaseRef;
