@@ -1,14 +1,6 @@
 (function(){
   'use strict';
 
-/**
- * @ngdoc overview
- * @name findawakeApp
- * @description
- * # findawakeApp
- *
- * Main module of the application.
- */
   angular
     .module('findAWake', [
       'ngCookies',
@@ -18,7 +10,6 @@
       'firebase',
       'ui.bootstrap',
       'imgur',
-      // 'geolocation',
       'google.geocoder',
       'ks.activeLink'
     ])
@@ -244,14 +235,6 @@
       .when('/signup/success', {
         templateUrl: '/views/auth/signup.success.html',
         controller: 'SignupSuccessController',
-        authRequired: true,
-        resolve: {
-          profile: authUserResolve
-        }
-      })
-      .when('/welcome', {
-        templateUrl: '/views/user/welcome.html', 
-        controller: 'UserWelcomeCtrl', 
         authRequired: true,
         resolve: {
           profile: authUserResolve

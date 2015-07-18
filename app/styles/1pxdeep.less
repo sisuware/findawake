@@ -515,35 +515,28 @@ h1, h2, h3, h4, h5, h6,
 
 .navbar-toggle {
     @color:@color1;
-    background-color: @color;
+
+    background-color: transparent;
     .btn-borders(@color);
 
-    &:hover,
-    &:focus {
-        background-color: lighten(@color,2%);
+    &:active,.active {
+        background-color:darken(@color,15%);
     }
 
-    &:active,
-    .active {
-        background-color:darken(@color,2%);
-        border-top-color:darken(@color,2%);
-    }
-
-    .icon-bar-color(@color) when (luma(@color) > @luma-upper-break) {
-        background-color:#333;
-    }
-
-    .icon-bar-color(@color) when (luma(@color) =< @luma-upper-break) {
-        background-color:white;
-    }
-
-    .icon-bar {
-        .icon-bar-color(@color);
-    }
+   
 }
 
 .navbar-collapse {
     border-top:none;
+}
+
+.navbar-default {
+    @color:@color1;
+    .navbar-toggle {
+        &:hover,&:focus {
+            background-color: lighten(@color,2%);
+        }
+    }
 }
 
 //pills

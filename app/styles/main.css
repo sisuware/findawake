@@ -8478,24 +8478,20 @@ h6 small,
   padding: 0;
 }
 .navbar-toggle {
-  background-color: #26ade4;
+  background-color: transparent;
   border: 1px solid transparent;
   border-top-color: #67c6ec;
 }
-.navbar-toggle:hover,
-.navbar-toggle:focus {
-  background-color: #2fb0e5;
-}
 .navbar-toggle:active,
 .navbar-toggle .active {
-  background-color: #1daae3;
-  border-top-color: #1daae3;
-}
-.navbar-toggle .icon-bar {
-  background-color: white;
+  background-color: #157ea9;
 }
 .navbar-collapse {
   border-top: none;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #2fb0e5;
 }
 .nav-pills {
   text-shadow: none;

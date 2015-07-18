@@ -10,22 +10,23 @@
   function navigation(SimpleLogin) {
     var _html =  '<div class="container">';
         _html += '  <div class="navbar-header">';
-        _html += '    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">';
+        _html += '    <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">';
         _html += '      <span class="sr-only">Toggle navigation</span>';
-        _html += '      <span class="icon-bar"></span>';
-        _html += '      <span class="icon-bar"></span>';
-        _html += '      <span class="icon-bar"></span>';
+       
+        _html += '      <i class="fa fa-fw" ng-class="{\'fa-chevron-up\':!isCollapsed,\'fa-chevron-down\':isCollapsed}"></i>';
+        // _html += '      <span class="icon-bar"></span>';
+        // _html += '      <span class="icon-bar"></span>';
         _html += '    </button>';
         // _html += '    <a class="navbar-brand" href="/">Find A Wake <small class="label label-info">BETA</small></a>';
         _html += '  </div>';
-        _html += '  <div class="collapse navbar-collapse" id="navbar-collapse">';
+        _html += '  <div class="collapse navbar-collapse" collapse="isCollapsed">';
         _html += '    <ul class="nav navbar-nav animated fadeIn">';
         _html += '      <li ng-repeat="route in routes" ks-active-link active-class="active" active-path="{{route.href}}">';
         _html += '        <a href="{{route.href}}"><i class="fa {{route.icon}}"></i> {{route.label}}</a></li>';
         _html += '      </li>';
         _html += '    </ul>';
         _html += '    <ul class="nav navbar-nav navbar-right animated fadeIn">';      
-        _html += '      <li ng-cloak ng-show="user" ks-active-link active-class="active" active-path="/account/wakes"><a ng-href="/account/wakes">My Wakes</a></li>';
+        // _html += '      <li ng-cloak ng-show="user" ks-active-link active-class="active" active-path="/account/wakes"><a ng-href="/account/wakes">My Wakes</a></li>';
         _html += '      <li class="dropdown" ng-cloak ng-show="user">';
         _html += '        <a href="" class="dropdown-toggle" data-toggle="dropdown"><span ng-bind="user.password.email"></span> <span class="caret"></span></a>';
         _html += '        <ul class="dropdown-menu" role="menu">';
@@ -55,7 +56,7 @@
     
     function navigationController($scope, $element, $attrs) {
       _checkCurrentUser();
-      
+      $scope.isCollapsed = true;
       $scope.routes = [
         {href:'/wakes/discover', label:'Find A Wake', icon: 'fa-search'},
         {href:'/wakes/share', label:'Share A Wake', icon: 'fa-plus'},

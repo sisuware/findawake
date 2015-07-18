@@ -1,12 +1,16 @@
-<div class="sectional color1a clearfix sectional-sm">
+<div ng-cloak ng-hide="wake.id" class="sectional highlight text-center">
+  <h1><i class="fa fa-meh-o"></i></h1>
+  <h3 class="text-center">This wake doesn't appear to exist...</h3>
+  <p class="lead">Please double check the url you are trying to visit.</p>
+</div>
+<div ng-cloak ng-show="wake.boat" class="sectional color1a clearfix sectional-sm">
   <div class="container animated fadeIn">
     <div class="col-sm-8">
-      <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
+      <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small ng-cloak ng-show="wake.location"><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
       <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{wake.userId}}">{{profile.name}}</a></small>
     </div>
     <div class="col-sm-4">
-      <h2><a class="btn btn-block btn-default highlight btn-lg" ng-href="/wakes/{{wake.id}}/request/ride">Request A Ride</a></h2>
-      <!-- <p class="muted text-center">Request a ride to be notified when you can wakeboard, wakesurf, or wakeskate behind this wake making machine!</p> -->
+      <h2 ng-cloak ng-show="wake.id"><a class="btn btn-block btn-default highlight btn-lg" ng-href="/wakes/{{wake.id}}/request/ride">Request A Ride</a></h2>
     </div>
     <!-- <div ng-cloak ng-show-auth="login" class="col-xs-3 text-right">
       <button ng-cloak ng-show="wake.userId === auth.userId" ng-click="removeWake(wake)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
@@ -23,13 +27,13 @@
     </div> -->
   </div>
 </div>
-<div ng-cloak ng-show="wake.thumbnail" class="row clearfix wake-show-thumbnail {{wake.thumbnail ? 'has-thumbnail':'no-thumbnail'}} animated fadeIn" style="background-image: url('http://i.imgur.com/{{wake.thumbnail}}h.jpg')"></div>
+<div ng-cloak ng-show="wake.thumbnail" class="wake-show-thumbnail {{wake.thumbnail ? 'has-thumbnail':'no-thumbnail'}} animated fadeIn" style="background-image: url('http://i.imgur.com/{{wake.thumbnail}}h.jpg')"></div>
 <div class="sectional">
   <div class="container animated fadeIn">
     <div class="col-md-8">
       <p class="lead">{{wake.boat.description}}</p>
     </div>
-    <div class="col-md-4">
+    <div ng-cloak ng-show="wake.schedules || wake.boat" class="col-md-4">
       <h4><i class="fa fa-smile-o"></i> Goodies</h4>
       <ul class="list-unstyled">
         <li ng-cloak ng-show="wake.boat.perfectPass"><i class="fa fa-check"></i> Cruise Control / Perfect Pass</li>
@@ -39,7 +43,7 @@
       </ul>
       <hr/>
       <h4><i class="fa fa-calendar"></i> Schedule</h4>
-      <table class="table table-condensed table-striped">
+      <table class="table table-condensed table-striped highlight">
         <thead>
           <tr>
             <th>Day</th>
@@ -61,9 +65,9 @@
     </div>
   </div>
 </div>
-<div class="sectional highlight">
-  <p class="lead text-center form-group">Just choose how you want to ride <a ng-href="/profile/{{wake.userId}}">{{profile.name}}'s</a> wake</p>
-  <div class="container">
+<div ng-cloak ng-show="wake.types" class="sectional highlight">
+  <p ng-cloak ng-show="profile.name" class="lead text-center form-group">Just choose how you want to ride <a ng-href="/profile/{{wake.userId}}">{{profile.name}}'s</a> wake</p>
+  <div class="container animated fadeIn">
     <div class="row-fluid clearfix">
        <div ng-cloak ng-show="value" class="col-sm-4" ng-repeat="(key, value) in wake.types" ng-mouseover="type.$mouseover = true" ng-mouseleave="type.$mouseover = false">
         <a class="color1 thumbnail board-thumbnail" ng-class="{true: 'active'}[type.$mouseover]" ng-href="/wakes/{{wake.id}}/request/ride#{{key}}">
