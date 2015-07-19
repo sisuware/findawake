@@ -8,15 +8,29 @@
   UsersVerifyEmailController.$inject = ['$scope','hash', 'profile', '$location'];
 
   function UsersVerifyEmailController($scope, hash, profile, $location) {
-    $scope.hash = hash;
-    $scope.profile = profile;
+    function _updateEmailVerifiedHash() {
+      if (!hash || !profile) {
+        console.debug('missing hash or profile');
+        return false;
+      }
 
-    $scope.profile.emailVerified = hash.$id;
-    
-    $scope.profile.$save().then(function(){
+      if (profile && !profile.emailVerified) {
+        profile.emailVerified = angular.copy(hash.$id);
+        profile.$save().then(_redirect, _handleError);
+      } else {
+        _redirect();
+      }
+    }
+
+    function _redirect() {
       $location.path('/signup/success');
-    }, function(errors){
-      $scope.errors = errors;
-    });
+    }
+
+    function _handleError(error) {
+      console.log(error);
+      $location.path('/my/account');
+    }
+
+    _updateEmailVerifiedHash();
   }
 })();
