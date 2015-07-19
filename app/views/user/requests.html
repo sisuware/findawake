@@ -7,7 +7,16 @@
 </div>
 <div class="sectional">
   <div class="sectional-title">my ride requests</div>
-  <div class="container animated fadeIn">
-    {{profile.requests}}
+  <div ng-cloak ng-hide="profile.requests" class="container animated fadeIn">
+    <h3 class="text-center">You have not requested to ride on any wakes.</h3>
+    <p class="lead text-center">Go find a wake and request to ride it or tell all your friends who own boats to join!</p>
+    <div class="form-group text-center">
+      <a href="/wakes/discover" class="btn btn-lg btn-default color3"><i class="fa fa-search"></i> Find A Wake</a>
+    </div>
+  </div>
+  <div ng-cloak ng-show="profile.requests" class="container">
+    <div class="row clearfix">
+      <div ng-repeat="(key,value) in profile.requests" class="col-sm-6 col-md-3" user-request-panel wake-id="key" request-id="value"></div>
+    </div>
   </div>
 </div>

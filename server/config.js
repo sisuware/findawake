@@ -1,6 +1,6 @@
 module.exports = {
-  logLevel: process.env.LOG_LEVEL || 'debug',
-  uri: process.env.ENV_URI || 'http://findawake.com/',
+  logLevel: 'debug',
+  uri: 'http://findawake.com/',
 
   zapier : {
     email: {
@@ -11,8 +11,8 @@ module.exports = {
   },
 
   firebase: {
-    account: process.env.FIREBASE_ACCOUNT || 'https://findawake.firebaseio.com',
-    token : process.env.FIREBASE_TOKEN || 'YYM6RxwtABV1jlzgIw3wXThPxSKEIM5ufkdrFLZB'
+    account: 'https://findawake.firebaseio.com',
+    token : 'YYM6RxwtABV1jlzgIw3wXThPxSKEIM5ufkdrFLZB'
   },
 
   moment: {

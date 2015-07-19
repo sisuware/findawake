@@ -17,6 +17,7 @@
 
       Requests.create($scope.request).then(function(data){
         console.log('request success');
+        $location.path('wakes/' + wake.id);
       }, function(ref){
         $scope.error = ref;
       }).finally(function(){

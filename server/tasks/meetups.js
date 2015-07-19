@@ -66,7 +66,7 @@
 
       usersRef
         .child(rider.userId)
-        .on('value', function success(user) {
+        .once('value', function success(user) {
           var user = user.val();
           
           if (rider.notification.email) {
@@ -134,7 +134,7 @@
       requestsRef
         .child(wakeId)
         .child(requestId)
-        .on('value', function success(snapshot) {
+        .once('value', function success(snapshot) {
           dfr.resolve(snapshot.val());
         }, function failure(error) {
           dfr.reject(error);
