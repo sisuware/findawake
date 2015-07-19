@@ -10551,6 +10551,23 @@ a.list-group-item.color4 > .list-group-item-heading {
 .image-ocean {
   background: url('/images/ocean.jpg') no-repeat center;
 }
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 110px;
+  background-color: #f5f5f5;
+  padding: 25px 0;
+}
 .navbar {
   margin-bottom: 0px;
 }
