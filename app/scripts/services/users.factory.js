@@ -13,7 +13,8 @@
     var service = {
       get: get,
       getProfile: getProfile,
-      updateProfile: updateProfile
+      updateProfile: updateProfile,
+      requests: requests
     };
 
     return service; 
@@ -21,6 +22,15 @@
     function get(id){
       if (!id) { return false; }
       return syncData.object('users/' + id).$loaded();
+    }
+
+    function requests(id, wakeId) {
+      if (!id) { return false; }
+      if (wakeId) {
+        return syncData.object('users/' + id + '/requests/' + wakeId).$loaded();
+      } else {
+        return syncData.object('users/' + id + '/requests').$loaded();
+      }
     }
 
     function getProfile(id){

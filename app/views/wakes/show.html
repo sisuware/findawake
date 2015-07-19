@@ -9,22 +9,7 @@
       <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small ng-cloak ng-show="wake.location"><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
       <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{wake.userId}}">{{profile.name}}</a></small>
     </div>
-    <div class="col-sm-4">
-      <h2 ng-cloak ng-show="wake.id"><a class="btn btn-block btn-default highlight btn-lg" ng-href="/wakes/{{wake.id}}/request/ride">Request A Ride</a></h2>
-    </div>
-    <!-- <div ng-cloak ng-show-auth="login" class="col-xs-3 text-right">
-      <button ng-cloak ng-show="wake.userId === auth.userId" ng-click="removeWake(wake)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i> Delete</button>
-      <a ng-cloak ng-show="wake.userId === auth.userId" ng-href="/wakes/{{wake.id}}/edit" class="btn btn-danger btn-sm"><i class="fa fa-gear"></i> Edit</a>
-    </div> -->
-    <!-- <div ng-cloak class="well animated fadeIn">
-        <div class="form-group">
-          <button type="button" class="btn btn-block btn-success disabled btn-lg"><i class="fa fa-star"></i> Ride Requested</button>
-        </div>
-        <p class="muted text-center">
-          You'll be notified via when a session has been scheduled.
-        </p>
-      </div>
-    </div> -->
+    <div class="col-sm-4" wake-request-ride wake="wake"></div>
   </div>
 </div>
 <div ng-cloak ng-show="wake.thumbnail" class="wake-show-thumbnail {{wake.thumbnail ? 'has-thumbnail':'no-thumbnail'}} animated fadeIn" style="background-image: url('http://i.imgur.com/{{wake.thumbnail}}h.jpg')"></div>
@@ -65,7 +50,7 @@
     </div>
   </div>
 </div>
-<div ng-cloak ng-show="wake.types" class="sectional highlight">
+<div ng-cloak ng-show="wake.types" ng-hide="isRequested()" class="sectional highlight">
   <p ng-cloak ng-show="profile.name" class="lead text-center form-group">Just choose how you want to ride <a ng-href="/profile/{{wake.userId}}">{{profile.name}}'s</a> wake</p>
   <div class="container animated fadeIn">
     <div class="row-fluid clearfix">
