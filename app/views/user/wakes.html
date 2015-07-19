@@ -6,8 +6,17 @@
   </div>
 </div>
 <div class="sectional">
-	<div class="sectional-title">my wakes</div>
-	<div ng-cloak ng-show="profile && profile.wakes" class="container animated fadeIn">
-		<div ng-repeat="wake in profile.wakes" class="col-sm-12" wake-panel wake-id="wake" user="profile"></div>
-	</div>
+  <div class="sectional-title">my wakes</div>
+  <div ng-cloak ng-hide="profile.wakes" class="container animated fadeIn">
+    <h3 class="text-center">You do not have any wakes.</h3>
+    <p class="lead text-center">Go share a wake so riders can find it and request a ride.</p>
+    <div class="form-group text-center">
+      <a href="/wakes/share" class="btn btn-lg btn-default color3"><i class="fa fa-plus"></i> Share A Wake</a>
+    </div>
+  </div>
+  <div ng-cloak ng-show="profile.wakes" class="container">
+    <div class="row clearfix">
+      <div ng-repeat="(key,value) in profile.wakes" class="col-sm-6 col-md-3" user-wake-panel wake-id="value"></div>
+    </div>
+  </div>
 </div>

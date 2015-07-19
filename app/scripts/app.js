@@ -61,7 +61,7 @@
     }
 
     function meetupsResolve(Meetups, $route) {
-      return Meetups.query();
+      return Meetups.query($route.current.params.id);
     }
 
     function wakesLocationResolve(Locations, $route) {
