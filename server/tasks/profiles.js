@@ -7,9 +7,7 @@
   var Log = require('../log');
   var config = require('../config');
 
-  module.exports = function Profiles(firebaseRef) {
-    var firebaseRef = firebaseRef;
-
+  module.exports = function Profiles(Models) {
     var service = {
       process: process
     };
@@ -32,7 +30,7 @@
 
     function _collectAssociatedTaskData(data) {
       Log.info('collecting associated data', data)
-      return _userData(data.userId)
+      return Models.getUser(data.userId);
     }
 
     function _processTaskDataResults(data) {
@@ -59,22 +57,6 @@
             Log.success('saved public profile', datum);
             dfr.resolve(datum);
           }
-        });
-
-      return dfr.promise;
-    }
-
-    function _userData(userId) {
-      var dfr = Q.defer();
-      var users = firebaseRef.child('users');
-
-      users
-        .child(userId)
-        .once('value', function success(snapshot){
-          dfr.resolve(snapshot.val());
-        }, function failure(error){
-          Log.error('failed to get user snapshot', error);
-          dfr.reject(error);
         });
 
       return dfr.promise;

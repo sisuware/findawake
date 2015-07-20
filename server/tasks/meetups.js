@@ -7,9 +7,7 @@
   var Log = require('../log');
   var config = require('../config');
 
-  module.exports = function Meetups(firebaseRef) {
-    var firebaseRef = firebaseRef;
-
+  module.exports = function Meetups(Models) {
     var service = {
       process: process
     };
@@ -34,8 +32,8 @@
       Log.info('collecting associated data', data)
       return Q.all([
         _acceptedRidersData(data.wakeId),
-        _meetupData(data.wakeId, data.meetupId),
-        _wakeData(data.wakeId)
+        Models.getMeetup(data),
+        Models.getWake(data.wakeId)
       ]);
     }
 
@@ -47,7 +45,7 @@
       var wake = results[2];
       var info = _meetupInfo(meetup, wake);
 
-      riders.forEach(function(rider) {
+      riders.forEach(function (rider) {
         promises.push(_notifyRider(rider, info));
       });
 
@@ -57,18 +55,15 @@
     function _notifyRider(rider, info) {
       Log.info('notify rider', rider)
       var dfr = Q.defer();
-      var usersRef = firebaseRef.child('users');
       var promises = [];
 
       if (!rider.notification || !rider.userId) {
         dfr.reject();
       }
 
-      usersRef
-        .child(rider.userId)
-        .once('value', function success(user) {
-          var user = user.val();
-          
+      Models
+        .getUser(rider.userId)
+        .then(function (user) {
           if (rider.notification.email) {
             info.name = user.name;
             info.email = user.email;
@@ -85,9 +80,7 @@
           }
 
           Q.all(promises).then(dfr.resolve, dfr.reject);
-        }, function failure(error) {
-          dfr.reject(error);
-        });
+        }, dfr.reject);
 
       return dfr.promise;
     }
@@ -108,68 +101,18 @@
 
     function _acceptedRidersData(wakeId) {
       var dfr = Q.defer();
-      var acceptedRequestsRef = firebaseRef.child('accepted_requests');
       var promises = [];
 
-      acceptedRequestsRef
-        .child(wakeId)
-        .once('value', function success(snapshot) {
-          snapshot.forEach(function(request) {
-            promises.push(_riderRequestData(wakeId, request.val()));
+      Models
+        .queryAcceptedRequests(wakeId)
+        .then(function (requests){
+          requests.forEach(function (request){
+            promises.push(Models.getRequest(request));
           });
 
           Q.all(promises).then(dfr.resolve, dfr.reject);
+        }, dfr.reject);
 
-        }, function failure(error) {
-          dfr.reject(error);
-        });
-
-      return dfr.promise;
-    }
-
-    function _riderRequestData(wakeId, requestId) {
-      var dfr = Q.defer();
-      var requestsRef = firebaseRef.child('requests');
-
-      requestsRef
-        .child(wakeId)
-        .child(requestId)
-        .once('value', function success(snapshot) {
-          dfr.resolve(snapshot.val());
-        }, function failure(error) {
-          dfr.reject(error);
-        });
-
-      return dfr.promise;
-    }
-
-    function _meetupData(wakeId, meetupId) {
-      var dfr = Q.defer();
-      var meetupsRef = firebaseRef.child('meetups');
-
-      meetupsRef
-        .child(wakeId)
-        .child(meetupId)
-        .once('value', function success(snapshot) {
-          dfr.resolve(snapshot.val());
-        }, function failure(error) {
-          dfr.reject(error);
-        });
-
-      return dfr.promise;
-    }
-
-    function _wakeData(wakeId) {
-      var dfr = Q.defer();
-      var wakesRef = firebaseRef.child('wakes');
-
-      wakesRef
-        .child(wakeId)
-        .once('value', function success(snapshot) {
-          dfr.resolve(snapshot.val());
-        }, function failure(error) {
-          dfr.reject(error);
-        });
 
       return dfr.promise;
     }
