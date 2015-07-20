@@ -36,23 +36,25 @@
     }
 
     function acceptRequest(request) {
-      return FirebaseModels.createRef('accepted_requests/' + request.wakeId, request.id).then(function(acceptedRef){
-        get(request).then(function(userRequestRef){
-          userRequestRef.accepted = acceptedRef;
-          userRequestRef.declined = false;
-          return userRequestRef.$save();
-        });  
-      });
+      return FirebaseModels.createTask({'task':'request','requestId':request.id,'wakeId':request.wakeId,'accepted':true});
+      // return FirebaseModels.createRef('accepted_requests/' + request.wakeId, request.id).then(function(acceptedRef){
+        // get(request).then(function(userRequestRef){
+          // userRequestRef.accepted = acceptedRef;
+          // userRequestRef.declined = false;
+          // return userRequestRef.$save();
+        // });  
+      // });
     }
 
     function declineRequest(request) {
-      return FirebaseModels.createRef('declined_requests/' + request.wakeId, request.id).then(function(declinedRef){
-        get(request).then(function(userRequestRef){
-          userRequestRef.declined = declinedRef;
-          userRequestRef.accepted = false;
-          return userRequestRef.$save();
-        });  
-      });
+      return FirebaseModels.createTask({'task':'request','requestId':request.id,'wakeId':request.wakeId,'accepted':false});
+      // return FirebaseModels.createRef('declined_requests/' + request.wakeId, request.id).then(function(declinedRef){
+        // get(request).then(function(userRequestRef){
+          // userRequestRef.declined = declinedRef;
+          // userRequestRef.accepted = false;
+          // return userRequestRef.$save();
+        // });  
+      // });
     }
 
     function _resetAcceptedDeclined() {

@@ -8,6 +8,7 @@ var ref = new Firebase(config.firebase.account);
 var Meetups = require('./tasks/meetups')(ref);
 var Accounts = require('./tasks/accounts')(ref);
 var Profiles = require('./tasks/profiles')(ref);
+var Requests = require('./tasks/requests')(ref);
 
 // move to env variable
 var tokenGenerator = new FirebaseTokenGenerator(config.firebase.token);
@@ -49,6 +50,13 @@ function processQueue(data, progress, resolve, reject) {
   if (data.task === 'profile') {
     unknownTask = false;
     Profiles
+      .process(data)
+      .then(resolve, reject);
+  }
+
+  if (data.task === 'request') {
+    unknownTask = false;
+    Requests
       .process(data)
       .then(resolve, reject);
   }

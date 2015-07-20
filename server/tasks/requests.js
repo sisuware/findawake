@@ -1,13 +1,12 @@
 (function(){
   'use strict';
   var Q = require('q');
-  var BadWords = require('bad-words');
   var _ = require('lodash');
 
   var Log = require('../log');
   var config = require('../config');
 
-  module.exports = function Profiles(firebaseRef) {
+  module.exports = function Requests(firebaseRef) {
     var firebaseRef = firebaseRef;
 
     var service = {
@@ -20,7 +19,7 @@
      * Process new accounts from the queue
      */
     function process(task) {
-      Log.info('starting Profile task', task)
+      Log.info('starting Request task', task)
       var dfr = Q.defer();
 
       _collectAssociatedTaskData(task)
@@ -32,33 +31,27 @@
 
     function _collectAssociatedTaskData(data) {
       Log.info('collecting associated data', data)
-      return _userData(data.userId)
+      return _requestData(data.wakeId, data.requestId),
     }
 
     function _processTaskDataResults(data) {
       Log.info('process task data results', data);
+      
+      
+    }
+
+    function _requestData(wakeId, requestId) {
       var dfr = Q.defer();
-      var filter = new BadWords();
-      var profilesRef = firebaseRef.child('profiles');
-      var datum = _.pick(data,'avatar','bio','gear','location','name','boats');     
+      var requests = firebaseRef.child('requests');
 
-      if (datum.bio) {
-        datum.bio = filter.clean(datum.bio);
-      }
-      if (datum.name) {
-        datum.name = filter.clean(datum.name);
-      }
-
-      profilesRef
-        .child(data.userId)
-        .set(datum, function(error){
-          if (error) {
-            Log.error('failed to update public profile', error);
-            dfr.reject(error);
-          } else {
-            Log.success('saved public profile', datum);
-            dfr.resolve(datum);
-          }
+      requests
+        .child(wakeId)
+        .child(requestId)
+        .once('value', function(snapshot){
+          dfr.resolve(snapshot.val());
+        }, function(error) {
+          Log.error('failed to get request snapshot', error);
+          dfr.reject(error);
         });
 
       return dfr.promise;
@@ -73,7 +66,7 @@
         .once('value', function success(snapshot){
           dfr.resolve(snapshot.val());
         }, function failure(error){
-          Log.error('failed to get user snapshot', error);
+          Log.error('failed to get user snapshot', userId);
           dfr.reject(error);
         });
 
