@@ -1,5 +1,6 @@
 (function(){
   'use strict';
+  
   var Request = require('request');
   var Q = require('q');
   var config = require('./config');
@@ -14,14 +15,18 @@
     return service;
 
     function welcomeEmail(data) {
-      return _email(config.zapier.email.welcome, data);
+      return _zapierEmail(config.zapier.email.welcome, data);
     }
 
     function meetupEmail(data) {
-      return _email(config.zapier.email.meetup, data);
+      return _zapierEmail(config.zapier.email.meetup, data);
     }
 
-    function _email(url, data) {
+    function requestEmail(data) {
+      return _sendEmailMessage(data);
+    }
+
+    function _zapierEmail(url, data) {
       var dfr = Q.defer();
 
       Request.post({url: url, body: data, json: true}, function(error, httpResponse, body){
@@ -46,6 +51,14 @@
         }
       });  
       
+      return dfr.promise;
+    }
+
+    function _sendEmailMessage(data) {
+      var dfr = Q.defer();
+      console.log(data);
+      dfr.resolve(data);
+
       return dfr.promise;
     }
   }
