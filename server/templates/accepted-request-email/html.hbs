@@ -17,7 +17,7 @@
         <table class="main" width="100%" cellpadding="0" cellspacing="0">
           <tr>
             <td class="alert alert-good">
-              Your ride request has been accepted.
+              {{name}}, your ride request has been <b>accepted</b>
             </td>
           </tr>
           <tr>
@@ -25,21 +25,18 @@
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    {{name}}, your ride request for {{wake.year}} {{wake.make}} {{wake.model}} has been approved.
+                    <small>WAKE</small>
+                    <h2 class="first">{{wake.year}} {{wake.make}} {{wake.model}}</h2>
                   </td>
                 </tr>
                 <tr>
                   <td class="content-block">
+                    <p>You will now be notified when a meetup has been scheduled.</p>
                   </td>
                 </tr>
                 <tr>
                   <td class="content-block">
-                    <!-- <a href="http://www.mailgun.com" class="btn-primary">Upgrade my account</a> -->
-                  </td>
-                </tr>
-                <tr>
-                  <td class="content-block">
-                    <!-- Thanks for choosing Acme Inc. -->
+                    <a href="http://{{wakeHref}}" class="btn-primary">View Meetups</a>
                   </td>
                 </tr>
               </table>
@@ -49,7 +46,7 @@
         <div class="footer">
           <table width="100%">
             <tr>
-              <!-- <td class="aligncenter content-block"><a href="http://www.mailgun.com">Unsubscribe</a> from these alerts.</td> -->
+              <td class="aligncenter content-block"><a href="http://findawake.com">Find A Wake</a></td>
             </tr>
           </table>
         </div></div>

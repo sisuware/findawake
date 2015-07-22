@@ -78,7 +78,7 @@
 
     function _requestInfo(wake) {
       var datum = {
-        'wake': _.pick(wake, 'year','make','model'),
+        'wake': _.pick(wake.boat, 'year','make','model'),
         'wakeHref': _generateWakeHref(wake)
       };
 
