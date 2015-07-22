@@ -41,18 +41,19 @@
       var dfr = Q.defer();
       var request = results[0];
       var wake = results[1];
-      var info = _requestInfo(wake);
+      var emailData = _requestInfo(wake);
       
       Models
         .getUser(request.userId)
         .then(function(user){
-          info.name = user.name;
-          info.email = user.email;
-          info.requestAccepted = task.accepted;
+          emailData.name = user.name;
+          emailData.to = user.email;
+          emailData.accepted = task.accepted;
+          emailData.subject = 'Ride request ' + (task.accepted ? 'accepted':'declined');
 
-          Log.info('emailing user', info);
+          Log.info('emailing user', emailData);
           
-          Notify.requestEmail(info).then(dfr.resolve, dfr.reject);
+          Notify.requestEmail(emailData).then(dfr.resolve, dfr.reject);
         }, dfr.reject);
 
       return dfr.promise;
@@ -77,15 +78,11 @@
 
     function _requestInfo(wake) {
       var datum = {
-        'wake': _parseWakeInfo(wake),
+        'wake': _.pick(wake, 'year','make','model'),
         'wakeHref': _generateWakeHref(wake)
       };
 
       return datum;
-    }
-
-    function _parseWakeInfo(wake) {
-      return [wake.boat.year, wake.boat.make, wake.boat.model].join(' ');
     }
 
     function _generateWakeHref(wake) {

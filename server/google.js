@@ -6,7 +6,7 @@
   var Q = require('q');
   var Log = require('./log');
   var config = require('./config');
-
+  
   var googleAuth = new Google.auth.JWT(config.google.auth.client_email, null, config.google.auth.private_key, config.google.auth.scopes, config.google.user);
 
   var service = {
@@ -15,16 +15,10 @@
 
   module.exports = service;
 
-  function sendMessage() {
+  function sendMessage(message) {
     var dfr = Q.defer();
     Log.info('attempting to send email through Gmail');
 
-    var message = "To: simook@gmail.com\n" +
-                  "From: support@findawake.com\n" +
-                  "Subject: Subject Text\n\n" +
-    
-                  "The actual message text goes here";
-    
     _authorize()
       .then(function(auth){
         Gmail.users.messages.send({
@@ -47,10 +41,6 @@
 
 
     return dfr.promise;
-  }
-
-  function _messageBody() {
-
   }
 
   function _authorize() {
