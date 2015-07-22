@@ -4,8 +4,6 @@
   "main": "main.js",
   "dependencies": {
     "bad-words": "^1.2.1",
-    "bitly": "^2.0.0",
-    "btoa": "^1.1.2",
     "firebase": "^2.2.7",
     "firebase-queue": "^1.2.1",
     "firebase-token-generator": "^2.0.0",
