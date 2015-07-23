@@ -23,43 +23,52 @@ ref.authWithCustomToken(token, function(error, authData){
   runTests();
 });
 
+var meetupTask = {
+  meetupId: '-JuHX2c--XKn8JFrRBVJ',
+  wakeId: '-Ju2pVidXn6wEmzEmDgV',
+  task: 'meetup'
+};
+
+var welcomeTask = {
+  userId: 'simplelogin:28'
+};
+
+var profileTask = {
+
+};
+
+var acceptedRequestTask = {
+  accepted: true,
+  wakeId: '-Ju2pVidXn6wEmzEmDgV',
+  requestId: '-Ju3fiHeG_-Y6dj9heJv'
+};
+
+var declinedRequestTask = {
+  accepted: false,
+  wakeId: '-Ju2pVidXn6wEmzEmDgV',
+  requestId: '-Ju3fiHeG_-Y6dj9heJv'
+};
+
 function runTests() {
-
-  var meetupTask = {
-    meetupId: '-JuHX2c--XKn8JFrRBVJ',
-    wakeId: '-Ju2pVidXn6wEmzEmDgV',
-    task: 'meetup'
-  };
-
-  var welcomeTask = {
-    userId: 'simplelogin:28'
-  };
-
-  var profileTask = {
-
-  };
-
-  var requestTask = {
-    accepted: true,
-    wakeId: '-Ju2pVidXn6wEmzEmDgV',
-    requestId: '-Ju3fiHeG_-Y6dj9heJv'
-  };
-
   // Requests
-  //   .process(requestTask)
+  //   .process(acceptedRequestTask)
   //   .then(_handleSuccess, _handleError)
   //   .done(_handleDone);
 
-  // Meetups.process(meetupTask).then(function(results){
-  //   Log.success('Meetups testing complete', results);
-  // }, function(errors){
-  //   Log.failed('Meetup testing failed', errors);
-  // });
+  // Requests
+  //   .process(declinedRequestTask)
+  //   .then(_handleSuccess, _handleError)
+  //   .done(_handleDone);
 
-  Accounts
-    .process(welcomeTask)
+  Meetups
+    .process(meetupTask)
     .then(_handleSuccess, _handleError)
     .done(_handleDone);
+    
+  // Accounts
+  //   .process(welcomeTask)
+  //   .then(_handleSuccess, _handleError)
+  //   .done(_handleDone);
 }
 
 function _handleSuccess(results) {

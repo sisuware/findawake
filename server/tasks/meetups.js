@@ -31,7 +31,7 @@
     function _collectAssociatedTaskData(data) {
       Log.info('collecting associated data', data)
       return Q.all([
-        _acceptedRidersData(data.wakeId),
+        Models.queryAcceptedRequests(data.wakeId),
         Models.getMeetup(data),
         Models.getWake(data.wakeId)
       ]);
@@ -66,10 +66,10 @@
         .then(function (user) {
           if (rider.notification.email) {
             info.name = user.name;
-            info.email = user.email;
-
+            info.to = user.email;
+            info.subject = 'Meetup has been scheduled';
             Log.info('emailing rider', info);
-            promises.push(Notify.meetupEmail(info));
+            promises.push(Notify.email('meetup',info));
           }
 
           if (rider.notification.text) {
@@ -91,34 +91,12 @@
         'time': Moment(meetup.time).format(config.moment.timeFormat),
         'location': meetup.location.undefined,
         'address': meetup.location.formatted,
-        'wake': _parseWakeInfo(wake),
+        'wake': _.pick(wake.boat, 'year','make','model'),
         'wakeHref': _generateWakeHref(wake),
         'directions': _generateDirectionsHref(meetup)
       };
 
       return datum;
-    }
-
-    function _acceptedRidersData(wakeId) {
-      var dfr = Q.defer();
-      var promises = [];
-
-      Models
-        .queryAcceptedRequests(wakeId)
-        .then(function (requests){
-          requests.forEach(function (request){
-            promises.push(Models.getRequest(request));
-          });
-
-          Q.all(promises).then(dfr.resolve, dfr.reject);
-        }, dfr.reject);
-
-
-      return dfr.promise;
-    }
-
-    function _parseWakeInfo(wake) {
-      return [wake.boat.year, wake.boat.make, wake.boat.model].join(' ');
     }
 
     function _generateWakeHref(wake) {

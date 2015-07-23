@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Find A Wake</title>
+<title>Find A Wake - Ride request accepted</title>
 <link href="styles.css" media="all" rel="stylesheet" type="text/css" />
 </head>
 
@@ -16,8 +16,8 @@
       <div class="content">
         <table class="main" width="100%" cellpadding="0" cellspacing="0">
           <tr>
-            <td class="alert">
-              <h1>Hi {{name}}</h1>
+            <td class="alert alert-danger">
+              <h1>{{wake.year}} {{wake.make}} {{wake.model}}</h1>
             </td>
           </tr>
           <tr>
@@ -25,25 +25,19 @@
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block text-center">
-                    <h2>Welcome to Find A Wake!</h3>
-                    <p>We are super excited that you are joining us.</p>
+                    <h2>{{name}}, your ride request has been declined.</h2>
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td class="content-block text-center">
-                    <h3>Please take a moment to verify your email address.</h3>
+                    <h3></h3>
                   </td>
-                </tr>
-                <tr>
+                </tr> -->
+                <!-- <tr>
                   <td class="content-block text-center">
-                    <a href="{{verifyEmailHref}}" class="btn btn-primary btn-block">Verify Email Address</a>
+                    <a href="http://{{wakeHref}}" class="btn btn-block btn-primary">View Request</a>
                   </td>
-                </tr>
-                <tr>
-                  <td class="content-block">
-                    
-                  </td>
-                </tr>
+                 --></tr>
               </table>
             </td>
           </tr>
@@ -51,9 +45,7 @@
         <div class="footer">
           <table width="100%">
             <tr>
-              <td class="aligncenter content-block">
-                You are recieving this message because the email <i>{{to}}</i> was used to register an account at Find A Wake on {{created}}. If this was not your doing, please reply to this email.
-              </td>
+              <td class="aligncenter content-block"><a href="http://findawake.com">Find A Wake</a></td>
             </tr>
           </table>
         </div></div>

@@ -250,6 +250,10 @@ a {
 
   .1pxdeep-shadow();
 
+  &.btn-block {
+    display: block;
+  }
+
   .btn-color(@color) {
       background:@color;
       .contrast(@color);
@@ -324,20 +328,24 @@ a {
   margin-top: 0;
 }
 
-.aligncenter {
+.text-center {
   text-align: center;
 }
 
-.alignright {
+.text-right {
   text-align: right;
 }
 
-.alignleft {
+.text-left {
   text-align: left;
 }
 
 .clear {
   clear: both;
+}
+
+.lead {
+  font-size: 24px;
 }
 
 /* -------------------------------------
@@ -380,12 +388,6 @@ a {
   border:none;
   text-shadow:none;
 
-  .close {
-      .opacity(100);
-      text-shadow:none;
-      margin-top:-1px;
-  }
-
   .alert-color(@color) {
       background:@color;
       .contrast(@color);
@@ -393,7 +395,7 @@ a {
 
   .alert-color-schemify(@color) {
     .alert-color(@color);
-    //.schemify(@color);
+    .schemify(@color);
 
     a {
       .contrast(@color);
@@ -403,7 +405,7 @@ a {
     }
   }
 
-  .alert-color-schemify(#fbfcd6);
+  .alert-color-schemify(#0d8ec2);
 
   &.alert-error,&.alert-danger {.alert-color-schemify(#ee5f5b);}
   &.alert-info {.alert-color-schemify(#08c);}

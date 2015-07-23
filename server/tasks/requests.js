@@ -44,8 +44,9 @@
         .getUser(request.userId)
         .then(function(user){
           var emailData = _requestEmailData(wake, user, task);
+          var template = task.accepted ? 'acceptedRequest':'declinedRequest';
           Log.info('emailing user', emailData);
-          Notify.requestEmail(emailData).then(dfr.resolve, dfr.reject);
+          Notify.email(template, emailData).then(dfr.resolve, dfr.reject);
         }, dfr.reject);
 
       return dfr.promise;
@@ -58,7 +59,7 @@
       Models
         .updateRequest(task.wakeId, task.requestId, task.accepted)
         .then(function(){
-          Log.success('succesfully updated request', task);
+          Log.info('succesfully updated request', task);
           dfr.resolve(task);
         }, function(errors){
           Log.error('failed to update request', errors);
@@ -74,7 +75,6 @@
         'wakeHref': _generateWakeHref(wake),
         'name': user.name,
         'to': user.email,
-        'accepted': task.accepted,
         'subject': 'Ride request ' + (task.accepted ? 'accepted':'declined')
       };
 

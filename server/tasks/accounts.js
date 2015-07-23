@@ -42,7 +42,7 @@
         .createUserHash(task.userId)
         .then(function(hash){
           Notify
-            .welcomeEmail(_welcomeEmailData(user, hash))
+            .email('welcome', _welcomeEmailData(user, hash))
             .then(dfr.resolve, dfr.reject);
         }, dfr.reject);
 

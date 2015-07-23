@@ -43,17 +43,19 @@
 
     function queryAcceptedRequests(id) {
       var dfr = Q.defer();
-
+      var acceptedRequests = [];
+      
       requests
         .child(id)
-        .orderByChild('accepted')
-        .equalTo(true)
-        .once('value', function(snapshot){
-          dfr.resolve(snapshot.val());
-        }, function(error) {
-          Log.error('failed to get accepted requests snapshot', error);
-          dfr.reject(error);
-        });
+        .once('value', function(requests){
+          requests.forEach(function(request){
+            if (request.child('accepted').val()) {
+              acceptedRequests.push(request.val());
+            }
+          });
+
+          dfr.resolve(acceptedRequests);         
+        }, dfr.reject);
 
       return dfr.promise; 
     }    
@@ -149,7 +151,7 @@
             Log.error('error saving unique validation hash', error);
             dfr.reject(error);
           } else {
-            Log.success('saved unique validation hash', hash);
+            Log.info('saved unique validation hash', hash);
             dfr.resolve(hash);
           }
         });

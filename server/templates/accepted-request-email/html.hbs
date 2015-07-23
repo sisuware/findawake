@@ -17,26 +17,25 @@
         <table class="main" width="100%" cellpadding="0" cellspacing="0">
           <tr>
             <td class="alert alert-success">
-              {{name}}, your ride request has been <b>accepted</b>
+              <h1>{{wake.year}} {{wake.make}} {{wake.model}}</h1>
             </td>
           </tr>
           <tr>
             <td class="content-wrap">
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td class="content-block">
-                    <small>WAKE</small>
-                    <h2 class="first">{{wake.year}} {{wake.make}} {{wake.model}}</h2>
+                  <td class="content-block text-center">
+                    <h2>{{name}}, your ride request has been accepted.</h2>
                   </td>
                 </tr>
                 <tr>
-                  <td class="content-block">
-                    <p>You will now be notified when a meetup has been scheduled.</p>
+                  <td class="content-block text-center">
+                    <h3>You will be notified when a meetup has been scheduled.</h3>
                   </td>
                 </tr>
                 <tr>
-                  <td class="content-block">
-                    <a href="http://{{wakeHref}}" class="btn btn-primary">View Meetups</a>
+                  <td class="content-block text-center">
+                    <a href="http://{{wakeHref}}" class="btn btn-block btn-primary">View Meetups</a>
                   </td>
                 </tr>
               </table>

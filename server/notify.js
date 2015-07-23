@@ -11,38 +11,34 @@
   var path = require('path')
 
   var templates = {
-    meetupEmailDir: path.join(__dirname, 'templates', 'meetup-email'),
-    acceptedRequestEmailDir: path.join(__dirname, 'templates', 'accepted-request-email'),
-    requestEmailDir: path.join(__dirname, 'templates', 'request-email'),
-    welcomeEmailDir: path.join(__dirname, 'templates', 'welcome-email')
+    meetup: path.join(__dirname, 'templates', 'meetup-email'),
+    acceptedRequest: path.join(__dirname, 'templates', 'accepted-request-email'),
+    declinedRequest: path.join(__dirname, 'templates', 'declined-request-email'),
+    welcome: path.join(__dirname, 'templates', 'welcome-email')
   };
 
   module.exports = function Notify() {
     var service = {
-      welcomeEmail: welcomeEmail,
+      email: email,
       meetupEmail: meetupEmail,
-      requestEmail: requestEmail,
       sms: sms
     };
 
     return service;
 
-    function welcomeEmail(data) {
-      //return _zapierEmail(config.zapier.email.welcome, data);
-      return _renderTemplate('welcomeEmailDir', data)
-        .then(Google.sendMessage)
-        .done();
+    function email(template, data) {
+      var dfr = Q.defer();
+      
+      _renderTemplate(template, data)
+        .then(function(message){
+          Google.sendMessage(message).then(dfr.resolve, dfr.reject);
+        }, dfr.reject);
+
+      return dfr.promise;
     }
 
     function meetupEmail(data) {
       return _zapierEmail(config.zapier.email.meetup, data);
-    }
-
-    function requestEmail(data) {
-      return _renderTemplate(data.accepted ? 'acceptedRequestEmailDir' : 'declinedRequestEmailDir', data)
-        .then(Google.sendMessage)
-        .done();
-      //return Google.sendMessage(data);
     }
 
     function _zapierEmail(url, data) {
