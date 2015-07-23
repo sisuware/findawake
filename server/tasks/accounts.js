@@ -39,6 +39,7 @@
       return Models
         .createUserHash(task.userId)
         .then(function(hash){
+
           var email = _welcomeUserEmail(user, hash);
           Log.info('emailing new user', email);  
           return Notify.welcomeEmail(email);
@@ -48,12 +49,13 @@
         });
     }
 
-    function _welcomeUserEmail(user, hash) {
+    function _welcomeEmailData(user, hash) {
       var datum = {
         'created': Moment(user.created).format(config.moment.dateFormat + ', ' + config.moment.timeFormat),
-        'email': user.email,
+        'to': user.email,
         'name': user.name,
-        'verifyEmailHref': _generateValidationHashHref(hash)
+        'verifyEmailHref': _generateValidationHashHref(hash),
+        'subject': 'Welcome to Find A Wake'
       };
 
       return datum;

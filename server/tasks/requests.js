@@ -22,7 +22,6 @@
         .then(_collectAssociatedTaskData)
         .then(_notifyRider.bind(null, task))
         .then(dfr.resolve, dfr.reject)
-        .done();
 
       return dfr.promise;
     }
@@ -36,23 +35,16 @@
     }
 
     function _notifyRider(task, results) {
-      Log.info('notifying rider', task);
-      
+      Log.info('notifying rider', task); 
       var dfr = Q.defer();
       var request = results[0];
       var wake = results[1];
-      var emailData = _requestInfo(wake);
       
       Models
         .getUser(request.userId)
         .then(function(user){
-          emailData.name = user.name;
-          emailData.to = user.email;
-          emailData.accepted = task.accepted;
-          emailData.subject = 'Ride request ' + (task.accepted ? 'accepted':'declined');
-
+          var emailData = _requestEmailData(wake, user, task);
           Log.info('emailing user', emailData);
-          
           Notify.requestEmail(emailData).then(dfr.resolve, dfr.reject);
         }, dfr.reject);
 
@@ -76,10 +68,14 @@
       return dfr.promise;
     }
 
-    function _requestInfo(wake) {
+    function _requestEmailData(wake, user, task) {
       var datum = {
         'wake': _.pick(wake.boat, 'year','make','model'),
-        'wakeHref': _generateWakeHref(wake)
+        'wakeHref': _generateWakeHref(wake),
+        'name': user.name,
+        'to': user.email,
+        'accepted': task.accepted,
+        'subject': 'Ride request ' + (task.accepted ? 'accepted':'declined')
       };
 
       return datum;
