@@ -30,23 +30,23 @@
     }
 
     function _collectAssociatedTaskData(data) {
-      Log.info('collecting associated data', data)
+      Log.info('fetching new user data', data)
       return Models.getUser(data.userId);
     }
 
     function _processTaskDataResults(task, user) {
-      Log.info('process task data results', user);
-      return Models
+      Log.info('prepareing to email the new user', user);
+      var dfr = Q.defer();
+      
+      Models
         .createUserHash(task.userId)
         .then(function(hash){
+          Notify
+            .welcomeEmail(_welcomeEmailData(user, hash))
+            .then(dfr.resolve, dfr.reject);
+        }, dfr.reject);
 
-          var email = _welcomeUserEmail(user, hash);
-          Log.info('emailing new user', email);  
-          return Notify.welcomeEmail(email);
-
-        }, function(errors){
-          Log.error('failed to generate validation hash', errors);
-        });
+      return dfr.promise;
     }
 
     function _welcomeEmailData(user, hash) {

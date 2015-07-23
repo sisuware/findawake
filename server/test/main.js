@@ -45,10 +45,10 @@ function runTests() {
     requestId: '-Ju3fiHeG_-Y6dj9heJv'
   };
 
-  Requests
-    .process(requestTask)
-    .then(_handleSuccess, _handleError)
-    .done(_handleDone);
+  // Requests
+  //   .process(requestTask)
+  //   .then(_handleSuccess, _handleError)
+  //   .done(_handleDone);
 
   // Meetups.process(meetupTask).then(function(results){
   //   Log.success('Meetups testing complete', results);
@@ -56,10 +56,10 @@ function runTests() {
   //   Log.failed('Meetup testing failed', errors);
   // });
 
-  // Accounts
-  //   .process(welcomeTask)
-  //   .then(_handleSuccess, _handleError)
-  //   .done(_handleDone);
+  Accounts
+    .process(welcomeTask)
+    .then(_handleSuccess, _handleError)
+    .done(_handleDone);
 }
 
 function _handleSuccess(results) {

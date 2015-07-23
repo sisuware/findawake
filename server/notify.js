@@ -28,7 +28,10 @@
     return service;
 
     function welcomeEmail(data) {
-      return _zapierEmail(config.zapier.email.welcome, data);
+      //return _zapierEmail(config.zapier.email.welcome, data);
+      return _renderTemplate('welcomeEmailDir', data)
+        .then(Google.sendMessage)
+        .done();
     }
 
     function meetupEmail(data) {
