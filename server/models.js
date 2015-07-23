@@ -110,12 +110,12 @@
       return dfr.promise;
     }
 
-    function getMeetup(meetup) {
+    function getMeetup(wakeId, meetupId) {
       var dfr = Q.defer();
 
       meetupsRef
-        .child(meetup.wakeId)
-        .child(meetup.meetupId)
+        .child(wakeId)
+        .child(meetupId)
         .once('value', function(snapshot) {
           dfr.resolve(snapshot.val());
         }, function(error) {

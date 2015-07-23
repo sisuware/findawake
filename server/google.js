@@ -3,6 +3,7 @@
 
   var Google = require('googleapis');
   var Gmail = Google.gmail('v1');
+  var UrlShortener = Google.urlshortener('v1');
   var Q = require('q');
   var Log = require('./log');
   var config = require('./config');
@@ -10,10 +11,29 @@
   var googleAuth = new Google.auth.JWT(config.google.auth.client_email, null, config.google.auth.private_key, config.google.auth.scopes, config.google.user);
 
   var service = {
-    sendMessage: sendMessage
+    sendMessage: sendMessage,
+    urlShorten: urlShorten
   };
 
   module.exports = service;
+
+  function urlShorten(url) {
+    var dfr = Q.defer();
+    
+    _authorize()
+      .then(function(auth){
+        debugger;
+        UrlShortener.url.insert({resource:{'longUrl':url}, 'auth':auth}, function(err, response){
+          if (err) {
+            dfr.reject(err);
+          } else {
+            dfr.resolve(response);
+          }
+        });
+      });
+
+    return dfr.promise;
+  }
 
   function sendMessage(message) {
     var dfr = Q.defer();

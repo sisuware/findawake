@@ -82,7 +82,7 @@
     }
 
     function _generateWakeHref(wake) {
-      return config.uri + 'wakes/' + wake.id;
+      return 'http://' + config.uri + 'wakes/' + wake.id;
     }
   }
 })();
