@@ -18,13 +18,13 @@
         profile.emailVerified = angular.copy(hash.$id);
         profile.$save().then(_redirect, _handleError);
       } else {
-        _redirect();
+        $timeout(_redirect);
       }
     }
 
     function _redirect() {
-      //$timeout($location.path.bind('/signup/sucess'));
-      window.location.replace(window.location.origin + '/signup/success');
+      $location.url('/signup/success');
+      //window.location.replace(window.location.origin + '/signup/success');
     }
 
     function _handleError(error) {
