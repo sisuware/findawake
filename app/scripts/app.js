@@ -201,13 +201,12 @@
           profile: authUserResolve
         }
       })
-      .when('/account/verify/email/:hash', {
+      .when('/account/verify/email', {
         templateUrl: '/views/user/verify/email.html',
         controller: 'UsersVerifyEmailController',
         authRequired: true,
-        //authorizationRequired: 'hash.$value',
+        reloadOnSearch: false,
         resolve: {
-          hash: hashResolve,
           profile: authUserResolve
         }
       })  

@@ -5,20 +5,25 @@
     .module('findAWake')
     .controller('UsersVerifyEmailController', UsersVerifyEmailController);
 
-  UsersVerifyEmailController.$inject = ['$scope','hash', 'profile', '$location', '$timeout'];
+  UsersVerifyEmailController.$inject = ['$scope','Hashes', 'profile', '$location'];
 
-  function UsersVerifyEmailController($scope, hash, profile, $location, $timeout) {
-    function _updateEmailVerifiedHash() {
+  function UsersVerifyEmailController($scope, Hashes, profile, $location) {
+    Hashes.get($location.hash()).then(_updateEmailVerifiedHash, _handleError);
+
+    function _updateEmailVerifiedHash(hash) {
       if (!hash || !profile) {
-        console.debug('missing hash or profile');
-        return false;
+        return _handleError('missing hash or profile');
+      }
+
+      if (hash.$value !== profile.$id) {
+        return _handleError('hash id mismatch');
       }
 
       if (profile && !profile.emailVerified) {
-        profile.emailVerified = angular.copy(hash.$id);
-        profile.$save().then(_redirect, _handleError);
+        profile.emailVerified = hash.$id;
+        return profile.$save().then(_redirect, _handleError);
       } else {
-        _redirect();
+        return _redirect();
       }
     }
 
@@ -34,12 +39,8 @@
     }
 
     function _cleanup() {
-     if (timeout) {
-        $timeout.cancel(timeout);
-      }
+      $location.hash('');
       $scope.$destroy(); 
     }
-
-    var timeout = $timeout(_updateEmailVerifiedHash);
   }
 })();
