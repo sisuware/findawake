@@ -16,13 +16,14 @@
 
     return service;
 
-    function get(id) {
-      if (!id) { return false; }
-      return syncData.object('meetups/' + id).$loaded();
+    function query(id) {
+      if (!id) {return false;}
+      return syncData.array('meetups/' + id).$loaded();
     }
 
-    function query() {
-      return syncData.array('meetups').$loaded();
+    function get(meetup) {
+      if (!meetup) { return false; }
+      return syncData.object('meetups/' + meetup.wakeId + '/' + meetup.id).$loaded();
     }
 
     function create(meetup) { 

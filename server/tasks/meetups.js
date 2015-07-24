@@ -2,14 +2,14 @@
   'use strict';
   var Q = require('q');
   var Moment = require('moment');
+  var _ = require('lodash');
 
   var Notify = require('../notify')();
   var Log = require('../log');
   var config = require('../config');
+  var Google = require('../google');
 
-  module.exports = function Meetups(firebaseRef) {
-    var firebaseRef = firebaseRef;
-
+  module.exports = function Meetups(Models) {
     var service = {
       process: process
     };
@@ -33,157 +33,91 @@
     function _collectAssociatedTaskData(data) {
       Log.info('collecting associated data', data)
       return Q.all([
-        _acceptedRidersData(data.wakeId),
-        _meetupData(data.wakeId, data.meetupId),
-        _wakeData(data.wakeId)
+        Models.queryAcceptedRequests(data.wakeId),
+        Models.getMeetup(data.wakeId, data.meetupId),
+        Models.getWake(data.wakeId)
       ]);
     }
 
     function _processTaskDataResults(results) {
       Log.info('process task data results', results);
+      var dfr = Q.defer();
       var promises = [];
-      var riders = results[0];
+      var requests = results[0];
       var meetup = results[1];
       var wake = results[2];
-      var info = _meetupInfo(meetup, wake);
+      
+      _meetupInfo(meetup, wake)
+        .then(function(info){
+          requests.forEach(function (request) {
+            promises.push(_notifyUser(request, info));
+          });
 
-      riders.forEach(function(rider) {
-        promises.push(_notifyRider(rider, info));
-      });
-
-      return Q.all(promises);
+          Q.all(promises).then(dfr.resolve, dfr.reject);
+        }, dfr.reject);
+      return dfr.promise;
     }
 
-    function _notifyRider(rider, info) {
-      Log.info('notify rider', rider)
+    function _notifyUser(request, info) {
+      Log.info('notify user of meetup', request)
       var dfr = Q.defer();
-      var usersRef = firebaseRef.child('users');
       var promises = [];
 
-      if (!rider.notification || !rider.userId) {
+      if (!request.notification || !request.userId) {
         dfr.reject();
       }
 
-      usersRef
-        .child(rider.userId)
-        .once('value', function success(user) {
-          var user = user.val();
-          
-          if (rider.notification.email) {
+      Models
+        .getUser(request.userId)
+        .then(function (user) {
+          if (request.notification.email) {
             info.name = user.name;
-            info.email = user.email;
-
-            Log.info('emailing rider', info);
-            promises.push(Notify.meetupEmail(info));
+            info.to = user.email;
+            info.subject = 'Meetup has been scheduled';
+            Log.info('emailing user', info);
+            promises.push(Notify.email('meetup',info));
           }
 
-          if (rider.notification.text) {
+          if (request.notification.text) {
             info.number = user.cell.value;
 
-            Log.info('texting rider', info);
+            Log.info('texting user', info);
             promises.push(Notify.sms(info));
           }
 
           Q.all(promises).then(dfr.resolve, dfr.reject);
-        }, function failure(error) {
-          dfr.reject(error);
-        });
+        }, dfr.reject);
 
       return dfr.promise;
     }
 
     function _meetupInfo(meetup, wake) {
+      var dfr = Q.defer();
       var datum = {
         'date': Moment(meetup.date).format(config.moment.dateFormat),
         'time': Moment(meetup.time).format(config.moment.timeFormat),
         'location': meetup.location.undefined,
         'address': meetup.location.formatted,
-        'wake': _parseWakeInfo(wake),
-        'wakeHref': _generateWakeHref(wake),
-        'directions': _generateDirectionsHref(meetup)
+        'wake': _.pick(wake.boat, 'year','make','model'),
+        'wakeHref': _generateWakeHref(wake)
       };
 
-      return datum;
-    }
-
-    function _acceptedRidersData(wakeId) {
-      var dfr = Q.defer();
-      var acceptedRequestsRef = firebaseRef.child('accepted_requests');
-      var promises = [];
-
-      acceptedRequestsRef
-        .child(wakeId)
-        .once('value', function success(snapshot) {
-          snapshot.forEach(function(request) {
-            promises.push(_riderRequestData(wakeId, request.val()));
-          });
-
-          Q.all(promises).then(dfr.resolve, dfr.reject);
-
-        }, function failure(error) {
-          dfr.reject(error);
-        });
+      Google.urlShorten(_generateDirectionsUrl(meetup))
+        .then(function(response){
+          debugger;
+          datum.directions = response.id;
+          dfr.resolve(datum);
+        }, dfr.reject);
 
       return dfr.promise;
-    }
-
-    function _riderRequestData(wakeId, requestId) {
-      var dfr = Q.defer();
-      var requestsRef = firebaseRef.child('requests');
-
-      requestsRef
-        .child(wakeId)
-        .child(requestId)
-        .once('value', function success(snapshot) {
-          dfr.resolve(snapshot.val());
-        }, function failure(error) {
-          dfr.reject(error);
-        });
-
-      return dfr.promise;
-    }
-
-    function _meetupData(wakeId, meetupId) {
-      var dfr = Q.defer();
-      var meetupsRef = firebaseRef.child('meetups');
-
-      meetupsRef
-        .child(wakeId)
-        .child(meetupId)
-        .once('value', function success(snapshot) {
-          dfr.resolve(snapshot.val());
-        }, function failure(error) {
-          dfr.reject(error);
-        });
-
-      return dfr.promise;
-    }
-
-    function _wakeData(wakeId) {
-      var dfr = Q.defer();
-      var wakesRef = firebaseRef.child('wakes');
-
-      wakesRef
-        .child(wakeId)
-        .once('value', function success(snapshot) {
-          dfr.resolve(snapshot.val());
-        }, function failure(error) {
-          dfr.reject(error);
-        });
-
-      return dfr.promise;
-    }
-
-    function _parseWakeInfo(wake) {
-      return [wake.boat.year, wake.boat.make, wake.boat.model].join(' ');
     }
 
     function _generateWakeHref(wake) {
-      return config.uri + 'wakes/' + wake.id;
+      return 'http://' + config.uri + 'wakes/' + wake.id;
     }
 
-    function _generateDirectionsHref(meetup) {
-      return 'http://maps.google.com/maps?daddr=' + meetup.location.lat + ',' + meetup.location.lng
+    function _generateDirectionsUrl(meetup) {
+      return 'http://maps.google.com/maps?daddr=' + meetup.location.lat + ',' + meetup.location.lng;
     }
   }
 })();

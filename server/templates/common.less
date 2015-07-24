@@ -1,0 +1,480 @@
+@import 'scheme';
+
+@white:                             #f7f7f7;
+@1pxdeep-bg:                        @white;
+
+@brand-primary:                     hsl(hue(#428bca),@sat,@l-factor);
+@brand-info:                        hsl(hue(#5bc0de),@sat,@l-factor);
+@brand-success:                     hsl(hue(#5cb85c),((saturation(#5cb85c) + @sat)/2),((luma(#5cb85c) + @luma - 10)/2));
+@brand-warning:                     hsl(hue(#f0ad4e),((saturation(#f0ad4e) + @sat + 16)/2),((luma(#f0ad4e) + @luma - 10)/2));
+@brand-danger:                      hsl(hue(#d9534f),((saturation(#d9534f) + @sat)/2),((luma(#d9534f) + @luma + 10)/2));
+
+@highlight:                         lighten(@1pxdeep-bg,6%);
+@monochrome:                        greyscale(@color1);
+@body-bg:                           @white;
+
+.contrast (@color) when (luma(@color) >= @luma-upper-break) {
+    color:mix(darken(@color,18%),#111,50%);
+}
+
+.contrast (@color) when (luma(@color) < @luma-upper-break) {
+    color:hsl(hue(@color),@sat,97%);
+}
+
+.contrast-dim (@color) when (luma(@color) >= @luma-upper-break) {
+    color:mix(darken(@color,5%),#111,65%);
+}
+
+.contrast-dim (@color) when (luma(@color) < @luma-upper-break) {
+    color:mix(@color,#ffffff,25%);
+}
+
+.contrast-link (@color) when (luma(@color) >= @luma-upper-break) {
+    color:average(darken(@color,80%),#222);
+}
+
+.contrast-link (@color) when (luma(@color) < @luma-upper-break) {
+    color:mix(#ffffff,@color1,75%);
+}
+
+.opacity(@opacity) {
+  opacity: @opacity;
+  // IE8 filter
+  @opacity-ie: (@opacity * 100);
+  filter: ~"alpha(opacity=@{opacity-ie})";
+}
+
+@1pxdeep-shadow-intensity:.1;
+
+@1pxdeep-shadow-color:mix(darken(@color1,33%),#222,50%);
+
+@1pxdeep-shadow-r:red(@1pxdeep-shadow-color);
+@1pxdeep-shadow-g:green(@1pxdeep-shadow-color);
+@1pxdeep-shadow-b:blue(@1pxdeep-shadow-color);
+
+.1pxdeep-shadow(@intensity:1) {
+    .box-shadow(0px 1px 2px rgba(@1pxdeep-shadow-r,@1pxdeep-shadow-g,@1pxdeep-shadow-b,(@intensity*@1pxdeep-shadow-intensity)));
+    //.box-shadow(none);
+}
+
+.1pxdeep-shadow(@intensity:1) when (luma(@color1) > @luma-upper-break)  {
+    @1pxdeep-shadow-intensity:.05;
+    .box-shadow(0px 1px 2px rgba(@1pxdeep-shadow-r,@1pxdeep-shadow-g,@1pxdeep-shadow-b,(@intensity*@1pxdeep-shadow-intensity)));
+    //.box-shadow(none);
+}
+
+.1pxdeep-shadow-inset(@intensity:1) {
+    .box-shadow(inset 0px 0px 3px rgba(@1pxdeep-shadow-r,@1pxdeep-shadow-g,@1pxdeep-shadow-b,(@intensity*@1pxdeep-shadow-intensity)));
+    //.box-shadow(none);
+}
+
+.1pxdeep-shadow-inset(@intensity:1) when (luma(@color1) > @luma-upper-break) {
+    @1pxdeep-shadow-intensity:.05;
+    .box-shadow(inset 0px 0px 3px rgba(@1pxdeep-shadow-r,@1pxdeep-shadow-g,@1pxdeep-shadow-b,(@intensity*@1pxdeep-shadow-intensity)));
+    //.box-shadow(none);
+}
+
+.schemify(@color) {
+  @mix-weight:60%;
+  @new-color:mix(hsl(hue(@color),@sat,@luma),@color,@mix-weight);
+  background:@new-color;
+  .contrast(@new-color);
+}
+
+
+/* -------------------------------------
+    GLOBAL
+    A very basic CSS reset
+------------------------------------- */
+* {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: none;
+  width: 100% !important;
+  height: 100%;
+  line-height: 1.6em;
+  /* 1.6em * 14px = 22.4px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients */
+  /*line-height: 22px;*/
+}
+
+/* Let's make sure all tables have defaults */
+table td {
+  vertical-align: top;
+}
+
+/* -------------------------------------
+    BODY & CONTAINER
+------------------------------------- */
+body {
+  background-color: @body-bg;
+  .contrast(@body-bg);
+}
+
+.body-wrap {
+  background-color: @body-bg;
+  width: 100%;
+}
+
+.container {
+  display: block !important;
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  /* makes it centered */
+  clear: both !important;
+}
+
+.content {
+  max-width: 600px;
+  margin: 0 auto;
+  display: block;
+  padding: 20px;
+}
+
+/* -------------------------------------
+    HEADER, FOOTER, MAIN
+------------------------------------- */
+.main {
+  background-color: @highlight;
+  border-radius: 3px;
+  .contrast(@highlight)
+}
+
+.content-wrap {
+  padding: 20px;
+}
+
+.content-block {
+  padding: 0 0 20px;
+}
+
+.header {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.footer {
+  width: 100%;
+  clear: both;
+  padding: 20px;
+  .contrast(@highlight);
+
+  p, a, td {
+    font-size: 12px;
+    .contrast(@highlight);  
+  }
+}
+
+/* -------------------------------------
+    TYPOGRAPHY
+------------------------------------- */
+h1, h2, h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  color: inherit;
+  margin: 40px 0 0;
+  line-height: 1.2em;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+  /* 1.2em * 32px = 38.4px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients */
+  /*line-height: 38px;*/
+}
+
+h2 {
+  font-size: 24px;
+  /* 1.2em * 24px = 28.8px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients */
+  /*line-height: 29px;*/
+}
+
+h3 {
+  font-size: 18px;
+  /* 1.2em * 18px = 21.6px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients */
+  /*line-height: 22px;*/
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+p, ul, ol {
+  margin-bottom: 10px;
+  font-weight: normal;
+}
+p li, ul li, ol li {
+  margin-left: 5px;
+  list-style-position: inside;
+}
+
+/* -------------------------------------
+    LINKS & BUTTONS
+------------------------------------- */
+a {
+  color: #348eda;
+  text-decoration: underline;
+}
+
+.btn-borders(@color) {
+    border: solid;
+    border-width:10px 20px;
+    border-color: @color;
+}
+
+
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1
+          box-shadow: @shadow;
+}
+
+.btn {
+  text-decoration: none;
+  line-height: 2em;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 5px;
+  text-transform: capitalize;
+
+  .1pxdeep-shadow();
+
+  &.btn-block {
+    display: block;
+  }
+
+  .btn-color(@color) {
+      background:@color;
+      .contrast(@color);
+      .btn-borders(@color);
+
+      &:hover,
+      &:focus {
+          background:lighten(@color,2%);
+          .btn-borders(lighten(@color,2%));
+          .contrast(@color);
+      }
+
+      &:active,
+      &.active {
+          .contrast-dim(@color);
+          background:darken(@color,2%);
+          border:1px solid darken(@color,2%);
+      }
+  }
+
+  .btn-color(@color) when (luma(@color) > @luma-upper-break) {
+      background:@color;
+      .contrast(@color);
+      .btn-borders(@color);
+
+      &:hover,
+      &:focus {
+          background:lighten(@color,2%);
+          .contrast(@color);
+      }
+
+      &:active,
+      &.active {
+          background:darken(@color,2%);
+          border:1px solid darken(@color,2%);
+      }
+  }
+
+  &.btn-primary {.btn-color(@brand-primary);}
+  &.btn-info {.btn-color(@brand-info);}
+  &.btn-success {.btn-color(@brand-success);}
+  &.btn-warning {.btn-color(@brand-warning);}
+  &.btn-danger {.btn-color(@brand-danger);}
+  &.btn-inverse {.btn-color(desaturate(@color1a,100%));}
+}
+
+// .btn-primary {
+//   text-decoration: none;
+//   color: #FFF;
+//   background-color: @brand-primary;
+//   //border: solid #348eda;
+//   border-width: 10px 20px;
+//   line-height: 2em;
+//    2em * 14px = 28px, use px to get airier line-height also in Thunderbird, and Yahoo!, Outlook.com, AOL webmail clients 
+//   /*line-height: 28px;*/
+//   font-weight: bold;
+//   text-align: center;
+//   cursor: pointer;
+//   display: inline-block;
+//   border-radius: 5px;
+//   text-transform: capitalize;
+// }
+
+/* -------------------------------------
+    OTHER STYLES THAT MIGHT BE USEFUL
+------------------------------------- */
+.last {
+  margin-bottom: 0;
+}
+
+.first {
+  margin-top: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.clear {
+  clear: both;
+}
+
+.lead {
+  font-size: 24px;
+}
+
+/* -------------------------------------
+    ALERTS
+    Change the class depending on warning email, good email or bad email
+------------------------------------- */
+// .alert {
+//   font-size: 16px;
+//   color: #fff;
+//   font-weight: 500;
+//   padding: 20px;
+//   text-align: center;
+//   border-radius: 3px 3px 0 0;
+//   a {
+//     color: #fff;
+//     text-decoration: none;
+//     font-weight: 500;
+//     font-size: 16px;
+//   }
+//   &.alert-warning {
+//     background-color: @brand-warning;
+//   }
+//   &.alert-bad {
+//     background-color: @brand-danger;
+//   }
+//   &.alert-good {
+//     background-color: @brand-success;
+//   }
+//   &.alert-info {
+//     background-color: @brand-info;
+//   }
+// }
+
+.alert {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 20px;
+  text-align: center;
+  border-radius: 3px 3px 0 0;
+  border:none;
+  text-shadow:none;
+
+  .alert-color(@color) {
+      background:@color;
+      .contrast(@color);
+  }
+
+  .alert-color-schemify(@color) {
+    .alert-color(@color);
+    .schemify(@color);
+
+    a {
+      .contrast(@color);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+    }
+  }
+
+  .alert-color-schemify(#0d8ec2);
+
+  &.alert-error,&.alert-danger {.alert-color-schemify(#ee591d);}
+  &.alert-info {.alert-color-schemify(#08c);}
+  &.alert-success {.alert-color-schemify(#1dee8e);}
+}
+
+/* -------------------------------------
+    INVOICE
+    Styles for the billing table
+------------------------------------- */
+.invoice {
+  margin: 40px auto;
+  text-align: left;
+  width: 80%;
+}
+.invoice td {
+  padding: 5px 0;
+}
+.invoice .invoice-items {
+  width: 100%;
+}
+.invoice .invoice-items td {
+  border-top: #eee 1px solid;
+}
+.invoice .invoice-items .total td {
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+  font-weight: 700;
+}
+
+/* -------------------------------------
+    RESPONSIVE AND MOBILE FRIENDLY STYLES
+------------------------------------- */
+@media only screen and (max-width: 640px) {
+  body {
+    padding: 0 !important;
+  }
+
+  h1, h2, h3, h4 {
+    font-weight: 800 !important;
+    margin: 20px 0 5px !important;
+  }
+
+  h1 {
+    font-size: 22px !important;
+  }
+
+  h2 {
+    font-size: 18px !important;
+  }
+
+  h3 {
+    font-size: 16px !important;
+  }
+
+  .container {
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .content {
+    padding: 0 !important;
+  }
+
+  .content-wrap {
+    padding: 10px !important;
+  }
+
+  .invoice {
+    width: 100% !important;
+  }
+}

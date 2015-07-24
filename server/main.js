@@ -5,11 +5,13 @@ var Log = require('./log');
 var config = require('./config');
 
 var ref = new Firebase(config.firebase.account);
-var Meetups = require('./tasks/meetups')(ref);
-var Accounts = require('./tasks/accounts')(ref);
-var Profiles = require('./tasks/profiles')(ref);
+var Models = require('./models')(ref);
 
-// move to env variable
+var Meetups = require('./tasks/meetups')(Models);
+var Accounts = require('./tasks/accounts')(Models);
+var Profiles = require('./tasks/profiles')(Models);
+var Requests = require('./tasks/requests')(Models);
+
 var tokenGenerator = new FirebaseTokenGenerator(config.firebase.token);
 var token = tokenGenerator.createToken({}, {'admin': true});
 
@@ -49,6 +51,13 @@ function processQueue(data, progress, resolve, reject) {
   if (data.task === 'profile') {
     unknownTask = false;
     Profiles
+      .process(data)
+      .then(resolve, reject);
+  }
+
+  if (data.task === 'request') {
+    unknownTask = false;
+    Requests
       .process(data)
       .then(resolve, reject);
   }

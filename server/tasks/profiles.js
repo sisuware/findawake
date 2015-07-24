@@ -7,9 +7,7 @@
   var Log = require('../log');
   var config = require('../config');
 
-  module.exports = function Profiles(firebaseRef) {
-    var firebaseRef = firebaseRef;
-
+  module.exports = function Profiles(Models) {
     var service = {
       process: process
     };
@@ -32,14 +30,13 @@
 
     function _collectAssociatedTaskData(data) {
       Log.info('collecting associated data', data)
-      return _userData(data.userId)
+      return Models.getUser(data.userId);
     }
 
     function _processTaskDataResults(data) {
       Log.info('process task data results', data);
       var dfr = Q.defer();
       var filter = new BadWords();
-      var profilesRef = firebaseRef.child('profiles');
       var datum = _.pick(data,'avatar','bio','gear','location','name','boats');     
 
       if (datum.bio) {
@@ -49,33 +46,9 @@
         datum.name = filter.clean(datum.name);
       }
 
-      profilesRef
-        .child(data.userId)
-        .set(datum, function(error){
-          if (error) {
-            Log.error('failed to update public profile', error);
-            dfr.reject(error);
-          } else {
-            Log.success('saved public profile', datum);
-            dfr.resolve(datum);
-          }
-        });
-
-      return dfr.promisel
-    }
-
-    function _userData(userId) {
-      var dfr = Q.defer();
-      var users = firebaseRef.child('users');
-
-      users
-        .child(userId)
-        .once('value', function success(snapshot){
-          dfr.resolve(snapshot.val());
-        }, function failure(error){
-          Log.error('failed to get user snapshot', userId);
-          dfr.reject(error);
-        });
+      Models
+        .updateProfile(data.userId, datum)
+        .then(dfr.resolve, dfr.reject);
 
       return dfr.promise;
     }

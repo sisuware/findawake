@@ -154,7 +154,10 @@
         if(err){
           dfr.reject(err);
         } else {
-          createTask({'task':'account','userId':user.uid}).then(dfr.resolve,dfr.reject);
+          $q.all([
+            createTask({'task':'account','userId':user.uid}),
+            createTask({'task':'profile','userId':user.uid})
+          ]).then(dfr.resolve,dfr.reject);
         }
       });
 
