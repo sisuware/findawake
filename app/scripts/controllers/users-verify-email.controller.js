@@ -18,20 +18,22 @@
         profile.emailVerified = angular.copy(hash.$id);
         profile.$save().then(_redirect, _handleError);
       } else {
-        $timeout(_redirect);
+        _redirect();
       }
     }
 
     function _redirect() {
-      $location.url('/signup/success');
-      //window.location.replace(window.location.origin + '/signup/success');
+      $timeout(function(){
+        $location.path('/signup/success');
+        $scope.$destroy();
+      });
     }
 
     function _handleError(error) {
       console.log(error);
-      $location.path('/my/account');
+      $location.path('/account/edit');
     }
 
-    _updateEmailVerifiedHash();
+    $timeout(_updateEmailVerifiedHash);
   }
 })();
