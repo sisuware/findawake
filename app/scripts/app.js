@@ -76,7 +76,11 @@
 
     function resolveRedirect(params, path, search) {
       if (path.match(/^(\/!)/)) {
-        return path.replace(/^(\/!)/,'') + search;
+        var url = path.replace(/^(\/!)/,'');
+        if (search && search.hash) {
+          url += '?hash=' search.hash;
+        }
+        return url;
       } else {
         return '/wakes/discover';
       }
