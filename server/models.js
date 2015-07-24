@@ -12,6 +12,7 @@
     var meetupsRef = firebaseRef.child('meetups');
     var wakesRef = firebaseRef.child('wakes');
     var hashes = firebaseRef.child('hashes');
+    var profilesRef = firebaseRef.child('profiles');
     
     var service = {
       queryRequests: queryRequests,
@@ -21,7 +22,8 @@
       getUser: getUser,
       getMeetup: getMeetup,
       getWake: getWake,
-      createUserHash: createUserHash
+      createUserHash: createUserHash,
+      updateProfile: updateProfile
     };
 
     return service;
@@ -144,6 +146,7 @@
     function createUserHash(id) {
       var dfr = Q.defer();
       var hash = Crypto.randomBytes(20).toString('hex');
+      
       hashes
         .child(hash)
         .set(id, function(error){
@@ -153,6 +156,24 @@
           } else {
             Log.info('saved unique validation hash', hash);
             dfr.resolve(hash);
+          }
+        });
+
+      return dfr.promise;
+    }
+
+    function updateProfile(id, data) {
+      var dfr = Q.defer();
+      
+      profilesRef
+        .child(id)
+        .set(data, function(error){
+          if (error) {
+            Log.error('failed to update public profile', error);
+            dfr.reject(error);
+          } else {
+            Log.info('saved public profile', data);
+            dfr.resolve(data);
           }
         });
 

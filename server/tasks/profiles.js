@@ -37,7 +37,6 @@
       Log.info('process task data results', data);
       var dfr = Q.defer();
       var filter = new BadWords();
-      var profilesRef = firebaseRef.child('profiles');
       var datum = _.pick(data,'avatar','bio','gear','location','name','boats');     
 
       if (datum.bio) {
@@ -47,17 +46,9 @@
         datum.name = filter.clean(datum.name);
       }
 
-      profilesRef
-        .child(data.userId)
-        .set(datum, function(error){
-          if (error) {
-            Log.error('failed to update public profile', error);
-            dfr.reject(error);
-          } else {
-            Log.success('saved public profile', datum);
-            dfr.resolve(datum);
-          }
-        });
+      Models
+        .updateProfile(data.userId, datum)
+        .then(dfr.resolve, dfr.reject);
 
       return dfr.promise;
     }

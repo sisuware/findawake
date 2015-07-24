@@ -8,7 +8,7 @@
   requestPanel.$inject = ['Users', 'Requests'];
 
   function requestPanel(Users, Requests) {
-    var _html  = '<div class="thumbnail" ng-class="{\'color3\':request.accepted,\'color4\':request.declined,\'highlight\':!request.accepted && !request.declined}">';
+    var _html  = '<div class="thumbnail" ng-class="{true:\'color3\',false:\'color4\',undefined:\'highlight\'}[request.accepted]">';
         _html += '  <a href="/profile/{{request.userId}}" target="_blank"><img avatar="{{profile.avatar}}" /></a>';
         _html += '   <h4 class="text-center"><a ng-href="/profile/{{request.userId}}" target="_blank">{{profile.name}}</a></h4>';
         _html += '  <div class="caption text-center">';
@@ -32,7 +32,7 @@
         _html += '  </div>';
         _html += '  <div ng-cloak ng-show="acceptedOrDeclined()" class="caption text-center">';
         _html += '    <span ng-cloak ng-show="request.accepted" class="text-success">Request Accepted</span>';
-        _html += '    <span ng-cloak ng-show="request.declined" class="text-danger">Request Declined</span>';
+        _html += '    <span ng-cloak ng-show="!request.accepted" class="text-danger">Request Declined</span>';
         _html += '  </div>';
         _html += '</div>';
 
@@ -58,7 +58,7 @@
       });
 
       function acceptedOrDeclined() {
-        return $scope.request.accepted || $scope.request.declined;
+        return _.isBoolean($scope.request.accepted);
       }
     }
   }

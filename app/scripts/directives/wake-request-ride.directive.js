@@ -13,8 +13,8 @@
         _html += '</h2>';
         _html += '<h2 ng-cloak ng-show="isRequested()">';
         _html += '  <a ng-cloak ng-hide="acceptedOrDeclined()" class="btn btn-block btn-default highlight btn-lg active" disabled="disabled" href="">Request pending...</a>';
-        _html += '  <a ng-cloak ng-show="request.accepted" class="btn btn-block btn-default color3 btn-lg active" disabled="disabled" href=""><i class="fa fa-smile-o"></i> Request Accepted</a>';
-        _html += '  <a ng-cloak ng-show="request.declined" class="btn btn-block btn-default color4 btn-lg active" disabled="disabled" href=""><i class="fa fa-frown-o"></i> Request Declined</a>';
+        _html += '  <a ng-cloak ng-show="acceptedOrDeclined() && request.accepted" class="btn btn-block btn-default color3 btn-lg active" disabled="disabled" href=""><i class="fa fa-smile-o"></i> Request Accepted</a>';
+        _html += '  <a ng-cloak ng-show="acceptedOrDeclined() && !request.accepted" class="btn btn-block btn-default color4 btn-lg active" disabled="disabled" href=""><i class="fa fa-frown-o"></i> Request Declined</a>';
         _html += '</h2>';
     
     var directive = {
@@ -55,7 +55,7 @@
 
       function acceptedOrDeclined() {
         if (!$scope.request) {return false;}
-        return $scope.request.accepted || $scope.request.declined;
+        return _.isBoolean($scope.request.accepted);
       }
 
       currentUser()

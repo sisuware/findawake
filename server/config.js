@@ -1,6 +1,6 @@
 module.exports = {
   logLevel: 'debug',
-  uri: 'http://staging.findawake.com/',
+  uri: 'staging.findawake.com/',
 
   zapier : {
     email: {
