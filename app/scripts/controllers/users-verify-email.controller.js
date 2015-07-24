@@ -23,17 +23,23 @@
     }
 
     function _redirect() {
-      $timeout(function(){
-        $location.path('/signup/success');
-        $scope.$destroy();
-      });
+      $location.path('/signup/success');
+      _cleanup();
     }
 
     function _handleError(error) {
       console.log(error);
       $location.path('/account/edit');
+      _cleanup();
     }
 
-    $timeout(_updateEmailVerifiedHash);
+    function _cleanup() {
+     if (timeout) {
+        $timeout.cancel(timeout);
+      }
+      $scope.$destroy(); 
+    }
+
+    var timeout = $timeout(_updateEmailVerifiedHash);
   }
 })();

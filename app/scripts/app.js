@@ -29,6 +29,7 @@
     profileResolve.$inject = ['Users', '$route'];
     meetupsResolve.$inject = ['Meetups', '$route'];
     wakesLocationResolve.$inject = ['Locations','$route'];
+    hashResolve.$inject = ['Hashes','$route'];
 
     $locationProvider.html5Mode(true);
     

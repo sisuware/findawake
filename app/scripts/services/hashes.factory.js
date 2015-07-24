@@ -5,9 +5,9 @@
     .module('findAWake')
     .factory('Hashes', Hashes);
 
-  Hashes.$inject = ['syncData','FirebaseModels','$q','Users'];
+  Hashes.$inject = ['syncData'];
 
-  function Hashes(syncData, FirebaseModels, $q, Users) {
+  function Hashes(syncData) {
     var service = {
       get: get
     };
