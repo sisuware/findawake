@@ -205,7 +205,7 @@
         templateUrl: '/views/user/verify/email.html',
         controller: 'UsersVerifyEmailController',
         authRequired: true,
-        authorizationRequired: 'hash.$value',
+        //authorizationRequired: 'hash.$value',
         resolve: {
           hash: hashResolve,
           profile: authUserResolve
