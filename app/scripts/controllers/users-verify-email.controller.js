@@ -5,9 +5,9 @@
     .module('findAWake')
     .controller('UsersVerifyEmailController', UsersVerifyEmailController);
 
-  UsersVerifyEmailController.$inject = ['$scope','hash', 'profile', '$location'];
+  UsersVerifyEmailController.$inject = ['$scope','hash', 'profile', '$location', '$timeout'];
 
-  function UsersVerifyEmailController($scope, hash, profile, $location) {
+  function UsersVerifyEmailController($scope, hash, profile, $location, $timeout) {
     function _updateEmailVerifiedHash() {
       if (!hash || !profile) {
         console.debug('missing hash or profile');
@@ -23,7 +23,8 @@
     }
 
     function _redirect() {
-      $location.path('/signup/success');
+      //$timeout($location.path.bind('/signup/sucess'));
+      window.location.replace(window.location.origin + '/signup/success');
     }
 
     function _handleError(error) {

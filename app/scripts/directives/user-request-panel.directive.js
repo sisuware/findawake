@@ -8,7 +8,7 @@
     userRequestPanel.$inject = ['Requests','Wakes'];
 
     function userRequestPanel(Requests, Wakes) {
-      var _html  = '<div class="thumbnail" ng-class="{true:\'color3\',false:\'color4\',undefined:\'highlight\'}[request.accepted]">';
+      var _html  = '<div class="thumbnail" ng-class="{true:\'color3\',false:\'color4\',undefined:\'highlight\',null:\'highlight\'}[request.accepted]">';
           _html += '  <div wake-thumbnail wake-id="{{wakeId}}"></div>';
           _html += '  <div ng-cloak ng-hide="acceptedOrDeclined()" class="caption text-center">';
           _html += '    <span class="text-muted inline-block">Request Pending...</span>';
@@ -38,7 +38,7 @@
       Requests.get({'wakeId':$scope.wakeId, 'id':$scope.requestId}).then(function(data){
         $scope.request = data;
       });
-      
+
       function acceptedOrDeclined() {
         if (!$scope.request) { return false; }
         return _.isBoolean($scope.request.accepted);
