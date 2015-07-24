@@ -62,7 +62,7 @@
     }
 
     function _generateValidationHashHref(hash) {
-      return 'http://' + config.uri + 'account/verify/email#' + hash;
+      return 'http://' + config.uri + 'account/verify/email/?hash=' + hash;
     }
   }
 })();

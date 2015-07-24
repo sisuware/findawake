@@ -76,7 +76,7 @@
 
     function resolveRedirect(params, path, search) {
       if (path.match(/^(\/!)/)) {
-        return path.replace(/^(\/!)/,'');
+        return path.replace(/^(\/!)/,'') + search;
       } else {
         return '/wakes/discover';
       }

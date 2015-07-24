@@ -8,7 +8,7 @@
   UsersVerifyEmailController.$inject = ['$scope','Hashes', 'profile', '$location'];
 
   function UsersVerifyEmailController($scope, Hashes, profile, $location) {
-    Hashes.get($location.hash()).then(_updateEmailVerifiedHash, _handleError);
+    Hashes.get($location.search('hash')).then(_updateEmailVerifiedHash, _handleError);
 
     function _updateEmailVerifiedHash(hash) {
       if (!hash || !profile) {
@@ -39,7 +39,7 @@
     }
 
     function _cleanup() {
-      $location.hash('');
+      $location.search('');
       $scope.$destroy(); 
     }
   }
