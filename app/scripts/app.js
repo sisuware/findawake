@@ -78,8 +78,9 @@
       if (path.match(/^(\/!)/)) {
         var url = path.replace(/^(\/!)/,'');
         if (search && search.hash) {
-          url += '?hash=' search.hash;
+          url += '?hash=' + search.hash;
         }
+        console.debug(url);
         return url;
       } else {
         return '/wakes/discover';
@@ -205,7 +206,7 @@
           profile: authUserResolve
         }
       })
-      .when('/account/verify/email', {
+      .when('/verify/email', {
         templateUrl: '/views/user/verify/email.html',
         controller: 'UsersVerifyEmailController',
         authRequired: true,

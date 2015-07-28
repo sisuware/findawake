@@ -1,3 +1,6 @@
 <div class="sectional text-center animated fadeIn">
-  <h3><i class="fa fa-spin fa-spinner"></i></h3>
+  <div class="container">
+    <h3 ng-hide="errors"><i class="fa fa-spin fa-spinner"></i></h3>
+    <div ng-cloak ng-show="errors" class="alert alert-danger">{{errors}}</div>
+  </div>
 </div>
