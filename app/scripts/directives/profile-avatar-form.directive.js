@@ -14,7 +14,7 @@
         _html += '<div class="row form-group">';
         _html += '  <div ng-cloak ng-show="errors" class="alert alert-danger"><strong>{{errors}}</strong></div>';
         _html += '  <div class="col-sm-4">';
-        _html += '    <img avatar="{{profile.avatar}}" size="m" style="rounded" />';
+        _html += '    <img avatar="{{profile.avatar}}" size="m" style="rounded" class="img-responsive"/>';
         _html += '    <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail">';
         _html += '      <i ng-hide="uploadingAvatar" class="fa fa-user"></i>';
         _html += '      <i ng-cloak ng-show="uploadingAvatar" class="fa fa-spinner fa-spin"></i>';
@@ -53,6 +53,8 @@
       $scope.cancelChangeAvatar = cancelChangeAvatar;
       $scope.deleteAvatar = deleteAvatar;
 
+      this.uploadAvatar = uploadAvatar;
+
       function deleteAvatar() {
         delete $scope.profile.avatar;
         updateProfile();
@@ -73,7 +75,6 @@
 
         Imgur.upload($scope.avatar).then(function(res){
           $scope.profile.avatar = res.data.id;
-          updateProfile();
         }, function(res){
           $scope.errors = res;
         }).finally(function(){

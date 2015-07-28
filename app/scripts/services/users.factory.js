@@ -14,7 +14,8 @@
       get: get,
       getProfile: getProfile,
       updateProfile: updateProfile,
-      requests: requests
+      requests: requests,
+      resendVerifyEmail: resendVerifyEmail
     };
 
     return service; 
@@ -42,9 +43,13 @@
     }
 
     function updateProfile(profile) {
-      return profile.$save().then(function(){
-        FirebaseModels.createTask({'task':'profile','userId':profile.userId});
+      return profile.$save().then(function(res){
+        FirebaseModels.createTask({'task':'profile','userId':profile.$id});
       });
+    }
+
+    function resendVerifyEmail(userId) {
+      return FirebaseModels.createTask({'task':'account','userId':userId});
     }
   }
 })();
