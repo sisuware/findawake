@@ -24,7 +24,6 @@
       SimpleLogin.init();
 
       $rootScope.$on('$routeChangeStart', function (event, current, prev) {
-        console.debug('routeChangeStart', current);
         _checkRouteAuthentication(current, event);
       });
 

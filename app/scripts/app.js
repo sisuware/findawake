@@ -206,13 +206,14 @@
           profile: authUserResolve
         }
       })
-      .when('/verify/email', {
-        templateUrl: '/views/user/verify/email.html',
-        controller: 'UsersVerifyEmailController',
+      .when('/verify/email/:hash', {
+        templateUrl: '/views/user/verify.email.html',
+        controller: 'VerifyEmailController',
         authRequired: true,
-        reloadOnSearch: false,
+        authorizationRequired: 'hash.$value',
         resolve: {
-          profile: authUserResolve
+          profile: authUserResolve,
+          hash: hashResolve
         }
       })  
       .when('/profile/:id', {

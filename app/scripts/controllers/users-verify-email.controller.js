@@ -3,26 +3,14 @@
 
   angular
     .module('findAWake')
-    .controller('UsersVerifyEmailController', UsersVerifyEmailController);
+    .controller('VerifyEmailController', VerifyEmailController);
 
-  UsersVerifyEmailController.$inject = ['$scope','Hashes', 'profile', '$location'];
+  VerifyEmailController.$inject = ['$scope','profile', 'hash', '$location'];
 
-  function UsersVerifyEmailController($scope, Hashes, profile, $location) {
-    var searchParam = $location.search();
-    
-    if (searchParam && searchParam.hash) {
-      Hashes.get(searchParam.hash).then(_updateEmailVerifiedHash, _handleError);
-    } else {
-      _handleError('Invalid email verification');
-    }
-
-    function _updateEmailVerifiedHash(hash) {
+  function VerifyEmailController($scope, profile, hash, $location) {
+    function _updateEmailVerifiedHash() {
       if (!hash || !profile) {
-        return _handleError('Unable to find a valid profile or the email verification is invalid');
-      }
-
-      if (hash.$value !== profile.$id) {
-        return _handleError('Invalid! Please verify you are clicking on the verify email link in the email');
+        return _handleError('Missing profile and/or email verification hash. Please reload the page or try again. ');
       }
 
       if (profile && !profile.emailVerified) {
@@ -35,17 +23,13 @@
 
     function _redirect() {
       $location.path('/signup/success');
-      _cleanup();
     }
 
     function _handleError(error) {
       console.log(error);
       $scope.errors = error;
-      _cleanup();
     }
 
-    function _cleanup() {
-      $location.search('');
-    }
+    _updateEmailVerifiedHash();
   }
 })();
