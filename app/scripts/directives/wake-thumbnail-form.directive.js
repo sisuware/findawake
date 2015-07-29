@@ -11,7 +11,7 @@
     var _html = '<div class="row form-group">';
         _html += '  <div ng-cloak ng-show="errors" class="alert alert-danger"><strong>{{errors}}</strong></div>';
         _html += '  <div class="col-xs-3">';
-        _html += '    <img avatar="{{wake.thumbnail}}" size="t" style="rounded" />';
+        _html += '    <img avatar="{{wake.thumbnail}}" size="t" style="rounded" class="img-responsive" />';
         _html += '    <div ng-cloak ng-hide="wake.thumbnail" class="img-thumbnail text-center">';
         _html += '      <small ng-hide="uploadingThumbnail">No<br/>Thumbnail</small>';
         _html += '      <i ng-cloak ng-show="uploadingThumbnail" class="fa fa-spinner fa-spin"></i>';

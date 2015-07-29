@@ -21,6 +21,7 @@
       updateRequest: updateRequest,
       getUser: getUser,
       getMeetup: getMeetup,
+      updateMeetup: updateMeetup,
       getWake: getWake,
       createUserHash: createUserHash,
       updateProfile: updateProfile
@@ -123,6 +124,24 @@
         }, function(error) {
           Log.error('failed to get meetup snapshot', error);
           dfr.reject(error);
+        });
+
+      return dfr.promise;
+    }
+
+    function updateMeetupTimezone(wakeId, meetupId, data) {
+      var dfr = Q.defer();
+
+      meetupsRef
+        .child(wakeId)
+        .child(meetupId)
+        .set(data, function(error){
+          if (error) {
+            Log.error('failed to update meetup', error);
+            dfr.reject(error);
+          } else {
+            dfr.resolve();
+          }
         });
 
       return dfr.promise;

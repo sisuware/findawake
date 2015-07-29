@@ -21,6 +21,8 @@ module.exports = {
   },
 
   google: {
+    user: 'support@findawake.com',
+    apiKey: 'AIzaSyDquH9EftzkyuPqc52dxcAnzjb8PQ6nupk',
     auth: {
       scopes: ['https://www.googleapis.com/auth/gmail.modify','https://www.googleapis.com/auth/urlshortener'],
       private_key_id : '79d032687049a4b2069716b98a44ed2b05d9cce2',
@@ -29,6 +31,8 @@ module.exports = {
       client_id : '78864326005-m613ncm6opmbpdbja81sgknvcg9viu4l.apps.googleusercontent.com',
       type: 'service_account'
     },
-    user: 'support@findawake.com'
+    apis: {
+      timezone: 'https://maps.googleapis.com/maps/api/timezone/json'
+    }
   }
 };

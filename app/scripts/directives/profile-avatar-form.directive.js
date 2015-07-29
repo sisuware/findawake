@@ -53,8 +53,6 @@
       $scope.cancelChangeAvatar = cancelChangeAvatar;
       $scope.deleteAvatar = deleteAvatar;
 
-      this.uploadAvatar = uploadAvatar;
-
       function deleteAvatar() {
         delete $scope.profile.avatar;
         updateProfile();

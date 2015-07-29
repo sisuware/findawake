@@ -5,7 +5,25 @@
     </div>
   </div>
 </div>
-<div class="sectional sectional-sm highlight">
+<div class="sectional sectional-sm">
   <div class="sectional-title">meetups</div>
-  {{meetups}}
+  <div class="container">
+    <div class="panel panel-default" ng-repeat="meetup in meetups">
+      <div class="panel-heading highlight">
+        <h4>{{meetup.date | date:'fullDate'}}, {{meetup.time | date:'shortTime'}}</h4>
+      </div>
+      <div class="panel-body highlight">
+        <div class="row clearfix">
+          <div class="col-md-6">
+            <address>
+              <a ng-href="http://maps.google.com/maps?daddr={{meetup.location.lat}},{{meetup.location.lng}}" target="_blank"><i class="fa fa-map-marker"></i> {{meetup.location.formatted}}</a>
+            </address>
+          </div>
+          <div class="col-md-6">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

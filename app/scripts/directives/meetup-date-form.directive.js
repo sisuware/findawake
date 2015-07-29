@@ -9,7 +9,7 @@
 
   function meetupDateForm($templateCache) {
     /* jshint maxstatements:48 */
-    var _html = '<datepicker class="pull-left" ng-model="meetup.date" min-date="minDate" show-weeks="true"></datepicker>';
+    var _html = '<datepicker class="pull-left" ng-model="meetup.date" min-date="minDate" show-weeks="false"></datepicker>';
     
     var _monthHtml  = '<table role="grid" aria-labelledby="{{::uniqueId}}-title" aria-activedescendant="{{activeDateId}}" class="white">';
         _monthHtml += '  <thead>';

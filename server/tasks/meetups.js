@@ -46,7 +46,7 @@
       var requests = results[0];
       var meetup = results[1];
       var wake = results[2];
-      
+
       _meetupInfo(meetup, wake)
         .then(function(info){
           requests.forEach(function (request) {
@@ -93,6 +93,7 @@
 
     function _meetupInfo(meetup, wake) {
       var dfr = Q.defer();
+      var location = [meetup.location.lat,meetup.location.lng].join(',');
       var datum = {
         'date': Moment(meetup.date).format(config.moment.dateFormat),
         'time': Moment(meetup.time).format(config.moment.timeFormat),
@@ -102,12 +103,22 @@
         'wakeHref': _generateWakeHref(wake)
       };
 
-      Google.urlShorten(_generateDirectionsUrl(meetup))
-        .then(function(response){
-          debugger;
-          datum.directions = response.id;
-          dfr.resolve(datum);
-        }, dfr.reject);
+      Q.all([
+        Google.getTimezone(location),
+        Google.urlShorten(_generateDirectionsUrl(location))
+      ])
+      .then(function(results){
+        var timezone = results[0];
+        var directions = results[1];
+        
+        meetup.directions = directions.id || false;
+        meetup.timezone = timezone || false;
+        datum.directions = directions.id;
+
+        Models.updateMeetup(wake.id, meetup.id, meetup);
+
+        dfr.resolve(datum);
+      });
 
       return dfr.promise;
     }
@@ -116,8 +127,8 @@
       return 'http://' + config.uri + 'wakes/' + wake.id;
     }
 
-    function _generateDirectionsUrl(meetup) {
-      return 'http://maps.google.com/maps?daddr=' + meetup.location.lat + ',' + meetup.location.lng;
+    function _generateDirectionsUrl(location) {
+      return 'http://maps.google.com/maps?daddr=' + location;
     }
   }
 })();

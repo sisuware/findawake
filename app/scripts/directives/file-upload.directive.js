@@ -7,13 +7,12 @@
 
   function fileUpload(){
     var directive = {
-      require: '^profileAvatarForm',
       link: fileUploadController
     };
 
     return directive;
 
-    function fileUploadController(scope, element, attrs, profileAvatarFormController) {
+    function fileUploadController(scope, element, attrs) {
       var reader = new FileReader();
       
       element.on('change', function(){
@@ -24,8 +23,11 @@
       reader.onload = function(file){
         scope.$apply(function(){
           scope[attrs.fileUpload] = file.target.result;
-          if (profileAvatarFormController) {
-            profileAvatarFormController.uploadAvatar();
+          if (scope && scope.uploadAvatar) {
+            scope.uploadAvatar();
+          }
+          if (scope && scope.uploadThumbnail) {
+            scope.uploadThumbnail();
           }
         });
       };

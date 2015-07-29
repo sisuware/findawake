@@ -22,22 +22,22 @@
       var dfr = Q.defer();
 
       _collectAssociatedTaskData(task)
-        .then(_processTaskDataResults)
+        .then(_processTaskDataResults.bind(null, task))
         .then(dfr.resolve, dfr.reject);
 
       return dfr.promise;
     }
 
-    function _collectAssociatedTaskData(data) {
-      Log.info('collecting associated data', data)
-      return Models.getUser(data.userId);
+    function _collectAssociatedTaskData(task) {
+      Log.info('collecting associated data', task)
+      return Models.getUser(task.userId);
     }
 
-    function _processTaskDataResults(data) {
-      Log.info('process task data results', data);
+    function _processTaskDataResults(task, user) {
+      Log.info('process profile results', user);
       var dfr = Q.defer();
       var filter = new BadWords();
-      var datum = _.pick(data,'avatar','bio','gear','location','name','boats');     
+      var datum = _.pick(user,'avatar','bio','gear','location','name','boats');     
 
       if (datum.bio) {
         datum.bio = filter.clean(datum.bio);
@@ -47,7 +47,7 @@
       }
 
       Models
-        .updateProfile(data.userId, datum)
+        .updateProfile(task.userId, datum)
         .then(dfr.resolve, dfr.reject);
 
       return dfr.promise;

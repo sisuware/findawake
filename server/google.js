@@ -6,13 +6,15 @@
   var UrlShortener = Google.urlshortener('v1');
   var Q = require('q');
   var Log = require('./log');
+  var Request = require('request');
   var config = require('./config');
   
   var googleAuth = new Google.auth.JWT(config.google.auth.client_email, null, config.google.auth.private_key, config.google.auth.scopes, config.google.user);
 
   var service = {
     sendMessage: sendMessage,
-    urlShorten: urlShorten
+    urlShorten: urlShorten,
+    getTimezone: getTimezone
   };
 
   module.exports = service;
@@ -22,7 +24,6 @@
     
     _authorize()
       .then(function(auth){
-        debugger;
         UrlShortener.url.insert({resource:{'longUrl':url}, 'auth':auth}, function(err, response){
           if (err) {
             dfr.reject(err);
@@ -59,6 +60,21 @@
         });
       }, dfr.reject);
 
+
+    return dfr.promise;
+  }
+
+  function getTimezone(location) {
+    var dfr = Q.defer();
+    var url = config.google.apis.timezone + '?auth=' + config.google.apiKey + '&location=' + location + '&timestamp=' + (new Date().valueOf()/1000);
+
+    Request.get({url:url, json:true}, function(error, httpResponse, body){
+      if (error) {
+        dfr.reject(error);
+      } else {
+        dfr.resolve(body);
+      }
+    });
 
     return dfr.promise;
   }
