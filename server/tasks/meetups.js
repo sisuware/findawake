@@ -47,7 +47,7 @@
       var meetup = results[1];
       var wake = results[2];
 
-      _meetupInfo(meetup, wake)
+      _updateMeetupInfo(meetup, wake)
         .then(function(info){
           requests.forEach(function (request) {
             promises.push(_notifyUser(request, info));
@@ -91,17 +91,9 @@
       return dfr.promise;
     }
 
-    function _meetupInfo(meetup, wake) {
+    function _updateMeetupInfo(meetup, wake) {
       var dfr = Q.defer();
       var location = [meetup.location.lat,meetup.location.lng].join(',');
-      var datum = {
-        'date': Moment(meetup.date).format(config.moment.dateFormat),
-        'time': Moment(meetup.time).format(config.moment.timeFormat),
-        'location': meetup.location.undefined,
-        'address': meetup.location.formatted,
-        'wake': _.pick(wake.boat, 'year','make','model'),
-        'wakeHref': _generateWakeHref(wake)
-      };
 
       Q.all([
         Google.getTimezone(location),
@@ -110,12 +102,22 @@
       .then(function(results){
         var timezone = results[0];
         var directions = results[1];
+        var utc = (parseInt(timezone.rawOffset) / 60) || '';
+        var date = Moment(meetup.date).utcOffset(utc);
+        var time = Moment(meetup.time).utcOffset(utc), 
         
-        meetup.directions = directions.id || false;
-        meetup.timezone = timezone || false;
-        datum.directions = directions.id;
+        var datum = {
+          'date': date.format(config.moment.dateFormat),
+          'time': time.format(config.moment.timeFormat),
+          'fromNow': date.fromNow(),
+          'location': meetup.location.undefined,
+          'address': meetup.location.formatted,
+          'wake': _.pick(wake.boat, 'year','make','model'),
+          'wakeHref': _generateWakeHref(wake),
+          'directions': directions.id
+        };
 
-        Models.updateMeetup(wake.id, meetup.id, meetup);
+        Models.updateMeetup(wake.id, meetup.id, {'directions':directions, 'timezone':_.omit(timezone,'status')});
 
         dfr.resolve(datum);
       });

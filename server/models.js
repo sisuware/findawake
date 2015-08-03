@@ -129,13 +129,13 @@
       return dfr.promise;
     }
 
-    function updateMeetupTimezone(wakeId, meetupId, data) {
+    function updateMeetup(wakeId, meetupId, data) {
       var dfr = Q.defer();
 
       meetupsRef
         .child(wakeId)
         .child(meetupId)
-        .set(data, function(error){
+        .update(data, function(error){
           if (error) {
             Log.error('failed to update meetup', error);
             dfr.reject(error);

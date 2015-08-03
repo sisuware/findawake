@@ -1,3 +1,4 @@
+var Q = require('q');
 var FirebaseTokenGenerator = require('firebase-token-generator');
 var Queue = require('firebase-queue');
 var Firebase = require('firebase');
@@ -15,14 +16,51 @@ var Requests = require('./tasks/requests')(Models);
 var tokenGenerator = new FirebaseTokenGenerator(config.firebase.token);
 var token = tokenGenerator.createToken({}, {'admin': true});
 
-ref.authWithCustomToken(token, function(error, authData){
-  if (error) {
-    Log.error('authentication failed', error);
-    return false;
-  }
+var queue;
 
-  var queue = new Queue(ref.child('queue'), processQueue);
+_authenticate();
+
+ref.onAuth(function(authData){
+  if (authData) {
+    if (!queue) {
+      _startQueue();
+    }
+  } else {
+    if (queue) {
+      _shutdownQueue();
+    }
+    _authenticate();
+  }
 });
+
+function _authenticate() {
+  var dfr = Q.defer();
+
+  ref.authWithCustomToken(token, function(error, authData){
+    if (error) {
+      Log.error('authentication failed', error);
+      dfr.reject(error);
+    } else {
+      dfr.resolve(authData);
+    }
+  });
+
+  return dfr.promise;
+}
+
+function _shutdownQueue() {
+  return queue
+    .shutdown()
+    .then(function(){
+      Log.info('queue shutdown');
+      queue = null;
+    });
+}
+
+function _startQueue(){
+  Log.info('starting queue');
+  queue = new Queue(ref.child('queue'), processQueue);
+}
 
 function processQueue(data, progress, resolve, reject) {
   Log.info('recieved a new task', data);
@@ -67,3 +105,9 @@ function processQueue(data, progress, resolve, reject) {
     reject();
   }
 }
+
+process.on('SIGINT', function() {
+  _shutdownQueue().then(function() {
+    process.exit(0);
+  });
+});
