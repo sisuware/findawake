@@ -148,16 +148,6 @@
           auth: authResolve
         }
       })
-      .when('/wakes/:id/meetup', {
-        templateUrl: '/views/wakes/ride.html', 
-        controller: 'WakesRideController',
-        authRequired: true,
-        authorizationRequired: 'wake.userId',
-        resolve: {
-          auth: authResolve,
-          wake: wakeResolve
-        }
-      })
       .when('/wakes/:id/requests', {
         templateUrl: '/views/wakes/requests.html',
         controller: 'WakesRequestsController',
@@ -169,14 +159,33 @@
           requests: wakeRequestsResolve
         }
       })
-      .when('/wakes/:id/meetups', {
-        templateUrl: '/views/wakes/meetups.html',
-        controller: 'WakesMeetupsIndexController',
+      .when('/meetups/:id/', {
+        templateUrl: '/views/meetups/index.html',
+        controller: 'MeetupsIndexController',
         authRequired: true,
         authorizationRequired: 'wake.userId',
         resolve: {
           wake: wakeResolve,
           meetups: meetupsResolve
+        }
+      })
+      .when('/meetups/:id/new', {
+        templateUrl: '/views/meetups/new.html',
+        controller: 'MeetupsNewController',
+        authRequired: true,
+        authorizationRequired: 'wake.userId',
+        resolve: {
+          wake: wakeResolve,
+          auth: authResolve
+        }
+      })
+      .when('/meetups/:id/:meetupId', {
+        templateUrl: '/views/meetups/show.html',
+        controller: 'MeetupsShowController',
+        authRequired: true,
+        authorizationRequired: 'wake.userId',
+        resolve: {
+          wake: wakeResolve
         }
       })
       .when('/account/wakes', {

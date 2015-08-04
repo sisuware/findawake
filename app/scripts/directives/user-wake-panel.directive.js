@@ -13,7 +13,7 @@
           _html += '  <div class="caption">';
           _html += '    <div class="row form-group">';
           _html += '      <div class="col-xs-8">';
-          _html += '        Ride Requests';
+          _html += '        Riders';
           _html += '      </div>';
           _html += '      <div class="col-xs-4 text-right">';
           _html += '        <a ng-href="/wakes/{{wakeId}}/requests" class="btn btn-default highlight btn-xs"><i class="fa fa-users"></i> {{requests.length}}</a>';
@@ -24,7 +24,7 @@
           _html += '        Meetups';
           _html += '      </div>';
           _html += '      <div class="col-xs-4 text-right">';
-          _html += '        <a ng-href="/wakes/{{wakeId}}/meetups" class="btn btn-default highlight btn-xs"><i class="fa fa-calendar"></i> {{meetups.length}}</a>';
+          _html += '        <a ng-href="/meetups/{{wakeId}}" class="btn btn-default highlight btn-xs"><i class="fa fa-calendar"></i> {{meetups.length}}</a>';
           _html += '      </div>';
           _html += '    </div>';
           _html += '    <hr/>';

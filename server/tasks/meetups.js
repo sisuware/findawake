@@ -104,7 +104,7 @@
         var directions = results[1];
         var utc = (parseInt(timezone.rawOffset) / 60) || '';
         var date = Moment(meetup.date).utcOffset(utc);
-        var time = Moment(meetup.time).utcOffset(utc), 
+        var time = Moment(meetup.time).utcOffset(utc); 
         
         var datum = {
           'date': date.format(config.moment.dateFormat),

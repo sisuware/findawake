@@ -3,11 +3,11 @@
 
   angular
     .module('findAWake')
-    .controller('WakesRideController', WakesRideController);
+    .controller('MeetupsNewController', MeetupsNewController);
 
-  WakesRideController.$inject = ['$scope', 'auth', 'wake', 'Meetups', '$location'];
+  MeetupsNewController.$inject = ['$scope', 'auth', 'wake', 'Meetups', '$location'];
 
-  function WakesRideController($scope, auth, wake, Meetups, $location) {
+  function MeetupsNewController($scope, auth, wake, Meetups, $location) {
     $scope.wake = wake;
     $scope.auth = auth;
     $scope.submit = submit;
