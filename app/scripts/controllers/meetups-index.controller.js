@@ -10,5 +10,10 @@
   function MeetupsIndexController($scope, meetups, wake) {
     $scope.meetups = meetups;
     $scope.wake = wake;
+    $scope.futureOrPast = futureOrPast;
+
+    function futureOrPast(date) {
+      
+    }
   }
 })();

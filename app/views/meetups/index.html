@@ -11,21 +11,22 @@
 <div class="sectional sectional-sm">
   <div class="sectional-title">meetups</div>
   <div class="container">
-    <div class="panel panel-default" ng-repeat="meetup in meetups|orderBy:'time'">
-      <div class="panel-heading highlight">
-        <h4>{{meetup.date | date:'fullDate'}}, {{meetup.time | date:'shortTime'}}</h4>
-      </div>
-      <div class="panel-body highlight">
-        <div class="row clearfix">
-          <div class="col-md-6">
-            <address>
-              <a ng-href="http://maps.google.com/maps?daddr={{meetup.location.lat}},{{meetup.location.lng}}" target="_blank"><i class="fa fa-map-marker"></i> {{meetup.location.formatted}}</a>
-            </address>
+    <div class="row-fluid clearfix">
+      <div class="col-sm-6 col-md-4" ng-repeat="meetup in meetups|orderBy:'-time'">
+        <a ng-href="/meetups/{{wake.id}}/{{meetup.id}}" class="thumbnail highlight" ng-class="">
+          <div class="caption">
+            <p class="lead text-center text-capitalize">{{meetup.date|moment:'fromNow'}}</p>
+            <hr/>
+            <h3 class="text-center"><i class="fa fa-map-marker"></i></h3>
+            <h4 class="text-center">{{meetup.location.undefined || meetup.location.point_of_interest}}</h4>
+            <hr/>
+            <p><i class="fa fa-calendar"></i> {{meetup.date | date:'fullDate'}}</p>
+            <p><i class="fa fa-clock-o"></i> {{meetup.time | date:'shortTime'}}</p>
+      <!--       <div class="col-md-2">
+              <h4 class="text-center text-info"><i class="fa fa-users"></i> {{meetup.riders | number}}</h4>
+            </div> -->
           </div>
-          <div class="col-md-6">
-            {{meetup.date|moment:'fromNow'}}
-          </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>

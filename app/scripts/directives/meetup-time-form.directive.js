@@ -50,7 +50,7 @@
     return directive;
 
     function meetupTimeFormController($scope) {
-      $scope.meetup.time = Date.now();
+      $scope.meetup.time = $scope.meetup.date;
       $templateCache.put('template/timepicker/timepicker.html', _timeHtml);
     }
   }
