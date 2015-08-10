@@ -6,28 +6,24 @@ var Log = require('./log');
 var config = require('./config');
 
 var ref = new Firebase(config.firebase.account);
-var Models = require('./models')(ref);
 
-var Meetups = require('./tasks/meetups')(Models);
-var Accounts = require('./tasks/accounts')(Models);
-var Profiles = require('./tasks/profiles')(Models);
-var Requests = require('./tasks/requests')(Models);
+var Specs = require('./specs')(ref);
 
 var tokenGenerator = new FirebaseTokenGenerator(config.firebase.token);
 var token = tokenGenerator.createToken({}, {'admin': true});
 
-var queue;
+var queues = [];
 
 _authenticate();
 
 ref.onAuth(function(authData){
   if (authData) {
-    if (!queue) {
-      _startQueue();
+    if (!queues.length) {
+      _startQueues();
     }
   } else {
-    if (queue) {
-      _shutdownQueue();
+    if (queues.length) {
+      _shutdownQueues();
     }
     _authenticate();
   }
@@ -48,18 +44,32 @@ function _authenticate() {
   return dfr.promise;
 }
 
-function _shutdownQueue() {
-  return queue
-    .shutdown()
+function _shutdownQueues() {
+  Log.info('queue shutdown');
+  var dfr = Q.defer();
+  var promises = [];
+  
+  queues.forEach(function(queue){
+    promises.push(queue.shutdown());
+  });
+
+  Q.all(promises)
     .then(function(){
-      Log.info('queue shutdown');
-      queue = null;
-    });
+      queues = [];
+      dfr.resolve();
+    }, dfr.reject);
+
+  return dfr.promise;
 }
 
-function _startQueue(){
-  Log.info('starting queue');
-  queue = new Queue(ref.child('queue'), processQueue);
+function _startQueues(){
+  var specs = Specs.query;
+  Log.info('starting queues: ', specs);
+
+  specs.forEach(function(spec){
+    var queue = new Queue(ref.child('queue'), { 'specId': spec }, Specs[spec]);
+    queues.push(queue);
+  });
 }
 
 function processQueue(data, progress, resolve, reject) {
@@ -107,7 +117,7 @@ function processQueue(data, progress, resolve, reject) {
 }
 
 process.on('SIGINT', function() {
-  _shutdownQueue().then(function() {
+  _shutdownQueues().then(function() {
     process.exit(0);
   });
 });

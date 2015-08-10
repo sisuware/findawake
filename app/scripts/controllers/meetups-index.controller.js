@@ -10,10 +10,11 @@
   function MeetupsIndexController($scope, meetups, wake) {
     $scope.meetups = meetups;
     $scope.wake = wake;
-    $scope.futureOrPast = futureOrPast;
+    $scope.ifFuture = afterToday;
 
-    function futureOrPast(date) {
-      
+    function afterToday(date) {
+      if (!date) { return false; }
+      return moment(date).isAfter();
     }
   }
 })();

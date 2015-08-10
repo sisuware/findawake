@@ -8,7 +8,7 @@
     userWakePanel.$inject = ['Requests','Meetups'];
 
     function userWakePanel(Requests, Meetups) {
-      var _html  = '<div class="thumbnail">';
+      var _html  = '<div class="thumbnail ghost">';
           _html += '  <div wake-thumbnail wake-id="{{wakeId}}"></div>';
           _html += '  <div class="caption">';
           _html += '    <div class="row form-group">';

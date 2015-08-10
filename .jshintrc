@@ -58,6 +58,7 @@
         "angular": false,
         "$": false,
         "_":false,
-        "google":false
+        "google":false,
+        "moment":false
     }
 }

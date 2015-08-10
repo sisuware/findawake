@@ -1,6 +1,6 @@
 <div class="sectional sectional-sm color1a clearfix">
   <div class="container animated fadeIn">
-    <div class="col-sm-23">
+    <div class="col-sm-12">
       <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
     </div>
   </div>
@@ -13,7 +13,7 @@
 </div>
 <div class="sectional">
   <div class="container">
-    <div class="row clearfix form-group">
+    <div class="row-fluid clearfix form-group">
       <div class="col-md-6 form-group">
         <h4>Meetup Location</h4>
         <p>What's the exact meetup location where riders should meet you?</p>
@@ -21,7 +21,7 @@
       <div class="col-md-6" meetup-location-form meetup="meetup"></div>
     </div>
     <hr/>
-    <div class="row clearfix form-group">
+    <div class="row-fluid clearfix form-group">
       <div class="col-md-6 form-group">
         <h4>Meetup Date</h4>
         <p>When should the riders meet you?</p>
@@ -29,7 +29,7 @@
       <div class="col-md-6" meetup-date-form meetup="meetup"></div>
     </div>
     <hr/>
-    <div class="row clearfix form-group">
+    <div class="row-fluid clearfix form-group">
       <div class="col-md-6 form-group">
         <h4>Meetup Time</h4>
         <p>What time should the riders meet you?</p>
@@ -41,7 +41,7 @@
 <div ng-cloak ng-show="meetup.location && meetup.date && meetup.time" class="sectional sectional-sm highlight">
   <div class="sectional-title">this will be shared with your riders</div>
   <div class="container animated fadeIn"> 
-    <div class="row form-group clearfix">
+    <div class="row-fluid form-group clearfix">
       <div class="col-md-4">
         <p class="text-center text-info lead"><i class="fa fa-map-marker"></i> {{meetup.location.formatted}}</p>
       </div>
@@ -59,7 +59,7 @@
 </div>
 <div class="sectional sectional-sm">
   <div class="container">
-    <div class="row form-group clearfix">
+    <div class="row-fluid form-group clearfix">
         <div class="col-md-9">
           <a ng-href="/meetups/{{wake.id}}">Back to Meetups</a>
         </div>

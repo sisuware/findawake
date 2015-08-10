@@ -10,15 +10,22 @@
 </div>
 <div class="sectional sectional-sm">
   <div class="sectional-title">meetups</div>
+  <div ng-cloak ng-hide="meetups.length" class="container animated fadeIn">
+    <h3 class="text-center">You do not have any meetups scheduled.</h3>
+    <p class="lead text-center">Go create a meetup to notify your riders when they can join you.</p>
+    <div class="form-group text-center">
+      <a ng-href="/meetups/{{wake.id}}/new" class="btn btn-lg btn-default color3"><i class="fa fa-plus"></i> New Meetup</a>
+    </div>
+  </div>
   <div class="container">
     <div class="row-fluid clearfix">
       <div class="col-sm-6 col-md-4" ng-repeat="meetup in meetups|orderBy:'-time'">
-        <a ng-href="/meetups/{{wake.id}}/{{meetup.id}}" class="thumbnail highlight" ng-class="">
+        <a ng-href="/meetups/{{wake.id}}/{{meetup.id}}" class="thumbnail btn" ng-class="{true:'highlight',false:'ghost'}[ifFuture(meetup.date)]">
           <div class="caption">
             <p class="lead text-center text-capitalize">{{meetup.date|moment:'fromNow'}}</p>
             <hr/>
-            <h3 class="text-center"><i class="fa fa-map-marker"></i></h3>
-            <h4 class="text-center">{{meetup.location.undefined || meetup.location.point_of_interest}}</h4>
+            <h4 class="text-center"><i class="fa fa-map-marker"></i></h4>
+            <p class="text-center">{{meetup.location.undefined || meetup.location.point_of_interest}}</p>
             <hr/>
             <p><i class="fa fa-calendar"></i> {{meetup.date | date:'fullDate'}}</p>
             <p><i class="fa fa-clock-o"></i> {{meetup.time | date:'shortTime'}}</p>

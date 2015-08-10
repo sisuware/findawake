@@ -9279,6 +9279,20 @@ h6 small,
   color: #717171;
   text-decoration: none;
 }
+.thumbnail.ghost,
+.img-thumbnail.ghost {
+  background-color: #eaeaea;
+}
+.thumbnail.ghost.active,
+.img-thumbnail.ghost.active {
+  border-color: #e0e0e0;
+}
+.thumbnail.ghost .caption,
+.img-thumbnail.ghost .caption {
+  color: #606060;
+  color: #676767;
+  text-decoration: none;
+}
 .form-horizontal {
   font-size: 18px;
 }

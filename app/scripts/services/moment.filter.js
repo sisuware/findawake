@@ -12,6 +12,6 @@
         parsed = parsed[fn]();
       } 
       return parsed;
-    }
+    };
   }
 })();
