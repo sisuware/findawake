@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title">Login or Register</h4>
+</div>
+<div class="modal-body" ng-form="loginModalForm">
+  <div ng-cloak ng-show="loading" class="animated fadeIn">
+    <h3 class="text-center text-muted"><i class="fa fa-spin fa-spinner"></i></h3>
+  </div>
+  <div ng-cloak ng-show="creatingProfile" class="text-center animated fadeIn">
+    <h3>Welcome aboard!</h3>
+    <p class="lead">Please wait while we finish creating your new account. This will only take a couple seconds.</p>
+    <h3 class="text-center text-muted"><i class="fa fa-spin fa-spinner"></i></h3>
+  </div>
+  <div ng-hide="loading || creatingProfile">
+    <div ng-hide="err" class="alert alert-info">Before you can request a ride, you will need to either login or register.</div>
+    <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+    <div class="form-group" ng-class="{'has-error':loginModalForm.email.$error.email, 'has-success':loginModalForm.email.$valid}">
+      <label class="control-label">Email</label>
+      <input class="form-control" type="email" ng-model="$parent.email" name="email" required />
+    </div>
+    <div class="form-group">
+      <label class="control-label">Password</label>
+      <input class="form-control" type="password" ng-model="$parent.pass" name="pass" required />
+    </div>
+    <div class="form-group" ng-show="createMode" ng-class="{'has-error':pass !== confirm, 'has-success':pass === confirm}">
+      <label class="control-label">Confirm Password</label>
+      <input class="form-control" type="password" ng-model="$parent.confirm" />
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="loginPassword()" ng-hide="createMode" ng-disabled="loginModalForm.$invalid">Login</button>
+  <button class="btn btn-default pull-left" ng-click="createMode = true" ng-hide="createMode">Register</button>
+  <button class="btn btn-primary" ng-show="createMode" ng-click="createAccount()" ng-disabled="loginModalForm.$invalid || modalPass !== modalConfirm">Create Account</button>
+  <button class="btn btn-default pull-left" ng-show="createMode" ng-click="createMode = false">Login</button>
+</div>

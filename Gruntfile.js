@@ -24,7 +24,7 @@ module.exports = function (grunt) {
 
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
+    app: 'app',
     dist: 'dist'
   };
 
@@ -180,6 +180,8 @@ module.exports = function (grunt) {
 
     // Automatically inject Bower components into the app
     wiredep: {
+      directory: '../.bowerrc',
+      bowerJson: '../bower.json',
       options: {
         cwd: '<%= yeoman.app %>'
       },
@@ -211,7 +213,7 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'],
+              js: ['concat'],
               css: ['cssmin']
             },
             post: {}
@@ -280,7 +282,7 @@ module.exports = function (grunt) {
     htmlmin: {
       dist: {
         options: {
-          collapseWhitespace: true,
+          collapseWhitespace: false,
           conservativeCollapse: true,
           collapseBooleanAttributes: true,
           removeCommentsFromCDATA: true,
@@ -330,7 +332,7 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            '.tmp/fonts/*'
           ]
         }, {
           expand: true,
@@ -339,9 +341,9 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/bootstrap/dist',
-          src: 'fonts/*',
-          dest: '<%= yeoman.dist %>'
+          cwd: 'bower_components/fontawesome/fonts',
+          src: '*',
+          dest: '<%= yeoman.dist %>/fonts'
         }]
       },
       styles: {
@@ -373,7 +375,6 @@ module.exports = function (grunt) {
       dist: [
         'less:development',
         'copy:styles',
-        'copy:fonts',
         'imagemin',
         'svgmin'
       ]
@@ -396,7 +397,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'wiredep',
+      //'wiredep',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -429,7 +430,7 @@ module.exports = function (grunt) {
     'copy:dist',
     'cdnify',
     'cssmin',
-    'uglify',
+    //'uglify',
     'filerev',
     'usemin',
     'htmlmin'

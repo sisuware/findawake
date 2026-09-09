@@ -1,0 +1,42 @@
+<div class="container animated fadeIn">
+  <div class="col-md-6 col-md-offset-3" >
+    <div ng-cloak ng-hide="creatingProfile" class="page-header text-center">
+      <h1>Register</h1>
+    </div>
+    <div ng-cloak ng-show="creatingProfile" class="page-header text-center animated fadeIn">
+      <h1>Welcome aboard!</h1>
+      <p>Please wait while we finish creating your new account. This will only take a couple seconds.</p>
+      <h3><i class="fa fa-spin fa-spinner"></i></h3>
+    </div>
+    <div ng-cloak ng-show="loading" class="animated fadeIn">
+      <h3 class="text-center"><i class="fa fa-spin fa-spinner"></i></h3>
+    </div>
+    <div ng-hide="loading || creatingProfile" class="form-group animated well" ng-form="registerForm" ng-class="{'shake':error ? true:false}">
+      <div ng-show="error" class="alert alert-danger"><strong>{{error}}</strong></div>
+      <div class="form-group">
+        <input class="form-control" type="text" ng-model="email" name="email" placeholder="Email" required/>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="password" ng-model="pass" name="pass" placeholder="Password" required/>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="password" ng-model="confirm" placeholder="Confirm Password" />
+      </div>
+      
+      <div class="form-group">
+        <ul class="list-unstyled">
+          <li><i class="fa fa-check-square-o"></i> <small>Do not send me emails unless I approve.</small></li>
+          <li><i class="fa fa-check-square-o"></i> <small>By clicking "Submit" you confirm that you accept the <a href="/legal" target="_blank">Terms of Service</a> and <a href="/legal" target="_blank">Privacy Policy</a>.</small></li>
+        </ul>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6"></div>
+          <div class="col-sm-6">
+            <button class="btn btn-success btn-block" ng-click="submit()" ng-disabled="registerForm.$invalid">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

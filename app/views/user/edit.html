@@ -1,0 +1,76 @@
+<div class="sectional color1a clearfix sectional-sm">
+  <div class="container animated fadeIn">
+    <div class="col-sm-12">
+      <h2><img avatar="{{profile.avatar}}" /> {{profile.name}} <small ng-show="profile.location"><i class="fa fa-map-marker"></i> {{profile.location}}</small></h2>
+    </div>
+  </div>
+</div>
+<div class="container animated fadeIn">
+  <!-- <div class="row clearfix form-group">
+    <div class="col-xs-12">
+      <div class="avatar avatar-sm">
+        <img ng-cloak ng-show="profile.avatar" class="img-rounded img-responsive" ng-src="{{profile.avatar}}" />
+        <div ng-cloak ng-hide="profile.avatar" class="btn-lg img-thumbnail text-muted"><i class="fa fa-user"></i></div>
+      </div>
+      <ol class="breadcrumb avatar-breadcrumb">
+        <li><a ng-href="/profile/{{profile.userId}}">{{profile.name}}</a></li>
+        <li class="active">Profile</li>
+      </ol>
+    </div>
+  </div> -->
+
+  
+  
+  <div class="row clearfix">
+    <div class="col-sm-12">
+      <h3 class="page-header">Account</h3>
+    </div>
+    <div class="col-md-8">
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-sm-2">Name</label>
+          <div class="col-sm-10">
+            <input type="text" placeholder="Name" class="form-control" ng-model="profile.name" />
+            <small class="muted">We're big on names around here, so people know who's who.</small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Location</label>
+          <div class="col-sm-10">
+            <input type="text" placeholder="Location" class="form-control" ng-model="profile.location" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Email</label>
+          <div class="col-sm-10">
+            <input type="text" placeholder="Email" class="form-control" ng-model="profile.email" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Cell</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon">1</span>
+              <input type="tel" class="form-control" placeholder="(555) 555-5555" ng-model="profile.cell.value" />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2">Bio</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" ng-model="profile.bio"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div profile-avatar-form profile="profile"></div>
+      <div profile-gear-form profile="profile"></div>
+    </div>
+    <div class="col-sm-12 text-right form-group">
+      <hr/>
+      <button ng-cloak ng-show="profileSaved" class="btn btn-success" ng-click="updateProfile()">Success!</button>
+      <button ng-cloak ng-hide="profileSaved" class="btn btn-primary" ng-click="updateProfile()" ng-bind="savingProfile ? 'Saving...' : 'Update Profile'" ng-disabled="savingProfile"></button>
+    </div>
+  </div>
+</div>

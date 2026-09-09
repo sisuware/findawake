@@ -1,9 +1,72 @@
-<div class="container">
-  <div class="page-header text-center">
-    <h2>Update your wake.</h2>
+<div class="sectional sectional-sm color1a clearfix">
+  <div class="container animated fadeIn">
+    <div class="col-sm-9">
+      <h2>{{wake.boat.year}} {{wake.boat.make}} {{wake.boat.model}} <small><i class="fa fa-map-marker"></i> {{wake.location.formatted}}</small></h2>
+      <small ng-cloak ng-show="profile.name">By <a ng-href="/profile/{{wake.userId}}">{{profile.name}}</a></small>
+    </div>
   </div>
-  <form ng-cloak ng-show="auth.id === wake.userId" name="editWake" class="animated fadeIn">
-    <ng-include src="'/views/wakes/form.html'"></ng-include>
+</div>
+<div class="sectional">
+  <div class="sectional-title">update your wake</div>
+  <div class="container animated fadeIn">
+    <div class="row form-group clearfix">
+      <div class="col-md-6 form-group">
+        <h4>Describe your Boat. <span class="label label-info">Public</span></h4>
+        <p>Let potential riders know what they can expect from your boat. This is also the perfect place to brag about your boat and the monster <b>wake</b> it makes.</p>
+      </div>
+      <div class="col-md-6">
+        <wake-info-form wake="wake"></wake-info-form>
+        <wake-thumbnail-form wake="wake"></wake-thumbnail-form>
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="true" ng-model="wake.boat.perfectPass"> Cruise Control / Perfect Pass
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="true" ng-model="wake.boat.tower"> Tower
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="true" ng-model="wake.boat.pylon"> Extended Pylon
+            </label>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="true" ng-model="wake.boat.ballastSystem"> Ballast System
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="row form-group clearfix">
+      <div class="col-md-6 form-group">
+        <h4>Type of Wakes. <span class="label label-info">Public</span></h4>
+        <p>What type of wakes can your boat create? Select from wakesurfing, wakeboarding, and wakeskating. </p>
+      </div>
+      <div class="col-md-6" wake-types-form wake="wake"></div>
+    </div>
+    <hr>
+    <div class="row form-group clearfix">
+      <div class="col-md-6 form-group">
+        <h4>Boating Schedule. <span class="label label-info">Public</span></h4>
+        <p>What days would you be willing to share your wake?</p>
+      </div>
+      <div class="col-md-6 table-responsive" wake-schedule-form wake="wake"></div>
+    </div>
+    <hr>
+    <div class="row form-group clearfix">
+      <div class="col-md-6 form-group">
+        <h4>Boating Location. <span class="label label-info">Public</span></h4>
+        <p>What's the general location of your boating activities?</p>
+        <p class="text-muted">NOTE: This is not the exact location of your house or boat, but the lake or river where you primarily go boating.</p>
+      </div>
+      <div class="col-md-6" wake-location-form wake="wake"></div>
+    </div>
+    <hr>
     <div class="row form-group clearfix">
       <div class="col-md-9">
         <a href="/wakes/{{wake.id}}">Cancel</button>
@@ -12,5 +75,5 @@
         <button type="button" class="btn btn-lg btn-primary btn-block" ng-click="update()">Update</button>
       </div>
     </div>
-  </form>
+  </div>
 </div>

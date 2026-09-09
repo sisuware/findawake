@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the findawakeApp
  */
-var app = angular.module('findawakeApp');
+var app = angular.module('findAWake');
 
 app.directive('fileUpload', function(){
   return {
